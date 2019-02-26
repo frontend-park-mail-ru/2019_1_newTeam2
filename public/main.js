@@ -1,50 +1,50 @@
-import {Headline} from './components/Headline/Headline.js';
+import {Link} from './components/Link/Link.js';
 const application = document.getElementById('application');
 
 function testComponents() {
     application.innerHTML = "";
-    const testHeadline = new Headline({
+    const testLink = new Link({
         parent: application,
-        textContent: "this is SPARTA...ups...Headline)",
+        textContent: "This is Link?",
     });
-    testHeadline.render();
+    testLink.render();
 
-    const th6 = new Headline({
+    const th6 = new Link({
         parent: application,
         size: "h6",
         textContent: "this is h6",
     });
     th6.render();
 
-    const th5 = new Headline({
+    const th5 = new Link({
         parent: application,
         size: "h5",
         textContent: "this is h5",
     });
     th5.render();
 
-    const th4 = new Headline({
+    const th4 = new Link({
         parent: application,
         size: "h4",
         textContent: "this is h4",
     });
     th4.render();
 
-    const th3 = new Headline({
+    const th3 = new Link({
         parent: application,
         size: "h3",
         textContent: "this is h3",
     });
     th3.render();
 
-    const th2 = new Headline({
+    const th2 = new Link({
         parent: application,
         size: "h2",
         textContent: "this is h2",
     });
     th2.render();
 
-    const th1 = new Headline({
+    const th1 = new Link({
         parent: application,
         size: "h1",
         textContent: "this is h1",
