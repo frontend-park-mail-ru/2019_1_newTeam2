@@ -1,23 +1,32 @@
 const noop = () => {};
 
-export class Icon {
+const validSizes = ["h1", "h2", "h3", "h4", "h5", "h6"];
+
+export class Link {
 
 	constructor({
-					parent = document.body,
-					src = "",
-					handler = noop,
-				} = {}) {
+		parent = document.body,
+		name = "",
+		size = "h1",
+		handler = noop,
+	} = {}) {
 		this._parent = parent;
-		this._src = src;
+		this._name = name;
+		this._size = size;
 		this._handler = handler;
 	}
 
 	render() {
-		const icon = document.createElement('img');
-		icon.src = this._src;
-		icon.classList.add('icon');
-		icon.addEventListener("click", this._handler);
-
-		this._parent.appendChild(icon);
+		const link = document.createElement('span');
+		link.textContent = this._name;
+		link.classList.add('link');
+		
+		if (validSizes.includes(this._size)) {
+			link.classList.add(this._size);
+		}
+		
+		link.addEventListener("click", this._handler);
+	
+		this._parent.appendChild(link);	
 	}
 }
