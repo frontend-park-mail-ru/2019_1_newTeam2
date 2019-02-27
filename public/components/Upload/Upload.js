@@ -7,26 +7,34 @@ export class Upload {
 		parent = document.body,
 		type = 'file',
 		callback = noop,
-
+		outerId = 'outerDivUpload',
 	} = {}) {
 		this._parent = parent;
 		this._type = type;
 		this._callback = callback;
+		this._outerId = outerId;
 	}
 
 	render() {
-		const upload = document.createElement('input');
-		upload.setAttribute('type', 'file');
+		const pug = require('pug');
+		const innerHTMLString = 'input(type="file", class=type, accept=files)';
+		let type = 'upload ';
+		let files = '';
 		switch(this._type) {
 			case 'image':
-				upload.setAttribute('accept', 'image/*');
-				img.classList.add(this._type);
+				type += this._type;
+				files = 'image/*';
 				break;
 			case 'file':
-				img.classList.add(this._type);
+				type += this._type;
 				break;
 		}
-		img.addEventListener('click', this._callback);
-		this._parent.appendChild(upload);
+		const html = pug.render(innerHTMLString, {'type': type,
+		'files': files});
+		const outerDiv = document.createElement('div');
+		outerDiv.id = this._outerId;
+		outerDiv.innerHTML = html;
+		outerDiv.addEventListener('click', this._callback);
+		this._parent.appendChild(outerDiv);
 	}
 }

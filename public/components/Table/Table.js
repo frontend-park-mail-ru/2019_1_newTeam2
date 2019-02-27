@@ -1,12 +1,12 @@
-/*'use strict'
-
-// import {TableTemplate} from './TableTemplate.js';
+'use strict'
 
 export class Table {
 	constructor({
 		parent = document.body,
+		outerId = 'outerDivTable',
 	} = {}) {
 		this._parent = parent;
+		this._outerId = outerId;
 	}
 
 	get data() {
@@ -19,10 +19,11 @@ export class Table {
 
 	render() {
 		let pug = require('pug');
-		let attempt = pug.renderFile('./Table.pug');
-		console.log(attempt);
-		this._parent.innerHTML = attempt;
-		// this.parent.innerHTML = this._template(data || null)
-
+		const innerHTMLString = ``;
+		const html = pug.render(innerHTMLString, {'data': this._data});
+		const div = document.createElement('div');
+		div.id = this._outerId;
+		div.innerHTML = html;
+		this._parent.appendChild(div);
 	};
-}*/
+}

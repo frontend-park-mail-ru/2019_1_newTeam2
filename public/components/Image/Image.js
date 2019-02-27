@@ -8,6 +8,7 @@ export class Image {
 		callback = noop,
 		type = 'dictionary',
 		src = '',
+		outerId = 'outerDivImg',
 	} = {}) {
 		this._parent = parent;
 		this._callback = callback;
@@ -17,20 +18,19 @@ export class Image {
 		};
 		this._src = src;
 		this._type = type;
+		this._outerId = outerId;
 	}
 
 	render() {
-		const img = document.createElement('img');
-		if(this._src == '') {
-			throw new Error('No src');
-		}
-		img.addEventListener('click', this._callback);
-		img.setAttribute('src', this._src);
-		if (this._type in this._typeset) {
-			img.classList.add(this._type);
-		} else {
-			img.classList.add('dictionary');
-		}
-		this._parent.appendChild(img);
+		const pug = require('pug');
+		const innerHTMLString = 'img(src=path, class=type)';
+		const type = this._type in this._typeset ? this._type : 'dictionary';
+		const html = pug.render(innerHTMLString, {'path': this._src,
+		'type': this._type});
+		const div = document.createElement('div');
+		div.id = this._outerId;
+		div.innerHTML = html;
+		div.addEventListener('click', this._callback);
+		this._parent.appendChild(div);
 	};
 }
