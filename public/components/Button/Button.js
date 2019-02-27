@@ -24,15 +24,16 @@ export class Button {
     render () {
         const button = document.createElement("button");
         button.addEventListener("click", this._handler);
+        button.classList.add("Button");
         switch(this._type) {
             case "buttonBig":
-                button.className = "Button buttonBig";
+                button.classList.add("buttonBig");
                 break;
             case "buttonSmall":
-                button.className = "Button buttonSmall";
+                button.classList.add("buttonSmall");
                 break;
             default:
-                button.className = "Button buttonBig";
+                button.classList.add("buttonSmall");
                 break;
         }
         button.textContent = this._text;

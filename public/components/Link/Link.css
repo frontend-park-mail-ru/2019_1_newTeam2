@@ -1,12 +1,12 @@
 .Link {
-    color: #3a90f3;
+    color: blue;
     text-align: center;
     text-decoration: none;
     display: block;
 }
 
 .Link:hover {
-    color: red;
+    color: navy;
 }
 
 @media screen and (min-width: 300px) {

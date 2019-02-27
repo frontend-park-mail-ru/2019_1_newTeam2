@@ -1,16 +1,17 @@
 .Button {
     color: #ffffff;
-    background: #3a90f3;
+    background: blue;
     text-decoration: none;
     user-select: none;
     margin: 1% 1% 1% 1% ;
     outline: none;
     text-align: center;
     display: block;
+    border: 0px;
 }
 
 .Button:hover {
-    background: #6095f0;
+    background: navy;
 }
 
 .Button:active {
