@@ -1,23 +1,23 @@
 const noop = () => {};
 
-export class Link {
+export class Icon {
 
 	constructor({
-		parent = document.body,
-		name = "",
-		handler = noop,
-	} = {}) {
+					parent = document.body,
+					src = "",
+					handler = noop,
+				} = {}) {
 		this._parent = parent;
-		this._name = name;
+		this._src = src;
 		this._handler = handler;
 	}
 
 	render() {
-		const link = document.createElement('span');
-		link.textContent = this._name;
-		link.classList.add('link');
-		link.addEventListener("click", this._handler);
-	
-		this._parent.appendChild(link);	
+		const icon = document.createElement('img');
+		icon.src = this._src;
+		icon.classList.add('icon');
+		icon.addEventListener("click", this._handler);
+
+		this._parent.appendChild(icon);
 	}
 }
