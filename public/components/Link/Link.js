@@ -10,6 +10,7 @@ export class Link {
         this._el = parent;
         this._text = textContent;
         this._size = size;
+        this._handler = someFunction;
     }
 
     set data(data) {
@@ -23,7 +24,7 @@ export class Link {
     render () {
         const link = document.createElement('span');
         link.textContent = this._text;
-
+        link.addEventListener("click", this._handler);
         switch(this._size) {
             case "h1":
                 link.className = "Link link_h1";
