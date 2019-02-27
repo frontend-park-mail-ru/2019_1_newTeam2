@@ -16,7 +16,7 @@ export class Link {
 		const link = document.createElement('span');
 		link.textContent = this._name;
 		link.classList.add('link');
-		link.addEventListener(click, handler);
+		link.addEventListener("click", this._handler);
 	
 		this._parent.appendChild(link);	
 	}
