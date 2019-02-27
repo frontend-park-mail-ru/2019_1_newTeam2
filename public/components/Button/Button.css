@@ -1,0 +1,59 @@
+.Button {
+    color: #ffffff;
+    background: #3a90f3;
+    text-decoration: none;
+    user-select: none;
+    margin: 1% 1% 1% 1% ;
+    outline: none;
+    text-align: center;
+    display: block;
+}
+
+.Button:hover {
+    background: #6095f0;
+}
+
+.Button:active {
+    background: #6095f0;
+    box-shadow: 0 0 10px #6095f0;
+}
+
+@media screen and (min-width: 300px) {
+    .buttonBig {
+        width: 200px;
+        font-size: 21px;
+        padding: 4px 0 4px 0;
+    }
+
+    .buttonSmall {
+        font-size: 12px;
+        padding: 7px 11px 7px 11px;
+    }
+}
+
+
+@media screen and (min-width: 700px) {
+    .buttonBig {
+        width: 420px;
+        font-size: 45px;
+        padding: 4px 0 4px 0;
+    }
+
+    .buttonSmall {
+        font-size: 25px;
+        padding: 7px 11px 7px 11px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .buttonBig {
+        width: 600px;
+        font-size: 64px;
+        padding: 4px 0 4px 0;
+    }
+
+    .buttonSmall {
+        font-size: 36px;
+        padding: 7px 11px 7px 11px;
+    }
+}

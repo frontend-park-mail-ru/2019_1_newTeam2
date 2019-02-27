@@ -1,0 +1,83 @@
+.Headline {
+    text-align: center;
+    word-wrap: break-word;
+    color: #3a90f3;
+}
+
+@media screen and (min-width: 300px) {
+    .headline_h6 {
+        font-size: 20px;
+    }
+
+    .headline_h5 {
+        font-size: 17px;
+    }
+
+    .headline_h4 {
+        font-size: 14px;
+    }
+
+    .headline_h3 {
+        font-size: 11px;
+    }
+
+    .headline_h2 {
+        font-size: 8px;
+    }
+
+    .headline_h1 {
+        font-size: 5px;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .headline_h6 {
+        font-size: 42px;
+    }
+
+    .headline_h5 {
+        font-size: 36px;
+    }
+
+    .headline_h4 {
+        font-size: 30px;
+    }
+
+    .headline_h3 {
+        font-size: 24px;
+    }
+
+    .headline_h2 {
+        font-size: 18px;
+    }
+
+    .headline_h1 {
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .headline_h6 {
+        font-size: 60px;
+    }
+
+    .headline_h5 {
+        font-size: 50px;
+    }
+
+    .headline_h4 {
+        font-size: 40px;
+    }
+
+    .headline_h3 {
+        font-size: 30px;
+    }
+
+    .headline_h2 {
+        font-size: 20px;
+    }
+
+    .headline_h1 {
+        font-size: 10px;
+    }
+}
