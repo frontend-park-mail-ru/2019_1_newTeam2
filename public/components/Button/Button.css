@@ -12,6 +12,7 @@
 
 .Button:hover {
     background: navy;
+    cursor: pointer;
 }
 
 .Button:active {
