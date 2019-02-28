@@ -1,9 +1,3 @@
-.outerDivUpload {
-    height: 100px;
-    width: 100px;
-    border-radius: 5px;
-    background-image: url(upload.png);
-}
 
 @media screen and (max-width: 300px) {
 
