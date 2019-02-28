@@ -3,18 +3,24 @@
 const noop = () => {}
 
 export class Upload {
+	/**
+	 * Creates a new Upload.
+	 * @class
+	 */
 	constructor({
-		parent = document.body,
 		type = 'file',
 		callback = noop,
 		outerId = 'outerDivUpload',
 	} = {}) {
-		this._parent = parent;
 		this._type = type;
 		this._callback = callback;
 		this._outerId = outerId;
 	}
 
+	/**
+	 * renders the upload
+	 * @returns {object} - the DOM element: div with rendered element
+	 */
 	render() {
 		const pug = require('pug');
 		const innerHTMLString = 'input(type="file", class=type, accept=files)';
@@ -33,8 +39,9 @@ export class Upload {
 		'files': files});
 		const outerDiv = document.createElement('div');
 		outerDiv.id = this._outerId;
+		outerDiv.classList.add(this._outerId);
 		outerDiv.innerHTML = html;
 		outerDiv.addEventListener('click', this._callback);
-		this._parent.appendChild(outerDiv);
+		return outerDiv;
 	}
 }

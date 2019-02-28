@@ -3,14 +3,16 @@
 const noop = () => {}
 
 export class Image {
+	/**
+	 * Creates a new Image.
+	 * @class
+	 */
 	constructor({
-		parent = document.body,
 		callback = noop,
 		type = 'dictionary',
 		src = '',
 		outerId = 'outerDivImg',
 	} = {}) {
-		this._parent = parent;
 		this._callback = callback;
 		this._typeset = {
 			'profile': true,
@@ -20,7 +22,10 @@ export class Image {
 		this._type = type;
 		this._outerId = outerId;
 	}
-
+	/**
+	 * renders the image
+	 * @returns {object} - the DOM element: div with rendered element
+	 */
 	render() {
 		const pug = require('pug');
 		const innerHTMLString = 'img(src=path, class=type)';
@@ -31,6 +36,6 @@ export class Image {
 		div.id = this._outerId;
 		div.innerHTML = html;
 		div.addEventListener('click', this._callback);
-		this._parent.appendChild(div);
-	};
+		return div;
+	}
 }
