@@ -23,7 +23,9 @@ export class Upload {
 	 */
 	render() {
 		const pug = require('pug');
-		const innerHTMLString = 'input(type="file", class=type, accept=files)';
+		const innerHTMLString = `label
+		input(type="file", class=type, accept=files)
+		span='Выберите ' + (files.length === 0 ? 'файл' : 'изображение')`;
 		let type = 'upload ';
 		let files = '';
 		switch(this._type) {
