@@ -1,27 +1,19 @@
+const pug = require('pug');
+const template = "input.input(type=type, value=value, placeholder=placeholder, name=name)";
+const templateGen = pug.compile(template);
+
 export class InputComponent {
-    constructor({
-                    parent = document.body,
-                    name = "login",
-                    type = "login",
-                    value = "",
-                    placeholder = ""
-                } = {}) {
-        this._el = parent;
-        this._name = name;
-        this._type = type;
-        this._value = value;
-        this._placeholder = placeholder;
+    constructor(object = {
+                    name: "login",
+                    type: "login",
+                    value: "",
+                    placeholder: ""
+                }) {
+        this._object = object;
     }
 
     render() {
-        const input = document.createElement('input');
-        input.setAttribute("type", this._type);
-        input.setAttribute("name", this._name);
-        input.setAttribute("value", this._value);
-        input.setAttribute("placeholder", this._placeholder);
-        input.classList.add("input");
-        input.classList.add(`input-{this._type}`);
-        this._el.appendChild(input);
+        return templateGen(this._object);
     }
 
 }
