@@ -13,11 +13,15 @@ export class Icon {
 	}
 
 	render() {
-		const icon = document.createElement('img');
-		icon.src = this._src;
-		icon.classList.add('icon');
-		icon.addEventListener(click, handler);
+		const pug = require('pug');
+		const templateString = 'img(src=path, class=icon)';
+		const inner = pug.render(templateString, {'path': this._src});
+		
+		const outer = document.createElement('div');
+		outer.innerHTML = inner;
+
+		outer.addEventListener(click, handler);
 	
-		this._parent.appendChild(icon);	
+		this._parent.appendChild(outer);	
 	}
 }
