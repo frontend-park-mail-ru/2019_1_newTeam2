@@ -1,45 +1,33 @@
+const pug = require('pug');
+
+const template = `
+div(class=size, class='checkbox')
+	input(type='checkbox', id=num)
+	label(for=num)`;
+
+const templateGen = pug.compile(template);
+
 const noop = () => {};
+const validSizes = ['big', 'small'];
 
 export class Checkbox {
-
 	constructor({
-					parent = document.body,
-					id = '0',
-					size = 'small',
-					handler = noop,
-					label = "",
-				} = {}) {
-		this._parent = parent;
+		id = '0',
+		size = 'small',
+		handler = noop,
+	} = {}) {
 		this._id = id;
-		this._size = size;
+		this._size = validSizes.includes(size) ? size : 'small';
 		this._handler = handler;
-		this._label = label;
 	}
 
 
 	render() {
-		const outerDiv = document.createElement('div');
-		outerDiv.classList.add('checkbox');
+		const outer = document.createElement('span');
+		outer.innerHTML = templateGen({'size': this._size, 'num': this._id});
 
-		if (this._size === 'small') {
-			outerDiv.classList.add('small');
-		} else if (this._size === 'big') {
-			outerDiv.classList.add('big');
-		} else {
-			outerDiv.classList.add('small');
-		}
+		outer.addEventListener('click', this._handler);
 
-		const checkbox = document.createElement('input');
-		checkbox.type = 'checkbox';
-		checkbox.id = this._id;
-
-		const label = document.createElement('label');
-		label.htmlFor = this._id;
-
-		outerDiv.addEventListener("click", this._handler);
-
-		this._parent.appendChild(outerDiv);
-		outerDiv.appendChild(checkbox);
-		outerDiv.appendChild(label);
+		return outer;
 	}
 }

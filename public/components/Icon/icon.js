@@ -1,27 +1,25 @@
+const pug = require('pug');
+const template = 'img(src=path, class="icon")';
+const templateGen = pug.compile(template);
+
 const noop = () => {};
 
 export class Icon {
 
 	constructor({
-		parent = document.body,
-		src = "",
+		src = '',
 		handler = noop,
 	} = {}) {
-		this._parent = parent;
 		this._src = src;
 		this._handler = handler;
 	}
 
 	render() {
-		const pug = require('pug');
-		const templateString = 'img(src=path, class=icon)';
-		const inner = pug.render(templateString, {'path': this._src});
-		
-		const outer = document.createElement('div');
-		outer.innerHTML = inner;
+		const outer = document.createElement('span');
+		outer.innerHTML = templateGen({'path': this._src});
 
-		outer.addEventListener(click, handler);
+		outer.addEventListener('click', this._handler);
 	
-		this._parent.appendChild(outer);	
+		return outer;
 	}
 }
