@@ -1,21 +1,25 @@
 {
-  "name": "sample",
+  "name": "wordTrainer",
   "version": "1.0.0",
   "scripts": {
     "start": "node server"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/frontend-park-mail-ru/sample.git"
+    "url": "git+https://github.com/2019-1-newTeam2.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/frontend-park-mail-ru/sample/issues"
+    "url": "https://github.com/2019-1-newTeam2/issues"
   },
-  "homepage": "https://github.com/frontend-park-mail-ru/sample#readme",
+  "homepage": "https://github.com/2019-1-newTeam2#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "uuid": "^3.3.2"
   }
 }
