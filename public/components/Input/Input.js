@@ -1,5 +1,5 @@
 const pug = require('pug');
-const template = "input.input(type=type, value=value, placeholder=placeholder, name=name)";
+const template = `input.input(type=type, value=value, placeholder=placeholder, name=name)`;
 const templateGen = pug.compile(template);
 
 export class InputComponent {
