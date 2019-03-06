@@ -7,9 +7,10 @@ const inp = new InputComponent({
     name: "test-input",
     placeholder: "do not enter"
 });
+
 const gris = new GriseMerdeComponent({
-    innerHTML: inp.render(),
-    classes: "big"
+    inner: inp.render(),
+    classes: "big-grise-merde"
 });
 
-document.body.innerHTML = gris.render();
+document.body.appendChild(gris.render());
