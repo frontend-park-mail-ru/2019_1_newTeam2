@@ -3,7 +3,7 @@ const pug = require('pug');
 const template = ``;
 const templateGen = pug.compile(template);
 
-export class PaginationComponent {
+export class Pagination {
     constructor(object = {
         rows_per_page: 10,
         src: ""
@@ -22,17 +22,17 @@ export class PaginationComponent {
     }
 
     pageNum(number) {
-        page = number;
+        this.page = number;
         return this.render();
     }
 
     nextPage() {
-        page++;
+        this.page++;
         return this.render();
     }
 
     previousPage() {
-        page = page < 2 ? 1 : page--;
+        this.page = this.page < 2 ? 1 : this.page--;
         return this.render();
     }
 }

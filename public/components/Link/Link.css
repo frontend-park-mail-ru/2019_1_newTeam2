@@ -1,62 +1,60 @@
-.Link {
-    color: blue;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-}
-
-.Link:hover {
-    color: navy;
+.link {
+	color: blue;
 }
 
 @media screen and (min-width: 300px) {
-    .link_h6 {
-        font-size: 48px;
-    }
-
-    .link_h5 {
-        font-size: 40px;
-    }
-
-    .link_h4 {
-        font-size: 32px;
-    }
-
-    .link_h3 {
-        font-size: 24px;
-    }
-
-    .link_h2 {
-        font-size: 16px;
-    }
-
-    .link_h1 {
-        font-size: 8px;
-    }
+	.link.h1 {
+		font-size: 48px;
+	}
+	
+	.link.h2 {
+		font-size: 40px;
+	}
+		
+	.link.h3 {
+		font-size: 32px;
+	}
+	
+	.link.h4 {
+		font-size: 24px;
+	}
+		
+	.link.h5 {
+		font-size: 16px;
+	}
+		
+	.link.h6 {
+		font-size: 8px;
+	}
 }
 
 @media screen and (min-width: 1200px) {
-    .link_h6 {
-        font-size: 42px;
-    }
+	.link.h1 {
+		font-size: 42px;
+	}
+	
+	.link.h2 {
+		font-size: 32px;
+	}
+		
+	.link.h3 {
+		font-size: 28px;
+	}
+	
+	.link.h4 {
+		font-size: 21px;
+	}
+		
+	.link.h5 {
+		font-size: 14px;
+	}
+		
+	.link.h6 {
+		font-size: 7px;
+	}
+}
 
-    .link_h5 {
-        font-size: 35px;
-    }
-
-    .link_h4 {
-        font-size: 28px;
-    }
-
-    .link_h3 {
-        font-size: 21px;
-    }
-
-    .link_h2 {
-        font-size: 14px;
-    }
-
-    .link_h1 {
-        font-size: 7px;
-    }
+.link:hover {
+	color: navy;
+	cursor: pointer;
 }

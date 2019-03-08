@@ -7,7 +7,7 @@ div(class="grise-merde" class=cl)
 `;
 const templateGen = pug.compile(template);
 
-export class GriseMerdeComponent {
+export class GriseMerde {
     constructor(object = {
         inner: "",
         classes: ""
