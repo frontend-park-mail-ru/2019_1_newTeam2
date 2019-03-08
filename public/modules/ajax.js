@@ -1,3 +1,5 @@
+'use strict'
+
 const noop = () => null;
 
 function checkStatus(response) {
