@@ -1,5 +1,15 @@
 const noop = () => null;
-	
+
+function checkStatus(response) {
+	if (response.status >= 200 && response.status < 300) {
+	  return response
+	} else {
+	  var error = new Error(response.statusText)
+	  error.response = response
+	  throw error
+	}
+  }
+
 export class AjaxModule {
 	_ajax({
 		callback = noop,
@@ -7,27 +17,23 @@ export class AjaxModule {
 		path = '/',
 		body = {},
 	} = {}) {
-		const xhr = new XMLHttpRequest();
-		xhr.open(method, path, true);
-		xhr.withCredentials = true;
-
-		if (body) {
-			xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-		}
-
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState !== 4) {
-				return;
-			}
-
-			callback(xhr);
-		};
-
-		if (body) {
-			xhr.send(JSON.stringify(body));
-		} else {
-			xhr.send();
-		}
+		fetch(path, {
+			method: method,
+			body: JSON.stringify(body),
+			headers: {
+				"Content-Type": "application/json",
+				"Charset": "utf-8"
+			},
+			credentials: "include"
+		  })
+		  .then(checkStatus)
+		  .then(function(response) {
+			callback(response);
+			return response.text()
+		  })
+		  .catch(function(error) {
+			console.log('request failed', error)
+		  })
 	}
 
 	doGet({
@@ -56,5 +62,3 @@ export class AjaxModule {
 		});
 	}
 }
-
-
