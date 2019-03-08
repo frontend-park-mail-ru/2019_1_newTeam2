@@ -1,20 +1,22 @@
-const pug = require('pug');
+'use strict';
+import {compile} from 'pug';
+
 const template = `input.input(type=type, value=value, placeholder=placeholder, name=name)`;
-const templateGen = pug.compile(template);
+const templateGen = compile(template);
 
 export class Input {
     constructor(object = {
-                    name: "",
-                    type: "text",
-                    value: "",
-                    placeholder: ""
+                    name: '',
+                    type: 'text',
+                    value: '',
+                    placeholder: ''
                 }) {
-        object.type = object.type ? object.type : "text";
+        object.type = object.type ? object.type : 'text';
         this._object = object;
     }
 
     render() {
-        let el = document.createElement("span");
+        let el = document.createElement('span');
         el.innerHTML = templateGen(this._object);
         return el;
     }

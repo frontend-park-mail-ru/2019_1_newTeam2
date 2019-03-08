@@ -1,11 +1,12 @@
-const pug = require('pug');
+'use strict';
+import {compile} from 'pug';
 
 const template = `
 div(class=size, class='checkbox')
 	input(type='checkbox', id=num)
 	label(for=num)`;
 
-const templateGen = pug.compile(template);
+const templateGen = compile(template);
 
 const noop = () => {};
 const validSizes = ['big', 'small'];

@@ -1,13 +1,15 @@
-const noop = () => {};
+'use strict';
+import {compile} from 'pug';
 
-const pug = require('pug');
 const template = `button(class="Button" class=additionalClass) #{text}`;
-const templateGen = pug.compile(template);
+const templateGen = compile(template);
+
+const noop = () => {};
 
 export class Button {
     constructor({
-                    type = "buttonBig",
-                    textContent = "",
+                    type = 'buttonBig',
+                    textContent = '',
                     someFunction = noop,
                 } = {}) {
         this._text = textContent;
@@ -16,12 +18,12 @@ export class Button {
     }
 
     render () {
-        let button = document.createElement("span");
+        let button = document.createElement('span');
         button.innerHTML = templateGen({
             additionalClass: this._type,
             text: this._text
         });
-        button.addEventListener("click", this._handler);
+        button.addEventListener('click', this._handler);
         return button;
     }
 }

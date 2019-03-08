@@ -1,8 +1,10 @@
-const noop = () => {};
+'use strict';
+import {compile} from 'pug';
 
-const pug = require('pug');
 const template = `img(src=path, class=type)`;
-const templateGen = pug.compile(template);
+const templateGen = compile(template);
+
+const noop = () => {};
 
 export class Image {
 	/**
