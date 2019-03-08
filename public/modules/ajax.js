@@ -1,8 +1,14 @@
 'use strict'
-
-const noop = () => null;
-
-function checkStatus(response) {
+/**
+* Checks the status of http answer
+* 
+* @throws {Error} if request status is not in [200:300)
+* 
+* @param  {object} response
+* 
+* @returns {Promise}
+*/
+const checkStatus = response => {
 	if (response.status >= 200 && response.status < 300) {
 	  return response
 	} else {
@@ -10,18 +16,31 @@ function checkStatus(response) {
 	  error.response = response
 	  throw error
 	}
-  }
+};
 
 export class AjaxModule {
-	_ajax({
-		callback = noop,
+	/**
+	 * Private _ajax function
+	 * Makes a http request
+	 * 
+	 * @throws {Error} if request status is not in [200:300)
+	 * 
+	 * @param  {object} [unnamed = {}]
+	 * @param  {string} [unnamed.method = 'GET']
+	 * @param  {string} [unnamed.path = '/'] 
+	 * @param  {object} [unnamed.body = {}]
+	 * 
+	 * @returns {Promise}
+	 */
+	_ajax ({
 		method = 'GET',
 		path = '/',
 		body = {},
 	} = {}) {
-		fetch(path, {
+		return fetch(path, {
 			method: method,
 			body: JSON.stringify(body),
+			mode: 'cors',
 			headers: {
 				"Content-Type": "application/json",
 				"Charset": "utf-8"
@@ -29,35 +48,46 @@ export class AjaxModule {
 			credentials: "include"
 		  })
 		  .then(checkStatus)
-		  .then(function(response) {
-			callback(response);
-			return response.text()
-		  })
-		  .catch(function(error) {
-			console.log('request failed', error)
-		  })
 	}
-
+	/**
+	 * Simple wrapper on private _ajax function
+	 * Makes a GET http request
+	 * 
+	 * @throws {Error} if request status is not in [200:300)
+	 * 
+	 * @param  {object} [unnamed = {}] 
+	 * @param  {string} [unnamed.path = '/'] 
+	 * @param  {object} [unnamed.body = {}]
+	 * 
+	 * @returns {Promise}
+	 */
 	doGet({
-		callback = noop,
 		path = '/',
 		body = {},
 	} = {}) {
-		this._ajax({
-			callback,
+		return this._ajax({
 			path,
 			body,
 			method: 'GET',
 		});
 	}
-
+	/**
+	 * Simple wrapper on private _ajax function
+	 * Makes a POST http request
+	 * 
+	 * @throws {Error} if request status is not in [200:300)
+	 * 
+	 * @param  {object} [unnamed = {}] 
+	 * @param  {string} [unnamed.path = '/'] 
+	 * @param  {object} [unnamed.body = {}]
+	 * 
+	 * @returns {Promise}
+	 */
 	doPost({
-		callback = noop,
 		path = '/',
 		body = {},
 	} = {}) {
-		this._ajax({
-			callback,
+		return this._ajax({
 			path,
 			body,
 			method: 'POST',
