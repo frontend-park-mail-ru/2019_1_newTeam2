@@ -1,6 +1,8 @@
-'use strict'
+const noop = () => {};
 
-const noop = () => {}
+const pug = require('pug');
+const template = `img(src=path, class=type)`;
+const templateGen = pug.compile(template);
 
 export class Image {
 	/**
@@ -11,7 +13,6 @@ export class Image {
 		callback = noop,
 		type = 'dictionary',
 		src = '',
-		outerId = 'outerDivImg',
 	} = {}) {
 		this._callback = callback;
 		this._typeset = {
@@ -20,22 +21,16 @@ export class Image {
 		};
 		this._src = src;
 		this._type = type;
-		this._outerId = outerId;
 	}
 	/**
 	 * renders the image
 	 * @returns {object} - the DOM element: div with rendered element
 	 */
 	render() {
-		const pug = require('pug');
-		const innerHTMLString = 'img(src=path, class=type)';
+		let el = document.createElement('div');
 		const type = this._type in this._typeset ? this._type : 'dictionary';
-		const html = pug.render(innerHTMLString, {'path': this._src,
-		'type': this._type});
-		const div = document.createElement('div');
-		div.id = this._outerId;
-		div.innerHTML = html;
-		div.addEventListener('click', this._callback);
-		return div;
+		el.addEventListener('click', this._callback);
+		el.innerHTML = templateGen({'path': this._src, 'type': type});
+		return el;
 	}
 }

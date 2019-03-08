@@ -111,5 +111,102 @@ function testGriseMerdeWithInput() {
 
     application.appendChild(gris.render());
 }
+
+function testTable() {
+    const table1 = new Table();
+    table1.data = [
+        {
+            "_id": "5c82aad90140f219a246bd36",
+            "index": 0,
+            "guid": "756efff9-2419-4d9c-99e8-4bbc75146107",
+            "isActive": true,
+            "balance": "$3,091.15",
+            "picture": "http://placehold.it/32x32",
+            "age": 39,
+            "eyeColor": "brown",
+            "company": "KNEEDLES"
+        },
+        {
+            "_id": "5c82aad95dca06edacff448f",
+            "index": 1,
+            "guid": "fc7aaa32-b43d-4cd6-a8e5-107529482161",
+            "isActive": true,
+            "balance": "$1,807.79",
+            "picture": "http://placehold.it/32x32",
+            "age": 37,
+            "eyeColor": "green",
+            "company": "MAKINGWAY"
+        },
+        {
+            "_id": "5c82aad919a5539c59ad9d40",
+            "index": 2,
+            "guid": "262886f0-1829-4fc6-b390-e4f99598d3b6",
+            "isActive": true,
+            "balance": "$3,580.73",
+            "picture": "http://placehold.it/32x32",
+            "age": 38,
+            "eyeColor": "blue",
+            "company": "NETUR"
+        },
+        {
+            "_id": "5c82aad923f8a3034dbf07bd",
+            "index": 3,
+            "guid": "246ede6f-ed50-4799-9a31-b237de07d401",
+            "isActive": true,
+            "balance": "$2,429.78",
+            "picture": "http://placehold.it/32x32",
+            "age": 39,
+            "eyeColor": "green",
+            "company": "UNIA"
+        },
+        {
+            "_id": "5c82aad91edf942dfd7a9546",
+            "index": 4,
+            "guid": "6a1cb46d-86a9-4eed-bd08-38db2a86311b",
+            "isActive": true,
+            "balance": "$3,572.67",
+            "picture": "http://placehold.it/32x32",
+            "age": 30,
+            "eyeColor": "brown",
+            "company": "RONELON"
+        },
+        {
+            "_id": "5c82aad981cb344cb98cab5f",
+            "index": 5,
+            "guid": "c3ba5d69-5c7a-4a61-b0e3-c65f184ecf96",
+            "isActive": true,
+            "balance": "$3,884.36",
+            "picture": "http://placehold.it/32x32",
+            "age": 23,
+            "eyeColor": "brown",
+            "company": "QUAILCOM"
+        },
+        {
+            "_id": "5c82aad93c7de820c87c778f",
+            "index": 6,
+            "guid": "1121d597-1d04-4e6f-9c28-ed359a1e519a",
+            "isActive": false,
+            "balance": "$1,831.82",
+            "picture": "http://placehold.it/32x32",
+            "age": 31,
+            "eyeColor": "green",
+            "company": "DEEPENDS"
+        },
+        {
+            "_id": "5c82aad9955e5507d06c20bb",
+            "index": 7,
+            "guid": "065b59b4-d55d-4777-b0d1-2727040e014a",
+            "isActive": false,
+            "balance": "$2,992.91",
+            "picture": "http://placehold.it/32x32",
+            "age": 23,
+            "eyeColor": "brown",
+            "company": "ZIORE"
+        }
+    ];
+    application.appendChild(table1.render());
+}
+
+testTable();
+// testHeadline();
 // testButton();
-testHeadline();
