@@ -20,6 +20,12 @@ export class Dictionaries {
         const headGen = new Headline({textContent: 'Мои словари'});
         const head = headGen.render();
         outer.appendChild(head);
+        outer.appendChild(new Icon({
+            src: '../../../../home-icon.png',
+            handler: () => {
+                rendererDict.render(application, 'menu');
+            }
+        }).render());
         outer.appendChild(inner);
 
         const ajax = new AjaxModule();
