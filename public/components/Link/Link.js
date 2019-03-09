@@ -1,8 +1,8 @@
 'use strict';
-import {compile} from 'pug';
+const pug = require('pug');
 
 const template = 'span(class="link", class=size) name';
-const templateGen = compile(template);
+const templateGen = pug.compile(template);
 
 const noop = () => {};
 const validSizes = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
