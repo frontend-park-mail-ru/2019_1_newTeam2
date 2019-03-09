@@ -204,9 +204,10 @@ function testTable() {
             "company": "ZIORE"
         }
     ];
+    // table1.fields = ['first', 'second', 'hell'];
     application.appendChild(table1.render());
 }
 
-testTable();
+// testTable();
 // testHeadline();
 // testButton();

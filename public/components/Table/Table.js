@@ -5,7 +5,7 @@ const template = `table(class='res')
 				th=key
 			each line in data
 				tr(class='line')
-					each key in header
+					each key in keys
 						td(class='cell')=(key in line) ? line[key] : ''`;
 const templateGen = pug.compile(template);
 
@@ -64,7 +64,7 @@ export class Table {
 		console.log(this._fields);
 		console.log("this._data");
 		console.log(this._data);
-		this._div.innerHTML = templateGen({'header': this._fields, 'data': this._data, 'styles': this._classes});
+		this._div.innerHTML = templateGen({'header': this._fields, 'data': this._data, 'keys': Object.keys(this._data[0]), 'styles': this._classes});
 		return this._div;
 	};
 }

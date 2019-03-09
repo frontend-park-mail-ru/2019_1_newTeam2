@@ -1,6 +1,6 @@
 'use strict';
-const pug = require('pug');
 
+const pug = require('pug');
 const template = 'span(class="link", class=size) #{name}';
 const templateGen = pug.compile(template);
 

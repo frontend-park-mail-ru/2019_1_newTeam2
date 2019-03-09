@@ -1,4 +1,6 @@
 // import {AjaxModule} from "./modules/ajax";
+import {Table} from "../Table/Table.js";
+
 const pug = require('pug');
 const template = ``;
 const templateGen = pug.compile(template);
@@ -9,7 +11,10 @@ export class Pagination {
         src = ""
     } = {}) {
         this.page = 1;
-        this._object = {rows_per_page: rows_per_page, src: src};
+        this._object = {
+            rows_per_page: rows_per_page,
+            src: src
+        };
         this.el = document.createElement("span");
     }
 

@@ -1,12 +1,12 @@
 'use strict';
 const pug = require('pug');
 
-template = `label
+const template = `label
 		input(type="file", class=type, accept=files)
 		span='Выберите ' + (files.length === 0 ? 'файл' : 'изображение')`;
 const templateGen = pug.compile(template);
 
-const noop = () => {}
+const noop = () => {};
 
 export class Upload {
 	/**
@@ -18,7 +18,7 @@ export class Upload {
 		callback = noop,
 	} = {}) {
 		this._type = type;
-		this._callback = callback;
+		this._handler = callback;
 	}
 
 	/**
@@ -45,7 +45,7 @@ export class Upload {
 		outerDiv.id = this._outerId;
 		outerDiv.classList.add(this._outerId);
 		outerDiv.innerHTML = html;
-		outerDiv.addEventListener('click', this._callback);
+		outerDiv.addEventListener('click', this._handler);
 		return outerDiv; */
 
 		outer.addEventListener('click', this._handler);
