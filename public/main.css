@@ -11,3 +11,8 @@
 @import "./components/Upload/Upload.css" screen;
 
 @import "./components/Pages/Menu/Menu.css" screen;
+@import "./components/Pages/Login/Login.css" screen;
+
+.centered {
+    margin-left: 25%;
+}

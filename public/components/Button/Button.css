@@ -1,6 +1,6 @@
 .button {
     color: #ffffff;
-    background: blue;
+    background: #29b6f6;
     text-decoration: none;
     user-select: none;
     margin: 1% 1% 1% 1% ;
@@ -11,13 +11,13 @@
 }
 
 .button:hover {
-    background: navy;
+    background:#01579b;
     cursor: pointer;
 }
 
 .button:active {
-    background: #6095f0;
-    box-shadow: 0 0 10px #6095f0;
+    background:#01579b;
+    box-shadow: 0 0 10px#01579b;
 }
 
 @media screen and (min-width: 300px) {

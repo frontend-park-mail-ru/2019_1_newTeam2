@@ -2,12 +2,12 @@
 
 import {Button} from '../../Button/Button.js';
 
-let buttons = {
-    train: Training,
-    dictis: Dictionaries,
-    feed: Feed,
-    profile: Profile
-}
+// let buttons = {
+//     train: Training,
+//     dictis: Dictionaries,
+//     feed: Feed,
+//     profile: Profile
+// }
 
 export class Menu {
     render() {
