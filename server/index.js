@@ -25,23 +25,29 @@ app.get('/menu', function (req, res) {
 
 // user
 app.post('/signup', function (req, res) {
+	const login = req.body.login;
 	const password = req.body.password;
 	const email = req.body.email;
 	if (
-		!password || !email || !age ||
+		!password || !email || !login ||
 		!password.match(/^\S{4,}$/) ||
-		!email.match(/@/) ||
-		!(typeof age === 'number' && age > 10 && age < 100)
+		!email.match(/@/)
 	) {
 		return res.status(400).json({error: 'Невалидные данные пользователя'});
+	} else {
+		return res.status(200).json({status: 'OK'});
 	}
 });
 
 app.post('/login', function (req, res) {
 	const password = req.body.password;
-	const email = req.body.email;
-	if (!password || !email) {
+	const login = req.body.login;
+
+	if (!password || !login) {
 		return res.status(400).json({error: 'Не указан E-Mail или пароль'});
+	}
+	if (login == 'login' && password == 'pass') {
+		return res.status(200).json({status: 'OK'});
 	}
 });
 

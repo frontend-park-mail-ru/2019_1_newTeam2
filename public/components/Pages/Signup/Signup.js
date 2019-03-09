@@ -9,50 +9,57 @@ import {AjaxModule} from '../../../modules/ajax.js';
 import {RenderModule} from '../../../modules/render.js';
 
 
-export class Login {
+export class Signup {
     render() {
         const outer = document.createElement('div');
         outer.classList.add('centered');
         
-        let headline = new Headline({size: 'h1', textContent: 'Авторизация'});
+        let headline = new Headline({size: 'h1', textContent: 'Регистрация'});
+
         let errorText = document.createElement('div');
         errorText.classList.add('error-text');
         errorText.classList.add('hidden-element');
 
-
         let login = new Input({type: 'text', label: 'Логин', id: 'login'});
         let password = new Input({ type: 'password', label: 'Пароль', id: 'password'});
+        let email = new Input({ type: 'email', label: '@mail', id: 'email'});
 
-        let signupLink = new Link({size: 'h4', name: 'Нет аккаунта?'});
-        let submit = new Button({size: 'small', name: 'Войти'});
-
+        let loginLink = new Link({size: 'h4', name: 'Уже есть аккаунт?'});
+        let submit = new Button({size: 'small', name: 'Зарегистрироваться'});
+        
         let renderedSubmit = submit.render();
-        let renderedSignupLink = signupLink.render();
+        let renderedLoginLink = loginLink.render();
         
         outer.appendChild(headline.render());
         outer.appendChild(errorText);
         outer.appendChild(login.render());
+        outer.appendChild(email.render());
         outer.appendChild(password.render());
-        outer.appendChild(renderedSignupLink);
+        outer.appendChild(renderedLoginLink);
         outer.appendChild(renderedSubmit);
 
         let ajax = new AjaxModule();
 
         const application = document.getElementById('application');
-        const rendererLogin = new RenderModule();
+        const rendererSignup = new RenderModule();
 
         renderedSubmit.addEventListener( 'click', () => {
             let profile = {
                 "login" : document.getElementById('login').value,
-                "password" : document.getElementById('password').value
-            }
+                "email" : document.getElementById('email').value,
+                "password" : document.getElementById('password').value,
+                "langId" : 0, // по умолчанию
+                "pronounceOn" : 0
+            };
     
+            console.log(profile);
+
             ajax.doPost({
-                path: '/login',
+                path: '/signup',
                 body: profile
             })
             .then ((response) => {
-                rendererLogin.render(application, 'menu');
+                rendererSignup.render(application, 'menu');
             })
             .catch ((error) => {
                 console.log(error.response);
@@ -64,11 +71,11 @@ export class Login {
             });
 
         });
-
-        renderedSignupLink.addEventListener( 'click', () => {
-            rendererLogin.render(application, 'signup');
-        });
             
+        renderedLoginLink.addEventListener( 'click', () => {
+            rendererSignup.render(application, 'login');
+        });
+
 		return outer;
     }
 }
