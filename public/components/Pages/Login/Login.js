@@ -1,6 +1,6 @@
 'use strict'
 
-import {Headline} from '../../Headline/Headline';
+import {Headline} from '../../Headline/Headline.js';
 import {Input} from '../../Input/Input.js';
 import {Link} from '../../Link/Link.js';
 import {Button} from '../../Button/Button.js';
@@ -16,7 +16,7 @@ export class Login {
         let password = new Input({ type: 'password'});
 
         let signUpLink = new Link({name: 'Уже есть аккаунт?'});
-        let submit = new Button({size: 'small'});
+        let submit = new Button({size: 'small', name: 'Войти'});
         
         outer.appendChild(headline.render());
         outer.appendChild(login.render());
@@ -26,6 +26,4 @@ export class Login {
 
 		return outer;
     }
-    
-    
 }
