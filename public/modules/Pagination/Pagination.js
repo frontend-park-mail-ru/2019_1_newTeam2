@@ -1,29 +1,24 @@
-// import {AjaxModule} from "./modules/ajax";
-import {Table} from "../../components/Table/Table.js";
+'use strict';
 
-const pug = require('pug');
-const template = ``;
-const templateGen = pug.compile(template);
+import {AjaxModule} from "../ajax.js";
+
+const ajax = new AjaxModule();
+
+const application = document.getElementById('application');
 
 export class Pagination {
     constructor({
-        rows_per_page = 10,
-        src = ""
+        rows_per_page = 10
     } = {}) {
         this.page = 1;
         this._object = {
-            rows_per_page: rows_per_page,
-            src: src
+            rows_per_page: rows_per_page
         };
-        this.el = document.createElement("span");
     }
 
 
     render() {
-        // get data
-        // object.data = data
-        this.el.innerHTML = templateGen(this._object);
-        return this.el;
+        return ajax.doGet({path: '/users'});
     }
 
     pageNum(number) {

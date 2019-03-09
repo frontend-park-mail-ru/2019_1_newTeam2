@@ -4,7 +4,6 @@ import {RenderModule} from "../../../modules/render.js";
 import {AjaxModule} from "../../../modules/ajax.js";
 import {Headline} from "../../Headline/Headline.js";
 import {GriseMerde} from "../../GriseMerde/GriseMerde.js";
-import {Image} from "../../Image/Image.js";
 import {Icon} from "../../Icon/Icon.js";
 
 const application = document.getElementById('application');

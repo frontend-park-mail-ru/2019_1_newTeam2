@@ -55,6 +55,29 @@ app.get('/users/:userId(\\d+)', function (req, res) {
 
 });
 
+//HARDCODE, TODELETE!!!!!
+app.get('/users', function (req, res) {
+	return res.status(200).json([
+		{
+			'username': 'Vova',
+			'score': -3
+		},
+		{
+			'username': 'Sergey',
+			'score': 52
+		},
+		{
+			'username': 'Irina',
+			'score': 56
+		},
+		{
+			'username': 'Alex',
+			'score': 41
+		}
+	]);
+
+});
+
 
 // dictionary
 app.get('/dictionaries', function (req, res) {

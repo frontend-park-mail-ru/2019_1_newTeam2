@@ -1,12 +1,14 @@
 import {Menu} from '../components/Pages/Menu/Menu.js';
 import {Login} from '../components/Pages/Login/Login.js';
 import {Dictionaries} from "../components/Pages/Dictionaries/Dictionaries.js";
+import {Leaderboard} from "../components/Pages/Leaderboard/Leaderboard.js";
 
 const pages = {
     menu: Menu,
     login: Login,
     dictionaries: Dictionaries,
-    errorPage: Menu
+    errorPage: Menu,
+    leaderboard: Leaderboard
 };
 
 export class RenderModule {

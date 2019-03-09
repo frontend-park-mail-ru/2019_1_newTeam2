@@ -11,7 +11,8 @@ let buttonNames = {
     dictionaries: 'Мои словари',
     feed: 'Лента',
     profile: 'Профиль',
-    login: 'Выйти'
+    login: 'Выйти',
+    leaderboard: 'Таблица лидеров'
 };
 
 export class Menu {
