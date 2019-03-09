@@ -1,7 +1,6 @@
-import {Menu} from './components/Pages/Menu/Menu.js';
-
+import {RenderModule} from './modules/render.js';
 const application = document.getElementById('application');
 
-const menu = new Menu();
-application.innerHTML = '';
-application.appendChild(menu.render());
+let renderer = new RenderModule;
+
+renderer.render(application, 'menu');
