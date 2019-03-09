@@ -13,6 +13,18 @@
 @import "./components/Pages/Menu/Menu.css" screen;
 @import "./components/Pages/Login/Login.css" screen;
 
+* {
+    font: Helvetica;
+}
+
 .centered {
     margin-left: 25%;
+}
+
+.error-text {
+    color: red !important;
+}
+
+.hidden-element{
+    display: hidden;
 }

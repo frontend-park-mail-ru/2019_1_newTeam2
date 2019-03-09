@@ -1,6 +1,6 @@
 'use strict';
 const pug = require('pug');
-const template = 'div(class="button", class=size) #{name}';
+const template = `button(class="button", class=size) #{name}`;
 const templateGen = pug.compile(template);
 
 const noop = () => {};

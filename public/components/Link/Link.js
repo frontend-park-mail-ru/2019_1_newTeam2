@@ -10,7 +10,7 @@ const validSizes = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 export class Link {
 	constructor({
 		name = '',
-		size = 'h1',
+		size = '',
 		handler = noop,
 	} = {}) {
 		this._name = name;
