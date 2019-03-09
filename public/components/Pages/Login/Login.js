@@ -15,17 +15,17 @@ export class Login {
         outer.classList.add('centered');
         
         let headline = new Headline({size: 'h1', textContent: 'Авторизация'});
-
         let errorText = document.createElement('div');
         errorText.classList.add('error-text');
         errorText.classList.add('hidden-element');
+
 
         let login = new Input({type: 'text', label: 'Логин', id: 'login'});
         let password = new Input({ type: 'password', label: 'Пароль', id: 'password'});
 
         let signupLink = new Link({size: 'h4', name: 'Нет аккаунта?'});
         let submit = new Button({size: 'small', name: 'Войти'});
-        
+
         let renderedSubmit = submit.render();
         let renderedSignupLink = signupLink.render();
         

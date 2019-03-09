@@ -2,7 +2,7 @@ const pug = require('pug');
 const template = `
 - var cl = classes
 div(class="grise-merde" class=cl)
- | !{inner.outerHTML}
+ | !{inner}
  |
 `;
 const templateGen = pug.compile(template);
@@ -13,6 +13,7 @@ export class GriseMerde {
         classes: ""
     }) {
         object.classes = object.classes ? object.classes : "small-grise-merde";
+        object.inner = object.inner instanceof Node ? object.inner.outerHTML : object.inner;
         this._object = object;
     }
 

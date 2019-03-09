@@ -53,17 +53,65 @@ app.post('/login', function (req, res) {
 
 app.get('/me', function (req, res) {
 	return res.status(200).json({message: 'Profile of logined user'});
-	
+
 });
 
 app.get('/users/:userId(\\d+)', function (req, res) {
 	return res.status(200).json({message: 'Profile of user', id: req.params.userId});
-	
+
+});
+
+//HARDCODE, TODELETE!!!!!
+app.get('/users', function (req, res) {
+	return res.status(200).json([
+		{
+			'username': 'Vova',
+			'score': -3
+		},
+		{
+			'username': 'Sergey',
+			'score': 52
+		},
+		{
+			'username': 'Irina',
+			'score': 56
+		},
+		{
+			'username': 'Alex',
+			'score': 41
+		}
+	]);
+
 });
 
 
-
 // dictionary
+app.get('/dictionaries', function (req, res) {
+	return res.status(200).json([
+		{
+			name: 'Dict1',
+			id: '1',
+		},
+		{
+			name: 'Dict2',
+			id: '2',
+		},
+		{
+			name: 'Dict3',
+			id: '3',
+		},
+		{
+			name: 'Dict4',
+			id: '4',
+		},
+		{
+			name: 'Dict5',
+			id: '5',
+		},
+	]);
+});
+
+
 app.get('/dictionaries/:dictionaryId(\\d+)', function (req, res) {
 	return res.status(200).json({message: 'Dictionary', id: req.params.dictionaryId});
 	
