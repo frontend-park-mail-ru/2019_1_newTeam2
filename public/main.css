@@ -13,6 +13,10 @@
 @import "./components/Pages/Menu/Menu.css" screen;
 @import "./components/Pages/Login/Login.css" screen;
 
+* {
+    font: Helvetica;
+}
+
 .centered {
     margin-left: 25%;
 }

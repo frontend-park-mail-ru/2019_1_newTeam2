@@ -39,9 +39,14 @@ app.post('/signup', function (req, res) {
 
 app.post('/login', function (req, res) {
 	const password = req.body.password;
-	const email = req.body.email;
-	if (!password || !email) {
+	const login = req.body.login;
+
+	if (!password || !login) {
 		return res.status(400).json({error: 'Не указан E-Mail или пароль'});
+	}
+	if (login == 'login' && password == 'pass') {
+		console.log('It is okey, I am ready to go');
+		return res.status(200).json({status: 'OK'});
 	}
 });
 
