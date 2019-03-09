@@ -6,12 +6,12 @@
 @import "./components/Icon/Icon.css" screen;
 @import "./components/Image/Image.css" screen;
 @import "./components/GriseMerde/GriseMerde.css" screen;
-@import "./components/Pagination/Pagination.css" screen;
 @import "./components/Table/Table.css" screen;
 @import "./components/Upload/Upload.css" screen;
 
 @import "./components/Pages/Menu/Menu.css" screen;
 @import "./components/Pages/Login/Login.css" screen;
+@import "./components/Pages/Dictionaries/Dictionaries.css" screen;
 
 .centered {
     margin-left: 25%;

@@ -12,8 +12,8 @@ const checkStatus = response => {
 	if (response.status >= 200 && response.status < 300) {
 	  return response
 	} else {
-	  var error = new Error(response.statusText)
-	  error.response = response
+	  let error = new Error(response.statusText)
+	  error.response = response;
 	  throw error
 	}
 };
@@ -37,6 +37,17 @@ export class AjaxModule {
 		path = '/',
 		body = {},
 	} = {}) {
+		let init = {
+			method: method,
+			mode: 'cors',
+			headers: {
+				"Content-Type": "application/json",
+				"Charset": "utf-8"
+			},
+			credentials: "include"
+		};
+		if (method === "POST")
+			init.body = JSON.stringify(body);
 		return fetch(path, {
 			method: method,
 			body: JSON.stringify(body),
@@ -46,30 +57,34 @@ export class AjaxModule {
 				"Charset": "utf-8"
 			},
 			credentials: "include"
-		  })
-		  .then(checkStatus)
+		})
+			.then(checkStatus);
 	}
 	/**
 	 * Simple wrapper on private _ajax function
 	 * Makes a GET http request
-	 * 
+	 *
 	 * @throws {Error} if request status is not in [200:300)
-	 * 
-	 * @param  {object} [unnamed = {}] 
-	 * @param  {string} [unnamed.path = '/'] 
+	 *
+	 * @param  {object} [unnamed = {}]
+	 * @param  {string} [unnamed.path = '/']
 	 * @param  {object} [unnamed.body = {}]
-	 * 
+	 *
 	 * @returns {Promise}
 	 */
 	doGet({
 		path = '/',
-		body = {},
 	} = {}) {
-		return this._ajax({
-			path,
-			body,
-			method: 'GET',
-		});
+		return fetch(path, {
+			method: "GET",
+			mode: 'cors',
+			headers: {
+				"Content-Type": "application/json",
+				"Charset": "utf-8"
+			},
+			credentials: "include"
+		})
+			.then(checkStatus);
 	}
 	/**
 	 * Simple wrapper on private _ajax function

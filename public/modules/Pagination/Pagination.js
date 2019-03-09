@@ -1,5 +1,5 @@
 // import {AjaxModule} from "./modules/ajax";
-import {Table} from "../Table/Table.js";
+import {Table} from "../../components/Table/Table.js";
 
 const pug = require('pug');
 const template = ``;

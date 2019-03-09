@@ -8,11 +8,11 @@ const application = document.getElementById('application');
 
 let buttonNames = {
     train: 'Тренировка',
-    dictionaries:  'Мои словари',
+    dictionaries: 'Мои словари',
     feed: 'Лента',
     profile: 'Профиль',
     login: 'Выйти'
-}; 
+};
 
 export class Menu {
     render() {
