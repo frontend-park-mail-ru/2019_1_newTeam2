@@ -2,6 +2,13 @@
 
 import {Button} from '../../Button/Button.js';
 
+let buttons = {
+    train: Training,
+    dictis: Dictionaries,
+    feed: Feed,
+    profile: Profile
+}
+
 export class Menu {
     render() {
         const outer = document.createElement('div');
@@ -19,6 +26,12 @@ export class Menu {
         });
 
 		return outer;
-	}
+    }
+    
+    clickOnButton(name) {
+        return (function () {
+            // TODO(gleensande)
+        });
+    } 
 }
 
