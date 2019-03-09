@@ -1,5 +1,5 @@
 @import "./components/Button/Button.css" screen;
-@import "components/Link/Link.css" screen; /**/
+@import "./components/Link/Link.css" screen;
 @import "./components/Headline/Headline.css" screen;
 @import "./components/Checkbox/Checkbox.css" screen;
 @import "./components/Input/Input.css" screen;
@@ -9,3 +9,10 @@
 @import "./components/Pagination/Pagination.css" screen;
 @import "./components/Table/Table.css" screen;
 @import "./components/Upload/Upload.css" screen;
+
+@import "./components/Pages/Menu/Menu.css" screen;
+@import "./components/Pages/Login/Login.css" screen;
+
+.centered {
+    margin-left: 25%;
+}

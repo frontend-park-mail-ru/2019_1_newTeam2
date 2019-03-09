@@ -1,29 +1,28 @@
 'use strict';
 const pug = require('pug');
-
-const template = `button(class="Button" class=additionalClass) #{text}`;
+const template = 'div(class="button", class=size) #{name}';
 const templateGen = pug.compile(template);
 
 const noop = () => {};
+const validSizes = ['big', 'small'];
 
 export class Button {
     constructor({
-                    type = 'buttonBig',
-                    textContent = '',
-                    someFunction = noop,
-                } = {}) {
-        this._text = textContent;
-        this._type = type;
-        this._handler = someFunction;
+        size = 'big',
+        name = '',
+        handler = noop,
+    } = {}) {
+        this._name = name;
+        this._size = validSizes.includes(size) ? size : 'small';
+        this._handler = handler;
     }
 
     render () {
-        let button = document.createElement('span');
-        button.innerHTML = templateGen({
-            additionalClass: this._type,
-            text: this._text
-        });
-        button.addEventListener('click', this._handler);
-        return button;
+        const outer = document.createElement('div');
+		outer.innerHTML = templateGen({'size': this._size, 'name': this._name});
+
+		outer.addEventListener('click', this._handler);
+
+		return outer;
     }
 }

@@ -16,7 +16,7 @@ export class Input {
     }
 
     render() {
-        let el = document.createElement('span');
+        let el = document.createElement('div');
         el.innerHTML = templateGen(this._object);
         return el;
     }
