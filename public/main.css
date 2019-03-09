@@ -20,3 +20,11 @@
 .centered {
     margin-left: 25%;
 }
+
+.error-text {
+    color: red !important;
+}
+
+.hidden-element{
+    display: hidden;
+}

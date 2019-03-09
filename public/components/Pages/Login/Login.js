@@ -17,6 +17,10 @@ export class Login {
         
         let headline = new Headline({size: 'h1', textContent: 'Авторизация'});
 
+        let errorText = document.createElement('div');
+        errorText.classList.add('error-text');
+        errorText.classList.add('hidden-element');
+
         let login = new Input({type: 'text', label: 'Логин', id: 'login'});
         let password = new Input({ type: 'password', label: 'Пароль', id: 'password'});
 
@@ -26,6 +30,7 @@ export class Login {
         let renderedSubmit = submit.render();
         
         outer.appendChild(headline.render());
+        outer.appendChild(errorText);
         outer.appendChild(login.render());
         outer.appendChild(password.render());
         outer.appendChild(signUpLink.render());
@@ -50,17 +55,22 @@ export class Login {
                 body: profile
             })
             .then ((response) => {
-                console.log('I cannot just render a menu here');
                 rendererLogin.render(application, 'menu');
             })
             .catch ((error) => {
                 console.log('Error occured here, it is: ');
                 console.log(error.response);
+                error.response.json()
+                .then ((res) => {
+                    errorText.innerText = res['error'];
+                    errorText.classList.remove('hidden-element');
+                    //let loginElement = document.getElementById('login');
+                    //loginElement.parentNode.insertBefore(errorText, loginElement);
+                });
             });
 
-            console.log('I jumped here, hello')
         });
-        
+            
 
 
 		return outer;

@@ -45,7 +45,6 @@ app.post('/login', function (req, res) {
 		return res.status(400).json({error: 'Не указан E-Mail или пароль'});
 	}
 	if (login == 'login' && password == 'pass') {
-		console.log('It is okey, I am ready to go');
 		return res.status(200).json({status: 'OK'});
 	}
 });
