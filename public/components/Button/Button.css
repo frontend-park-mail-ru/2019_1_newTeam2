@@ -1,4 +1,4 @@
-.Button {
+.button {
     color: #ffffff;
     background: blue;
     text-decoration: none;
@@ -10,24 +10,24 @@
     border: 0px;
 }
 
-.Button:hover {
+.button:hover {
     background: navy;
     cursor: pointer;
 }
 
-.Button:active {
+.button:active {
     background: #6095f0;
     box-shadow: 0 0 10px #6095f0;
 }
 
 @media screen and (min-width: 300px) {
-    .buttonBig {
+    .button.big {
         width: 200px;
         font-size: 21px;
         padding: 4px 0 4px 0;
     }
 
-    .buttonSmall {
+    .button.small {
         font-size: 12px;
         padding: 7px 11px 7px 11px;
     }
@@ -35,26 +35,26 @@
 
 
 @media screen and (min-width: 700px) {
-    .buttonBig {
+    .button.big {
         width: 420px;
         font-size: 45px;
         padding: 4px 0 4px 0;
     }
 
-    .buttonSmall {
+    .button.small {
         font-size: 25px;
         padding: 7px 11px 7px 11px;
     }
 }
 
 @media screen and (min-width: 1200px) {
-    .buttonBig {
+    .button.big {
         width: 600px;
         font-size: 64px;
         padding: 4px 0 4px 0;
     }
 
-    .buttonSmall {
+    .button.small {
         font-size: 36px;
         padding: 7px 11px 7px 11px;
     }

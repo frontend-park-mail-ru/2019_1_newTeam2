@@ -1,4 +1,4 @@
-import {Menu} from './components/Pages/Menu.js';
+import {Menu} from './components/Pages/Menu/Menu.js';
 
 const application = document.getElementById('application');
 
