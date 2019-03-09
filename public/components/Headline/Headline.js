@@ -1,8 +1,8 @@
 'use strict';
-import {compile} from 'pug';
+const pug = require('pug');
 
 const template = `p(class="headline" class=size) #{text}`;
-const templateGen = compile(template);
+const templateGen = pug.compile(template);
 
 const validSizes = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const noop = () => {};

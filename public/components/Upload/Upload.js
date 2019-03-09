@@ -1,5 +1,5 @@
 'use strict';
-import {compile} from 'pug';
+const pug = require('pug');
 
 template = `label
 		input(type="file", class=type, accept=files)

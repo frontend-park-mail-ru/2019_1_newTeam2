@@ -1,8 +1,8 @@
 'use strict';
-import {compile} from 'pug';
+const pug = require('pug');
 
 const template = `button(class="Button" class=additionalClass) #{text}`;
-const templateGen = compile(template);
+const templateGen = pug.compile(template);
 
 const noop = () => {};
 

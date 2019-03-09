@@ -1,8 +1,8 @@
 'use strict';
-import {compile} from 'pug';
+const pug = require('pug');
 
 const template = `input.input(type=type, value=value, placeholder=placeholder, name=name)`;
-const templateGen = compile(template);
+const templateGen = pug.compile(template);
 
 export class Input {
     constructor(object = {

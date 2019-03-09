@@ -19,7 +19,6 @@ app.use(cookie());
 // menu
 app.get('/menu', function (req, res) {
 	return res.status(200).json({message: 'Menu'});
-	// TODO(gleensande)
 });
 
 
@@ -36,9 +35,6 @@ app.post('/signup', function (req, res) {
 	) {
 		return res.status(400).json({error: 'Невалидные данные пользователя'});
 	}
-
-	// TODO(gleensande): запрос на email всех пользователей на backend
-	// генерация токена ? и авторизация
 });
 
 app.post('/login', function (req, res) {
@@ -47,18 +43,16 @@ app.post('/login', function (req, res) {
 	if (!password || !email) {
 		return res.status(400).json({error: 'Не указан E-Mail или пароль'});
 	}
-
-	// TODO(gleensande): запрос на проверку пользователя, авторизация
 });
 
 app.get('/me', function (req, res) {
 	return res.status(200).json({message: 'Profile of logined user'});
-	// TODO(gleensande)
+	
 });
 
 app.get('/users/:userId(\\d+)', function (req, res) {
 	return res.status(200).json({message: 'Profile of user', id: req.params.userId});
-	// TODO(gleensande)
+	
 });
 
 
@@ -66,17 +60,17 @@ app.get('/users/:userId(\\d+)', function (req, res) {
 // dictionary
 app.get('/dictionaries/:dictionaryId(\\d+)', function (req, res) {
 	return res.status(200).json({message: 'Dictionary', id: req.params.dictionaryId});
-	// TODO(gleensande)
+	
 });
 
 app.get('/dictionaries/add', function (req, res) {
 	return res.status(200).json({message: 'Page of adding a dictionary'});
-	// TODO(gleensande)
+	
 });
 
 app.get('/dictionaries/add/import', function (req, res) {
 	return res.status(200).json({message: 'Page of importing a dictionary'});
-	// TODO(gleensande)
+	
 });
 
 
@@ -84,7 +78,7 @@ app.get('/dictionaries/add/import', function (req, res) {
 // card
 app.get('/dictionaries/:dictionaryId(\\d+)/add', function (req, res) {
 	return res.status(200).json({message: 'Add a card', dictionaryId: req.params.dictionaryId});
-	// TODO(gleensande)
+	
 });
 
 
@@ -92,12 +86,12 @@ app.get('/dictionaries/:dictionaryId(\\d+)/add', function (req, res) {
 // training
 app.get('/training/choose', function (req, res) {
 	return res.status(200).json({message: 'Training choose page'});
-	// TODO(gleensande)
+	
 });
 
 app.get('/training/play', function (req, res) {
 	return res.status(200).json({message: 'Training play page'});
-	// TODO(gleensande)
+	
 });
 
 

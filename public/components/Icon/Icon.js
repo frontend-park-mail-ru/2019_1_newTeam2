@@ -1,8 +1,8 @@
 'use strict';
-import {compile} from 'pug';
+const pug = require('pug');
 
 const template = 'img(src=path, class="icon")';
-const templateGen = compile(template);
+const templateGen = pug.compile(template);
 
 const noop = () => {};
 
