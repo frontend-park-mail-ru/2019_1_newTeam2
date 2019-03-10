@@ -109,7 +109,7 @@ export class Login {
             };
     
             ajax.doPost({
-                path: 'http://localhost:8090/login/',
+                path: 'https://ancient-bastion-96223.herokuapp.com/login/',
                 body: profile
             })
             .then ((response) => {
