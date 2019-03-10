@@ -13,7 +13,8 @@ let loginedButtonNames = {
     dictionaries: 'Мои словари',
     //feed: 'Лента',
     profile: 'Профиль',
-    leaderboard: 'Таблица лидеров'
+    leaderboard: 'Таблица лидеров',
+    login: 'Выйти'
 };
 
 let unloginedButtonNames = {

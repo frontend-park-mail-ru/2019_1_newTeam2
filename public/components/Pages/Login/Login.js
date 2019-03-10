@@ -8,10 +8,13 @@ import {Button} from '../../Button/Button.js';
 import {AjaxModule} from '../../../modules/ajax.js';
 import {RenderModule} from '../../../modules/render.js';
 import {CookieModule} from '../../../modules/cookie.js'; // REMOVE IT
-
+import {AuthModule} from '../../../modules/auth.js';
 
 export class Login {
     render() {
+        let authLogin = new AuthModule();
+        authLogin.logout();
+
         const outer = document.createElement('div');
         outer.classList.add('centered');
         
