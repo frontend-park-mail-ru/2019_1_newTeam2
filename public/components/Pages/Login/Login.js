@@ -111,7 +111,7 @@ export class Login {
             })
             .then ((response) => {
                 let cookieMod = new CookieModule(); // REMOVE IT
-                cookieMod.setCookie('user_id',0,1);
+                cookieMod.setCookie('user_id',0,1); // REMOVE IT
                 rendererLogin.render(application, 'menu');
             })
             .catch ((error) => {

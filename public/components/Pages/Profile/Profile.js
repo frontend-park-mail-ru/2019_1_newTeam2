@@ -1,4 +1,8 @@
 'use strict';
+const pug = require('pug');
+
+const template = `p ID: #{ID} <br/> Username: #{Username} <br/>`;
+const templateGen = pug.compile(template);
 
 import {Headline} from '../../Headline/Headline.js';
 import {Icon} from '../../Icon/Icon.js';
@@ -44,12 +48,23 @@ export class Profile{
         })
         .then ((response) => {
             console.log(response);
+            response.json()
+            .then ((res) => {
+                let info = document.createElement('div');
+                info.innerHTML = templateGen({ID: res['ID'], Username: res['Username']});
+                outer.appendChild(info);
+            })
+            .cath ((err) => {
+                // catch
+            })
 
         })
         .catch ((error) => {
             console.log(error.response);
             error.response.json()
-            // catch the exception
+            .catch (
+                // catch the exception
+            )
         });
 
         return outer;
