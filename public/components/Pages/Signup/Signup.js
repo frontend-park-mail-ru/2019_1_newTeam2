@@ -132,7 +132,7 @@ export class Signup {
             console.log(profile);
 
             ajax.doPost({
-                path: '/signup',
+                path: 'http://localhost:8090/signup/',
                 body: profile
             })
             .then ((response) => {
