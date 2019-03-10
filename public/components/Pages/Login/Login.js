@@ -53,7 +53,17 @@ export class Login {
         const application = document.getElementById('application');
         const rendererLogin = new RenderModule();
 
+        outer.addEventListener( 'keyup', (event) => {
+            if(event.keyCode === 13){
+                renderedSubmit.click();
+            }
+        });
+
         renderedSubmit.addEventListener( 'click', () => {
+             if (!serverErrorText.classList.contains('hidden-element')) {
+                serverErrorText.classList.add('hidden-element');
+            }
+
             if (!loginTemplateText.classList.contains('hidden-element')) {
                 loginTemplateText.classList.add('hidden-element');
             }
@@ -68,16 +78,16 @@ export class Login {
             let allFieldsValid = (() => {
                 let isOk = true;
             
-                const loginRegExpr = /[a-zA-Z0-9-_]$/;
-                const passwordRegExpr = /[a-zA-Z0-9-_]$/;
+                const loginRegExpr = /^[a-zA-Z0-9-_]+$/;
+                const passwordRegExpr = /^[a-zA-Z0-9-_]+$/;
                 
         
-                if (!loginRegExpr.test(loginText) || loginText == '') {
+                if (!loginRegExpr.test(loginText)) {
                     loginTemplateText.classList.remove('hidden-element');
                     isOk = false;
                 }
             
-                if (!passwordRegExpr.test(passwordText) || passwordText == '') {
+                if (!passwordRegExpr.test(passwordText)) {
                     passwordTemplateText.classList.remove('hidden-element');
                     isOk = false;
                 }

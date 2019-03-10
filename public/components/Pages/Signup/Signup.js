@@ -39,7 +39,7 @@ export class Signup {
         emailTemplateText.classList.add('hidden-element');
         emailTemplateText.innerText = 'Email-адрес';
 
-        let email = new Input({ type: 'email', label: '@mail* ', id: 'email', maxlen: 50});
+        let email = new Input({ type: 'email', label: 'Email* ', id: 'email', maxlen: 50});
         
         let submit = new Button({size: 'small', name: 'Зарегистрироваться'});
         let loginLink = new Link({size: 'h4', name: 'Уже есть аккаунт?'});
@@ -63,7 +63,17 @@ export class Signup {
         const application = document.getElementById('application');
         const rendererSignup = new RenderModule();
 
+        outer.addEventListener( 'keyup', (event) => {
+            if(event.keyCode === 13){
+                renderedSubmit.click();
+            }
+        });
+
         renderedSubmit.addEventListener( 'click', () => {
+            if (!serverErrorText.classList.contains('hidden-element')) {
+                serverErrorText.classList.add('hidden-element');
+            }
+
             if (!loginTemplateText.classList.contains('hidden-element')) {
                 loginTemplateText.classList.add('hidden-element');
             }
@@ -83,8 +93,8 @@ export class Signup {
             let allFieldsValid = (() => {
                 let isOk = true;
             
-                const loginRegExpr = /[a-zA-Z0-9-_]$/;
-                const passwordRegExpr = /[a-zA-Z0-9-_]$/;
+                const loginRegExpr = /^[a-zA-Z0-9-_]+$/;
+                const passwordRegExpr = /^[a-zA-Z0-9-_]+$/;
                 const emailRegExpr = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         
                 if (!loginRegExpr.test(loginText) || loginText == '') {
