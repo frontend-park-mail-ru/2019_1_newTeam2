@@ -41,6 +41,9 @@ export class Dictionaries {
                     back = dialog.cloneNode();
                     back.appendChild(dialog);
                     back.classList.add('grey-background');
+                    back.addEventListener('click',() => {
+                        back.classList.add('hidden');
+                    });
                     dialog.classList.add('dialog');
                     const importButtonHandler = () => {
                         rendererDict.render(application,'menu');
@@ -54,7 +57,6 @@ export class Dictionaries {
                     dialog.appendChild(cardsButton);
                     outer.appendChild(back);
                 }
-                // back.classList.toggle('hidden');
             }
             const griseGen = new GriseMerde({
                 classes:'grise-centered small-grise-merde'
