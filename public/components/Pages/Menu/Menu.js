@@ -9,15 +9,15 @@ import {AuthModule} from '../../../modules/auth.js';
 const application = document.getElementById('application');
 
 let loginedButtonNames = {
-    train: 'Тренировка',
+    //train: 'Тренировка',
     dictionaries: 'Мои словари',
-    feed: 'Лента',
+    //feed: 'Лента',
     profile: 'Профиль',
     leaderboard: 'Таблица лидеров'
 };
 
 let unloginedButtonNames = {
-    trainSample: 'Пробная тренировка',
+    //trainSample: 'Пробная тренировка',
     login: 'Войти',
     leaderboard: 'Таблица лидеров'
 };
