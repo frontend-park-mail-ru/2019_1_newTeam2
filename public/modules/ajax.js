@@ -9,7 +9,7 @@
 * @returns {Promise}
 */
 const checkStatus = response => {
-	if (response.status >= 200 && response.status < 300) {
+	if (response.status >= 200 && response.status < 400) {
 	  return response
 	} else {
 	  let error = new Error(response.statusText)
