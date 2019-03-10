@@ -15,26 +15,38 @@ export class Login {
         outer.classList.add('centered');
         
         let headline = new Headline({size: 'h1', textContent: 'Авторизация'});
-        let errorText = document.createElement('div');
-        errorText.classList.add('error-text');
-        errorText.classList.add('hidden-element');
+        let serverErrorText = document.createElement('div');
+        serverErrorText.classList.add('error-text');
+        serverErrorText.classList.add('hidden-element');
 
+        let loginTemplateText = document.createElement('div');
+        loginTemplateText.classList.add('error-text');
+        loginTemplateText.classList.add('hidden-element');
+        loginTemplateText.innerText = 'Строчные и прописные латинские буквы, цифры, _';
 
-        let login = new Input({type: 'text', label: 'Логин', id: 'login'});
-        let password = new Input({ type: 'password', label: 'Пароль', id: 'password'});
+        let login = new Input({type: 'text', label: 'Логин* ', id: 'login', maxlen: 20});
 
-        let signupLink = new Link({size: 'h4', name: 'Нет аккаунта?'});
+        let passwordTemplateText = document.createElement('div');
+        passwordTemplateText.classList.add('error-text');
+        passwordTemplateText.classList.add('hidden-element');
+        passwordTemplateText.innerText = 'Строчные и прописные латинские буквы, цифры, _';
+
+        let password = new Input({ type: 'password', label: 'Пароль* ', id: 'password', maxlen: 20});
+
         let submit = new Button({size: 'small', name: 'Войти'});
-
+        let signupLink = new Link({size: 'h4', name: 'Нет аккаунта?'});
+        
         let renderedSubmit = submit.render();
         let renderedSignupLink = signupLink.render();
         
         outer.appendChild(headline.render());
-        outer.appendChild(errorText);
+        outer.appendChild(serverErrorText);
+        outer.appendChild(loginTemplateText);
         outer.appendChild(login.render());
+        outer.appendChild(passwordTemplateText);
         outer.appendChild(password.render());
-        outer.appendChild(renderedSignupLink);
         outer.appendChild(renderedSubmit);
+        outer.appendChild(renderedSignupLink);
 
         let ajax = new AjaxModule();
 
@@ -42,10 +54,45 @@ export class Login {
         const rendererLogin = new RenderModule();
 
         renderedSubmit.addEventListener( 'click', () => {
-            let profile = {
-                "login" : document.getElementById('login').value,
-                "password" : document.getElementById('password').value
+            if (!loginTemplateText.classList.contains('hidden-element')) {
+                loginTemplateText.classList.add('hidden-element');
             }
+
+            if (!passwordTemplateText.classList.contains('hidden-element')) {
+                passwordTemplateText.classList.add('hidden-element');
+            }         
+
+            let loginText = document.getElementById('login').value;
+            let passwordText = document.getElementById('password').value;
+            
+            let allFieldsValid = (() => {
+                let isOk = true;
+            
+                const loginRegExpr = /[a-zA-Z0-9-_]$/;
+                const passwordRegExpr = /[a-zA-Z0-9-_]$/;
+                
+        
+                if (!loginRegExpr.test(loginText) || loginText == '') {
+                    loginTemplateText.classList.remove('hidden-element');
+                    isOk = false;
+                }
+            
+                if (!passwordRegExpr.test(passwordText) || passwordText == '') {
+                    passwordTemplateText.classList.remove('hidden-element');
+                    isOk = false;
+                }
+            
+                return isOk;
+            })();
+
+            if (!allFieldsValid) {
+                return;
+            }
+
+            let profile = {
+                "username" : loginText,
+                "password" : passwordText
+            };
     
             ajax.doPost({
                 path: '/login',
@@ -58,8 +105,8 @@ export class Login {
                 console.log(error.response);
                 error.response.json()
                 .then ((res) => {
-                    errorText.innerText = res['error'];
-                    errorText.classList.remove('hidden-element');
+                    serverErrorText.innerText = res['error'];
+                    serverErrorText.classList.remove('hidden-element');
                 });
             });
 

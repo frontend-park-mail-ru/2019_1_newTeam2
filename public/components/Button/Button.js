@@ -19,6 +19,7 @@ export class Button {
 
     render () {
         const outer = document.createElement('div');
+        outer.classList.add('inline-block-el');
 		outer.innerHTML = templateGen({'size': this._size, 'name': this._name});
 
 		outer.addEventListener('click', this._handler);
