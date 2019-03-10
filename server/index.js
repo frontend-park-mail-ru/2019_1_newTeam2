@@ -9,6 +9,7 @@ const path = require('path');
 const app = express();
 
 
+
 app.use(morgan('dev'));
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 app.use(body.json());
@@ -24,7 +25,7 @@ app.get('/menu', function (req, res) {
 
 
 // user
-app.post('/signup', function (req, res) {
+app.post('/signup', function (req, res, next) {
 	const username = req.body.username;
 	const password = req.body.password;
 	const email = req.body.email;
@@ -57,7 +58,14 @@ app.get('/me', function (req, res) {
 });
 
 app.get('/users/:userId(\\d+)', function (req, res) {
-	return res.status(200).json({message: 'Profile of user', id: req.params.userId});
+	return res.status(200).json({
+		ID: req.params.userId,
+		Username: 'myUsername',
+		Email: 'myEmail',
+		LangID: '0',
+		PronounceON: '0',
+		Score: '0'
+	});
 
 });
 

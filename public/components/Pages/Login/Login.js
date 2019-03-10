@@ -7,6 +7,7 @@ import {Button} from '../../Button/Button.js';
 
 import {AjaxModule} from '../../../modules/ajax.js';
 import {RenderModule} from '../../../modules/render.js';
+import {CookieModule} from '../../../modules/cookie.js'; // REMOVE IT
 
 
 export class Login {
@@ -109,6 +110,8 @@ export class Login {
                 body: profile
             })
             .then ((response) => {
+                let cookieMod = new CookieModule(); // REMOVE IT
+                cookieMod.setCookie('user_id',0,1);
                 rendererLogin.render(application, 'menu');
             })
             .catch ((error) => {
