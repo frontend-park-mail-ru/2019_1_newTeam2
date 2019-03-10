@@ -15,7 +15,7 @@ export class AuthModule {
     }
 
     logout() {
-        setCookie('user_id','',-1);
+        cookieMod.setCookie('user_id','',-1);
     }
 
     checkAuthorisationOnServer() {
