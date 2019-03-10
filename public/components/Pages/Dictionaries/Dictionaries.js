@@ -5,8 +5,11 @@ import {AjaxModule} from "../../../modules/ajax.js";
 import {Headline} from "../../Headline/Headline.js";
 import {GriseMerde} from "../../GriseMerde/GriseMerde.js";
 import {Icon} from "../../Icon/Icon.js";
+import {Button} from "../../Button/Button.js";
 
 const application = document.getElementById('application');
+
+
 
 export class Dictionaries {
     render() {
@@ -31,18 +34,37 @@ export class Dictionaries {
 
 
         const onfulfilled = (response) => {
-            const handler = () => {
-                rendererDict.render(application, 'dictionariesAdd');
-            };
-            const griseGen = new GriseMerde({
-                inner: new Icon({
-                    src: '../../../../plus.png',
-                    handler: handler
+            function addDictHandler() {
+                let back;
+                if(!back) {
+                    let dialog = document.createElement('div');
+                    back = dialog.cloneNode();
+                    back.appendChild(dialog);
+                    back.classList.add('grey-background');
+                    dialog.classList.add('dialog');
+                    const importButtonHandler = () => {
+                        rendererDict.render(application,'menu');
+                    };
+                    const cardsButtonHandler = () => {
+                        rendererDict.render(application,'menu');
+                    };
+                    const importButton = new Button({size: 'small', name: 'Импорт', handler: importButtonHandler}).render();
+                    const cardsButton = new Button({size: 'small', name: 'По картам', handler: cardsButtonHandler}).render();
+                    dialog.appendChild(importButton);
+                    dialog.appendChild(cardsButton);
+                    outer.appendChild(back);
                 }
-            ).render(),
+                // back.classList.toggle('hidden');
+            }
+            const griseGen = new GriseMerde({
                 classes:'grise-centered small-grise-merde'
             });
             const grise = griseGen.render();
+            grise.firstChild.appendChild(new Icon({
+                    src: '../../../../plus.png',
+                    handler: addDictHandler
+                }
+            ).render());
             inner.appendChild(grise);
             response.json().then(
                 (res) => {
@@ -64,7 +86,6 @@ export class Dictionaries {
             onfulfilled,
             (error) => {
                 console.log(error);
-                rendererDict.render(application, 'errorPage');
             }
         );
 

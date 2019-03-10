@@ -9,7 +9,6 @@ const pages = {
     menu: Menu,
     login: Login,
     dictionaries: Dictionaries,
-    errorPage: Menu,
     leaderboard: Leaderboard,
     signup: Signup
 };
