@@ -64,7 +64,8 @@ app.get('/users/:userId(\\d+)', function (req, res) {
 		Email: 'myEmail',
 		LangID: '0',
 		PronounceON: '0',
-		Score: '0'
+		Score: '0',
+		Avatar: 'someUrl'
 	});
 
 });
