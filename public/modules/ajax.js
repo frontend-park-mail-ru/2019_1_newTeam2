@@ -48,16 +48,7 @@ export class AjaxModule {
 		};
 		if (method === "POST")
 			init.body = JSON.stringify(body);
-		return fetch(path, {
-			method: method,
-			body: JSON.stringify(body),
-			mode: 'cors',
-			headers: {
-				"Content-Type": "application/json",
-				"Charset": "utf-8"
-			},
-			credentials: "include"
-		})
+		return fetch(path, init)
 			.then(checkStatus);
 	}
 	/**
@@ -75,16 +66,7 @@ export class AjaxModule {
 	doGet({
 		path = '/',
 	} = {}) {
-		return fetch(path, {
-			method: "GET",
-			mode: 'cors',
-			headers: {
-				"Content-Type": "application/json",
-				"Charset": "utf-8"
-			},
-			credentials: "include"
-		})
-			.then(checkStatus);
+		return this._ajax({path: path})
 	}
 	/**
 	 * Simple wrapper on private _ajax function

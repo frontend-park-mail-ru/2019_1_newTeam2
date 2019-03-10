@@ -11,14 +11,12 @@ export class Pagination {
         rows_per_page = 10
     } = {}) {
         this.page = 1;
-        this._object = {
-            rows_per_page: rows_per_page
-        };
+        this.rows_per_page = rows_per_page;
     }
 
 
     render() {
-        return ajax.doGet({path: '/users'});
+        return ajax.doGet({path: `/users?rows_per_page=${this.rows_per_page}&page=${this.page}`});
     }
 
     pageNum(number) {
@@ -28,11 +26,13 @@ export class Pagination {
 
     nextPage() {
         this.page++;
+        // console.log(this.page);
         return this.render();
     }
 
     previousPage() {
-        this.page = this.page < 2 ? 1 : this.page--;
-        return this.render();
+        this.page = this.page < 2 ? 1 : this.page - 1;
+        // console.log(this.page);
+        return this.render(); // we can do this because table can produce only one Node from class
     }
 }
