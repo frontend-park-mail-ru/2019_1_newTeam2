@@ -20,7 +20,7 @@ export class Dictionaries {
         const head = headGen.render();
         outer.appendChild(head);
         outer.appendChild(new Icon({
-            src: '../../../../home-icon.png',
+            src: './static/home-icon.png',
             handler: () => {
                 rendererDict.render(application, 'menu');
             }
@@ -36,7 +36,7 @@ export class Dictionaries {
             };
             const griseGen = new GriseMerde({
                 inner: new Icon({
-                    src: '../../../../plus.png',
+                    src: './static/plus.png',
                     handler: handler
                 }
             ).render(),

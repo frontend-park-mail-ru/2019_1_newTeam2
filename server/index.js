@@ -9,6 +9,7 @@ const path = require('path');
 const app = express();
 
 
+
 app.use(morgan('dev'));
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 app.use(body.json());
@@ -24,30 +25,30 @@ app.get('/menu', function (req, res) {
 
 
 // user
-app.post('/signup', function (req, res) {
-	const login = req.body.login;
+app.post('/signup', function (req, res, next) {
+	const username = req.body.username;
 	const password = req.body.password;
 	const email = req.body.email;
 	if (
-		!password || !email || !login ||
-		!password.match(/^\S{4,}$/) ||
-		!email.match(/@/)
+		!password || !email || !username
 	) {
 		return res.status(400).json({error: 'Невалидные данные пользователя'});
 	} else {
-		return res.status(200).json({status: 'OK'});
+		return res.status(200).end();
 	}
 });
 
 app.post('/login', function (req, res) {
 	const password = req.body.password;
-	const login = req.body.login;
+	const username = req.body.username;
 
-	if (!password || !login) {
-		return res.status(400).json({error: 'Не указан E-Mail или пароль'});
+	if (!password || !username) {
+		return res.status(400).json({error: 'Не указан логин или пароль'});
 	}
-	if (login == 'login' && password == 'pass') {
-		return res.status(200).json({status: 'OK'});
+	if (username != 'login' || password != 'pass') {
+		return res.status(400).json({error: 'Неверный логин или пароль'});
+	} else {
+		return res.status(200).end();
 	}
 });
 
@@ -57,7 +58,15 @@ app.get('/me', function (req, res) {
 });
 
 app.get('/users/:userId(\\d+)', function (req, res) {
-	return res.status(200).json({message: 'Profile of user', id: req.params.userId});
+	return res.status(200).json({
+		ID: req.params.userId,
+		Username: 'myUsername',
+		Email: 'myEmail',
+		LangID: '0',
+		PronounceON: '0',
+		Score: '0',
+		Avatar: 'someUrl'
+	});
 
 });
 

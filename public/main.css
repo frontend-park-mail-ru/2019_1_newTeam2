@@ -26,5 +26,9 @@
 }
 
 .hidden-element{
-    display: hidden;
+    display: none;
+}
+
+.inline-block-el {
+    display: inline-block;
 }
