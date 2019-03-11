@@ -113,8 +113,8 @@ export class Login {
                 body: profile
             })
             .then ((response) => {
-                // let cookieMod = new CookieModule(); // REMOVE IT
-                // cookieMod.setCookie('user_id',0,1); // REMOVE IT
+                let cookieMod = new CookieModule(); // REMOVE IT
+                cookieMod.setCookie('user_id',0,1); // REMOVE IT
                 rendererLogin.render(application, 'menu');
             })
             .catch ((error) => {
