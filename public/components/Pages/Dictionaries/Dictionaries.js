@@ -11,7 +11,7 @@ const application = document.getElementById('application');
 
 
 export class Dictionaries {
-    render() {
+    render(options = {}) {
         const rendererDict = new RenderModule();
         const outer = document.createElement('div');
         const inner = outer.cloneNode();
@@ -23,7 +23,7 @@ export class Dictionaries {
         outer.appendChild(new Icon({
             src: './static/home-icon.png',
             handler: () => {
-                rendererDict.render(application, 'menu');
+                rendererDict.render(application, 'menu', {logined: true});
             }
         }).render());
         outer.appendChild(inner);
@@ -85,7 +85,8 @@ export class Dictionaries {
         };
 
         ajax.doGet({
-            path: '/dictionaries'
+            // path: 'https://ancient-bastion-96223.herokuapp.com//dictionaries/me/'
+            path: '/dictionaries/me/'
         }).then(
             onfulfilled,
             (error) => {

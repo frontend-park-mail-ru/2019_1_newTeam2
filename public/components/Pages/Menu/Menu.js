@@ -3,7 +3,6 @@
 import {Button} from '../../Button/Button.js';
 
 import {RenderModule} from '../../../modules/render.js';
-import {AuthModule} from '../../../modules/auth.js';
 
 
 const application = document.getElementById('application');
@@ -25,7 +24,7 @@ let unloginedButtonNames = {
 
 
 export class Menu {
-    render() {
+    render(options = {}) {
         const rendererMenu = new RenderModule();
 
         const outer = document.createElement('div');
@@ -46,8 +45,7 @@ export class Menu {
             });
         };
 
-        let auth = new AuthModule();
-        if (auth.isAuthorised()) {
+        if (options != {} && options['logined']) {
             createButtons(loginedButtonNames);
         } else {
             createButtons(unloginedButtonNames);
