@@ -4,6 +4,7 @@ import {Dictionaries} from "../components/Pages/Dictionaries/Dictionaries.js";
 import {Leaderboard} from "../components/Pages/Leaderboard/Leaderboard.js";
 import {Signup} from '../components/Pages/Signup/Signup.js';
 import {Cards} from "../components/Pages/Cards/Cards.js";
+import {Profile} from '../components/Pages/Profile/Profile.js';
 
 
 const pages = {
@@ -12,7 +13,8 @@ const pages = {
     dictionaries: Dictionaries,
     leaderboard: Leaderboard,
     signup: Signup,
-    cards: Cards
+    cards: Cards,
+    profile: Profile
 };
 
 export class RenderModule {

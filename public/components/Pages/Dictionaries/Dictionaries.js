@@ -21,7 +21,7 @@ export class Dictionaries {
         const head = headGen.render();
         outer.appendChild(head);
         outer.appendChild(new Icon({
-            src: '../../../../home-icon.png',
+            src: './static/home-icon.png',
             handler: () => {
                 rendererDict.render(application, 'menu');
             }

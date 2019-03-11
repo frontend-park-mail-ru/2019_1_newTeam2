@@ -20,7 +20,7 @@ export class Leaderboard {
         outer.appendChild(head);
 
         outer.appendChild(new Icon({
-            src: '../../../../home-icon.png',
+            src: './static/home-icon.png',
             handler: () => {
                 rendererLead.render(application, 'menu');
             }
