@@ -1,0 +1,38 @@
+.grise-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tiles {
+    display: flex;
+    justify-content: space-between;
+}
+
+.grey-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(117,117,117, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dialog {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 30%;
+    width: 20%;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 0 10px 10px #dddddd;
+}
+
+.hidden {
+    display: none;
+}

@@ -1,0 +1,15 @@
+.grise-merde {
+    background-color: #e0e0e0;
+    width: 100%;
+    height: 100%;
+}
+
+.big-grise-merde {
+    width: 200px;
+    height: 400px;
+}
+
+.small-grise-merde {
+    width: 100px;
+    height: 200px;
+}

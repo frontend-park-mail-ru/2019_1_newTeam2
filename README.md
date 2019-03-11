@@ -10,5 +10,5 @@
  - [Смехунов Алексей](https://github.com/Sighr)
 
 
-## Backend
- [Репозиторий бэка](https://github.com/go-park-mail-ru/2019_1_newTeam2)
+## Frontend
+[Репозиторий фронта](https://github.com/frontend-park-mail-ru/2019_1_newTeam2)
