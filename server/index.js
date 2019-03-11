@@ -139,7 +139,7 @@ app.get('/dictionaries/:dictionaryId(\\d+)/', function (req, res) {
 	
 });
 
-app.get('/dictionaries/add/', function (req, res) {
+/*app.get('/dictionaries/add/', function (req, res) {
 	return res.status(200).json({message: 'Page of adding a dictionary'});
 	
 });
@@ -172,7 +172,9 @@ app.get('/training/play/', function (req, res) {
 
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;*/
+
+let port = process.env.PORT || 3000;
 
 app.listen(port, function () {
 	console.log(`Server listening port ${port}`);
