@@ -16,9 +16,9 @@ const pages = {
 };
 
 export class RenderModule {
-    render (application, item) {
+    render (application, item, options = {}) {
         application.innerHTML = '';
         const page = new pages[item]();
-        application.appendChild(page.render())
+        application.appendChild(page.render(options))
     }
 }

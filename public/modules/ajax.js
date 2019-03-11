@@ -10,11 +10,11 @@
 */
 const checkStatus = response => {
 	if (response.status >= 200 && response.status < 400) {
-	  return response
+	  return response;
 	} else {
-	  let error = new Error(response.statusText)
+	  let error = new Error(response.statusText);
 	  error.response = response;
-	  throw error
+	  throw error;
 	}
 };
 
@@ -88,6 +88,48 @@ export class AjaxModule {
 			path,
 			body,
 			method: 'POST',
+		});
+	}
+	/**
+	 * Simple wrapper on private _ajax function
+	 * Makes a PUT http request
+	 * 
+	 * @throws {Error} if request status is not in [200:300)
+	 * 
+	 * @param  {object} [unnamed = {}] 
+	 * @param  {string} [unnamed.path = '/'] 
+	 * @param  {object} [unnamed.body = {}]
+	 * 
+	 * @returns {Promise}
+	 */
+	doPut({
+		path = '/',
+		body = {},
+	} = {}) {
+		return this._ajax({
+			path,
+			body,
+			method: 'PUT',
+		});
+	}
+	/**
+	 * Simple wrapper on private _ajax function
+	 * Makes a DELETE http request
+	 * 
+	 * @throws {Error} if request status is not in [200:300)
+	 * 
+	 * @param  {object} [unnamed = {}] 
+	 * @param  {string} [unnamed.path = '/'] 
+	 * @param  {object} [unnamed.body = {}]
+	 * 
+	 * @returns {Promise}
+	 */
+	doDelete({
+		path = '/',
+	} = {}) {
+		return this._ajax({
+			path,
+			method: 'DELETE',
 		});
 	}
 }

@@ -7,11 +7,10 @@ import {Button} from '../../Button/Button.js';
 
 import {AjaxModule} from '../../../modules/ajax.js';
 import {RenderModule} from '../../../modules/render.js';
-import {CookieModule} from '../../../modules/cookie.js'; // REMOVE IT
 import {AuthModule} from '../../../modules/auth.js';
 
 export class Login {
-    render() {
+    render(options = {}) {
         let authLogin = new AuthModule();
         authLogin.logout();
 
@@ -109,13 +108,12 @@ export class Login {
             };
     
             ajax.doPost({
-                path: 'https://ancient-bastion-96223.herokuapp.com/login/',
+                // path: 'https://ancient-bastion-96223.herokuapp.com/login/',
+                path: '/login/',
                 body: profile
             })
             .then ((response) => {
-                let cookieMod = new CookieModule(); // REMOVE IT
-                cookieMod.setCookie('user_id',0,1); // REMOVE IT
-                rendererLogin.render(application, 'menu');
+                rendererLogin.render(application, 'menu', {logined: true});
             })
             .catch ((error) => {
                 console.log(error.response);

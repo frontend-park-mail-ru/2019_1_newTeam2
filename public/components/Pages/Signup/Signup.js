@@ -10,7 +10,7 @@ import {RenderModule} from '../../../modules/render.js';
 
 
 export class Signup {
-    render() {
+    render(options = {}) {
         const outer = document.createElement('div');
         outer.classList.add('centered');
         
@@ -132,11 +132,12 @@ export class Signup {
             console.log(profile);
 
             ajax.doPost({
-                path: 'http://localhost:8090/signup/',
+                // path: 'https://ancient-bastion-96223.herokuapp.com/signup/',
+                path: '/signup/',
                 body: profile
             })
             .then ((response) => {
-                rendererSignup.render(application, 'menu');
+                rendererSignup.render(application, 'menu', {logined: true});
             })
             .catch ((error) => {
                 console.log(error.response);

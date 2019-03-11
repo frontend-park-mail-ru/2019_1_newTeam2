@@ -9,8 +9,6 @@
 @import "./components/Table/Table.css" screen;
 @import "./components/Upload/Upload.css" screen;
 
-@import "./components/Pages/Menu/Menu.css" screen;
-@import "./components/Pages/Login/Login.css" screen;
 @import "./components/Pages/Dictionaries/Dictionaries.css" screen;
 
 * {

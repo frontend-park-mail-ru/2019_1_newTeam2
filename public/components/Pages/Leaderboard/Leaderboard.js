@@ -6,11 +6,12 @@ import {Pagination} from "../../../modules/Pagination/Pagination.js";
 import {Table} from "../../Table/Table.js";
 import {Icon} from "../../Icon/Icon.js";
 import {Button} from "../../Button/Button.js";
+import {AuthModule} from '../../../modules/auth.js';
 
 const application = document.getElementById('application');
 
 export class Leaderboard {
-    render() {
+    render(options = {}) {
         const rendererLead = new RenderModule();
 
         const outer = document.createElement('div');
@@ -22,7 +23,17 @@ export class Leaderboard {
         outer.appendChild(new Icon({
             src: './static/home-icon.png',
             handler: () => {
-                rendererLead.render(application, 'menu');
+                let auth = new AuthModule();
+                let options = {
+                    logined: false
+                };
+                auth.isAuthorised()
+                .then( (res) => {
+                    if (res.status == 200) {
+                        options['logined'] = true;
+                    }
+                    rendererLead.render(application, 'menu', options);
+                });
             }
         }).render());
         const pagination = new Pagination();

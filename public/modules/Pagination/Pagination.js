@@ -16,7 +16,10 @@ export class Pagination {
 
 
     render() {
-        return ajax.doGet({path: `/users?rows_per_page=${this.rows_per_page}&page=${this.page}`});
+        return ajax.doGet({
+            //path: `https://ancient-bastion-96223.herokuapp.com/users?rows_per_page=${this.rows_per_page}&page=${this.page}/`
+            path: `/users?rows_per_page=${this.rows_per_page}&page=${this.page}/`
+        });
     }
 
     pageNum(number) {
