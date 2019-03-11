@@ -132,8 +132,8 @@ export class Signup {
             console.log(profile);
 
             ajax.doPost({
-                // path: 'https://ancient-bastion-96223.herokuapp.com/signup/',
-                path: '/signup/',
+                path: 'https://ancient-bastion-96223.herokuapp.com/signup/',
+                // path: '/signup/',
                 body: profile
             })
             .then ((response) => {

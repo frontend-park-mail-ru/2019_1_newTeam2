@@ -32,15 +32,15 @@ export class ProfileEdit{
         outer.appendChild(headline.render());
 
         ajax.doGet({
-           // path: 'https://ancient-bastion-96223.herokuapp.com/users/me/'
-            path: '/users/me/'
+            path: 'https://ancient-bastion-96223.herokuapp.com/users/me/'
+            // path: '/users/me/'
         })
         .then ((response) => {
             console.log(response);
             response.json()
             .then ((res) => {
                 let info = document.createElement('div');
-                info.innerHTML = templateGen({ID: res['ID'], Username: res['Username'], Avatar: res['Avatar']});
+                info.innerHTML = templateGen({ID: res['id'], Username: res['username'], Avatar: res['Avatar']});
                 outer.appendChild(info);
             })
             .cath ((err) => {
