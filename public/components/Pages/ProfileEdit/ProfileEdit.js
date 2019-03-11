@@ -12,21 +12,21 @@ import {Button} from '../../Button/Button.js';
 import {AjaxModule} from '../../../modules/ajax.js';
 import {RenderModule} from '../../../modules/render.js';
 
-export class Profile{
+export class ProfileEdit{
     render(options = {}) {
-        const rendererProfile = new RenderModule();
+        const rendererProfileEdit = new RenderModule();
         const ajax = new AjaxModule();
         const application = document.getElementById('application');
 
         const outer = document.createElement('div');
         outer.classList.add('centered');
 
-        let headline = new Headline({size: 'h1', textContent: 'Мой профиль'});
+        let headline = new Headline({size: 'h1', textContent: 'Редактировать'});
 
         outer.appendChild(new Icon({
             src: './static/home-icon.png',
             handler: () => {
-                rendererProfile.render(application, 'menu', {logined: true});
+                rendererProfileEdit.render(application, 'menu', {logined: true});
             }
         }).render());
         outer.appendChild(headline.render());
@@ -56,12 +56,12 @@ export class Profile{
             )
         });
 
-        let edit = new Button({size: 'small', name: 'Редактировать'});
+        let edit = new Button({size: 'small', name: 'Сохранить'});
         edit = edit.render();
         outer.appendChild(edit);
 
         edit.addEventListener('click', () => {
-                rendererProfile.render(application, 'profileEdit');
+                rendererProfileEdit.render(application, 'profile');
             }
         );
 

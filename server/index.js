@@ -27,7 +27,7 @@ app.post('/signup/', function (req, res, next) {
 	) {
 		return res.status(400).json({error: 'Невалидные данные пользователя'});
 	} else {
-		res.cookie('user_id', 1, { expires: new Date(Date.now() + 1000 * 60 * 15 + 10800000), httpOnly: true });
+		res.cookie('user_id', 1, { maxAge: new Date(1000 * 60 * 15), httpOnly: true });
 		return res.status(200).end();
 	}
 });
@@ -42,7 +42,7 @@ app.post('/login/', function (req, res) {
 	if (username != 'login' || password != 'pass') {
 		return res.status(400).json({error: 'Неверный логин или пароль'});
 	} else {
-		res.cookie('user_id', 1, { expires: new Date(Date.now() + 1000 * 60 * 15 + 10800000), httpOnly: true });
+		res.cookie('user_id', 1, { maxAge: new Date(1000 * 60 * 15), httpOnly: true });
 		return res.status(200).end();
 	}
 });
@@ -79,7 +79,7 @@ app.get('/auth/', function (req, res) {
 });
 
 app.delete('/auth/', function (req, res) {
-	res.cookie('user_id', 1, { expires: new Date(Date.now()), httpOnly: true });
+	res.cookie('user_id', 1, { maxAge: new Date(0), httpOnly: true });
 	return res.status(200).end();
 });
 

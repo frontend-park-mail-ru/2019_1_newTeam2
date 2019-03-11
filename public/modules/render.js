@@ -4,6 +4,7 @@ import {Dictionaries} from "../components/Pages/Dictionaries/Dictionaries.js";
 import {Leaderboard} from "../components/Pages/Leaderboard/Leaderboard.js";
 import {Signup} from '../components/Pages/Signup/Signup.js';
 import {Profile} from '../components/Pages/Profile/Profile.js';
+import {ProfileEdit} from '../components/Pages/ProfileEdit/ProfileEdit.js';
 
 const pages = {
     menu: Menu,
@@ -12,13 +13,14 @@ const pages = {
     errorPage: Menu,
     leaderboard: Leaderboard,
     signup: Signup,
-    profile: Profile
+    profile: Profile,
+    profileEdit: ProfileEdit
 };
 
 export class RenderModule {
     render (application, item, options = {}) {
         application.innerHTML = '';
         const page = new pages[item]();
-        application.appendChild(page.render(options))
+        application.appendChild(page.render(options));
     }
 }
