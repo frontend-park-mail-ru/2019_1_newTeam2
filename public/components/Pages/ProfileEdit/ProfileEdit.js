@@ -1,7 +1,6 @@
 'use strict';
 
 const pug = require('pug');
-const CONFIG = require('../../../config.json');
 
 const template = `p ID: #{ID} <br/> Username: #{Username} <br/>
 img(src=Avatar)`;

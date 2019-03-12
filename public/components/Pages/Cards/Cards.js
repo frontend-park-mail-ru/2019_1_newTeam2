@@ -3,8 +3,8 @@
 import {RenderModule} from "../../../modules/render.js";
 import {Headline} from "../../Headline/Headline.js";
 import {Icon} from "../../Icon/Icon.js";
-import {AjaxModule} from "../../../modules/ajax";
-import {GriseMerde} from "../../GriseMerde/GriseMerde";
+import {AjaxModule} from "../../../modules/ajax.js";
+import {GriseMerde} from "../../GriseMerde/GriseMerde.js";
 
 const application = document.getElementById('application');
 

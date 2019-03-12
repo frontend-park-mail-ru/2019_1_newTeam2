@@ -1,6 +1,5 @@
 'use strict';
 
-const CONFIG = require('../../../config.json');
 const pug = require('pug');
 
 const template = `p ID: #{ID} <br/> Username: #{Username} <br/>
