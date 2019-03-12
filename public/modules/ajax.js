@@ -1,6 +1,6 @@
 'use strict';
 
-const baseUrl = '/';
+const baseUrl = 'htts://newteam2back.herokuapp.com/';
 
 /**
 * Checks the status of http answer
@@ -133,6 +133,28 @@ export class AjaxModule {
 		return this._ajax({
 			path,
 			method: 'DELETE',
+		});
+	}
+	/**
+	 * Simple wrapper on private _ajax function
+	 * Makes a PUT http request
+	 * 
+	 * @throws {Error} if request status is not in [200:300)
+	 * 
+	 * @param  {object} [unnamed = {}] 
+	 * @param  {string} [unnamed.path = '/'] 
+	 * @param  {object} [unnamed.body = {}]
+	 * 
+	 * @returns {Promise}
+	 */
+	doPatch({
+		path = '/',
+		body = {},
+	} = {}) {
+		return this._ajax({
+			path,
+			body,
+			method: 'PATCH',
 		});
 	}
 }

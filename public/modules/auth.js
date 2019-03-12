@@ -11,7 +11,7 @@ export class AuthModule {
     }
 
     logout() {
-        ajaxAuth.doDelete({
+        ajaxAuth.doPatch({
             path: 'session'
         });
     }
