@@ -1,5 +1,7 @@
 'use strict';
+
 const pug = require('pug');
+const CONFIG = require('../../../config.json');
 
 const template = `p ID: #{ID} <br/> Username: #{Username} <br/>
 img(src=Avatar)`;
@@ -31,9 +33,9 @@ export class ProfileEdit{
         }).render());
         outer.appendChild(headline.render());
 
-        ajax.doGet({
-            path: 'https://ancient-bastion-96223.herokuapp.com/users/me/'
-            // path: '/users/me/'
+        ajax.doPut({
+            path: 'users',
+            body: {}
         })
         .then ((response) => {
             console.log(response);

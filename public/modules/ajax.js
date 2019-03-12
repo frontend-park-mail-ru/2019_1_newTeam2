@@ -1,4 +1,7 @@
-'use strict'
+'use strict';
+
+const CONFIG = require('../config.json');
+
 /**
 * Checks the status of http answer
 * 
@@ -48,7 +51,7 @@ export class AjaxModule {
 		};
 		if (method === "POST")
 			init.body = JSON.stringify(body);
-		return fetch(path, init)
+		return fetch(CONFIG.baseUrl + path + '/', init)
 			.then(checkStatus);
 	}
 	/**

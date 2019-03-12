@@ -6,15 +6,13 @@ let ajaxAuth = new AjaxModule();
 export class AuthModule {
     isAuthorised() {     
         return ajaxAuth.doGet({
-            path: 'https://ancient-bastion-96223.herokuapp.com/auth/'
-            // path: '/auth/'
+            path: 'session'
         });
     }
 
     logout() {
         ajaxAuth.doDelete({
-            path: 'https://ancient-bastion-96223.herokuapp.com/auth/'
-            // path: '/auth/'
+            path: 'session'
         });
     }
 }
