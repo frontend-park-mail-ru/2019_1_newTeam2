@@ -2,7 +2,13 @@
 
 const pug = require('pug');
 
-const template = `p ID: #{ID} <br/> Username: #{Username} <br/>
+const template = `
+p
+    | ID: #{ID}
+    br
+    | Username:
+    input(type="text" value=Username name="username")
+    br
 img(src=Avatar)`;
 const templateGen = pug.compile(template);
 
@@ -31,8 +37,9 @@ export class ProfileEdit{
             }
         }).render());
         outer.appendChild(headline.render());
+        let userData;
 
-        ajax.doPut({
+        ajax.doGet({
             path: 'users',
             body: {}
         })
@@ -42,9 +49,10 @@ export class ProfileEdit{
             .then ((res) => {
                 let info = document.createElement('div');
                 info.innerHTML = templateGen({ID: res['id'], Username: res['username'], Avatar: res['Avatar']});
+                userData = res;
                 outer.appendChild(info);
             })
-            .cath ((err) => {
+            .catch ((err) => {
                 // catch
             })
 
@@ -57,12 +65,33 @@ export class ProfileEdit{
             )
         });
 
-        let edit = new Button({size: 'small', name: 'Сохранить'});
-        edit = edit.render();
+        let edit = new Button({size: 'small', name: 'Сохранить'}).render();
         outer.appendChild(edit);
 
         edit.addEventListener('click', () => {
-                rendererProfileEdit.render(application, 'profile');
+                const inputs = document.getElementsByTagName('input');
+
+                const body = {
+                    id: userData['id'],
+                    username: document.getElementsByName("username")[0],
+                    email: userData["email"],
+                    password: userData["password"],
+                    langID: userData["langID"],
+                    pronounceOn: userData["pronounceOn"],
+                    score: userData["score"],
+                    path: userData["path"]
+                };
+                ajax.doPut({
+                    path: 'users',
+                    body: body
+                }).then(
+                    () => {
+                        rendererProfileEdit.render(application, 'profile');
+                    },
+                    (err) => {
+                        console.log("some shit happened: " + err);
+                    }
+                )
             }
         );
 
