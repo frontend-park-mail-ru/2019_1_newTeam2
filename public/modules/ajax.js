@@ -49,7 +49,7 @@ export class AjaxModule {
 			},
 			credentials: "include"
 		};
-		if (method === "POST")
+		if (method === "POST" || method === "PUT" || method === "PATCH")
 			init.body = JSON.stringify(body);
 		return fetch(baseUrl + path + '/', init)
 			.then(checkStatus);
