@@ -11,4 +11,5 @@
 
 
 ## Frontend
-[Репозиторий фронта](https://github.com/frontend-park-mail-ru/2019_1_newTeam2)
+[Адрес фронта]
+(https://newwordtrainer.herokuapp.com/)

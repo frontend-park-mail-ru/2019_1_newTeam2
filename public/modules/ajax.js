@@ -1,6 +1,7 @@
 'use strict';
 
 const baseUrl = 'https://newteam2back.herokuapp.com/';
+const bodyIncludesMethods = ['POST', 'PATCH', 'PUT'];
 
 /**
 * Checks the status of http answer
@@ -44,13 +45,14 @@ export class AjaxModule {
 			method: method,
 			mode: 'cors',
 			headers: {
-				"Content-Type": "application/json",
-				"Charset": "utf-8"
+				'Content-Type': 'application/json',
+				'Charset': 'utf-8'
 			},
-			credentials: "include"
+			credentials: 'include'
 		};
-		if (method === "POST")
+		if (bodyIncludesMethods.includes(method)) {
 			init.body = JSON.stringify(body);
+		}
 		return fetch(baseUrl + path + '/', init)
 			.then(checkStatus);
 	}
