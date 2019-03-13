@@ -33,7 +33,7 @@ export class Profile{
         outer.appendChild(headline.render());
 
         ajax.doGet({
-            path: 'users/me'
+            path: 'users'
         })
         .then ((response) => {
             console.log(response);

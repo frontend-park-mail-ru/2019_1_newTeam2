@@ -1,6 +1,6 @@
 'use strict';
 
-const baseUrl = 'htts://newteam2back.herokuapp.com/';
+const baseUrl = 'https://newteam2back.herokuapp.com/';
 
 /**
 * Checks the status of http answer
