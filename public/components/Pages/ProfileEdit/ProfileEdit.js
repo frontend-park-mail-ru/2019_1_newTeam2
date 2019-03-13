@@ -73,7 +73,7 @@ export class ProfileEdit{
 
                 const body = {
                     id: userData['id'],
-                    username: document.getElementsByName("username")[0],
+                    username: document.getElementsByName("username")[0].value,
                     email: userData["email"],
                     password: userData["password"],
                     langID: userData["langID"],
