@@ -10,5 +10,9 @@
  - [Смехунов Алексей](https://github.com/Sighr)
 
 
-## Frontend
-[Репозиторий фронта](https://github.com/frontend-park-mail-ru/2019_1_newTeam2)
+## Deploy
+https://newwordtrainer.herokuapp.com/
+
+
+## Backend
+[Репозиторий бЕка](https://github.com/go-park-mail-ru/2019_1_newTeam2)
