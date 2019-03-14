@@ -66,5 +66,5 @@ export class Table {
 		console.log(this._data);
 		this._div.innerHTML = templateGen({'header': this._fields, 'data': this._data, 'keys': Object.keys(this._data[0]), 'styles': this._classes});
 		return this._div;
-	};
+	}
 }
