@@ -158,16 +158,12 @@ export class AjaxModule {
 		});
 	}
 	uploadAvatar({
-		body = ""
+		body
 	} = {}) {
 		const init = {
 			method: "POST",
 			mode: 'cors',
 			body: body,
-			headers: {
-				"Content-Type": "multipart/form-data",
-				"Charset": "utf-8"
-			},
 			credentials: "include"
 		};
 		return fetch(baseUrl + 'avatars/', init)
