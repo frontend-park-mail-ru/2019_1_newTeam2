@@ -159,4 +159,16 @@ export class AjaxModule {
 			method: 'PATCH',
 		});
 	}
+	uploadAvatar({
+		body
+	} = {}) {
+		const init = {
+			method: "POST",
+			mode: 'cors',
+			body: body,
+			credentials: "include"
+		};
+		return fetch(baseUrl + 'avatars/', init)
+			.then(checkStatus);
+	}
 }

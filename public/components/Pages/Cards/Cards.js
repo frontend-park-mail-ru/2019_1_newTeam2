@@ -8,7 +8,6 @@ import {GriseMerde} from "../../GriseMerde/GriseMerde.js";
 
 const application = document.getElementById('application');
 
-
 export class Cards {
     render() {
         const rendererCards = new RenderModule();

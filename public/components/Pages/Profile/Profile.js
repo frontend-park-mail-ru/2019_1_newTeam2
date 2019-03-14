@@ -2,15 +2,21 @@
 
 const pug = require('pug');
 
-const template = `p ID: #{ID} <br/> Username: #{Username} <br/>
-img(src=Avatar)`;
+const template = `
+p 
+    | ID: #{id}
+    br
+    | Username: #{username}
+    br
+    | Email: #{email}
+img(src=baseUrl + path)`;
 const templateGen = pug.compile(template);
 
 import {Headline} from '../../Headline/Headline.js';
 import {Icon} from '../../Icon/Icon.js';
 import {Button} from '../../Button/Button.js';
 
-import {AjaxModule} from '../../../modules/ajax.js';
+import {AjaxModule, baseUrl} from '../../../modules/ajax.js';
 import {RenderModule} from '../../../modules/render.js';
 
 export class Profile{
@@ -40,11 +46,14 @@ export class Profile{
             response.json()
             .then ((res) => {
                 let info = document.createElement('div');
-                info.innerHTML = templateGen({ID: res['id'], Username: res['username'], Avatar: res['Avatar']});
+                // info.innerHTML = templateGen({ID: res['id'], Username: res['username'], Avatar: res['Avatar']});
+                res.baseUrl = baseUrl;
+                info.innerHTML = templateGen(res);
                 outer.appendChild(info);
             })
-            .cath ((err) => {
-                // catch
+            .catch (
+                (err) => {
+                console.log(err);
             })
 
         })
@@ -52,19 +61,19 @@ export class Profile{
             console.log(error.response);
             error.response.json()
             .catch (
-                // catch the exception
+                (err) => {
+                    console.log(err);
+                }
             )
         });
 
-        let edit = new Button({size: 'small', name: 'Редактировать'});
-        edit = edit.render();
+        let edit = new Button({size: 'small', name: 'Редактировать'}).render();
         outer.appendChild(edit);
 
         edit.addEventListener('click', () => {
                 rendererProfile.render(application, 'profileEdit');
             }
         );
-
 
         return outer;
     }
