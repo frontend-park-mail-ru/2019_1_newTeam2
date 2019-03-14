@@ -53,7 +53,7 @@ export class AjaxModule {
 		if (bodyIncludesMethods.includes(method)) {
 			init.body = JSON.stringify(body);
 		}
-		return fetch(baseUrl + path + '/', init)
+		return fetch(baseUrl + path, init)
 			.then(checkStatus);
 	}
 	/**

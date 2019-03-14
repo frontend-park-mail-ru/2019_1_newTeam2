@@ -6,13 +6,13 @@ let ajaxAuth = new AjaxModule();
 export class AuthModule {
     isAuthorised() {     
         return ajaxAuth.doGet({
-            path: 'session'
+            path: 'session/'
         });
     }
 
     logout() {
         ajaxAuth.doPatch({
-            path: 'session'
+            path: 'session/'
         });
     }
 }

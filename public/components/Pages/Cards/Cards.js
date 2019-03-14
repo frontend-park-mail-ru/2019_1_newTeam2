@@ -60,7 +60,7 @@ export class Cards {
         };
 
         ajax.doGet({
-            path: `/dictionaries/${dictionaryId}` // get one dict
+            path: `/dictionaries/${dictionaryId}/` // get one dict
         }).then(
             onfulfilled,
             (error) => {
