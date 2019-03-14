@@ -1,6 +1,6 @@
 'use strict';
 
-const baseUrl = 'https://newteam2back.herokuapp.com/';
+export const baseUrl = 'https://newteam2back.herokuapp.com/';
 
 /**
 * Checks the status of http answer
@@ -156,5 +156,21 @@ export class AjaxModule {
 			body,
 			method: 'PATCH',
 		});
+	}
+	uploadAvatar({
+		body = ""
+	} = {}) {
+		const init = {
+			method: "POST",
+			mode: 'cors',
+			body: body,
+			headers: {
+				"Content-Type": "multipart/form-data",
+				"Charset": "utf-8"
+			},
+			credentials: "include"
+		};
+		return fetch(baseUrl + 'avatars/', init)
+			.then(checkStatus);
 	}
 }

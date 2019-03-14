@@ -4,19 +4,23 @@ const pug = require('pug');
 
 const template = `
 p
-    | ID: #{ID}
+    | ID: #{id}
     br
     | Username:
-    input(type="text" value=Username name="username")
+    input(type="text" value=username name="username")
     br
-img(src=Avatar)`;
+    | Email:
+    input(type="email" value=email name="email")
+    br
+    input(type="file" value=file name="file")
+img(src=baseUrl + path)`;
 const templateGen = pug.compile(template);
 
 import {Headline} from '../../Headline/Headline.js';
 import {Icon} from '../../Icon/Icon.js';
 import {Button} from '../../Button/Button.js';
 
-import {AjaxModule} from '../../../modules/ajax.js';
+import {AjaxModule, baseUrl} from '../../../modules/ajax.js';
 import {RenderModule} from '../../../modules/render.js';
 
 export class ProfileEdit{
@@ -48,12 +52,14 @@ export class ProfileEdit{
             response.json()
             .then ((res) => {
                 let info = document.createElement('div');
-                info.innerHTML = templateGen({ID: res['id'], Username: res['username'], Avatar: res['Avatar']});
+                // info.innerHTML = templateGen({ID: res['id'], Username: res['username'], Avatar: res['Avatar']});
+                res.baseUrl = baseUrl;
+                info.innerHTML = templateGen(res);
                 userData = res;
                 outer.appendChild(info);
             })
             .catch ((err) => {
-                // catch
+                console.log(err);
             })
 
         })
@@ -61,7 +67,9 @@ export class ProfileEdit{
             console.log(error.response);
             error.response.json()
             .catch (
-                // catch the exception
+                (err) => {
+                    console.log(err);
+                }
             )
         });
 
@@ -69,19 +77,37 @@ export class ProfileEdit{
         outer.appendChild(edit);
 
         edit.addEventListener('click', () => {
-                const inputs = document.getElementsByTagName('input');
-
-                const body = {
-                    id: userData['id'],
-                    username: document.getElementsByName("username")[0].value,
-                    email: userData["email"],
-                    password: userData["password"],
-                    langID: userData["langID"],
-                    pronounceOn: userData["pronounceOn"],
-                    score: userData["score"],
-                    path: userData["path"]
-                };
-                ajax.doPut({
+            let body = {
+                id: userData['id'],
+                username: document.getElementsByName('username')[0].value,
+                email: userData['email'],
+                password: userData['password'],
+                langID: userData['langID'],
+                pronounceOn: userData['pronounceOn'],
+                score: userData['score'],
+                path: userData['path']
+            };
+            const inputs = document.getElementsByTagName('input');
+            Array.from(inputs).forEach(
+                (input) => {
+                    if (input.name === 'file') {
+                        return;
+                    }
+                    body[`${input.name}`] = input.value;
+                }
+            );
+            const fileUpload = document.getElementsByName('file')[0];
+            if(fileUpload.value) {
+                let formData = new FormData();
+                formData.append("file", fileUpload.files[0]);
+                ajax.uploadAvatar({
+                    body: formData
+                }).then(
+                    () => {},
+                    (err) => {console.log(err)}
+                );
+            }
+            ajax.doPut({
                     path: 'users',
                     body: body
                 }).then(
@@ -91,7 +117,7 @@ export class ProfileEdit{
                     (err) => {
                         console.log("some shit happened: " + err);
                     }
-                )
+                );
             }
         );
 
