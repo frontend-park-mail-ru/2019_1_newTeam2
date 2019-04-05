@@ -1,11 +1,3 @@
-const pug = require('pug');
-const template = `
-- var cl = classes
-div(class="grise-merde" class=cl)
- | !{inner}
- |
-`;
-const templateGen = pug.compile(template);
 
 export class GriseMerde {
     constructor(object = {
@@ -19,7 +11,7 @@ export class GriseMerde {
 
     render() {
         let el = document.createElement("span");
-        el.innerHTML = templateGen(this._object);
+        el.innerHTML = grisemerdeTemplate(this._object);
         return el;
     }
 

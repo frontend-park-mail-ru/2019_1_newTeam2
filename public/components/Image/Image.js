@@ -1,8 +1,4 @@
 'use strict';
-const pug = require('pug');
-
-const template = `img(src=path, class=type)`;
-const templateGen = pug.compile(template);
 
 const noop = () => {};
 
@@ -32,7 +28,7 @@ export class Image {
 		let el = document.createElement('div');
 		const type = this._type in this._typeset ? this._type : 'dictionary';
 		el.addEventListener('click', this._callback);
-		el.innerHTML = templateGen({'path': this._src, 'type': type});
+		el.innerHTML = imageTemplate({'path': this._src, 'type': type});
 		return el;
 	}
 }
