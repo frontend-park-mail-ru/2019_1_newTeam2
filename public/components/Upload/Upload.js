@@ -1,10 +1,4 @@
 'use strict';
-const pug = require('pug');
-
-const template = `label
-		input(type="file", class=type, accept=files)
-		span='Выберите ' + (files.length === 0 ? 'файл' : 'изображение')`;
-const templateGen = pug.compile(template);
 
 const noop = () => {};
 
@@ -39,7 +33,7 @@ export class Upload {
 		}
 
 		const outer = document.createElement('span');
-		outer.innerHTML = templateGen({'type': type, 'files': files});
+		outer.innerHTML = uploadTemplate({'type': type, 'files': files});
 		
 		/* const outerDiv = document.createElement('div');
 		outerDiv.id = this._outerId;

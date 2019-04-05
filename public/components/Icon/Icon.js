@@ -1,8 +1,4 @@
 'use strict';
-const pug = require('pug');
-
-const template = 'img(src=path, class="icon")';
-const templateGen = pug.compile(template);
 
 const noop = () => {};
 
@@ -18,7 +14,7 @@ export class Icon {
 
 	render() {
 		const outer = document.createElement('span');
-		outer.innerHTML = templateGen({'path': this._src});
+		outer.innerHTML = iconTemplate({'path': this._src});
 
 		outer.addEventListener('click', this._handler);
 	

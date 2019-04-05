@@ -1,0 +1,8 @@
+table(class='res')
+    tr(class='res_h')
+        each key in header
+            th=key
+        each line in data
+            tr(class='line')
+                each key in keys
+                    td(class='cell')=(key in line) ? line[key] : ''

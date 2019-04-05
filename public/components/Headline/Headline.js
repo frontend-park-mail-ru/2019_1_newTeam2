@@ -1,8 +1,4 @@
 'use strict';
-const pug = require('pug');
-
-const template = `p(class="headline" class=size) #{text}`;
-const templateGen = pug.compile(template);
 
 const validSizes = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const noop = () => {};
@@ -21,7 +17,7 @@ export class Headline {
     render () {
         let headLineBoard = document.createElement('div');
         headLineBoard.addEventListener('click', this._handler);
-        headLineBoard.innerHTML = templateGen({
+        headLineBoard.innerHTML = headlineTemplate({
             size: this._size,
             text: this._text
         });
