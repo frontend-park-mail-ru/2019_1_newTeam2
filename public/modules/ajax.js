@@ -1,6 +1,6 @@
 'use strict';
 
-const baseUrl = 'https://newteam2back.herokuapp.com/';
+export const baseUrl = 'https://newteam2back.herokuapp.com/';
 const bodyIncludesMethods = ['POST', 'PATCH', 'PUT'];
 
 /**
