@@ -10,9 +10,8 @@ import {Cards} from './views/Cards/Cards.js';
 import {Profile} from './views/Profile/Profile.js';
 import {ProfileEdit} from './views/ProfileEdit/ProfileEdit.js';
 
-const auth = new AuthModule();
-
 const views = {
+    '': Menu,
     'menu': Menu,
     'login': Login,
     'dictionaries/me': Dictionaries,
@@ -24,16 +23,11 @@ const views = {
 };
 
 Object.entries(views).forEach(element => {
-    router.register(element[0], new views[element[0]]);
+    router.register(element[0], views[element[0]]);
 });
 
-auth.isAuthorised()
-.then( (res) => {
-    let options = {
-        logined: false
-    };
-    if (res.status === 200) {
-        options['logined'] = true;
-    }
-    router.go('menu', options);
-});
+/*let pathname = window.location.pathname;
+pathname = pathname.substring(1, pathname.length);
+
+router.go(pathname);*/
+router.render();
