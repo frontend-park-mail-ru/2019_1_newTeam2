@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node server",
-    "prestart": "pug -c -D --name-after-file -o public/components/pug public/components/pug_compiled"
+    "prestart": "pug -c -D --name-after-file -o public/components/pug_compiled public/components/pug"
   },
   "repository": {
     "type": "git",
