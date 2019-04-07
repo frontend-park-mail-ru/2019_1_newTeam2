@@ -1,5 +1,6 @@
 import {RenderModule} from './services/render.js';
 import {AuthModule} from './services/auth.js';
+import {LeaderboardController} from "./controllers/LeaderboardController.js";
 
 const application = document.getElementById('application');
 
