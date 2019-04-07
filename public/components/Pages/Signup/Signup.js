@@ -132,7 +132,7 @@ export class Signup {
             console.log(profile);
 
             ajax.doPost({
-                path: 'users',
+                path: 'users/',
                 body: profile
             })
             .then ((response) => {

@@ -85,7 +85,6 @@ export class Dictionaries {
         };
 
         ajax.doGet({
-            // path: 'https://ancient-bastion-96223.herokuapp.com//dictionaries/me/'
             path: '/dictionaries/me/'
         }).then(
             onfulfilled,

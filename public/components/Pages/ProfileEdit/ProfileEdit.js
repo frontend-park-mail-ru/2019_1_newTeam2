@@ -44,7 +44,7 @@ export class ProfileEdit{
         let userData;
 
         ajax.doGet({
-            path: 'users',
+            path: 'users/',
             body: {}
         })
         .then ((response) => {
@@ -108,7 +108,7 @@ export class ProfileEdit{
                 );
             }
             ajax.doPut({
-                    path: 'users',
+                    path: 'users/',
                     body: body
                 }).then(
                     () => {

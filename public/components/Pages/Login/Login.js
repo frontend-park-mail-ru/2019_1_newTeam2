@@ -108,7 +108,7 @@ export class Login {
             };
     
             ajax.doPost({
-                path: 'session',
+                path: 'session/',
                 body: profile
             })
             .then ((response) => {
