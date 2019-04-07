@@ -19,7 +19,7 @@ export class UserModel {
 
     getUser(id = 0) {
         ajax.doGet({
-            path: this.url + id.toString(10)
+            path: this.url + '/' + id.toString(10)
         })
             .then(
                 (res) => {
@@ -40,7 +40,7 @@ export class UserModel {
 
     getSelf() {
         ajax.doGet({
-            path: this.url
+            path: this.url + '/'
         })
             .then(
                 (res) => {
@@ -80,15 +80,45 @@ export class UserModel {
                 });
     }
 
-    updateUser(id = 0) {
-
+    updateUser(id = 0, body) {
+        ajax.doPut({
+            path: this.url + '/',
+            body: body
+        }).then(
+            () => {
+                bus.emit('user-updated');
+            },
+            (error) => {
+                bus.emit('update-user-error', error);
+                console.log("some shit happened: " + error);
+            }
+        );
     }
 
-    createUser() {
-
+    createUser(body) {
+        ajax.doPost({
+            path: this.url + '/',
+            body: body
+        })
+            .then((response) => {
+                bus.emit('user-created');
+            })
+            .catch ((error) => {
+                bus.emit('create-user-error', error);
+            });
     }
 
     deleteUser(id = 0) {
-
+        ajax.doDelete({
+            path: this.url + '/' + id.toString(10)
+        })
+            .then(() => {
+                    bus.emit('user-deleted');
+                }
+            )
+            .catch((error) => {
+                    bus.emit('delete-user-error', error);
+                }
+            )
     }
 }
