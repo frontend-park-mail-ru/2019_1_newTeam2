@@ -13,17 +13,20 @@ class RouterModule {
             console.log("path is not registred");
             return;
         }
+
+        let stateObj = {
+            path: path,
+        };
+        history.pushState(stateObj,'', path);
+
+        this.render(path, options); 
+    }
+
+    render(path, options) {
         this.application.innerHTML = '';
-        this.application.appendChild(this.views[path].render(options))
+        this.application.appendChild(this.views[path].render(options));
     }
 
-    back() {
-
-    }
-
-    forward() {
-
-    }
 }
 
 export default new RouterModule();
