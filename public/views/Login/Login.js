@@ -5,8 +5,8 @@ import {Input} from '../../components/Input/Input.js';
 import {Link} from '../../components/Link/Link.js';
 import {Button} from '../../components/Button/Button.js';
 
-import {AjaxModule} from '../../services/ajax.js';
 import router from '../../services/router.js';
+import ajax from '../../services/ajax.js';
 import {AuthModule} from '../../services/auth.js';
 
 export class Login {
@@ -50,8 +50,6 @@ export class Login {
         outer.appendChild(password.render());
         outer.appendChild(renderedSubmit);
         outer.appendChild(renderedSignupLink);
-
-        let ajax = new AjaxModule();
 
         outer.addEventListener( 'keyup', (event) => {
             if(event.keyCode === 13){

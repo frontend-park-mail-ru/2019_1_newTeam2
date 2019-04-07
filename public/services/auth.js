@@ -1,17 +1,16 @@
 'use strict';
 
-import {AjaxModule} from './ajax.js';
-let ajaxAuth = new AjaxModule();
+import ajax from './ajax.js';
 
 export class AuthModule {
     isAuthorised() {     
-        return ajaxAuth.doGet({
+        return ajax.doGet({
             path: 'session/'
         });
     }
 
     logout() {
-        ajaxAuth.doPatch({
+        ajax.doPatch({
             path: 'session/'
         });
     }

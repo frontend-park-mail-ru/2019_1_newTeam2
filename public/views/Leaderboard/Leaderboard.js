@@ -2,18 +2,19 @@
 
 import router from "../../services/router.js";
 import {Headline} from "../../components/Headline/Headline.js";
-import {Pagination} from "../../services/Pagination/Pagination.js";
+import {Pagination} from "../../services/pagination.js";
 import {Table} from "../../components/Table/Table.js";
 import {Icon} from "../../components/Icon/Icon.js";
 import {Button} from "../../components/Button/Button.js";
 import {AuthModule} from '../../services/auth.js';
+import bus from "../../services/bus.js";
 
 export class Leaderboard {
     render(options = {}) {
-        const outer = document.createElement('div');
+        let outer = application;
+        outer.innerHTML = '';
 
-        const headGen = new Headline({textContent: 'Лидеры'});
-        const head = headGen.render();
+        const head = new Headline({textContent: 'Лидеры'}).render();
         outer.appendChild(head);
 
         outer.appendChild(new Icon({
@@ -32,45 +33,29 @@ export class Leaderboard {
                 });
             }
         }).render());
-        const pagination = new Pagination();
+
+        const forTable = document.createElement('div');
+        const forPagination = document.createElement('div');
+        outer.appendChild(forTable);
+        outer.appendChild(forPagination);
+
         const table = new Table();
-        let tableBefore = null;
-        pagination.render()
-            .then(
-                (response) => {
-                    response.json()
-                        .then(
-                        (res) =>
-                        {
-                            return res;
-                        }
-                    )
-                        .then(
-                            (res) => {
-                                res.sort((l, r) => {return l.score < r.score;});
-                                table.data = res;
-                                outer.insertBefore(table.render(),tableBefore);
-                            }
-                        );
-                }
-            );
-        const buttonPrev = new Button({
-            size: 'pagination',
-            name: '<',
-            handler: () => {
-                pagination.previousPage();
-            }
-        }).render();
-        outer.appendChild(buttonPrev);
-        tableBefore = buttonPrev;
-        const buttonNext = new Button({
-            size: 'pagination',
-            name: '>',
-            handler: () => {
-                pagination.nextPage();
-            }
-        }).render();
-        outer.appendChild(buttonNext);
-        return outer;
+        this._onload = (data) => {
+            console.log(data);
+            table.data = data;
+            let childNode = forTable.firstChild;
+            if(!childNode)
+                forTable.appendChild(table.render());
+            else
+                childNode = table.render();
+        };
+        bus.on('users-loaded', this._onload);
+
+        const pagination = new Pagination();
+        pagination.render(forPagination);
+    }
+
+    preventAllEvents() {
+        bus.off('users-loaded', this._onload);
     }
 }

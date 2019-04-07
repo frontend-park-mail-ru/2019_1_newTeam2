@@ -3,7 +3,7 @@
 import router from "../../services/router.js";
 import {Headline} from "../../components/Headline/Headline.js";
 import {Icon} from "../../components/Icon/Icon.js";
-import {AjaxModule} from "../../services/ajax.js";
+import ajax from '../../services/ajax.js';
 import {GriseMerde} from "../../components/GriseMerde/GriseMerde.js";
 
 export class Cards {
@@ -22,8 +22,6 @@ export class Cards {
             }
         }).render());
         outer.appendChild(inner);
-
-        const ajax = new AjaxModule();
 
         const onfulfilled = (response) => {
             function addCardHandler() {
