@@ -16,15 +16,12 @@ import {Headline} from '../../components/Headline/Headline.js';
 import {Icon} from '../../components/Icon/Icon.js';
 import {Button} from '../../components/Button/Button.js';
 
+import router from '../../services/router.js';
 import {baseUrl} from '../../services/ajax.js';
 import ajax from '../../services/ajax.js';
-import {RenderModule} from '../../services/render.js';
 
 export class Profile{
     render(options = {}) {
-        const rendererProfile = new RenderModule();
-        const application = document.getElementById('application');
-
         const outer = document.createElement('div');
         outer.classList.add('centered');
 
@@ -33,7 +30,7 @@ export class Profile{
         outer.appendChild(new Icon({
             src: './static/home-icon.png',
             handler: () => {
-                rendererProfile.render(application, 'menu', {logined: true});
+                router.go('menu', {logined: true});
             }
         }).render());
         outer.appendChild(headline.render());
@@ -71,7 +68,7 @@ export class Profile{
         outer.appendChild(edit);
 
         edit.addEventListener('click', () => {
-                rendererProfile.render(application, 'profileEdit');
+                router.go('profile/edit/me');
             }
         );
 

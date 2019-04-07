@@ -1,18 +1,14 @@
 'use strict';
 
-import {RenderModule} from "../../services/render.js";
+import router from "../../services/router.js";
 import ajax from '../../services/ajax.js';
 import {Headline} from "../../components/Headline/Headline.js";
 import {GriseMerde} from "../../components/GriseMerde/GriseMerde.js";
 import {Icon} from "../../components/Icon/Icon.js";
 import {Button} from "../../components/Button/Button.js";
 
-const application = document.getElementById('application');
-
-
 export class Dictionaries {
     render(options = {}) {
-        const rendererDict = new RenderModule();
         const outer = document.createElement('div');
         const inner = outer.cloneNode();
         inner.classList.add('tiles');
@@ -23,7 +19,7 @@ export class Dictionaries {
         outer.appendChild(new Icon({
             src: './static/home-icon.png',
             handler: () => {
-                rendererDict.render(application, 'menu', {logined: true});
+                router.go('menu', {logined: true});
             }
         }).render());
         outer.appendChild(inner);
@@ -41,10 +37,10 @@ export class Dictionaries {
                     });
                     dialog.classList.add('dialog');
                     const importButtonHandler = () => {
-                        rendererDict.render(application,'menu');
+                        router.go('menu');
                     };
                     const cardsButtonHandler = () => {
-                        rendererDict.render(application,'menu');
+                        router.go('menu');
                     };
                     const importButton = new Button({size: 'small', name: 'Импорт', handler: importButtonHandler}).render();
                     const cardsButton = new Button({size: 'small', name: 'По картам', handler: cardsButtonHandler}).render();

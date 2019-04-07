@@ -1,16 +1,13 @@
 'use strict';
 
-import {RenderModule} from "../../services/render.js";
+import router from "../../services/router.js";
 import {Headline} from "../../components/Headline/Headline.js";
 import {Icon} from "../../components/Icon/Icon.js";
 import ajax from '../../services/ajax.js';
 import {GriseMerde} from "../../components/GriseMerde/GriseMerde.js";
 
-const application = document.getElementById('application');
-
 export class Cards {
     render() {
-        const rendererCards = new RenderModule();
         const outer = document.createElement('div');
         const inner = outer.cloneNode();
         inner.classList.add('tiles');
@@ -21,14 +18,14 @@ export class Cards {
         outer.appendChild(new Icon({
             src: '../../../../home-icon.png',
             handler: () => {
-                rendererCards.render(application, 'menu');
+                router.go('menu');
             }
         }).render());
         outer.appendChild(inner);
 
         const onfulfilled = (response) => {
             function addCardHandler() {
-                rendererCards.render(application, 'menu');
+                router.go('menu');
             }
             const griseGen = new GriseMerde({
                 classes:'grise-centered small-grise-merde'

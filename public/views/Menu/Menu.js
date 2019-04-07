@@ -2,31 +2,26 @@
 
 import {Button} from '../../components/Button/Button.js';
 
-import {RenderModule} from '../../services/render.js';
-
-
-const application = document.getElementById('application');
+import router from '../../services/router.js';
 
 let loginedButtonNames = {
-    //train: 'Тренировка',
-    dictionaries: 'Мои словари',
-    //feed: 'Лента',
-    profile: 'Профиль',
-    leaderboard: 'Таблица лидеров',
-    login: 'Выйти'
+    //'train': 'Тренировка',
+    'dictionaries/me': 'Мои словари',
+    //'feed': 'Лента',
+    'profile/me': 'Профиль',
+    'leaderboard': 'Таблица лидеров',
+    'login': 'Выйти'
 };
 
 let unloginedButtonNames = {
-    //trainSample: 'Пробная тренировка',
-    login: 'Войти',
-    leaderboard: 'Таблица лидеров'
+    //'trainSample': 'Пробная тренировка',
+    'login': 'Войти',
+    'leaderboard': 'Таблица лидеров'
 };
 
 
 export class Menu {
     render(options = {}) {
-        const rendererMenu = new RenderModule();
-
         const outer = document.createElement('div');
         outer.classList.add('centered');
         
@@ -40,7 +35,7 @@ export class Menu {
             Object.entries(buttonNames).forEach( (name, i) => {
                 buttons[i] = buttons[i].render();
                 buttons[i].addEventListener('click', function () {        
-                    rendererMenu.render(application, name[0]);
+                    router.go(name[0]);
                 });
             });
         };

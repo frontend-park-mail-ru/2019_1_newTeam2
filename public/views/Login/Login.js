@@ -5,8 +5,8 @@ import {Input} from '../../components/Input/Input.js';
 import {Link} from '../../components/Link/Link.js';
 import {Button} from '../../components/Button/Button.js';
 
+import router from '../../services/router.js';
 import ajax from '../../services/ajax.js';
-import {RenderModule} from '../../services/render.js';
 import {AuthModule} from '../../services/auth.js';
 
 export class Login {
@@ -50,9 +50,6 @@ export class Login {
         outer.appendChild(password.render());
         outer.appendChild(renderedSubmit);
         outer.appendChild(renderedSignupLink);
-
-        const application = document.getElementById('application');
-        const rendererLogin = new RenderModule();
 
         outer.addEventListener( 'keyup', (event) => {
             if(event.keyCode === 13){
@@ -109,8 +106,8 @@ export class Login {
                 path: 'session/',
                 body: profile
             })
-            .then ((response) => {
-                rendererLogin.render(application, 'menu', {logined: true});
+            .then (() => {
+                router.go('menu', {logined: true});
             })
             .catch ((error) => {
                 console.log(error.response);
@@ -124,7 +121,7 @@ export class Login {
         });
 
         renderedSignupLink.addEventListener( 'click', () => {
-            rendererLogin.render(application, 'signup');
+            router.go('signup');
         });
             
 		return outer;

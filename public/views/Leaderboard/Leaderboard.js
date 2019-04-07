@@ -1,6 +1,6 @@
 'use strict';
 
-import {RenderModule} from "../../services/render.js";
+import router from "../../services/router.js";
 import {Headline} from "../../components/Headline/Headline.js";
 import {Pagination} from "../../services/pagination.js";
 import {Table} from "../../components/Table/Table.js";
@@ -9,11 +9,8 @@ import {Button} from "../../components/Button/Button.js";
 import {AuthModule} from '../../services/auth.js';
 import bus from "../../services/bus.js";
 
-const application = document.getElementById('application');
-
 export class Leaderboard {
-    render() {
-        const rendererLead = new RenderModule();
+    render(options = {}) {
         let outer = application;
         outer.innerHTML = '';
 
@@ -28,12 +25,11 @@ export class Leaderboard {
                     logined: false
                 };
                 auth.isAuthorised()
-                .then(
-                    (res) => {
-                        if(res.status === 200) {
-                            options['logined'] = true;
-                        }
-                        rendererLead.render(application, 'menu', options);
+                .then( (res) => {
+                    if (res.status === 200) {
+                        options['logined'] = true;
+                    }
+                    router.go('menu', options);
                 });
             }
         }).render());
