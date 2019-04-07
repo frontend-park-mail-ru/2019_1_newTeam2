@@ -26,7 +26,7 @@ export class UserModel {
                     res.json()
                         .then(
                             (res) => {
-                                bus.emit('user-loaded', res);
+                                setTimeout(bus.emit, 0, 'user-loaded', res);
                             },
                             (err) => {
                                 console.log(err);
@@ -47,7 +47,7 @@ export class UserModel {
                     res.json()
                         .then(
                             (res) => {
-                                bus.emit('user-loaded', res);
+                                setTimeout(bus.emit, 0, 'user-loaded', res);
                             },
                             (err) => {
                                 console.log(err);
@@ -68,7 +68,7 @@ export class UserModel {
                     res.json()
                         .then(
                             (res) => {
-                                bus.emit('users-loaded', res);
+                                setTimeout(bus.emit, 0, 'users-loaded', res);
                             },
                             (err) => {
                                 console.log(err);
