@@ -6,7 +6,7 @@ import {Link} from '../../components/Link/Link.js';
 import {Button} from '../../components/Button/Button.js';
 
 import {AjaxModule} from '../../services/ajax.js';
-import {RenderModule} from '../../services/render.js';
+import router from '../../services/router.js';
 
 
 export class Signup {
@@ -61,7 +61,6 @@ export class Signup {
         let ajax = new AjaxModule();
 
         const application = document.getElementById('application');
-        const rendererSignup = new RenderModule();
 
         outer.addEventListener( 'keyup', (event) => {
             if(event.keyCode === 13){
@@ -135,8 +134,8 @@ export class Signup {
                 path: 'users/',
                 body: profile
             })
-            .then ((response) => {
-                rendererSignup.render(application, 'menu', {logined: true});
+            .then (() => {
+                router.go('menu', {logined: true});
             })
             .catch ((error) => {
                 console.log(error.response);
@@ -150,7 +149,7 @@ export class Signup {
         });
             
         renderedLoginLink.addEventListener( 'click', () => {
-            rendererSignup.render(application, 'login');
+            router.go('login');
         });
 
 		return outer;

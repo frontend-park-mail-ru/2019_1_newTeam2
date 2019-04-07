@@ -21,11 +21,10 @@ import {Icon} from '../../components/Icon/Icon.js';
 import {Button} from '../../components/Button/Button.js';
 
 import {AjaxModule, baseUrl} from '../../services/ajax.js';
-import {RenderModule} from '../../services/render.js';
+import router from '../../services/router.js';
 
 export class ProfileEdit{
     render(options = {}) {
-        const rendererProfileEdit = new RenderModule();
         const ajax = new AjaxModule();
         const application = document.getElementById('application');
 
@@ -37,7 +36,7 @@ export class ProfileEdit{
         outer.appendChild(new Icon({
             src: './static/home-icon.png',
             handler: () => {
-                rendererProfileEdit.render(application, 'menu', {logined: true});
+                router.go('menu', {logined: true});
             }
         }).render());
         outer.appendChild(headline.render());
@@ -112,7 +111,7 @@ export class ProfileEdit{
                     body: body
                 }).then(
                     () => {
-                        rendererProfileEdit.render(application, 'profile');
+                        router.go('profile/me');
                     },
                     (err) => {
                         console.log("some shit happened: " + err);

@@ -6,7 +6,7 @@ import {Link} from '../../components/Link/Link.js';
 import {Button} from '../../components/Button/Button.js';
 
 import {AjaxModule} from '../../services/ajax.js';
-import {RenderModule} from '../../services/render.js';
+import router from '../../services/router.js';
 import {AuthModule} from '../../services/auth.js';
 
 export class Login {
@@ -52,9 +52,6 @@ export class Login {
         outer.appendChild(renderedSignupLink);
 
         let ajax = new AjaxModule();
-
-        const application = document.getElementById('application');
-        const rendererLogin = new RenderModule();
 
         outer.addEventListener( 'keyup', (event) => {
             if(event.keyCode === 13){
@@ -111,8 +108,8 @@ export class Login {
                 path: 'session/',
                 body: profile
             })
-            .then ((response) => {
-                rendererLogin.render(application, 'menu', {logined: true});
+            .then (() => {
+                router.go('menu', {logined: true});
             })
             .catch ((error) => {
                 console.log(error.response);
@@ -126,7 +123,7 @@ export class Login {
         });
 
         renderedSignupLink.addEventListener( 'click', () => {
-            rendererLogin.render(application, 'signup');
+            router.go('signup');
         });
             
 		return outer;

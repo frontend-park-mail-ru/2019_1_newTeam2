@@ -1,6 +1,6 @@
 'use strict';
 
-import {RenderModule} from "../../services/render.js";
+import router from "../../services/router.js";
 import {Headline} from "../../components/Headline/Headline.js";
 import {Pagination} from "../../services/Pagination/Pagination.js";
 import {Table} from "../../components/Table/Table.js";
@@ -8,12 +8,8 @@ import {Icon} from "../../components/Icon/Icon.js";
 import {Button} from "../../components/Button/Button.js";
 import {AuthModule} from '../../services/auth.js';
 
-const application = document.getElementById('application');
-
 export class Leaderboard {
     render(options = {}) {
-        const rendererLead = new RenderModule();
-
         const outer = document.createElement('div');
 
         const headGen = new Headline({textContent: 'Лидеры'});
@@ -32,7 +28,7 @@ export class Leaderboard {
                     if (res.status === 200) {
                         options['logined'] = true;
                     }
-                    rendererLead.render(application, 'menu', options);
+                    router.go('menu', options);
                 });
             }
         }).render());
