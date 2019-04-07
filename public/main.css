@@ -9,10 +9,10 @@
 @import "./components/Table/Table.css" screen;
 @import "./components/Upload/Upload.css" screen;
 
-@import "./components/Pages/Dictionaries/Dictionaries.css" screen;
+@import "views/Dictionaries/Dictionaries.css" screen;
 
 * {
-    font: Helvetica;
+    font-family: Helvetica, sans-serif;
 }
 
 .centered {

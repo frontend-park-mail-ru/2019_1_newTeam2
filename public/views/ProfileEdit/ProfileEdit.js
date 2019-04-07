@@ -16,12 +16,12 @@ p
 img(src=baseUrl + path)`;
 const templateGen = pug.compile(template);
 
-import {Headline} from '../../Headline/Headline.js';
-import {Icon} from '../../Icon/Icon.js';
-import {Button} from '../../Button/Button.js';
+import {Headline} from '../../components/Headline/Headline.js';
+import {Icon} from '../../components/Icon/Icon.js';
+import {Button} from '../../components/Button/Button.js';
 
-import {AjaxModule, baseUrl} from '../../../modules/ajax.js';
-import {RenderModule} from '../../../modules/render.js';
+import {AjaxModule, baseUrl} from '../../services/ajax.js';
+import {RenderModule} from '../../services/render.js';
 
 export class ProfileEdit{
     render(options = {}) {

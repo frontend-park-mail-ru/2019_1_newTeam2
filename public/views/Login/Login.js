@@ -1,21 +1,23 @@
 'use strict';
 
-import {Headline} from '../../Headline/Headline.js';
-import {Input} from '../../Input/Input.js';
-import {Link} from '../../Link/Link.js';
-import {Button} from '../../Button/Button.js';
+import {Headline} from '../../components/Headline/Headline.js';
+import {Input} from '../../components/Input/Input.js';
+import {Link} from '../../components/Link/Link.js';
+import {Button} from '../../components/Button/Button.js';
 
-import {AjaxModule} from '../../../modules/ajax.js';
-import {RenderModule} from '../../../modules/render.js';
+import {AjaxModule} from '../../services/ajax.js';
+import {RenderModule} from '../../services/render.js';
+import {AuthModule} from '../../services/auth.js';
 
-
-export class Signup {
+export class Login {
     render(options = {}) {
+        let authLogin = new AuthModule();
+        authLogin.logout();
+
         const outer = document.createElement('div');
         outer.classList.add('centered');
         
-        let headline = new Headline({size: 'h1', textContent: 'Регистрация'});
-
+        let headline = new Headline({size: 'h1', textContent: 'Авторизация'});
         let serverErrorText = document.createElement('div');
         serverErrorText.classList.add('error-text');
         serverErrorText.classList.add('hidden-element');
@@ -34,34 +36,25 @@ export class Signup {
 
         let password = new Input({ type: 'password', label: 'Пароль* ', id: 'password', maxlen: 20});
 
-        let emailTemplateText = document.createElement('div');
-        emailTemplateText.classList.add('error-text');
-        emailTemplateText.classList.add('hidden-element');
-        emailTemplateText.innerText = 'Email-адрес';
-
-        let email = new Input({ type: 'email', label: 'Email* ', id: 'email', maxlen: 50});
+        let submit = new Button({size: 'small', name: 'Войти'});
+        let signupLink = new Link({size: 'h4', name: 'Нет аккаунта?'});
         
-        let submit = new Button({size: 'small', name: 'Зарегистрироваться'});
-        let loginLink = new Link({size: 'h4', name: 'Уже есть аккаунт?'});
-                
         let renderedSubmit = submit.render();
-        let renderedLoginLink = loginLink.render();
+        let renderedSignupLink = signupLink.render();
         
         outer.appendChild(headline.render());
         outer.appendChild(serverErrorText);
         outer.appendChild(loginTemplateText);
         outer.appendChild(login.render());
-        outer.appendChild(emailTemplateText);
-        outer.appendChild(email.render());
         outer.appendChild(passwordTemplateText);
         outer.appendChild(password.render());
         outer.appendChild(renderedSubmit);
-        outer.appendChild(renderedLoginLink);
+        outer.appendChild(renderedSignupLink);
 
         let ajax = new AjaxModule();
 
         const application = document.getElementById('application');
-        const rendererSignup = new RenderModule();
+        const rendererLogin = new RenderModule();
 
         outer.addEventListener( 'keyup', (event) => {
             if(event.keyCode === 13){
@@ -70,7 +63,7 @@ export class Signup {
         });
 
         renderedSubmit.addEventListener( 'click', () => {
-            if (!serverErrorText.classList.contains('hidden-element')) {
+             if (!serverErrorText.classList.contains('hidden-element')) {
                 serverErrorText.classList.add('hidden-element');
             }
 
@@ -80,35 +73,25 @@ export class Signup {
 
             if (!passwordTemplateText.classList.contains('hidden-element')) {
                 passwordTemplateText.classList.add('hidden-element');
-            }   
-            
-            if (!emailTemplateText.classList.contains('hidden-element')) {
-                emailTemplateText.classList.add('hidden-element');
-            }  
+            }         
 
             let loginText = document.getElementById('login').value;
             let passwordText = document.getElementById('password').value;
-            let emailText = document.getElementById('email').value;
             
             let allFieldsValid = (() => {
                 let isOk = true;
             
                 const loginRegExpr = /^[a-zA-Z0-9-_]+$/;
                 const passwordRegExpr = /^[a-zA-Z0-9-_]+$/;
-                const emailRegExpr = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                
         
-                if (!loginRegExpr.test(loginText) || loginText == '') {
+                if (!loginRegExpr.test(loginText)) {
                     loginTemplateText.classList.remove('hidden-element');
                     isOk = false;
                 }
             
-                if (!passwordRegExpr.test(passwordText) || passwordText == '') {
+                if (!passwordRegExpr.test(passwordText)) {
                     passwordTemplateText.classList.remove('hidden-element');
-                    isOk = false;
-                }
-
-                if (!emailRegExpr.test(emailText) || emailText == '') {
-                    emailTemplateText.classList.remove('hidden-element');
                     isOk = false;
                 }
             
@@ -119,24 +102,17 @@ export class Signup {
                 return;
             }
 
-
-
             let profile = {
-                "username" : document.getElementById('login').value,
-                "email" : document.getElementById('email').value,
-                "password" : document.getElementById('password').value,
-                "langID" : 0, // по умолчанию
-                "pronounceOn" : 0 // по умолчанию
+                "username" : loginText,
+                "password" : passwordText
             };
     
-            console.log(profile);
-
             ajax.doPost({
-                path: 'users/',
+                path: 'session/',
                 body: profile
             })
             .then ((response) => {
-                rendererSignup.render(application, 'menu', {logined: true});
+                rendererLogin.render(application, 'menu', {logined: true});
             })
             .catch ((error) => {
                 console.log(error.response);
@@ -148,11 +124,11 @@ export class Signup {
             });
 
         });
-            
-        renderedLoginLink.addEventListener( 'click', () => {
-            rendererSignup.render(application, 'login');
-        });
 
+        renderedSignupLink.addEventListener( 'click', () => {
+            rendererLogin.render(application, 'signup');
+        });
+            
 		return outer;
     }
 }

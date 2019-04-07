@@ -1,11 +1,11 @@
 'use strict';
 
-import {RenderModule} from "../../../modules/render.js";
-import {AjaxModule} from "../../../modules/ajax.js";
-import {Headline} from "../../Headline/Headline.js";
-import {GriseMerde} from "../../GriseMerde/GriseMerde.js";
-import {Icon} from "../../Icon/Icon.js";
-import {Button} from "../../Button/Button.js";
+import {RenderModule} from "../../services/render.js";
+import {AjaxModule} from "../../services/ajax.js";
+import {Headline} from "../../components/Headline/Headline.js";
+import {GriseMerde} from "../../components/GriseMerde/GriseMerde.js";
+import {Icon} from "../../components/Icon/Icon.js";
+import {Button} from "../../components/Button/Button.js";
 
 const application = document.getElementById('application');
 

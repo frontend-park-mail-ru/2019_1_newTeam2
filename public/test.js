@@ -5,7 +5,7 @@ import {Input} from "./components/Input/Input.js";
 import {GriseMerde} from "./components/GriseMerde/GriseMerde.js";
 import {Button} from './components/Button/Button.js';
 import {Headline} from './components/Headline/Headline.js';
-import {Pagination} from './modules/Pagination/Pagination.js'
+import {Pagination} from './services/Pagination/Pagination.js'
 import {Table} from './components/Table/Table.js'
 import {Upload} from './components/Upload/Upload.js'
 import {Image} from './components/Image/Image.js'
@@ -14,7 +14,7 @@ const application = document.getElementById('application');
 
 
 function testIcon() {
-    const icon = new Icon({ src: 'points.png' });
+    const icon = new Icon({ src: 'static/points.png' });
     application.appendChild(icon.render());
 }
 

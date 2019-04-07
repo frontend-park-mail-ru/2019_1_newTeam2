@@ -1,5 +1,5 @@
-import {RenderModule} from './modules/render.js';
-import {AuthModule} from './modules/auth.js';
+import {RenderModule} from './services/render.js';
+import {AuthModule} from './services/auth.js';
 
 const application = document.getElementById('application');
 
@@ -11,7 +11,7 @@ auth.isAuthorised()
     let options = {
         logined: false
     };
-    if (res.status == 200) {
+    if (res.status === 200) {
         options['logined'] = true;
     }
     renderer.render(application, 'menu', options);

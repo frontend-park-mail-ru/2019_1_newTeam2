@@ -1,8 +1,8 @@
 'use strict';
 
-import {Button} from '../../Button/Button.js';
+import {Button} from '../../components/Button/Button.js';
 
-import {RenderModule} from '../../../modules/render.js';
+import {RenderModule} from '../../services/render.js';
 
 
 const application = document.getElementById('application');
@@ -45,7 +45,7 @@ export class Menu {
             });
         };
 
-        if (options != {} && options['logined']) {
+        if (options && options['logined']) {
             createButtons(loginedButtonNames);
         } else {
             createButtons(unloginedButtonNames);

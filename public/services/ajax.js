@@ -64,7 +64,6 @@ export class AjaxModule {
 	 *
 	 * @param  {object} [unnamed = {}]
 	 * @param  {string} [unnamed.path = '/']
-	 * @param  {object} [unnamed.body = {}]
 	 *
 	 * @returns {Promise}
 	 */
@@ -125,8 +124,7 @@ export class AjaxModule {
 	 * 
 	 * @param  {object} [unnamed = {}] 
 	 * @param  {string} [unnamed.path = '/'] 
-	 * @param  {object} [unnamed.body = {}]
-	 * 
+	 *
 	 * @returns {Promise}
 	 */
 	doDelete({

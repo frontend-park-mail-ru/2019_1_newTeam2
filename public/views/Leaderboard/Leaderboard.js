@@ -1,12 +1,12 @@
 'use strict';
 
-import {RenderModule} from "../../../modules/render.js";
-import {Headline} from "../../Headline/Headline.js";
-import {Pagination} from "../../../modules/Pagination/Pagination.js";
-import {Table} from "../../Table/Table.js";
-import {Icon} from "../../Icon/Icon.js";
-import {Button} from "../../Button/Button.js";
-import {AuthModule} from '../../../modules/auth.js';
+import {RenderModule} from "../../services/render.js";
+import {Headline} from "../../components/Headline/Headline.js";
+import {Pagination} from "../../services/Pagination/Pagination.js";
+import {Table} from "../../components/Table/Table.js";
+import {Icon} from "../../components/Icon/Icon.js";
+import {Button} from "../../components/Button/Button.js";
+import {AuthModule} from '../../services/auth.js';
 
 const application = document.getElementById('application');
 
@@ -29,7 +29,7 @@ export class Leaderboard {
                 };
                 auth.isAuthorised()
                 .then( (res) => {
-                    if (res.status == 200) {
+                    if (res.status === 200) {
                         options['logined'] = true;
                     }
                     rendererLead.render(application, 'menu', options);
