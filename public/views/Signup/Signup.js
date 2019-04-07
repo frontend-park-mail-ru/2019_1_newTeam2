@@ -5,7 +5,7 @@ import {Input} from '../../components/Input/Input.js';
 import {Link} from '../../components/Link/Link.js';
 import {Button} from '../../components/Button/Button.js';
 
-import {AjaxModule} from '../../services/ajax.js';
+import ajax from '../../services/ajax.js';
 import {RenderModule} from '../../services/render.js';
 
 
@@ -57,8 +57,6 @@ export class Signup {
         outer.appendChild(password.render());
         outer.appendChild(renderedSubmit);
         outer.appendChild(renderedLoginLink);
-
-        let ajax = new AjaxModule();
 
         const application = document.getElementById('application');
         const rendererSignup = new RenderModule();

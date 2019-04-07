@@ -22,7 +22,7 @@ const checkStatus = response => {
 	}
 };
 
-export class AjaxModule {
+class AjaxModule {
 	/**
 	 * Private _ajax function
 	 * Makes a http request
@@ -170,3 +170,5 @@ export class AjaxModule {
 			.then(checkStatus);
 	}
 }
+
+export default new AjaxModule();

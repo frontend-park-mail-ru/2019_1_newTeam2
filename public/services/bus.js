@@ -3,20 +3,17 @@ class EventBus {
         this.listeners = {}
     }
 
-    on(event, callback)
-    {
+    on(event, callback) {
         if(!this.listeners[event])
             this.listeners[event] = [];
         this.listeners[event].push(callback);
     }
 
-    off(event, callback)
-    {
+    off(event, callback) {
         this.listeners[event] = this.listeners[event].filter(c => c!==callback)
     }
 
-    emit(event, data)
-    {
+    emit(event, data) {
         this.listeners[event].forEach(l => l(data))
     }
 }

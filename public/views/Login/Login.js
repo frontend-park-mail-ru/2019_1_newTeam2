@@ -5,7 +5,7 @@ import {Input} from '../../components/Input/Input.js';
 import {Link} from '../../components/Link/Link.js';
 import {Button} from '../../components/Button/Button.js';
 
-import {AjaxModule} from '../../services/ajax.js';
+import ajax from '../../services/ajax.js';
 import {RenderModule} from '../../services/render.js';
 import {AuthModule} from '../../services/auth.js';
 
@@ -50,8 +50,6 @@ export class Login {
         outer.appendChild(password.render());
         outer.appendChild(renderedSubmit);
         outer.appendChild(renderedSignupLink);
-
-        let ajax = new AjaxModule();
 
         const application = document.getElementById('application');
         const rendererLogin = new RenderModule();

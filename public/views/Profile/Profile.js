@@ -16,13 +16,13 @@ import {Headline} from '../../components/Headline/Headline.js';
 import {Icon} from '../../components/Icon/Icon.js';
 import {Button} from '../../components/Button/Button.js';
 
-import {AjaxModule, baseUrl} from '../../services/ajax.js';
+import {baseUrl} from '../../services/ajax.js';
+import ajax from '../../services/ajax.js';
 import {RenderModule} from '../../services/render.js';
 
 export class Profile{
     render(options = {}) {
         const rendererProfile = new RenderModule();
-        const ajax = new AjaxModule();
         const application = document.getElementById('application');
 
         const outer = document.createElement('div');
