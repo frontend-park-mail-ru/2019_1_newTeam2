@@ -39,7 +39,7 @@ class RouterModule {
             currentState = {
                 'path': pathname,
                 'options': {},
-            }
+            };
             if (!(currentState['path'] in this.views)) {
                 console.log("path is not registred");
                 console.log(path);

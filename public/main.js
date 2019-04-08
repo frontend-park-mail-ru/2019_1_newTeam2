@@ -1,6 +1,4 @@
 import router from './services/router.js';
-import {AuthModule} from './services/auth.js';
-import {LeaderboardController} from "./controllers/LeaderboardController.js";
 
 import {Menu} from './views/Menu/Menu.js';
 import {Login} from './views/Login/Login.js';

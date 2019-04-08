@@ -1,21 +1,5 @@
 'use strict';
 
-const pug = require('pug');
-
-const template = `
-p
-    | ID: #{id}
-    br
-    | Username:
-    input(type="text" value=username name="username")
-    br
-    | Email:
-    input(type="email" value=email name="email")
-    br
-    input(type="file" value=file name="file")
-img(src=baseUrl + path)`;
-const templateGen = pug.compile(template);
-
 import {Headline} from '../../components/Headline/Headline.js';
 import {Icon} from '../../components/Icon/Icon.js';
 import {Button} from '../../components/Button/Button.js';
@@ -53,7 +37,7 @@ export class ProfileEdit{
                 let info = document.createElement('div');
                 // info.innerHTML = templateGen({ID: res['id'], Username: res['username'], Avatar: res['Avatar']});
                 res.baseUrl = baseUrl;
-                info.innerHTML = templateGen(res);
+                info.innerHTML = profileeditTemplate(res);
                 userData = res;
                 outer.appendChild(info);
             })

@@ -1,16 +1,5 @@
 'use strict';
 
-const pug = require('pug');
-
-const template = `
-p 
-    | ID: #{id}
-    br
-    | Username: #{username}
-    br
-    | Email: #{email}
-img(src=baseUrl + path)`;
-const templateGen = pug.compile(template);
 
 import {Headline} from '../../components/Headline/Headline.js';
 import {Icon} from '../../components/Icon/Icon.js';
@@ -45,7 +34,7 @@ export class Profile{
                 let info = document.createElement('div');
                 // info.innerHTML = templateGen({ID: res['id'], Username: res['username'], Avatar: res['Avatar']});
                 res.baseUrl = baseUrl;
-                info.innerHTML = templateGen(res);
+                info.innerHTML = profileTemplate(res);
                 outer.appendChild(info);
             })
             .catch (

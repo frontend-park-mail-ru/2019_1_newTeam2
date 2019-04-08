@@ -5,7 +5,7 @@ import {Input} from "./components/Input/Input.js";
 import {GriseMerde} from "./components/GriseMerde/GriseMerde.js";
 import {Button} from './components/Button/Button.js';
 import {Headline} from './components/Headline/Headline.js';
-import {Pagination} from './services/pagination.js'
+import {Pagination} from './components/pagination.js'
 import {Table} from './components/Table/Table.js'
 import {Upload} from './components/Upload/Upload.js'
 import {Image} from './components/Image/Image.js'

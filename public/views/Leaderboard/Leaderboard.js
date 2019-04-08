@@ -2,15 +2,17 @@
 
 import router from "../../services/router.js";
 import {Headline} from "../../components/Headline/Headline.js";
-import {Pagination} from "../../services/pagination.js";
+import {Pagination} from "../../components/pagination.js";
 import {Table} from "../../components/Table/Table.js";
 import {Icon} from "../../components/Icon/Icon.js";
 import {Button} from "../../components/Button/Button.js";
 import {AuthModule} from '../../services/auth.js';
 import bus from "../../services/bus.js";
 
+const application = document.getElementById('application');
+
 export class Leaderboard {
-    render(options = {}) {
+    render() {
         let outer = application;
         outer.innerHTML = '';
 
