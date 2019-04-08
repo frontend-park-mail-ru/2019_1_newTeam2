@@ -90,7 +90,7 @@ export class Signup {
             
                 const loginRegExpr = /^[a-zA-Z0-9-_]+$/;
                 const passwordRegExpr = /^[a-zA-Z0-9-_]+$/;
-                const emailRegExpr = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                const emailRegExpr = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         
                 if (!loginRegExpr.test(loginText) || loginText == '') {
                     loginTemplateText.classList.remove('hidden-element');
@@ -131,7 +131,7 @@ export class Signup {
                 body: profile
             })
             .then (() => {
-                router.go('menu', {logined: true});
+                router.go('menu');
             })
             .catch ((error) => {
                 console.log(error.response);

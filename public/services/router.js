@@ -1,13 +1,12 @@
+'use strict';
+
 class RouterModule {
     constructor() {
         this.views = {};
         this.application = document.getElementById('application');
-        window.addEventListener('popstate', event => {
+        window.addEventListener('popstate', () => {
             this.render();
-            /*
-            this.go(pathname);*/
         })
-        //window.onpopstate = this.render;
     }
 
     register(path, view) {
@@ -26,24 +25,22 @@ class RouterModule {
             'options': options,
         };
         history.pushState(stateObj,'', path);
-        //history.back();
         this.render();
     }
 
     render() {
-        console.log(history.state);
         let currentState = history.state;
         if (!currentState) {
             let pathname = window.location.pathname;
             pathname = pathname.substring(1, pathname.length);
-            currentState = {
-                'path': pathname,
-                'options': {},
-            }
-            if (!(currentState['path'] in this.views)) {
+            if (!(pathname in this.views)) {
                 console.log("path is not registred");
                 console.log(path);
                 return;
+            }
+            currentState = {
+                'path': pathname,
+                'options': {},
             }
         }
         let view = this.views[currentState['path']];

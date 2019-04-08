@@ -6,7 +6,6 @@ import {Pagination} from "../../services/pagination.js";
 import {Table} from "../../components/Table/Table.js";
 import {Icon} from "../../components/Icon/Icon.js";
 import {Button} from "../../components/Button/Button.js";
-import {AuthModule} from '../../services/auth.js';
 import bus from "../../services/bus.js";
 
 export class Leaderboard {
@@ -20,17 +19,7 @@ export class Leaderboard {
         outer.appendChild(new Icon({
             src: './static/home-icon.png',
             handler: () => {
-                let auth = new AuthModule();
-                let options = {
-                    logined: false
-                };
-                auth.isAuthorised()
-                .then( (res) => {
-                    if (res.status === 200) {
-                        options['logined'] = true;
-                    }
-                    router.go('menu', options);
-                });
+                router.go('menu');
             }
         }).render());
 

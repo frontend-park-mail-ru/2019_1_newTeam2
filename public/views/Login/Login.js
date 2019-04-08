@@ -7,12 +7,11 @@ import {Button} from '../../components/Button/Button.js';
 
 import router from '../../services/router.js';
 import ajax from '../../services/ajax.js';
-import {AuthModule} from '../../services/auth.js';
+import auth from '../../services/auth.js';
 
 export class Login {
     render(options = {}) {
-        let authLogin = new AuthModule();
-        authLogin.logout();
+        auth.logout();
 
         const outer = document.createElement('div');
         outer.classList.add('centered');
@@ -107,7 +106,7 @@ export class Login {
                 body: profile
             })
             .then (() => {
-                router.go('menu', {logined: true});
+                router.go('menu');
             })
             .catch ((error) => {
                 console.log(error.response);

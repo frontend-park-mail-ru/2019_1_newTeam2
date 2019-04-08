@@ -1,3 +1,5 @@
+'use strict';
+
 class EventBus {
     constructor() {
         this.listeners = {}
