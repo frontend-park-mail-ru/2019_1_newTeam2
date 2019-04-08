@@ -86,10 +86,10 @@ export class UserModel {
             body: body
         }).then(
             () => {
-                bus.emit('user-updated');
+                setTimeout(bus.emit, 0, 'user-updated');
             },
             (error) => {
-                bus.emit('update-user-error', error);
+                setTimeout(bus.emit, 0, 'update-user-error', error);
                 console.log("some shit happened: " + error);
             }
         );
@@ -101,10 +101,10 @@ export class UserModel {
             body: body
         })
             .then((response) => {
-                bus.emit('user-created');
+                setTimeout(bus.emit, 0, 'user-created');
             })
             .catch ((error) => {
-                bus.emit('create-user-error', error);
+                setTimeout(bus.emit, 0, 'create-user-error', error);
             });
     }
 
@@ -113,11 +113,11 @@ export class UserModel {
             path: this.url + '/' + id.toString(10)
         })
             .then(() => {
-                    bus.emit('user-deleted');
+                    setTimeout(bus.emit, 0, 'user-deleted');
                 }
             )
             .catch((error) => {
-                    bus.emit('delete-user-error', error);
+                    setTimeout(bus.emit, 0, 'delete-user-error', error);
                 }
             )
     }
