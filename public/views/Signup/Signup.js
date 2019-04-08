@@ -125,7 +125,7 @@ export class Signup {
                 "username" : document.getElementById('login').value,
                 "email" : document.getElementById('email').value,
                 "password" : document.getElementById('password').value,
-                "langID" : 0, // по умолчанию
+                "langID" : 1, // по умолчанию
                 "pronounceOn" : 0 // по умолчанию
             };
     
