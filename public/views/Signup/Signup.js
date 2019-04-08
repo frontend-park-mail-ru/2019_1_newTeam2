@@ -7,6 +7,7 @@ import {Button} from '../../components/Button/Button.js';
 
 import router from '../../services/router.js';
 import ajax from '../../services/ajax.js';
+import validation from '../../services/validation.js';
 
 
 export class Signup {
@@ -59,7 +60,7 @@ export class Signup {
         outer.appendChild(renderedLoginLink);
 
         outer.addEventListener( 'keyup', (event) => {
-            if(event.keyCode === 13){
+            if(event.keyCode === 13){ // Enter button clicked
                 renderedSubmit.click();
             }
         });
@@ -87,22 +88,18 @@ export class Signup {
             
             let allFieldsValid = (() => {
                 let isOk = true;
-            
-                const loginRegExpr = /^[a-zA-Z0-9-_]+$/;
-                const passwordRegExpr = /^[a-zA-Z0-9-_]+$/;
-                const emailRegExpr = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        
-                if (!loginRegExpr.test(loginText) || loginText == '') {
+
+                if (!validation.checkLogin(loginText)) {
                     loginTemplateText.classList.remove('hidden-element');
                     isOk = false;
                 }
             
-                if (!passwordRegExpr.test(passwordText) || passwordText == '') {
+                if (!validation.checkPassword(passwordText)) {
                     passwordTemplateText.classList.remove('hidden-element');
                     isOk = false;
                 }
 
-                if (!emailRegExpr.test(emailText) || emailText == '') {
+                if (!validation.checkEmail(emailText)) {
                     emailTemplateText.classList.remove('hidden-element');
                     isOk = false;
                 }

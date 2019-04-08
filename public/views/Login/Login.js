@@ -8,6 +8,7 @@ import {Button} from '../../components/Button/Button.js';
 import router from '../../services/router.js';
 import ajax from '../../services/ajax.js';
 import auth from '../../services/auth.js';
+import validation from '../../services/validation.js';
 
 export class Login {
     render(options = {}) {
@@ -51,7 +52,7 @@ export class Login {
         outer.appendChild(renderedSignupLink);
 
         outer.addEventListener( 'keyup', (event) => {
-            if(event.keyCode === 13){
+            if(event.keyCode === 13){ // Enter button clicked
                 renderedSubmit.click();
             }
         });
@@ -75,16 +76,12 @@ export class Login {
             let allFieldsValid = (() => {
                 let isOk = true;
             
-                const loginRegExpr = /^[a-zA-Z0-9-_]+$/;
-                const passwordRegExpr = /^[a-zA-Z0-9-_]+$/;
-                
-        
-                if (!loginRegExpr.test(loginText)) {
+                if (!validation.checkLogin(loginText)) {
                     loginTemplateText.classList.remove('hidden-element');
                     isOk = false;
                 }
             
-                if (!passwordRegExpr.test(passwordText)) {
+                if (!validation.checkPassword(passwordText)) {
                     passwordTemplateText.classList.remove('hidden-element');
                     isOk = false;
                 }
