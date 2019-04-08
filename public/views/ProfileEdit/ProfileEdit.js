@@ -10,17 +10,15 @@ import ajax from '../../services/ajax.js';
 
 export class ProfileEdit{
     render(options = {}) {
-        const application = document.getElementById('application');
-
         const outer = document.createElement('div');
         outer.classList.add('centered');
 
         let headline = new Headline({size: 'h1', textContent: 'Редактировать'});
 
         outer.appendChild(new Icon({
-            src: './static/home-icon.png',
+            src: '../../static/home-icon.png',
             handler: () => {
-                router.go('menu', {logined: true});
+                router.go('menu');
             }
         }).render());
         outer.appendChild(headline.render());

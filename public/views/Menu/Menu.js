@@ -3,6 +3,7 @@
 import {Button} from '../../components/Button/Button.js';
 
 import router from '../../services/router.js';
+import auth from '../../services/auth.js';
 
 let loginedButtonNames = {
     //'train': 'Тренировка',
@@ -40,7 +41,7 @@ export class Menu {
             });
         };
 
-        if (options && options['logined']) {
+        if (auth.isAuthorised()) {
             createButtons(loginedButtonNames);
         } else {
             createButtons(unloginedButtonNames);
@@ -53,4 +54,3 @@ export class Menu {
 		return outer;
     }   
 }
-

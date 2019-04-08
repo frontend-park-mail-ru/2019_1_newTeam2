@@ -1,4 +1,5 @@
 import router from './services/router.js';
+import {LeaderboardController} from "./controllers/LeaderboardController.js";
 
 import {Menu} from './views/Menu/Menu.js';
 import {Login} from './views/Login/Login.js';
@@ -25,8 +26,4 @@ Object.entries(views).forEach(element => {
     router.register(element[0], views[element[0]]);
 });
 
-/*let pathname = window.location.pathname;
-pathname = pathname.substring(1, pathname.length);
-
-router.go(pathname);*/
 router.render();

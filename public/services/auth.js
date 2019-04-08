@@ -2,11 +2,19 @@
 
 import ajax from './ajax.js';
 
-export class AuthModule {
-    isAuthorised() {     
-        return ajax.doGet({
-            path: 'session/'
-        });
+class AuthModule {
+    async isAuthorised() {
+        let result;
+        try {
+            result = await ajax.doGet({
+                path: 'session/'
+            });
+        } catch (e) {
+            console.log("Can't GET backend/session");
+            return false;
+        }
+        console.log(result.status);
+        return (result.status === '200');
     }
 
     logout() {
@@ -15,3 +23,5 @@ export class AuthModule {
         });
     }
 }
+
+export default new AuthModule();

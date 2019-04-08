@@ -17,9 +17,9 @@ export class Profile{
         let headline = new Headline({size: 'h1', textContent: 'Мой профиль'});
 
         outer.appendChild(new Icon({
-            src: './static/home-icon.png',
+            src: '../../static/home-icon.png',
             handler: () => {
-                router.go('menu', {logined: true});
+                router.go('menu');
             }
         }).render());
         outer.appendChild(headline.render());
@@ -57,7 +57,7 @@ export class Profile{
         outer.appendChild(edit);
 
         edit.addEventListener('click', () => {
-                router.go('profile/edit/me');
+                router.go('profile/me/edit');
             }
         );
 
