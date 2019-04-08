@@ -7,7 +7,6 @@ class RouterModule {
             'path': '',
             'options': {},
         };
-        this.application = document.getElementById('application');
         window.addEventListener('popstate', () => {
             this.render();
         })
@@ -48,10 +47,12 @@ class RouterModule {
             }
         }
 
-        let view = this.views[currentState['path']];
+        let controller = this.views[currentState['path']];
         let options = currentState['options'];
-        this.application.innerHTML = '';
-        this.application.appendChild((new view()).render(options));
+        if(this.currentController)
+            this.currentController.preventAllEvents();
+        this.currentController = new controller();
+        this.currentController.index(options);
     }
 
 }

@@ -3,9 +3,8 @@
 import {Button} from '../../components/Button/Button.js';
 
 import router from '../../services/router.js';
-import auth from '../../services/auth.js';
 
-let loginedButtonNames = {
+const loginedButtonNames = {
     //'train': 'Тренировка',
     'dictionaries/me': 'Мои словари',
     //'feed': 'Лента',
@@ -14,16 +13,18 @@ let loginedButtonNames = {
     'login': 'Выйти'
 };
 
-let unloginedButtonNames = {
+const unloginedButtonNames = {
     //'trainSample': 'Пробная тренировка',
     'login': 'Войти',
     'leaderboard': 'Таблица лидеров'
 };
 
+const application = document.getElementById('application');
 
 export class Menu {
-    render(options = {}) {
-        const outer = document.createElement('div');
+    render({authorised = false}) {
+        const outer = application;
+        outer.innerHTML = '';
         outer.classList.add('centered');
         
         let buttons = [];
@@ -41,7 +42,7 @@ export class Menu {
             });
         };
 
-        if (auth.isAuthorised()) {
+        if (authorised) {
             createButtons(loginedButtonNames);
         } else {
             createButtons(unloginedButtonNames);
@@ -50,7 +51,5 @@ export class Menu {
         buttons.forEach( item => {
             outer.appendChild(item);
         });
-
-		return outer;
-    }   
+    }
 }

@@ -5,10 +5,10 @@ import bus from "../services/bus.js";
 
 export class LeaderboardController {
     index({rows = 10, page = 1}) {
-        this.users = new UserModel();
-        this.users.getUsers(rows, page);
         this.view = new Leaderboard();
         this.view.render();
+        this.users = new UserModel();
+        this.users.getUsers(rows, page);
 
         this._onprevpage = () => {
             page = page < 2 ? 1 : page - 1;

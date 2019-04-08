@@ -5,7 +5,6 @@ import {Headline} from "../../components/Headline/Headline.js";
 import {Pagination} from "../../components/pagination.js";
 import {Table} from "../../components/Table/Table.js";
 import {Icon} from "../../components/Icon/Icon.js";
-import {Button} from "../../components/Button/Button.js";
 import bus from "../../services/bus.js";
 
 const application = document.getElementById('application');

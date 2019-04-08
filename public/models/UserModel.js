@@ -26,7 +26,7 @@ export class UserModel {
                     res.json()
                         .then(
                             (res) => {
-                                setTimeout(bus.emit, 0, 'user-loaded', res);
+                                setTimeout(bus.emit.bind(bus), 0, 'user-loaded', res);
                             },
                             (err) => {
                                 console.log(err);
@@ -47,7 +47,7 @@ export class UserModel {
                     res.json()
                         .then(
                             (res) => {
-                                setTimeout(bus.emit, 0, 'user-loaded', res);
+                                setTimeout(bus.emit.bind(bus), 0, 'user-loaded', res);
                             },
                             (err) => {
                                 console.log(err);
@@ -68,7 +68,7 @@ export class UserModel {
                     res.json()
                         .then(
                             (res) => {
-                                setTimeout(bus.emit, 0, 'users-loaded', res);
+                                setTimeout(bus.emit.bind(bus), 0, 'users-loaded', res);
                             },
                             (err) => {
                                 console.log(err);
@@ -86,10 +86,10 @@ export class UserModel {
             body: body
         }).then(
             () => {
-                setTimeout(bus.emit, 0, 'user-updated');
+                setTimeout(bus.emit.bind(bus), 0, 'user-updated');
             },
             (error) => {
-                setTimeout(bus.emit, 0, 'update-user-error', error);
+                setTimeout(bus.emit.bind(bus), 0, 'update-user-error', error);
                 console.log("some shit happened: " + error);
             }
         );
@@ -101,10 +101,10 @@ export class UserModel {
             body: body
         })
             .then((response) => {
-                setTimeout(bus.emit, 0, 'user-created');
+                setTimeout(bus.emit.bind(bus), 0, 'user-created');
             })
             .catch ((error) => {
-                setTimeout(bus.emit, 0, 'create-user-error', error);
+                setTimeout(bus.emit.bind(bus), 0, 'create-user-error', error);
             });
     }
 
@@ -113,11 +113,11 @@ export class UserModel {
             path: this.url + '/' + id.toString(10)
         })
             .then(() => {
-                    setTimeout(bus.emit, 0, 'user-deleted');
+                    setTimeout(bus.emit.bind(bus), 0, 'user-deleted');
                 }
             )
             .catch((error) => {
-                    setTimeout(bus.emit, 0, 'delete-user-error', error);
+                    setTimeout(bus.emit.bind(bus), 0, 'delete-user-error', error);
                 }
             )
     }
