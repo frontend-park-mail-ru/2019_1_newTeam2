@@ -40,10 +40,8 @@ export class Menu {
                 });
             });
         };
-        let DELETEth = auth.isAuthorised();
-        console.log("i get:");
-        console.log(DELETEth);
-        if (DELETEth) {
+
+        if (auth.isAuthorised()) {
             createButtons(loginedButtonNames);
         } else {
             createButtons(unloginedButtonNames);

@@ -3,6 +3,10 @@
 class RouterModule {
     constructor() {
         this.views = {};
+        this.prevState = {
+            'path': '',
+            'options': {},
+        };
         this.application = document.getElementById('application');
         window.addEventListener('popstate', () => {
             this.render();
@@ -24,7 +28,7 @@ class RouterModule {
             'path': path,
             'options': options,
         };
-        history.pushState(stateObj,'', path);
+        history.pushState(stateObj,'', '/' + path);
         this.render();
     }
 
@@ -43,6 +47,7 @@ class RouterModule {
                 'options': {},
             }
         }
+
         let view = this.views[currentState['path']];
         let options = currentState['options'];
         this.application.innerHTML = '';
