@@ -3,8 +3,8 @@ import router from './services/router.js';
 import {LeaderboardController} from "./controllers/LeaderboardController.js";
 import {MenuController} from "./controllers/MenuController.js";
 import {ProfileController} from "./controllers/ProfileController.js";
+import {LoginController} from "./controllers/LoginController.js";
 
-import {Login} from './views/Login/Login.js';
 import {Dictionaries} from './views/Dictionaries/Dictionaries.js';
 import {Signup} from './views/Signup/Signup.js';
 import {Cards} from './views/Cards/Cards.js';
@@ -12,7 +12,7 @@ import {Cards} from './views/Cards/Cards.js';
 const views = {
     '': MenuController,
     'menu': MenuController,
-    'login': Login,
+    'login': LoginController,
     'dictionaries/me': Dictionaries,
     'leaderboard': LeaderboardController,
     'signup': Signup,

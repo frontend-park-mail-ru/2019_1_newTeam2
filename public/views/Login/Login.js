@@ -6,21 +6,23 @@ import {Link} from '../../components/Link/Link.js';
 import {Button} from '../../components/Button/Button.js';
 
 import router from '../../services/router.js';
-import ajax from '../../services/ajax.js';
-import auth from '../../services/auth.js';
-import validation from '../../services/validation.js';
+import bus from '../../services/bus.js';
+
+const application = document.getElementById('application');
 
 export class Login {
     render(options = {}) {
-        auth.logout();
-
+        application.innerText = '';
         const outer = document.createElement('div');
         outer.classList.add('centered');
-        
+        application.appendChild(outer);
+
         let headline = new Headline({size: 'h1', textContent: 'Авторизация'});
         let serverErrorText = document.createElement('div');
         serverErrorText.classList.add('error-text');
         serverErrorText.classList.add('hidden-element');
+        serverErrorText.innerText = 'Неправильный логин или пароль';
+
 
         let loginTemplateText = document.createElement('div');
         loginTemplateText.classList.add('error-text');
@@ -72,54 +74,34 @@ export class Login {
 
             let loginText = document.getElementById('login').value;
             let passwordText = document.getElementById('password').value;
-            
-            let allFieldsValid = (() => {
-                let isOk = true;
-            
-                if (!validation.checkLogin(loginText)) {
-                    loginTemplateText.classList.remove('hidden-element');
-                    isOk = false;
-                }
-            
-                if (!validation.checkPassword(passwordText)) {
-                    passwordTemplateText.classList.remove('hidden-element');
-                    isOk = false;
-                }
-            
-                return isOk;
-            })();
-
-            if (!allFieldsValid) {
-                return;
-            }
 
             let profile = {
                 "username" : loginText,
                 "password" : passwordText
             };
-    
-            ajax.doPost({
-                path: 'session/',
-                body: profile
-            })
-            .then (() => {
-                router.go('menu');
-            })
-            .catch ((error) => {
-                console.log(error.response);
-                error.response.json()
-                .then ((res) => {
-                    serverErrorText.innerText = res['error'];
-                    serverErrorText.classList.remove('hidden-element');
-                });
-            });
 
+            setTimeout(bus.emit.bind(bus), 0 , 'form-submitted', profile);
         });
-
+        this._onwronglogin = () => {
+            loginTemplateText.classList.remove('hidden-element')
+        };
+        this._onwrongpassword = () => {
+            passwordTemplateText.classList.remove('hidden-element')
+        };
+        this._onnologin = () => {
+            serverErrorText.classList.remove('hidden-element')
+        };
+        bus.on('wrong-login', this._onwronglogin);
+        bus.on('wrong-password', this._onwrongpassword);
+        bus.on('no-login', this._onnologin);
         renderedSignupLink.addEventListener( 'click', () => {
             router.go('signup');
         });
-            
-		return outer;
+    }
+
+    preventAllEvents() {
+        bus.off('no-login', this._onnologin);
+        bus.off('wrong-login', this._onwronglogin);
+        bus.off('wrong-password', this._onwrongpassword);
     }
 }
