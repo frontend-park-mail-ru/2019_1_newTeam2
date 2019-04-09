@@ -1,0 +1,19 @@
+.checkbox_size_big {
+	width: 25px;
+	height: 25px;
+}
+
+.checkbox_size_big label {
+    width: 25px;
+    height: 25px;
+}
+
+.checkbox_size_big label:after {
+    width: 9px;
+    height: 5px;
+    top: 6px;
+    left: 7px;
+    border: 3px solid #333;
+    border-top: none;
+    border-right: none;
+}
