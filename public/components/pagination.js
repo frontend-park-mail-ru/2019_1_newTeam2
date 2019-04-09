@@ -11,14 +11,14 @@ export class Pagination {
             size: 'pagination',
             name: '<',
             handler: () => {
-                bus.emit('prev-page');
+                setTimeout(bus.emit.bind(bus), 0, 'prev-page');
             }
         }).render();
         const buttonNext = new Button({
             size: 'pagination',
             name: '>',
             handler: () => {
-                bus.emit('next-page');
+                setTimeout(bus.emit.bind(bus), 0, 'next-page');
             }
         }).render();
         div.appendChild(buttonPrev);
