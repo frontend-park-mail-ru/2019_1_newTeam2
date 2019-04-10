@@ -1,11 +1,8 @@
 @import '_type_primary/button__text_type_primary.css';
 @import '_type_secondary/button__text_type_secondary.css';
 
-@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
-
 .button__text {
     font-weight: 700;
     letter-spacing: 0.6px;
     text-align: center;
-    font-family: 'M PLUS Rounded 1c', sans-serif;;
 }

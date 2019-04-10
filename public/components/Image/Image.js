@@ -28,7 +28,7 @@ export class Image {
 		let el = document.createElement('div');
 		const type = this._type in this._typeset ? this._type : 'dictionary';
 		el.addEventListener('click', this._callback);
-		el.innerHTML = imageTemplate({'path': this._src, 'type': type});
+		el.innerHTML = imageTemplate({'path': this._src, 'type': 'image_type_' + type});
 		return el;
 	}
 }
