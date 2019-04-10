@@ -28,7 +28,7 @@ export class Cards {
                 router.go('menu');
             }
             const griseGen = new GriseMerde({
-                classes:'grise-centered small-grise-merde'
+                size:'small'
             });
             const grise = griseGen.render();
             grise.firstChild.appendChild(new Icon({
@@ -41,7 +41,7 @@ export class Cards {
             const foreach = (dict) => {
                 const griseGen = new GriseMerde({
                     inner: dict['name'],
-                    classes: 'grise-centered small-grise-merde'
+                    size: 'small'
                 });
                 const grise = griseGen.render();
                 inner.appendChild(grise);

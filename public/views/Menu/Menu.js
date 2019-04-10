@@ -32,7 +32,7 @@ export class Menu {
 
         const createButtons = (buttonNames) => {
             Object.entries(buttonNames).forEach( (name, i) => {
-                buttons[i] = new Button ({name: name[1], size: 'big'});
+                buttons[i] = new Button ({type: 'primary', name: name[1]});
             });
 
             Object.entries(buttonNames).forEach( (name, i) => {

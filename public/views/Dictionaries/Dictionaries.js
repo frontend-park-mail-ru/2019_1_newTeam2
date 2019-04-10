@@ -42,8 +42,8 @@ export class Dictionaries {
                     const cardsButtonHandler = () => {
                         router.go('menu');
                     };
-                    const importButton = new Button({size: 'small', name: 'Импорт', handler: importButtonHandler}).render();
-                    const cardsButton = new Button({size: 'small', name: 'По картам', handler: cardsButtonHandler}).render();
+                    const importButton = new Button({type: 'secondary', name: 'Импорт', handler: importButtonHandler}).render();
+                    const cardsButton = new Button({type: 'secondary', name: 'По картам', handler: cardsButtonHandler}).render();
                     dialog.appendChild(importButton);
                     dialog.appendChild(cardsButton);
                     outer.appendChild(back);
@@ -51,7 +51,7 @@ export class Dictionaries {
                 back.classList.remove('hidden');
             }
             const griseGen = new GriseMerde({
-                classes:'grise-centered small-grise-merde'
+                size:'small'
             });
             const grise = griseGen.render();
             grise.firstChild.appendChild(new Icon({
@@ -64,7 +64,7 @@ export class Dictionaries {
             const foreach = (dict) => {
                 const griseGen = new GriseMerde({
                     inner: dict['name'],
-                    classes: 'grise-centered small-grise-merde'
+                    size: 'small'
                 });
                 const grise = griseGen.render();
                 inner.appendChild(grise);

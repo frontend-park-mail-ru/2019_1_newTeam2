@@ -38,7 +38,7 @@ export class Login {
 
         let password = new Input({ type: 'password', label: 'Пароль* ', id: 'password', maxlen: 20});
 
-        let submit = new Button({size: 'small', name: 'Войти'});
+        let submit = new Button({type: 'secondary', name: 'Войти'});
         let signupLink = new Link({size: 'h4', name: 'Нет аккаунта?'});
         
         let renderedSubmit = submit.render();

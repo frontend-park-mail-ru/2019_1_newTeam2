@@ -1,0 +1,20 @@
+@import '_type_primary/button_type_primary.css' screen;
+@import '_type_secondary/button_type_secondary.css' screen;
+@import '_type_square/button_type_square.css' screen;
+
+@import '__text/button__text.css';
+
+.button {
+    user-select: none;
+    -moz-user-select: -moz-none;
+    background-color: #8EE000;
+    color: white;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.button:active {
+    background-color: #7ac70c;
+}

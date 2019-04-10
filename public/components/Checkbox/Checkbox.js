@@ -17,7 +17,10 @@ export class Checkbox {
 
 	render() {
 		const outer = document.createElement('span');
-		outer.innerHTML = checkboxTemplate({'size': this._size, 'num': this._id});
+		outer.innerHTML = checkboxTemplate({
+			'size': 'checkbox_size_' + this._size,
+			'num': this._id
+		});
 
 		outer.addEventListener('click', this._handler);
 
