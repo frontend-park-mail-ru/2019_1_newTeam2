@@ -7,11 +7,16 @@ import {GriseMerde} from "../../components/GriseMerde/GriseMerde.js";
 import {Icon} from "../../components/Icon/Icon.js";
 import {Button} from "../../components/Button/Button.js";
 
+const application = document.getElementById('application');
+
+
 export class Dictionaries {
-    render(options = {}) {
+    index(options = {}) {
         const outer = document.createElement('div');
         const inner = outer.cloneNode();
         inner.classList.add('tiles');
+        application.innerHTML = '';
+        application.appendChild(outer);
 
         const headGen = new Headline({textContent: 'Мои словари'});
         const head = headGen.render();
@@ -78,14 +83,16 @@ export class Dictionaries {
         };
 
         ajax.doGet({
-            path: '/dictionaries/me/'
+            path: 'dictionaries'
         }).then(
             onfulfilled,
             (error) => {
                 console.log(error);
             }
         );
+    }
 
-        return outer;
+    preventAllEvents() {
+
     }
 }

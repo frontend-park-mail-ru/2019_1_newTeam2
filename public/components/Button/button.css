@@ -5,6 +5,7 @@
 @import '__text/button__text.css';
 
 .button {
+    display: inline-block;
     user-select: none;
     -moz-user-select: -moz-none;
     background-color: #8EE000;
