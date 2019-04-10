@@ -10,7 +10,7 @@ export class Headline {
         someFunction = noop,
                 } = {}) {
         this._text = textContent;
-        this._size = validSizes.includes(size) ? size : '';
+        this._size = validSizes.includes(size) ? size : 'h1';
 		this._handler = someFunction;
     }
 
