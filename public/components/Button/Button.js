@@ -15,7 +15,7 @@ export class Button {
     }
 
     render () {
-        const outer = document.createElement('div');
+        const outer = document.createElement('span');
 		outer.innerHTML = buttonTemplate({
             'type_class': 'button_type_' + this._type,
             'text_class': 'button__text_type_' + this._type,

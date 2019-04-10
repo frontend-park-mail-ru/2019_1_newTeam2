@@ -6,14 +6,16 @@ import {Link} from '../../components/Link/Link.js';
 import {Button} from '../../components/Button/Button.js';
 
 import router from '../../services/router.js';
-import ajax from '../../services/ajax.js';
-import validation from '../../services/validation.js';
+import bus from "../../services/bus.js";
 
+const application = document.getElementById('application');
 
 export class Signup {
     render(options = {}) {
+        application.innerHTML = '';
         const outer = document.createElement('div');
         outer.classList.add('centered');
+        application.appendChild(outer);
         
         let headline = new Headline({size: 'h1', textContent: 'Регистрация'});
 
@@ -80,38 +82,7 @@ export class Signup {
             
             if (!emailTemplateText.classList.contains('hidden-element')) {
                 emailTemplateText.classList.add('hidden-element');
-            }  
-
-            let loginText = document.getElementById('login').value;
-            let passwordText = document.getElementById('password').value;
-            let emailText = document.getElementById('email').value;
-            
-            let allFieldsValid = (() => {
-                let isOk = true;
-
-                if (!validation.checkLogin(loginText)) {
-                    loginTemplateText.classList.remove('hidden-element');
-                    isOk = false;
-                }
-            
-                if (!validation.checkPassword(passwordText)) {
-                    passwordTemplateText.classList.remove('hidden-element');
-                    isOk = false;
-                }
-
-                if (!validation.checkEmail(emailText)) {
-                    emailTemplateText.classList.remove('hidden-element');
-                    isOk = false;
-                }
-            
-                return isOk;
-            })();
-
-            if (!allFieldsValid) {
-                return;
             }
-
-
 
             let profile = {
                 "username" : document.getElementById('login').value,
@@ -120,31 +91,36 @@ export class Signup {
                 "langID" : 0, // по умолчанию
                 "pronounceOn" : 0 // по умолчанию
             };
-    
-            console.log(profile);
 
-            ajax.doPost({
-                path: 'users/',
-                body: profile
-            })
-            .then (() => {
-                router.go('menu');
-            })
-            .catch ((error) => {
-                console.log(error.response);
-                error.response.json()
-                .then ((res) => {
-                    serverErrorText.innerText = res['error'];
-                    serverErrorText.classList.remove('hidden-element');
-                });
-            });
-
+            setTimeout(bus.emit.bind(bus), 0, 'signup-form-submitted', profile);
         });
-            
+        this._onwronglogin = () => {
+            loginTemplateText.classList.remove('hidden-element')
+        };
+        this._onwrongpassword = () => {
+            passwordTemplateText.classList.remove('hidden-element')
+        };
+        this._onwrongemail = () => {
+            emailTemplateText.classList.remove('hidden-element')
+        };
+        this._oncreateusererror = () => {
+            serverErrorText.classList.remove('hidden-element')
+        };
+
+        bus.on('wrong-login', this._onwronglogin);
+        bus.on('wrong-password', this._onwrongpassword);
+        bus.on('wrong-email', this._onwrongemail);
+        bus.on('create-user-error', this._oncreateusererror);
+
         renderedLoginLink.addEventListener( 'click', () => {
             router.go('login');
         });
+    }
 
-		return outer;
+    preventAllEvents() {
+        bus.off('create-user-error', this._oncreateusererror);
+        bus.off('wrong-login', this._onwronglogin);
+        bus.off('wrong-password', this._onwrongpassword);
+        bus.off('wrong-email', this._onwrongemail);
     }
 }
