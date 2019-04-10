@@ -16,7 +16,8 @@ class EventBus {
     }
 
     emit(event, data) {
-        this.listeners[event].forEach(l => l(data))
+        if(this.listeners[event])
+            this.listeners[event].forEach(l => l(data))
     }
 }
 

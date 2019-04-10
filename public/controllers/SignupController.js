@@ -13,7 +13,7 @@ export class SignupController {
         this.user = new UserModel();
         this.view.render();
         this._onusercreated = () => {
-            router.go('login');
+            router.go('menu');
         };
         this._onformsubmitted = (profile) => {
             let passed = true;
@@ -33,7 +33,6 @@ export class SignupController {
             }
             if(passed) {
                 this.user.createUser(profile);
-                // auth.login(profile);
             }
         };
         bus.on('user-created', this._onusercreated);
