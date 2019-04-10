@@ -16,7 +16,8 @@ const loginedButtonNames = {
 const unloginedButtonNames = {
     //'trainSample': 'Пробная тренировка',
     'login': 'Войти',
-    'leaderboard': 'Таблица лидеров'
+    'leaderboard': 'Таблица лидеров',
+    'signup': 'Зарегистрироваться'
 };
 
 const application = document.getElementById('application');

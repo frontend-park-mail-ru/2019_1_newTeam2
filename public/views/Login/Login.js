@@ -80,7 +80,7 @@ export class Login {
                 "password" : passwordText
             };
 
-            setTimeout(bus.emit.bind(bus), 0 , 'form-submitted', profile);
+            setTimeout(bus.emit.bind(bus), 0 , 'login-form-submitted', profile);
         });
         this._onwronglogin = () => {
             loginTemplateText.classList.remove('hidden-element')
@@ -94,6 +94,7 @@ export class Login {
         bus.on('wrong-login', this._onwronglogin);
         bus.on('wrong-password', this._onwrongpassword);
         bus.on('no-login', this._onnologin);
+
         renderedSignupLink.addEventListener( 'click', () => {
             router.go('signup');
         });

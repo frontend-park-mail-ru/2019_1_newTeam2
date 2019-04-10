@@ -30,11 +30,12 @@ export class LoginController {
             }
         };
         bus.on('login', this._onlogin);
-        bus.on('form-submitted', this._onformsubmitted);
+        bus.on('login-form-submitted', this._onformsubmitted);
     }
 
     preventAllEvents() {
+        this.view.preventAllEvents();
         bus.off('login', this._onlogin);
-        bus.off('form-submitted', this._onformsubmitted);
+        bus.off('login-form-submitted', this._onformsubmitted);
     }
 }
