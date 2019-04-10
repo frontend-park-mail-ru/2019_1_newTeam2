@@ -17,8 +17,9 @@ input[type=checkbox] {
     position: absolute;
     top: 0;
     left: 0;
-    background: #eee;
-    border:1px solid #ddd;
+    background: white;
+    border: 2px solid #8EE000;
+    border-radius: 4px;
 }
 
 /* tick */
