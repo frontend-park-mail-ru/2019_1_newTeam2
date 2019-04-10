@@ -1,50 +1,11 @@
-
-
-/*resulting tables*/
-.res {
-  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-  font-size: 16px;
+.table {
   border-collapse: collapse;
   text-align: center;
   display: table;
+  border: 2px solid #1CB0F6;
 }
-.res_h {
-  font-weight: normal;
-  color: maroon;
-  border-bottom: 2px solid maroon;
-  padding: 10px 15px;
-}
+
 .cell {
-  border-bottom: 1px solid maroon;
-  color: maroon;
-  padding: 10px 15px;
-  transition: .3s linear;
-}
-.line:hover td {
-    color: brown;
-    background: RosyBrown;
-}
-
-@media screen and (max-width: 300px) {
-	.res {
-		width: 100%;
-	}
-}
-
-@media screen and (min-width: 300px) {
-	.res {
-		width: 300px;
-	}
-}
-
-@media screen and (min-width: 700px) {
-	.res {
-		width: 600px;
-	}
-}
-
-@media screen and (min-width: 1200px) {
-	.res {
-		width: 700px;
-	}
+  border: 2px solid #1CB0F6;
+  padding:  10px;
 }
