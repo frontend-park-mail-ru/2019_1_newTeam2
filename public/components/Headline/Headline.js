@@ -15,7 +15,7 @@ export class Headline {
     }
 
     render () {
-        let headLineBoard = document.createElement('div');
+        let headLineBoard = document.createElement('span');
         headLineBoard.addEventListener('click', this._handler);
         headLineBoard.innerHTML = headlineTemplate({
             size: 'headline_size_' + this._size,

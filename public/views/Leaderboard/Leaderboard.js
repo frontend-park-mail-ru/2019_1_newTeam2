@@ -14,15 +14,15 @@ export class Leaderboard {
         let outer = application;
         outer.innerHTML = '';
 
-        const head = new Headline({textContent: 'Лидеры'}).render();
-        outer.appendChild(head);
-
         outer.appendChild(new Icon({
             src: './static/home-icon.png',
             handler: () => {
                 router.go('menu');
             }
         }).render());
+
+        const head = new Headline({textContent: 'Лидеры'}).render();
+        outer.appendChild(head);
 
         const forTable = document.createElement('div');
         const forPagination = document.createElement('div');
