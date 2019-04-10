@@ -1,4 +1,4 @@
-@import "./components/Button/Button.css" screen;
+@import "./components/Button/button.css" screen;
 @import "./components/Link/Link.css" screen;
 @import "./components/Headline/Headline.css" screen;
 @import "./components/Checkbox/Checkbox.css" screen;
@@ -13,6 +13,7 @@
 
 * {
     font-family: Helvetica, sans-serif;
+    box-sizing: border-box;
 }
 
 .centered {
@@ -25,8 +26,4 @@
 
 .hidden-element{
     display: none;
-}
-
-.inline-block-el {
-    display: inline-block;
 }

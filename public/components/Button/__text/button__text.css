@@ -1,5 +1,5 @@
-@import '_primary/button__text_type_primary.css';
-@import '_secondary/button__text_type_secondary.css';
+@import '_type_primary/button__text_type_primary.css';
+@import '_type_secondary/button__text_type_secondary.css';
 
 @import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
 

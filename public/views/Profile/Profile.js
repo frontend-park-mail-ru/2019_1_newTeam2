@@ -42,7 +42,7 @@ export class Profile{
 
         bus.on('user-loaded', this._onuserloaded);
 
-        let edit = new Button({size: 'small', name: 'Редактировать'}).render();
+        let edit = new Button({type: 'secondary', name: 'Редактировать'}).render();
         forButton.appendChild(edit);
 
         edit.addEventListener('click', () => {
@@ -51,7 +51,7 @@ export class Profile{
             forData.innerHTML = profileeditTemplate(this._user);
         });
 
-        let save = new Button({size: 'small', name: 'Сохранить'}).render();
+        let save = new Button({type: 'secondary', name: 'Сохранить'}).render();
         forButton.appendChild(save);
 
         save.addEventListener('click', () => {

@@ -42,8 +42,8 @@ export class Dictionaries {
                     const cardsButtonHandler = () => {
                         router.go('menu');
                     };
-                    const importButton = new Button({size: 'small', name: 'Импорт', handler: importButtonHandler}).render();
-                    const cardsButton = new Button({size: 'small', name: 'По картам', handler: cardsButtonHandler}).render();
+                    const importButton = new Button({type: 'secondary', name: 'Импорт', handler: importButtonHandler}).render();
+                    const cardsButton = new Button({type: 'secondary', name: 'По картам', handler: cardsButtonHandler}).render();
                     dialog.appendChild(importButton);
                     dialog.appendChild(cardsButton);
                     outer.appendChild(back);

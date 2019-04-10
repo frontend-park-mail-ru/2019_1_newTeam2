@@ -42,7 +42,7 @@ export class Signup {
 
         let email = new Input({ type: 'email', label: 'Email* ', id: 'email', maxlen: 50});
         
-        let submit = new Button({size: 'small', name: 'Зарегистрироваться'});
+        let submit = new Button({type: 'secondary', name: 'Зарегистрироваться'});
         let loginLink = new Link({size: 'h4', name: 'Уже есть аккаунт?'});
                 
         let renderedSubmit = submit.render();

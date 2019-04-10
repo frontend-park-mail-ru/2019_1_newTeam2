@@ -1,7 +1,7 @@
 'use strict';
 
 const noop = () => {};
-const validTypes = ['primary', 'secondary'];
+const validTypes = ['primary', 'secondary', 'square'];
 
 export class Button {
     constructor({
@@ -16,7 +16,6 @@ export class Button {
 
     render () {
         const outer = document.createElement('div');
-        outer.classList.add('inline-block-el');
 		outer.innerHTML = buttonTemplate({
             'type_class': 'button_type_' + this._type,
             'text_class': 'button__text_type_' + this._type,
