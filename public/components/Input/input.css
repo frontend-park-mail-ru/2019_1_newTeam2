@@ -13,4 +13,5 @@
 
 .input:focus {
     border-color: #1CB0F6;
+    caret-color: #1CB0F6;
 }

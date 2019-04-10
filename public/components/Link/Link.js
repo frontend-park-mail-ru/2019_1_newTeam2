@@ -1,6 +1,5 @@
 'use strict';
 
-
 const noop = () => {};
 const validSizes = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
@@ -17,7 +16,7 @@ export class Link {
 
 	render() {
 		const outer = document.createElement('span');
-		outer.innerHTML = linkTemplate({ 'size': this._size, 'name': this._name });
+		outer.innerHTML = linkTemplate({ 'size': 'link_size_' + this._size, 'name': this._name });
 		
 		outer.addEventListener('click', this._handler);
 	

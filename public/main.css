@@ -1,10 +1,10 @@
 @import "./components/Button/button.css" screen;
-@import "./components/Link/Link.css" screen;
+@import "./components/Link/link.css" screen;
 @import "./components/Headline/headline.css" screen;
 @import "./components/Checkbox/checkbox.css" screen;
-@import "./components/Input/Input.css" screen;
+@import "./components/Input/input.css" screen;
 @import "./components/Icon/icon.css" screen;
-@import "./components/Image/Image.css" screen;
+@import "./components/Image/image.css" screen;
 @import "./components/GriseMerde/grise-merde.css" screen;
 @import "./components/Table/Table.css" screen;
 @import "./components/Upload/Upload.css" screen;
