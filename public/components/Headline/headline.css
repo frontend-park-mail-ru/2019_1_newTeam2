@@ -1,0 +1,12 @@
+@import '_size_h1/headline_size_h1.css' screen;
+@import '_size_h2/headline_size_h2.css' screen;
+@import '_size_h3/headline_size_h3.css' screen;
+@import '_size_h4/headline_size_h4.css' screen;
+
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
+
+.headline {
+    word-wrap: break-word;
+    color: #1CB0F6;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
