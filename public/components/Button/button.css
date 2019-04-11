@@ -10,6 +10,7 @@
     -moz-user-select: -moz-none;
     background-color: #8EE000;
     color: white;
+    margin: 5px;
 }
 
 .button:hover {

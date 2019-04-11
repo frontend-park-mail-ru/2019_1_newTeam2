@@ -4,6 +4,7 @@ import {Headline} from '../../components/Headline/Headline.js';
 import {Input} from '../../components/Input/Input.js';
 import {Link} from '../../components/Link/Link.js';
 import {Button} from '../../components/Button/Button.js';
+import {Icon} from '../../components/Icon/Icon.js';
 
 import router from '../../services/router.js';
 import bus from '../../services/bus.js';
@@ -16,6 +17,13 @@ export class Login {
         const outer = document.createElement('div');
         outer.classList.add('centered');
         application.appendChild(outer);
+
+        outer.appendChild(new Icon({
+            src: './static/home-icon.png',
+            handler: () => {
+                router.go('menu');
+            }
+        }).render());
 
         let headline = new Headline({size: 'h1', textContent: 'Авторизация'});
         let serverErrorText = document.createElement('div');
@@ -39,7 +47,7 @@ export class Login {
         let password = new Input({ type: 'password', label: 'Пароль* ', id: 'password', maxlen: 20});
 
         let submit = new Button({type: 'secondary', name: 'Войти'});
-        let signupLink = new Link({size: 'h4', name: 'Нет аккаунта?'});
+        let signupLink = new Link({size: '', name: 'Нет аккаунта?'});
         
         let renderedSubmit = submit.render();
         let renderedSignupLink = signupLink.render();

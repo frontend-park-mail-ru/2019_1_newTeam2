@@ -6,6 +6,7 @@
     font-size: 17px;
     border: 2px solid #CFCFCF;
     outline: none;
+    margin: 5px;
 }
 
 .input:disabled {
