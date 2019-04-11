@@ -15,7 +15,6 @@ export class Login {
     render(options = {}) {
         application.innerText = '';
         const outer = document.createElement('div');
-        outer.classList.add('centered');
         application.appendChild(outer);
 
         outer.appendChild(new Icon({

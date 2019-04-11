@@ -13,54 +13,60 @@ const application = document.getElementById('application');
 export class Dictionary {
 	render(options = {}) {
 		application.innerHTML = '';
-		const outer = application;
 		const inner = document.createElement('div');
 		inner.classList.add('tiles');
 		application.innerHTML = '';
-		application.appendChild(outer);
+		application.appendChild(inner);
 
-		const headGen = new Headline({textContent: 'Мои словари'});
-		const head = headGen.render();
-		outer.appendChild(head);
-		outer.appendChild(new Icon({
+		application.appendChild(new Icon({
 			src: '../../static/home-icon.png',
 			handler: () => {
 				router.go('menu');
 			}
 		}).render());
-		outer.appendChild(inner);
 
-		const addButton = document.createElement('div');
-		addButton.innerText = 'Add';
-		addButton.addEventListener('click', (event) => {
-			const input1 = new Input({
-				id: 'input-dict-name',
-				type: 'text',
-				value: '',
-				placeholder: '',
-				maxlen: 50,
-				label: '',
-				disabled: '',
-			}).render();
-			const input2 = new Input({
-				id: 'input-dict-description',
-				type: 'text',
-				value: '',
-				placeholder: '',
-				maxlen: 50,
-				label: '',
-				disabled: '',
-			}).render();
-			outer.appendChild(input1);
-			outer.appendChild(input2);
-			const submit = new Button({handler: () => {
-					let dict = {};
-					dict.name = input1.value;
-					dict.description = input2.value;
-					setTimeout(bus.emit.bind(bus), 0, 'new-dict-form-submitted', dict);
-				}}).render();
-			outer.appendChild(submit);
-		});
+		application.appendChild(new Headline({
+			textContent: 'Мои словари'
+		}).render());
+		
+		application.appendChild(inner);
+		
+		application.appendChild(new Icon({
+			src: '../../static/plus.png',
+			id: 'plus',
+			handler: () => {
+				document.getElementById('plus').classList.add('hidden-element');
+				const input1 = new Input({
+					id: 'input-dict-name',
+					type: 'text',
+					value: '',
+					placeholder: 'Название словаря',
+					maxlen: 50,
+					label: '',
+				}).render();
+				const input2 = new Input({
+					id: 'input-dict-description',
+					type: 'text',
+					value: '',
+					placeholder: 'Описание словаря',
+					maxlen: 50,
+					label: '',
+				}).render();
+				application.appendChild(input1);
+				application.appendChild(input2);
+				const submit = new Button({
+					type: 'secondary',
+					name: 'Сохранить',
+					handler: () => {
+						let dict = {};
+						dict.name = input1.value;
+						dict.description = input2.value;
+						setTimeout(bus.emit.bind(bus), 0, 'new-dict-form-submitted', dict);
+					}
+				}).render();
+				application.appendChild(submit);
+			}
+		}).render());
 
 		this._ondictsloaded = (dicts) => {
 			dicts.forEach((dict) => {
