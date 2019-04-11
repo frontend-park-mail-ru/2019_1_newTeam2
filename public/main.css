@@ -9,7 +9,7 @@
 @import "./components/Table/Table.css" screen;
 @import "./components/Upload/Upload.css" screen;
 
-@import "views/Dictionaries/Dictionaries.css" screen;
+@import "views/Dictionary/Dictionary.css" screen;
 
 @import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
 

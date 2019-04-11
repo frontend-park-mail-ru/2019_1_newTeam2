@@ -7,9 +7,9 @@ export class CardModel {
         this.url = 'card'
     }
 
-    getSelfCards({rows = 5, page = 1}) {
+    getCardsByDictId({rows = 5, page = 1, id = 0} = {rows: 5, page: 1, id: 0}) {
         ajax.doGet({
-            path: this.url + '/'
+            path: this.url + `s/${id}?rows=${rows}&page=${page}`
         })
             .then(
                 (res) => {

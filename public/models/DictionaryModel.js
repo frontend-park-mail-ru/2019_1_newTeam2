@@ -7,9 +7,9 @@ export class DictionaryModel {
         this.url = 'dictionary'
     }
 
-    getSelfDicts({rows = 5, page = 1}) {
+    getSelfDicts({rows = 5, page = 1} = {rows: 5, page: 1}) {
         ajax.doGet({
-            path: this.url + '/'
+            path: this.url + `?rows=${rows}&page=${page}`
         })
             .then(
                 (res) => {
@@ -55,8 +55,8 @@ export class DictionaryModel {
             path: this.url + '/',
             body: body
         })
-            .then((response) => {
-                setTimeout(bus.emit.bind(bus), 0, 'dict-created');
+            .then((res) => {
+                setTimeout(bus.emit.bind(bus), 0, 'dict-created', res);
             })
             .catch ((error) => {
                 setTimeout(bus.emit.bind(bus), 0, 'create-dict-error', error);

@@ -37,7 +37,7 @@ class RouterModule {
             let pathname = window.location.pathname;
             pathname = pathname.substring(1, pathname.length);
             if (!(pathname in this.views)) {
-                console.log("path is not registred");
+                console.log("path is not registered");
                 console.log(path);
                 return;
             }
