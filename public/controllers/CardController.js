@@ -6,7 +6,7 @@ export class CardController {
     index(options = {}) {
         this.model = new CardModel();
         this.view = new Card();
-        this.view.render();
+        this.view.render(options);
         this.model.getCardsByDictId({id: options.id});
     }
 

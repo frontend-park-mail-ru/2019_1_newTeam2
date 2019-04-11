@@ -15,7 +15,7 @@ const views = {
     'dictionaries/me': DictionaryController,
     'leaderboard': LeaderboardController,
     'signup': SignupController,
-    'cards/me': CardController,
+    'cards': CardController,
     'profile/me': ProfileController
 };
 

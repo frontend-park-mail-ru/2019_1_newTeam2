@@ -8,10 +8,14 @@ export class Button {
         type = 'primary',
         name = '',
         handler = noop,
+        id = '',
+        is_hidden = ''
     } = {}) {
         this._name = name;
         this._type = validTypes.includes(type) ? type : 'primary';
         this._handler = handler;
+        this._id = id;
+        this._is_hidden = is_hidden;
     }
 
     render () {
@@ -19,7 +23,9 @@ export class Button {
 		outer.innerHTML = buttonTemplate({
             'type_class': 'button_type_' + this._type,
             'text_class': 'button__text_type_' + this._type,
-            'name': this._name
+            'name': this._name,
+            'is_hidden': this._is_hidden,
+            'id': this._id,
         });
 
 		outer.addEventListener('click', this._handler);

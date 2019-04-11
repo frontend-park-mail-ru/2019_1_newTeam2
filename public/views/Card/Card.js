@@ -15,11 +15,14 @@ export class Card {
         const inner = document.createElement('div');
         inner.classList.add('tiles');
 
-        const headGen = new Headline({textContent: 'Мои словари'});
-        const head = headGen.render();
-        outer.appendChild(head);
+        const head1 = new Headline({textContent: options.name}).render();
+		outer.appendChild(head1);
+		
+		const head2 = new Headline({size: 'h2', textContent: options.description}).render();
+		outer.appendChild(head2);
+
         outer.appendChild(new Icon({
-            src: '../../../../home-icon.png',
+            src: '../../static/home-icon.png',
             handler: () => {
                 router.go('menu');
             }

@@ -13,10 +13,6 @@ const application = document.getElementById('application');
 export class Dictionary {
 	render(options = {}) {
 		application.innerHTML = '';
-		const inner = document.createElement('div');
-		inner.classList.add('tiles');
-		application.innerHTML = '';
-		application.appendChild(inner);
 
 		application.appendChild(new Icon({
 			src: '../../static/home-icon.png',
@@ -28,45 +24,61 @@ export class Dictionary {
 		application.appendChild(new Headline({
 			textContent: 'Мои словари'
 		}).render());
+
+		const name = new Input({
+			id: 'name',
+			type: 'text',
+			value: '',
+			placeholder: 'Название словаря',
+			maxlen: 50,
+			label: '',
+		}).render();
+		name.classList.add('hidden-element');
+		application.appendChild(name);
+
+		const description = new Input({
+			id: 'description',
+			type: 'text',
+			value: '',
+			placeholder: 'Описание словаря',
+			maxlen: 50,
+			label: '',
+		}).render();
+		description.classList.add('hidden-element');
+		application.appendChild(description);
 		
-		application.appendChild(inner);
-		
-		application.appendChild(new Icon({
+		const submit = new Button({
+			type: 'secondary',
+			name: 'Сохранить',
+			id: 'submit',
+			is_hidden: 'hidden-element',
+			handler: () => {
+				document.getElementById('submit').classList.add('hidden-element');
+				name.classList.add('hidden-element');
+				description.classList.add('hidden-element');
+				document.getElementById('plus').classList.remove('hidden-element');
+				let dict = {};
+				dict.name = document.getElementById('name').value;
+				dict.description = document.getElementById('description').value;
+				console.log(dict.name);
+				console.log(dict.description);
+				// setTimeout(bus.emit.bind(bus), 0, 'new-dict-form-submitted', dict);
+				router.go('cards', dict);
+			}
+		}).render();
+		application.appendChild(submit);
+
+		let plus = new Icon({
 			src: '../../static/plus.png',
 			id: 'plus',
 			handler: () => {
 				document.getElementById('plus').classList.add('hidden-element');
-				const input1 = new Input({
-					id: 'input-dict-name',
-					type: 'text',
-					value: '',
-					placeholder: 'Название словаря',
-					maxlen: 50,
-					label: '',
-				}).render();
-				const input2 = new Input({
-					id: 'input-dict-description',
-					type: 'text',
-					value: '',
-					placeholder: 'Описание словаря',
-					maxlen: 50,
-					label: '',
-				}).render();
-				application.appendChild(input1);
-				application.appendChild(input2);
-				const submit = new Button({
-					type: 'secondary',
-					name: 'Сохранить',
-					handler: () => {
-						let dict = {};
-						dict.name = input1.value;
-						dict.description = input2.value;
-						setTimeout(bus.emit.bind(bus), 0, 'new-dict-form-submitted', dict);
-					}
-				}).render();
-				application.appendChild(submit);
+				name.classList.remove('hidden-element');
+				description.classList.remove('hidden-element');
+				document.getElementById('submit').classList.remove('hidden-element');
 			}
-		}).render());
+		}).render();
+		application.appendChild(plus);
 
 		this._ondictsloaded = (dicts) => {
 			dicts.forEach((dict) => {
@@ -83,6 +95,10 @@ export class Dictionary {
 				});
 			});
 		};
+
+		const inner = document.createElement('div');
+		inner.classList.add('tiles');
+		application.appendChild(inner);
 
 		this._ondictcreated = (dict) => {
 			let div = document.createElement('div');
