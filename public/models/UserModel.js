@@ -42,21 +42,18 @@ export class UserModel {
         ajax.doGet({
             path: this.url + '/'
         })
-            .then(
-                (res) => {
-                    res.json()
-                        .then(
-                            (res) => {
-                                setTimeout(bus.emit.bind(bus), 0, 'user-loaded', res);
-                            },
-                            (err) => {
-                                console.log(err);
-                            }
-                        );
-                },
-                (err) => {
-                    console.log(err)
-                });
+        .then((res) => {
+            res.json()
+            .then((res) => {
+                setTimeout(bus.emit.bind(bus), 0, 'user-loaded', res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        })
+        .catch((err) => {
+            console.log(err)
+        });
     }
 
     getUsers(rows = 10, page = 1) {

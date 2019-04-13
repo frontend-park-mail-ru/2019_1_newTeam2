@@ -37,6 +37,12 @@ export class Profile{
         this._onuserloaded = (data) => {
             data.baseUrl = baseUrl;
             this._user = data;
+            console.log(this._user.path);
+            if (!this._user.path) {
+                this._user.path = '/static/avatar-default.png';
+            } else {
+                this._user.path = this._user.baseUrl + this._user.path;
+            }
             forData.innerHTML = profileTemplate(this._user);
         };
 
