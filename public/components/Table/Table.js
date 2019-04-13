@@ -50,10 +50,10 @@ export class Table {
 	render() {
 		if(this._fields === undefined)
 			this._fields = Object.keys(this._data[0]);
-		console.log("this._fields");
-		console.log(this._fields);
-		console.log("this._data");
-		console.log(this._data);
+		// console.log("this._fields");
+		// console.log(this._fields);
+		// console.log("this._data");
+		// console.log(this._data);
 		this._div.innerHTML = tableTemplate({'header': this._fields, 'data': this._data, 'keys': Object.keys(this._data[0]), 'styles': this._classes});
 		return this._div;
 	}

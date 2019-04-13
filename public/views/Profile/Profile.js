@@ -1,80 +1,82 @@
 'use strict';
 
-const pug = require('pug');
-
-const template = `
-p 
-    | ID: #{id}
-    br
-    | Username: #{username}
-    br
-    | Email: #{email}
-img(src=baseUrl + path)`;
-const templateGen = pug.compile(template);
-
 import {Headline} from '../../components/Headline/Headline.js';
 import {Icon} from '../../components/Icon/Icon.js';
 import {Button} from '../../components/Button/Button.js';
 
-import {AjaxModule, baseUrl} from '../../services/ajax.js';
-import {RenderModule} from '../../services/render.js';
+import router from '../../services/router.js';
+import {baseUrl} from '../../services/ajax.js';
+import bus from "../../services/bus.js";
+
+const application = document.getElementById('application');
 
 export class Profile{
     render(options = {}) {
-        const rendererProfile = new RenderModule();
-        const ajax = new AjaxModule();
-        const application = document.getElementById('application');
-
-        const outer = document.createElement('div');
+        const outer = application;
+        outer.innerHTML = '';
         outer.classList.add('centered');
+
 
         let headline = new Headline({size: 'h1', textContent: 'Мой профиль'});
 
         outer.appendChild(new Icon({
-            src: './static/home-icon.png',
+            src: '../../static/home-icon.png',
             handler: () => {
-                rendererProfile.render(application, 'menu', {logined: true});
+                router.go('menu');
             }
         }).render());
         outer.appendChild(headline.render());
 
-        ajax.doGet({
-            path: 'users/'
-        })
-        .then ((response) => {
-            console.log(response);
-            response.json()
-            .then ((res) => {
-                let info = document.createElement('div');
-                // info.innerHTML = templateGen({ID: res['id'], Username: res['username'], Avatar: res['Avatar']});
-                res.baseUrl = baseUrl;
-                info.innerHTML = templateGen(res);
-                outer.appendChild(info);
-            })
-            .catch (
-                (err) => {
-                console.log(err);
-            })
 
-        })
-        .catch ((error) => {
-            console.log(error.response);
-            error.response.json()
-            .catch (
-                (err) => {
-                    console.log(err);
-                }
-            )
-        });
+        let forData = document.createElement('div');
+        let forButton = document.createElement('div');
 
-        let edit = new Button({size: 'small', name: 'Редактировать'}).render();
-        outer.appendChild(edit);
+        outer.appendChild(forData);
+        outer.appendChild(forButton);
+
+        this._onuserloaded = (data) => {
+            data.baseUrl = baseUrl;
+            this._user = data;
+            forData.innerHTML = profileTemplate(this._user);
+        };
+
+        bus.on('user-loaded', this._onuserloaded);
+
+        let edit = new Button({type: 'secondary', name: 'Редактировать'}).render();
+        forButton.appendChild(edit);
 
         edit.addEventListener('click', () => {
-                rendererProfile.render(application, 'profileEdit');
-            }
-        );
+            edit.firstChild.classList.add('hidden-element');
+            save.firstChild.classList.remove('hidden-element');
+            forData.innerHTML = profileeditTemplate(this._user);
+        });
 
-        return outer;
+        let save = new Button({type: 'secondary', name: 'Сохранить'}).render();
+        forButton.appendChild(save);
+
+        save.addEventListener('click', () => {
+            edit.firstChild.classList.remove('hidden-element');
+            save.firstChild.classList.add('hidden-element');
+            const inputs = document.getElementsByTagName('input');
+            Array.from(inputs).forEach(
+                (input) => {
+                    if (input.name === 'file') {
+                        return;
+                    }
+                    this._user[`${input.name}`] = input.value;
+                }
+            );
+            setTimeout(bus.emit.bind(bus), 0, 'edit-user', this._user);
+            const fileUpload = document.getElementsByName('file')[0];
+            if(fileUpload.value) {
+                setTimeout(bus.emit.bind(bus), 0, 'user-upload-avatar', fileUpload.files[0]);
+            }
+            forData.innerHTML = profileTemplate(this._user);
+        });
+        save.firstChild.classList.add('hidden-element');
+    }
+
+    preventAllEvents() {
+        bus.off('user-loaded', this._onuserloaded);
     }
 }

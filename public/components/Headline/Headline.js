@@ -10,15 +10,15 @@ export class Headline {
         someFunction = noop,
                 } = {}) {
         this._text = textContent;
-        this._size = validSizes.includes(size) ? size : '';
+        this._size = validSizes.includes(size) ? size : 'h1';
 		this._handler = someFunction;
     }
 
     render () {
-        let headLineBoard = document.createElement('div');
+        let headLineBoard = document.createElement('span');
         headLineBoard.addEventListener('click', this._handler);
         headLineBoard.innerHTML = headlineTemplate({
-            size: this._size,
+            size: 'headline_size_' + this._size,
             text: this._text
         });
         return headLineBoard;

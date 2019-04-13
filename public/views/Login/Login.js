@@ -4,23 +4,32 @@ import {Headline} from '../../components/Headline/Headline.js';
 import {Input} from '../../components/Input/Input.js';
 import {Link} from '../../components/Link/Link.js';
 import {Button} from '../../components/Button/Button.js';
+import {Icon} from '../../components/Icon/Icon.js';
 
-import {AjaxModule} from '../../services/ajax.js';
-import {RenderModule} from '../../services/render.js';
-import {AuthModule} from '../../services/auth.js';
+import router from '../../services/router.js';
+import bus from '../../services/bus.js';
+
+const application = document.getElementById('application');
 
 export class Login {
     render(options = {}) {
-        let authLogin = new AuthModule();
-        authLogin.logout();
-
+        application.innerText = '';
         const outer = document.createElement('div');
-        outer.classList.add('centered');
-        
+        application.appendChild(outer);
+
+        outer.appendChild(new Icon({
+            src: './static/home-icon.png',
+            handler: () => {
+                router.go('menu');
+            }
+        }).render());
+
         let headline = new Headline({size: 'h1', textContent: 'Авторизация'});
         let serverErrorText = document.createElement('div');
         serverErrorText.classList.add('error-text');
         serverErrorText.classList.add('hidden-element');
+        serverErrorText.innerText = 'Неправильный логин или пароль';
+
 
         let loginTemplateText = document.createElement('div');
         loginTemplateText.classList.add('error-text');
@@ -36,8 +45,8 @@ export class Login {
 
         let password = new Input({ type: 'password', label: 'Пароль* ', id: 'password', maxlen: 20});
 
-        let submit = new Button({size: 'small', name: 'Войти'});
-        let signupLink = new Link({size: 'h4', name: 'Нет аккаунта?'});
+        let submit = new Button({type: 'secondary', name: 'Войти'});
+        let signupLink = new Link({size: '', name: 'Нет аккаунта?'});
         
         let renderedSubmit = submit.render();
         let renderedSignupLink = signupLink.render();
@@ -51,13 +60,8 @@ export class Login {
         outer.appendChild(renderedSubmit);
         outer.appendChild(renderedSignupLink);
 
-        let ajax = new AjaxModule();
-
-        const application = document.getElementById('application');
-        const rendererLogin = new RenderModule();
-
         outer.addEventListener( 'keyup', (event) => {
-            if(event.keyCode === 13){
+            if(event.keyCode === 13){ // Enter button clicked
                 renderedSubmit.click();
             }
         });
@@ -77,58 +81,35 @@ export class Login {
 
             let loginText = document.getElementById('login').value;
             let passwordText = document.getElementById('password').value;
-            
-            let allFieldsValid = (() => {
-                let isOk = true;
-            
-                const loginRegExpr = /^[a-zA-Z0-9-_]+$/;
-                const passwordRegExpr = /^[a-zA-Z0-9-_]+$/;
-                
-        
-                if (!loginRegExpr.test(loginText)) {
-                    loginTemplateText.classList.remove('hidden-element');
-                    isOk = false;
-                }
-            
-                if (!passwordRegExpr.test(passwordText)) {
-                    passwordTemplateText.classList.remove('hidden-element');
-                    isOk = false;
-                }
-            
-                return isOk;
-            })();
-
-            if (!allFieldsValid) {
-                return;
-            }
 
             let profile = {
                 "username" : loginText,
                 "password" : passwordText
             };
-    
-            ajax.doPost({
-                path: 'session/',
-                body: profile
-            })
-            .then ((response) => {
-                rendererLogin.render(application, 'menu', {logined: true});
-            })
-            .catch ((error) => {
-                console.log(error.response);
-                error.response.json()
-                .then ((res) => {
-                    serverErrorText.innerText = res['error'];
-                    serverErrorText.classList.remove('hidden-element');
-                });
-            });
 
+            setTimeout(bus.emit.bind(bus), 0 , 'login-form-submitted', profile);
         });
+        this._onwronglogin = () => {
+            loginTemplateText.classList.remove('hidden-element')
+        };
+        this._onwrongpassword = () => {
+            passwordTemplateText.classList.remove('hidden-element')
+        };
+        this._onnologin = () => {
+            serverErrorText.classList.remove('hidden-element')
+        };
+        bus.on('wrong-login', this._onwronglogin);
+        bus.on('wrong-password', this._onwrongpassword);
+        bus.on('no-login', this._onnologin);
 
         renderedSignupLink.addEventListener( 'click', () => {
-            rendererLogin.render(application, 'signup');
+            router.go('signup');
         });
-            
-		return outer;
+    }
+
+    preventAllEvents() {
+        bus.off('no-login', this._onnologin);
+        bus.off('wrong-login', this._onwronglogin);
+        bus.off('wrong-password', this._onwrongpassword);
     }
 }

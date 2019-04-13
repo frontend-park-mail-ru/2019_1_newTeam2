@@ -9,7 +9,8 @@ export class Input {
                     value: '',
                     placeholder: '',
                     maxlen: 50,
-                    label: ''
+                    label: '',
+                    disabled: '',
                 }) {
         object.type = validTypes.includes(object.type)? object.type : 'text';
         this._object = object;

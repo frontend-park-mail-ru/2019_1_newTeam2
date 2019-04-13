@@ -1,0 +1,38 @@
+@import '_size_big/checkbox_size_big.css';
+@import '_size_small/checkbox_size_small.css';
+
+/* hide browser checkbox */
+input[type=checkbox] {
+	visibility: hidden;
+}
+
+/* area of checkbox */
+.checkbox {
+    position: relative;
+}
+
+/* area of checkbox */
+.checkbox label {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    border: 2px solid #8EE000;
+    border-radius: 4px;
+}
+
+/* tick */
+.checkbox label:after {
+    opacity: 0;
+    content: '';
+    position: absolute;
+    background: transparent;
+
+    transform: rotate(-45deg);
+}
+
+/* checked */
+.checkbox input[type=checkbox]:checked + label:after {
+    opacity: 1;
+}

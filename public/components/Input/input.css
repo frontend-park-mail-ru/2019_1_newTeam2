@@ -1,0 +1,19 @@
+.input {
+    border-radius: 8px;
+    height: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 17px;
+    border: 2px solid #CFCFCF;
+    outline: none;
+    margin: 5px;
+}
+
+.input:disabled {
+    background: #F0F0F0;
+}
+
+.input:focus {
+    border-color: #1CB0F6;
+    caret-color: #1CB0F6;
+}

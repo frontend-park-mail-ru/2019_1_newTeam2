@@ -1,0 +1,7 @@
+@import '_size_big/grise-merde_size_big.css';
+@import '_size_small/grise-merde_size_small.css';
+
+.grise-merde {
+    background-color: #dddddd;
+    border-radius: 20px;
+}

@@ -1,0 +1,7 @@
+@import '_type_dictionary/image_type_dictionary.css' screen;
+@import '_type_profile/image_type_profile.css' screen;
+
+.image {
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px 0px rgba(175,175,175,1);
+}

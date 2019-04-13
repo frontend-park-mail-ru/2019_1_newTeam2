@@ -1,5 +1,5 @@
 {
-  "name": "wordTrainer",
+  "name": "wordtrainer",
   "version": "1.0.0",
   "scripts": {
     "start": "node server",
@@ -24,5 +24,7 @@
     "morgan": "^1.9.1",
     "pug-cli": "^1.0.0-alpha6",
     "uuid": "^3.3.2"
-  }
+  },
+  "description": "## Описание Сервис для эффективного запоминания слов",
+  "main": ".eslintrc.js"
 }
