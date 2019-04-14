@@ -1,6 +1,6 @@
-import {Menu} from "../views/Menu/Menu.js";
-import auth from '../models/AuthModel.js';
-import bus from "../services/bus.js";
+import {Menu} from "/views/Menu/Menu.js";
+import auth from '/models/AuthModel.js';
+import bus from "/services/bus.js";
 
 export class MenuController {
     index() {

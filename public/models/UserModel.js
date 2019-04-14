@@ -1,5 +1,5 @@
-import ajax from "../services/ajax.js";
-import bus from "../services/bus.js";
+import ajax from "/services/ajax.js";
+import bus from "/services/bus.js";
 
 
 export class UserModel {

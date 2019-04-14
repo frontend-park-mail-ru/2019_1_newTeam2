@@ -1,10 +1,10 @@
 'use strict';
 
-import router from "../../services/router.js";
-import {Headline} from "../../components/Headline/Headline.js";
-import {Icon} from "../../components/Icon/Icon.js";
-import {GriseMerde} from "../../components/GriseMerde/GriseMerde.js";
-import bus from "../../services/bus.js";
+import router from "/services/router.js";
+import {Headline} from "/components/Headline/Headline.js";
+import {Icon} from "/components/Icon/Icon.js";
+import {GriseMerde} from "/components/GriseMerde/GriseMerde.js";
+import bus from "/services/bus.js";
 
 const application = document.getElementById('application');
 
@@ -22,7 +22,7 @@ export class Card {
 		outer.appendChild(head2);
 
         outer.appendChild(new Icon({
-            src: '../../static/home-icon.png',
+            src: '/static/home-icon.png',
             handler: () => {
                 router.go('menu');
             }

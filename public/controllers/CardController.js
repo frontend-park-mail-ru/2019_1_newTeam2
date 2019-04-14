@@ -1,5 +1,5 @@
-import {CardModel} from "../models/CardModel.js";
-import {Card} from "../views/Card/Card.js";
+import {CardModel} from "/models/CardModel.js";
+import {Card} from "/views/Card/Card.js";
 
 
 export class CardController {

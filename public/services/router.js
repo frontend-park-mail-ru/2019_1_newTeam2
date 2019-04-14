@@ -27,7 +27,11 @@ class RouterModule {
             'path': path,
             'options': options,
         };
-        history.pushState(stateObj,'', '/' + path);
+        if ('id' in options) {
+            history.pushState(stateObj,'', '/' + path + options.id + '/');
+        } else {
+            history.pushState(stateObj,'', '/' + path);
+        }
         this.render();
     }
 
@@ -49,12 +53,6 @@ class RouterModule {
 
         let controller = this.views[currentState['path']];
         let options = currentState['options'];
-        // window.addEventListener('beforeunload', (event) => {
-        //     event.preventDefault();
-        //     event.returnValue = '';
-        //     setTimeout(this.render(), 5);
-        //     return '';
-        // });
         if(this.currentController)
             this.currentController.preventAllEvents();
         this.currentController = new controller();

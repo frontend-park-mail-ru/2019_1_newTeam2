@@ -1,8 +1,8 @@
 'use strict';
 
-import {Button} from '../../components/Button/Button.js';
+import {Button} from '/components/Button/Button.js';
 
-import router from '../../services/router.js';
+import router from '/services/router.js';
 
 const loginedButtonNames = {
     //'train': 'Тренировка',

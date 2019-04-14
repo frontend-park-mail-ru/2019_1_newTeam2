@@ -1,13 +1,13 @@
 'use strict';
 
-import {Headline} from '../../components/Headline/Headline.js';
-import {Input} from '../../components/Input/Input.js';
-import {Link} from '../../components/Link/Link.js';
-import {Button} from '../../components/Button/Button.js';
-import {Icon} from '../../components/Icon/Icon.js';
+import {Headline} from '/components/Headline/Headline.js';
+import {Input} from '/components/Input/Input.js';
+import {Link} from '/components/Link/Link.js';
+import {Button} from '/components/Button/Button.js';
+import {Icon} from '/components/Icon/Icon.js';
 
-import router from '../../services/router.js';
-import bus from "../../services/bus.js";
+import router from '/services/router.js';
+import bus from "/services/bus.js";
 
 const application = document.getElementById('application');
 
@@ -18,7 +18,7 @@ export class Signup {
         application.appendChild(outer);
         
         outer.appendChild(new Icon({
-            src: './static/home-icon.png',
+            src: '/static/home-icon.png',
             handler: () => {
                 router.go('menu');
             }

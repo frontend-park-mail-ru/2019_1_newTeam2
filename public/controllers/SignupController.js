@@ -1,9 +1,9 @@
-import {Signup} from "../views/Signup/Signup.js";
-import auth from "../models/AuthModel.js";
-import bus from "../services/bus.js"
-import validation from "../services/validation.js";
-import router from "../services/router.js";
-import {UserModel} from "../models/UserModel.js";
+import {Signup} from "/views/Signup/Signup.js";
+import auth from "/models/AuthModel.js";
+import bus from "/services/bus.js"
+import validation from "/services/validation.js";
+import router from "/services/router.js";
+import {UserModel} from "/models/UserModel.js";
 
 
 export class SignupController {
