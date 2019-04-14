@@ -8,6 +8,7 @@
 @import "./components/GriseMerde/grise-merde.css" screen;
 @import "./components/Table/Table.css" screen;
 @import "./components/Upload/Upload.css" screen;
+@import "./components/DictionaryPreview/dictionary-preview.css";
 
 @import "views/Dictionary/Dictionary.css" screen;
 

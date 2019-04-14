@@ -81,17 +81,8 @@ export class Dictionary {
 			dicts.forEach((dict) => {
 				let preview = new DictionaryPreview(dict).render();
 				application.appendChild(preview);
-
-				/*under.addEventListener('click', (event) => {
-					const id = dict.id;
-					router.go('dictionary/' + id);
-				});*/
 			});
 		};
-
-		const inner = document.createElement('div');
-		inner.classList.add('tiles');
-		application.appendChild(inner);
 
 		bus.on('dicts-loaded', this._ondictsloaded);
 	}

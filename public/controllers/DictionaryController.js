@@ -24,6 +24,10 @@ export class DictionaryController {
             alert('Произошла ошибка при создании словаря.');
         };
 
+        this._on_dict_deleted = () => {
+            
+        }
+
         bus.on('new-dict-form-submitted', this._onnewdict);
         bus.on('dict-created', this._on_dict_created);
         bus.on('create-dict-error', this._on_create_dict_error);

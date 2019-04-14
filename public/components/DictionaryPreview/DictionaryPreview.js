@@ -1,9 +1,9 @@
 'use strict';
 
-import {GriseMerde} from "/components/GriseMerde/GriseMerde.js";
 import {Headline} from "/components/Headline/Headline.js";
 import {Icon} from "/components/Icon/Icon.js";
 import bus from "/services/bus.js";
+import router from "/services/router.js";
 
 export class DictionaryPreview {
     constructor(dict) {
@@ -13,8 +13,17 @@ export class DictionaryPreview {
     }
 
     render() {
-        let inner = document.createElement("div");
+        let outer = document.createElement("div");
+        outer.classList.add("grise-merde");
+        outer.classList.add("grise-merde_size_small");
+        outer.classList.add("dictionary-preview");
+        outer.id = this.id;
 
+        outer.addEventListener('click', () => {
+            const id = this.id;
+            router.go('dictionary/' + id);
+        });
+        
         let cross = new Icon({
             src: '/static/cross.png',
             handler: () => {
@@ -22,25 +31,20 @@ export class DictionaryPreview {
                 setTimeout(bus.emit.bind(bus), 0, 'dict-removed', this.id)
             }
         }).render();
-        inner.appendChild(cross);
+        outer.appendChild(cross);
 
         let name = new Headline({
             size: 'h1',
             textContent: this.name,
         }).render();
-        inner.appendChild(name);
+        outer.appendChild(name);
 
         let description = new Headline({
             size: 'h2',
             textContent: this.description,
         }).render();
-        inner.appendChild(description);
+        outer.appendChild(description);
 
-        let outer = new GriseMerde({
-            size: 'small',
-            id: this.id,
-            inner: inner,
-        }).render();
 
         return outer;
     }
