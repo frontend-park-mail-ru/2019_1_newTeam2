@@ -17,7 +17,7 @@ export class DictionaryController {
 
         this._on_dict_created = (dict) => {
             console.log('Словарь успешно создан');
-            router.go('dictionary', {id: dict.id});
+            router.go('dictionary/' + dict.id);
         };
 
         this._on_create_dict_error = () => {

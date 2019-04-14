@@ -5,7 +5,8 @@ const validSizes = ['small', 'big'];
 export class GriseMerde {
     constructor(object = {
         inner: "",
-        size: ""
+        size: "",
+        id: "",
     }) {
         object.size = validSizes.includes(object.size) ? object.size : 'small';
         object.size = 'grise-merde_size_' + object.size;

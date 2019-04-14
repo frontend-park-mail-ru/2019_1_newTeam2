@@ -2,10 +2,10 @@
 
 import router from "/services/router.js";
 import {Headline} from "/components/Headline/Headline.js";
-import {GriseMerde} from "/components/GriseMerde/GriseMerde.js";
 import {Icon} from "/components/Icon/Icon.js";
 import {Button} from "/components/Button/Button.js";
 import {Input} from "/components/Input/Input.js";
+import {DictionaryPreview} from "/components/DictionaryPreview/DictionaryPreview.js";
 import bus from "/services/bus.js";
 
 const application = document.getElementById('application');
@@ -79,17 +79,13 @@ export class Dictionary {
 
 		this._ondictsloaded = (dicts) => {
 			dicts.forEach((dict) => {
-				let div = document.createElement('div');
-				div.innerText = `${dict.name} ${dict.description}`;
-				// let link = document.createElement('span');
-				// div.appendChild(link);
-				// link.classList.add('hidden-element');
-				// link.innerText = `${dict.id}`;
-				inner.appendChild(div);
-				div.addEventListener('click', (event) => {
+				let preview = new DictionaryPreview(dict).render();
+				application.appendChild(preview);
+
+				/*under.addEventListener('click', (event) => {
 					const id = dict.id;
-					router.go('cards', {dictId: id});
-				});
+					router.go('dictionary/' + id);
+				});*/
 			});
 		};
 
