@@ -9,8 +9,7 @@ export class DictionaryModel {
 
     getSelfDicts({rows = 5, page = 1} = {rows: 5, page: 1}) {
         ajax.doGet({
-            //path: this.url + `?rows=${rows}&page=${page}`
-            path: this.url + '/',
+            path: this.url + `?rows=${rows}&page=${page}`
         })
         .then((res) => {
             res.json()

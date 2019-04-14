@@ -8,19 +8,21 @@ import {LoginController} from "/controllers/LoginController.js";
 import {DictionaryController} from "/controllers/DictionaryController.js";
 import {CardController} from "/controllers/CardController.js";
 
-const views = {
-    '': MenuController,
-    'menu': MenuController,
-    'login': LoginController,
-    'dictionaries/me': DictionaryController,
-    'leaderboard': LeaderboardController,
-    'signup': SignupController,
-    'dictionary': CardController,
-    'profile/me': ProfileController,
-};
+const controllers = new Set([
+    ['^$', MenuController],
+    ['^menu$', MenuController],
+    ['^login$', LoginController],
+    ['^dictionaries/me$', DictionaryController],
+    ['^leaderboard$', LeaderboardController],
+    ['^signup$', SignupController],
+    ['^dictionary$', CardController],
+    ['^profile/me$', ProfileController],
+    ['^dictionary/[0-9]+$', CardController],
+]);
 
-Object.entries(views).forEach(element => {
-    router.register(element[0], views[element[0]]);
+
+controllers.forEach((value, valueToo, controllers) => {
+    router.register(value[0], value[1]);
 });
 
 router.render();
