@@ -54,6 +54,7 @@ export class Dictionary {
 			is_hidden: 'hidden-element',
 			handler: () => {
 				document.getElementById('submit').classList.add('hidden-element');
+				document.getElementById('deny').classList.add('hidden-element');
 				name.classList.add('hidden-element');
 				description.classList.add('hidden-element');
 				document.getElementById('plus').classList.remove('hidden-element');
@@ -65,17 +66,38 @@ export class Dictionary {
 		}).render();
 		application.appendChild(submit);
 
+		let deny = new Icon({
+			src: '/static/cross.png',
+			id: 'deny',
+			class: 'hidden-element',
+			handler: () => {
+				document.getElementById('submit').classList.add('hidden-element');
+				document.getElementById('deny').classList.add('hidden-element');
+				name.classList.add('hidden-element');
+				description.classList.add('hidden-element');
+				document.getElementById('plus').classList.remove('hidden-element');
+				let dict = {};
+				dict.name = document.getElementById('name').value;
+				dict.description = document.getElementById('description').value;
+			}
+		}).render();
+		application.appendChild(deny);
+
 		let plus = new Icon({
 			src: '/static/plus.png',
 			id: 'plus',
 			handler: () => {
 				document.getElementById('plus').classList.add('hidden-element');
+				document.getElementById('deny').classList.remove('hidden-element');
 				name.classList.remove('hidden-element');
 				description.classList.remove('hidden-element');
 				document.getElementById('submit').classList.remove('hidden-element');
 			}
 		}).render();
 		application.appendChild(plus);
+
+		let limiter = document.createElement('br');
+		application.appendChild(limiter);
 
 		this._ondictsloaded = (dicts) => {
 			dicts.forEach((dict) => {

@@ -24,13 +24,16 @@ export class DictionaryController {
             alert('Произошла ошибка при создании словаря.');
         };
 
-        this._on_dict_deleted = () => {
-            
+        this._on_dict_removed = (id) => {
+            let body = JSON.stringify({'id': id});
+            console.log(body);
+            this.model.deleteDict(body);
         }
 
         bus.on('new-dict-form-submitted', this._onnewdict);
         bus.on('dict-created', this._on_dict_created);
         bus.on('create-dict-error', this._on_create_dict_error);
+        bus.on('dict-removed', this._on_dict_removed);
     }
 
     preventAllEvents() {
@@ -38,5 +41,6 @@ export class DictionaryController {
         bus.off('new-dict-form-submitted', this._onnewdict);
         bus.off('dict-created', this._on_dict_created);
         bus.off('create-dict-error', this._on_create_dict_error);
+        bus.off('dict-removed', this._on_dict_removed);
     }
 }

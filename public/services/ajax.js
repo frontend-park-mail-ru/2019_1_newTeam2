@@ -1,7 +1,7 @@
 'use strict';
 
 export const baseUrl = 'http://localhost:8090/';//'https://newteam2back.herokuapp.com/';
-const bodyIncludesMethods = ['POST', 'PATCH', 'PUT'];
+const bodyIncludesMethods = ['POST', 'PATCH', 'PUT', 'DELETE'];
 
 /**
 * Checks the status of http answer

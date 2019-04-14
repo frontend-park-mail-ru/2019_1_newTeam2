@@ -1,5 +1,6 @@
 @media screen and (min-width: 300px) {
 	.icon {
+		margin-top: 5px;
 		height: 40px;
 		width: 40px;
 	}
@@ -7,6 +8,7 @@
 
 @media screen and (min-width: 700px) {
 	.icon {
+		margin-top: 5px;
 		height: 30px;
 		width: 30px;
 	}
