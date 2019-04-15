@@ -47,9 +47,9 @@ export class CardModel {
                 });
     }
 
-    createCard(body) {
+    createCard(body, dictId) {
         ajax.doPost({
-            path: this.url + '/',
+            path: this.url + '/?dictionaryId=' + dictId,
             body: body
         })
             .then((response) => {

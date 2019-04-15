@@ -5,6 +5,7 @@ import {Headline} from "/components/Headline/Headline.js";
 import {Icon} from "/components/Icon/Icon.js";
 import {Button} from "/components/Button/Button.js";
 import {Input} from "/components/Input/Input.js";
+import {CardPreview} from "/components/CardPreview/CardPreview.js"
 import bus from "/services/bus.js";
 
 const application = document.getElementById('application');
@@ -110,8 +111,11 @@ export class Card {
 	
 		}
 
-        this._oncardsloaded = () => {
-
+        this._oncardsloaded = (cards) => {
+			cards.forEach((card)=> {
+				let cardComponent = new CardPreview(card).render();
+				application.appendChild(cardComponent);
+			});
 		};
 
         this._oncardloaded = () => {

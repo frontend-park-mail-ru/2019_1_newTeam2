@@ -14,7 +14,7 @@ export class CardController {
         this.model.getCardsByDictId({id: this.id});
 
         this._onnewcardformsubmitted = (body) => {
-            this.model.createCard(body);
+            this.model.createCard(body, this.id);
         }
 
         bus.on('new-card-form-submitted', this._onnewcardformsubmitted);
