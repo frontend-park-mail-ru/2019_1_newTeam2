@@ -3,31 +3,112 @@
 import router from "/services/router.js";
 import {Headline} from "/components/Headline/Headline.js";
 import {Icon} from "/components/Icon/Icon.js";
-import {GriseMerde} from "/components/GriseMerde/GriseMerde.js";
+import {Button} from "/components/Button/Button.js";
+import {Input} from "/components/Input/Input.js";
 import bus from "/services/bus.js";
 
 const application = document.getElementById('application');
 
 export class Card {
-    render(options = {}) {
-        application.innerHTML = '';
-        const outer = application;
-        const inner = document.createElement('div');
-        inner.classList.add('tiles');
+    render() {
+		application.innerHTML = '';
+		application.appendChild(new Icon({
+			src: '/static/home-icon.png',
+			handler: () => {
+				router.go('menu');
+			}
+		}).render());
 
-        const head1 = new Headline({textContent: options.name}).render();
-		outer.appendChild(head1);
-		
-		const head2 = new Headline({size: 'h2', textContent: options.description}).render();
-		outer.appendChild(head2);
+		this._ondictloaded = (dict) => {
+			const head1 = new Headline({textContent: dict.name}).render();
+			application.appendChild(head1);
+			
+			const head2 = new Headline({size: 'h2', textContent: dict.description}).render();
+			application.appendChild(head2);
 
-        outer.appendChild(new Icon({
-            src: '/static/home-icon.png',
-            handler: () => {
-                router.go('menu');
-            }
-        }).render());
-        outer.appendChild(inner);
+			const word = new Input({
+				id: 'word',
+				type: 'text',
+				value: '',
+				placeholder: 'Слово (русский)',
+				maxlen: 50,
+				label: '',
+			}).render();
+			word.classList.add('hidden-element');
+			application.appendChild(word);
+	
+			const translation = new Input({
+				id: 'translation',
+				type: 'text',
+				value: '',
+				placeholder: 'Перевод (английский)',
+				maxlen: 50,
+				label: '',
+			}).render();
+			translation.classList.add('hidden-element');
+			application.appendChild(translation);
+			
+			const submit = new Button({
+				type: 'secondary',
+				name: 'Сохранить',
+				id: 'submit',
+				is_hidden: 'hidden-element',
+				handler: () => {
+					document.getElementById('submit').classList.add('hidden-element');
+					document.getElementById('deny').classList.add('hidden-element');
+					word.classList.add('hidden-element');
+					translation.classList.add('hidden-element');
+					document.getElementById('plus').classList.remove('hidden-element');
+					let card = {
+						'id': 0,
+						'word': {
+							'name': document.getElementById('word').value,
+							'langID': 1
+						},
+						'translation': {
+							'name': document.getElementById('translation').value,
+							'langID': 2
+						}
+					};
+					setTimeout(bus.emit.bind(bus), 0, 'new-card-form-submitted', card);
+				}
+			}).render();
+			application.appendChild(submit);
+	
+			let deny = new Icon({
+				src: '/static/cross.png',
+				id: 'deny',
+				class: 'hidden-element',
+				handler: () => {
+					document.getElementById('submit').classList.add('hidden-element');
+					document.getElementById('deny').classList.add('hidden-element');
+					word.classList.add('hidden-element');
+					translation.classList.add('hidden-element');
+					document.getElementById('plus').classList.remove('hidden-element');
+					let dict = {};
+					dict.word = document.getElementById('word').value;
+					dict.translation = document.getElementById('translation').value;
+				}
+			}).render();
+			application.appendChild(deny);
+	
+			let plus = new Icon({
+				src: '/static/plus.png',
+				id: 'plus',
+				handler: () => {
+					document.getElementById('plus').classList.add('hidden-element');
+					document.getElementById('deny').classList.remove('hidden-element');
+					word.classList.remove('hidden-element');
+					translation.classList.remove('hidden-element');
+					document.getElementById('submit').classList.remove('hidden-element');
+				}
+			}).render();
+			application.appendChild(plus);
+	
+			let limiter = document.createElement('br');
+			application.appendChild(limiter);
+	
+		}
 
         this._oncardsloaded = () => {
 
@@ -65,6 +146,8 @@ export class Card {
 
 		};
 
+		bus.on('dict-loaded', this._ondictloaded);
+		bus.on('load-dict-error', this._onloaddicterror);
 		bus.on('cards-loaded', this._oncardsloaded);
 		bus.on('card-loaded', this._oncardloaded);
 		bus.on('load-card-error', this._onloadcarderror);
@@ -77,6 +160,8 @@ export class Card {
     }
 
     preventAllEvents() {
+		bus.off('dict-loaded', this._ondictloaded);
+		bus.off('load-dict-error', this._onloaddicterror);
 		bus.off('cards-loaded', this._oncardsloaded);
 		bus.off('card-loaded', this._oncardloaded);
 		bus.off('load-card-error', this._onloadcarderror);

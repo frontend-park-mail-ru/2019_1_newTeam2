@@ -7,25 +7,22 @@ export class CardModel {
         this.url = 'card'
     }
 
-    getCardsByDictId({rows = 5, page = 1, id = 0} = {rows: 5, page: 1, id: 0}) {
+    getCardsByDictId({ rows = 5, page = 1, id = 0 } = { rows: 5, page: 1, id: 0 }) {
         ajax.doGet({
-            path: this.url + `s/${id}?rows=${rows}&page=${page}`
+            path: this.url + `s?dict=${id}&rows=${rows}&page=${page}`
         })
-            .then(
-                (res) => {
-                    res.json()
-                        .then(
-                            (res) => {
-                                setTimeout(bus.emit.bind(bus), 0, 'cards-loaded', res);
-                            },
-                            (err) => {
-                                console.log(err);
-                            }
-                        );
-                },
-                (err) => {
-                    console.log(err)
-                });
+            .then((res) => {
+                res.json()
+                    .then((res) => {
+                        setTimeout(bus.emit.bind(bus), 0, 'cards-loaded', res);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            })
+            .catch((err) => {
+                console.log(err)
+            });
     }
 
     getCard(id = 0) {
@@ -58,7 +55,7 @@ export class CardModel {
             .then((response) => {
                 setTimeout(bus.emit.bind(bus), 0, 'card-created');
             })
-            .catch ((error) => {
+            .catch((error) => {
                 setTimeout(bus.emit.bind(bus), 0, 'create-card-error', error);
             });
     }
@@ -83,12 +80,12 @@ export class CardModel {
             path: this.url + '/' + id.toString(10)
         })
             .then(() => {
-                    setTimeout(bus.emit.bind(bus), 0, 'card-deleted');
-                }
+                setTimeout(bus.emit.bind(bus), 0, 'card-deleted');
+            }
             )
             .catch((error) => {
-                    setTimeout(bus.emit.bind(bus), 0, 'delete-card-error', error);
-                }
+                setTimeout(bus.emit.bind(bus), 0, 'delete-card-error', error);
+            }
             )
     }
 }

@@ -25,9 +25,7 @@ export class DictionaryController {
         };
 
         this._on_dict_removed = (id) => {
-            let body = JSON.stringify({'id': id});
-            console.log(body);
-            this.model.deleteDict(body);
+            this.model.deleteDict(id);
         }
 
         bus.on('new-dict-form-submitted', this._onnewdict);

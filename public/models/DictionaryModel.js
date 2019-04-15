@@ -77,10 +77,9 @@ export class DictionaryModel {
         });
     }
 
-    deleteDict(body) {
+    deleteDict(id = 0) {
         ajax.doDelete({
-            path: this.url + '/',
-            body: body
+            path: this.url + '/' + id.toString(10)
         })
         .then(() => {
             setTimeout(bus.emit.bind(bus), 0, 'dict-deleted');

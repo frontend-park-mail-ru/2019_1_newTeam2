@@ -21,7 +21,7 @@ class RouterModule {
         this.controllers.push(controller);
     }
 
-    go(path, options = {}) {
+    go(path) {
         let i = validation.findPathInArray(path, this.paths);
         if (i === -1) {
             console.log("path is not registered");
@@ -30,8 +30,7 @@ class RouterModule {
         }
 
         let stateObj = {
-            'path': path,
-            'options': options,
+            'path': path
         };
 
         history.pushState(stateObj,'', '/' + path);
@@ -51,20 +50,20 @@ class RouterModule {
                 return;
             }
             currentState = {
-                'path': currentPath,
-                'options': {},
+                'path': currentPath
             }
         }
 
         let i = validation.findPathInArray(currentState['path'], this.paths);
         let controller = this.controllers[i];
-        let options = currentState['options'];
 
         if (this.currentController) {
             this.currentController.preventAllEvents();
         }
 
         this.currentController = new controller();
+
+        let options = {'path': currentState['path']};
         this.currentController.index(options);
     }
 
