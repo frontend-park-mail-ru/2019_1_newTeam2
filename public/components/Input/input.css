@@ -1,12 +1,29 @@
-.input {
-    border-radius: 8px;
-    height: 50px;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 17px;
-    border: 2px solid #CFCFCF;
-    outline: none;
-    margin: 5px;
+@media screen and (min-width: 700px) {
+    .input {
+        width: 680px;
+        border-radius: 8px;
+        height: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 17px;
+        border: 2px solid #CFCFCF;
+        outline: none;
+        margin: 5px;
+    }
+}
+
+@media screen and (min-width: 300px) {
+    .input {
+        width: 280px;
+        border-radius: 8px;
+        height: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 17px;
+        border: 2px solid #CFCFCF;
+        outline: none;
+        margin: 5px;
+    }
 }
 
 .input:disabled {

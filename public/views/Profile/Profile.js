@@ -14,8 +14,6 @@ export class Profile{
     render(options = {}) {
         const outer = application;
         outer.innerHTML = '';
-        outer.classList.add('centered');
-
 
         let headline = new Headline({size: 'h1', textContent: 'Мой профиль'});
 
