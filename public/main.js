@@ -8,6 +8,16 @@ import {LoginController} from "/controllers/LoginController.js";
 import {DictionaryController} from "/controllers/DictionaryController.js";
 import {CardController} from "/controllers/CardController.js";
 
+if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+        .then((reg) => {
+            // console.log(reg);
+        })
+        .catch((err) => {
+            // console.log(err);
+        });
+}
+
 const controllers = new Set([
     ['^$', MenuController],
     ['^menu$', MenuController],
