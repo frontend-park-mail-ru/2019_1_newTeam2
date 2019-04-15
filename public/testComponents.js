@@ -1,10 +1,10 @@
-import {Icon} from './components/Icon/icon.js'
-import {Checkbox} from './components/Checkbox/checkbox.js'
-import {Link} from './components/Link/link.js'
-import {Button} from './components/Button/Button.js';
-import {Headline} from './components/Headline/Headline.js';
-import {InputComponent} from "./components/Input/Input.js";
-import {GriseMerdeComponent} from "./components/GriseMerde/GriseMerde.js";
+import {Icon} from '/components/Icon/icon.js'
+import {Checkbox} from '/components/Checkbox/checkbox.js'
+import {Link} from '/components/Link/link.js'
+import {Button} from '/components/Button/Button.js';
+import {Headline} from '/components/Headline/Headline.js';
+import {InputComponent} from "/components/Input/Input.js";
+import {GriseMerdeComponent} from "/components/GriseMerde/GriseMerde.js";
 
 const application = document.getElementById('application');
 

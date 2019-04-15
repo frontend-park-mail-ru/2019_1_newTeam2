@@ -1,12 +1,4 @@
 'use strict';
-const pug = require('pug');
-
-const template = `
-div(class=size, class='checkbox')
-	input(type='checkbox', id=num)
-	label(for=num)`;
-
-const templateGen = pug.compile(template);
 
 const noop = () => {};
 const validSizes = ['big', 'small'];
@@ -25,7 +17,10 @@ export class Checkbox {
 
 	render() {
 		const outer = document.createElement('span');
-		outer.innerHTML = templateGen({'size': this._size, 'num': this._id});
+		outer.innerHTML = checkboxTemplate({
+			'size': 'checkbox_size_' + this._size,
+			'num': this._id
+		});
 
 		outer.addEventListener('click', this._handler);
 

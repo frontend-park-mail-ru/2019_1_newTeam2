@@ -1,26 +1,22 @@
-const pug = require('pug');
-const template = `
-- var cl = classes
-div(class="grise-merde" class=cl)
- | !{inner}
- |
-`;
-const templateGen = pug.compile(template);
+'use strict';
+
+const validSizes = ['small', 'big'];
 
 export class GriseMerde {
     constructor(object = {
         inner: "",
-        classes: ""
+        size: "",
+        id: "",
     }) {
-        object.classes = object.classes ? object.classes : "small-grise-merde";
+        object.size = validSizes.includes(object.size) ? object.size : 'small';
+        object.size = 'grise-merde_size_' + object.size;
         object.inner = object.inner instanceof Node ? object.inner.outerHTML : object.inner;
         this._object = object;
     }
 
     render() {
-        let el = document.createElement("span");
-        el.innerHTML = templateGen(this._object);
+        let el = document.createElement("div");
+        el.innerHTML = grisemerdeTemplate(this._object);
         return el;
     }
-
 }

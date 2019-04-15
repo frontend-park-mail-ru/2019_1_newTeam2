@@ -1,0 +1,35 @@
+@media screen and (min-width: 1200px) {
+	image_type_dictionary{
+        height: 100px;
+		width: 100px;
+		border-radius: 8px;
+		margin: 8px;
+	}
+}
+
+@media screen and (min-width: 700px) {
+	image_type_dictionary{
+        height: 50px;
+		width: 50px;
+		border-radius: 8px;
+		margin: 8px;
+	}
+}
+
+@media screen and (min-width: 300px) {
+	image_type_dictionary{
+        height: 50px;
+		width: 50px;
+		border-radius: 2px;
+		margin: 2px;
+	}
+}
+
+@media screen and (max-width: 300px) {
+	image_type_dictionary{
+        height: 50px;
+		width: 50px;
+		border-radius: 2px;
+		margin: 2px;
+	}
+}

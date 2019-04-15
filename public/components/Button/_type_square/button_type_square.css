@@ -1,0 +1,23 @@
+@media screen and (min-width: 700px) {
+    .button_type_square {
+        line-height: 48px;
+        height: 48px;
+        width: 48px;
+        border-radius: 24px;
+        padding-left: 20px;
+        padding-right: 20px;
+        display: inline-block;
+    }
+}
+
+@media screen and (min-width: 300px) {
+    .button_type_square {
+        line-height: 32px;
+        height: 32px;
+        width: 32px;
+        border-radius: 16px;
+        padding-left: 12px;
+        padding-right: 12px;
+        display: inline-block;
+    }
+}

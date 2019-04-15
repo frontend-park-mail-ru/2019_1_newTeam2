@@ -1,8 +1,9 @@
 {
-  "name": "wordTrainer",
+  "name": "wordtrainer",
   "version": "1.0.0",
   "scripts": {
-    "start": "node server"
+    "start": "node server",
+    "prestart": "pug -c -D --name-after-file -o public/components/pug_compiled server/pug"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,9 @@
     "eslint": "^5.15.1",
     "express": "^4.16.4",
     "morgan": "^1.9.1",
+    "pug-cli": "^1.0.0-alpha6",
     "uuid": "^3.3.2"
-  }
+  },
+  "description": "## Описание Сервис для эффективного запоминания слов",
+  "main": ".eslintrc.js"
 }

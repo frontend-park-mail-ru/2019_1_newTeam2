@@ -1,11 +1,7 @@
 'use strict';
 
-const pug = require('pug');
-const template = 'span(class="link", class=size) #{name}';
-const templateGen = pug.compile(template);
-
 const noop = () => {};
-const validSizes = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+const validSizes = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', ''];
 
 export class Link {
 	constructor({
@@ -20,7 +16,7 @@ export class Link {
 
 	render() {
 		const outer = document.createElement('span');
-		outer.innerHTML = templateGen({ 'size': this._size, 'name': this._name });
+		outer.innerHTML = linkTemplate({ 'size': 'link_size_' + this._size, 'name': this._name });
 		
 		outer.addEventListener('click', this._handler);
 	

@@ -1,26 +1,32 @@
 'use strict';
-const pug = require('pug');
-const template = `button(class="button", class=size) #{name}`;
-const templateGen = pug.compile(template);
 
 const noop = () => {};
-const validSizes = ['big', 'small'];
+const validTypes = ['primary', 'secondary', 'square'];
 
 export class Button {
     constructor({
-        size = 'big',
+        type = 'primary',
         name = '',
         handler = noop,
+        id = '',
+        is_hidden = ''
     } = {}) {
         this._name = name;
-        this._size = validSizes.includes(size) ? size : 'small';
+        this._type = validTypes.includes(type) ? type : 'primary';
         this._handler = handler;
+        this._id = id;
+        this._is_hidden = is_hidden;
     }
 
     render () {
-        const outer = document.createElement('div');
-        outer.classList.add('inline-block-el');
-		outer.innerHTML = templateGen({'size': this._size, 'name': this._name});
+        const outer = document.createElement('span');
+		outer.innerHTML = buttonTemplate({
+            'type_class': 'button_type_' + this._type,
+            'text_class': 'button__text_type_' + this._type,
+            'name': this._name,
+            'is_hidden': this._is_hidden,
+            'id': this._id,
+        });
 
 		outer.addEventListener('click', this._handler);
 

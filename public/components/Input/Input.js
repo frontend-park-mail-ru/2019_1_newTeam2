@@ -1,11 +1,4 @@
 'use strict';
-const pug = require('pug');
-
-const template = `
-div
-    label(for=id) #{label}
-input.input(type=type, value=value, placeholder=placeholder, maxlength=maxlen, id=id)`;
-const templateGen = pug.compile(template);
 
 const validTypes = ['text', 'email', 'tel', 'password'];
 
@@ -16,7 +9,8 @@ export class Input {
                     value: '',
                     placeholder: '',
                     maxlen: 50,
-                    label: ''
+                    label: '',
+                    disabled: '',
                 }) {
         object.type = validTypes.includes(object.type)? object.type : 'text';
         this._object = object;
@@ -24,7 +18,7 @@ export class Input {
 
     render() {
         let el = document.createElement('div');
-        el.innerHTML = templateGen(this._object);
+        el.innerHTML = inputTemplate(this._object);
         return el;
     }
 }

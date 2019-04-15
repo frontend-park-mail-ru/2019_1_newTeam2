@@ -1,18 +1,28 @@
-import {RenderModule} from './modules/render.js';
-import {AuthModule} from './modules/auth.js';
+import router from '/services/router.js';
 
-const application = document.getElementById('application');
+import {LeaderboardController} from "/controllers/LeaderboardController.js";
+import {MenuController} from "/controllers/MenuController.js";
+import {ProfileController} from "/controllers/ProfileController.js";
+import {SignupController} from "/controllers/SignupController.js";
+import {LoginController} from "/controllers/LoginController.js";
+import {DictionaryController} from "/controllers/DictionaryController.js";
+import {CardController} from "/controllers/CardController.js";
 
-const renderer = new RenderModule();
-const auth = new AuthModule();
+const controllers = new Set([
+    ['^$', MenuController],
+    ['^menu$', MenuController],
+    ['^login$', LoginController],
+    ['^dictionaries/me$', DictionaryController],
+    ['^leaderboard$', LeaderboardController],
+    ['^signup$', SignupController],
+    ['^dictionary$', CardController],
+    ['^profile/me$', ProfileController],
+    ['^dictionary/[0-9]+$', CardController],
+]);
 
-auth.isAuthorised()
-.then( (res) => {
-    let options = {
-        logined: false
-    };
-    if (res.status == 200) {
-        options['logined'] = true;
-    }
-    renderer.render(application, 'menu', options);
+
+controllers.forEach((value, valueToo, controllers) => {
+    router.register(value[0], value[1]);
 });
+
+router.render();

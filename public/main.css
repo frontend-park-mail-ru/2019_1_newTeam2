@@ -1,18 +1,22 @@
-@import "./components/Button/Button.css" screen;
-@import "./components/Link/Link.css" screen;
-@import "./components/Headline/Headline.css" screen;
-@import "./components/Checkbox/Checkbox.css" screen;
-@import "./components/Input/Input.css" screen;
-@import "./components/Icon/Icon.css" screen;
-@import "./components/Image/Image.css" screen;
-@import "./components/GriseMerde/GriseMerde.css" screen;
+@import "./components/Button/button.css" screen;
+@import "./components/Link/link.css" screen;
+@import "./components/Headline/headline.css" screen;
+@import "./components/Checkbox/checkbox.css" screen;
+@import "./components/Input/input.css" screen;
+@import "./components/Icon/icon.css" screen;
+@import "./components/Image/image.css" screen;
+@import "./components/GriseMerde/grise-merde.css" screen;
 @import "./components/Table/Table.css" screen;
 @import "./components/Upload/Upload.css" screen;
+@import "./components/DictionaryPreview/dictionary-preview.css";
 
-@import "./components/Pages/Dictionaries/Dictionaries.css" screen;
+@import "views/Dictionary/Dictionary.css" screen;
+
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
 
 * {
-    font: Helvetica;
+    font-family: 'M PLUS Rounded 1c', sans-serif;;
+    box-sizing: border-box;
 }
 
 .centered {
@@ -20,13 +24,9 @@
 }
 
 .error-text {
-    color: red !important;
+    color: red;
 }
 
 .hidden-element{
     display: none;
-}
-
-.inline-block-el {
-    display: inline-block;
 }
