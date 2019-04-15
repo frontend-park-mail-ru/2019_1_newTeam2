@@ -15,13 +15,14 @@ export class CardPreview {
 
     render() {
         let outer = document.createElement('div');
+        outer.classList.add('card-preview');
         let word = new Headline ({
-            size: 'h3',
+            size: 'h2',
             textContent: this.word.name,
         }).render();
         outer.appendChild(word);
         let translation = new Headline ({
-            size: 'h4',
+            size: 'h2',
             textContent: this.translation.name,
         }).render();
         outer.appendChild(translation);

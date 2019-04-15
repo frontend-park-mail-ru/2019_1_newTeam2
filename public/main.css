@@ -9,6 +9,7 @@
 @import "./components/Table/Table.css" screen;
 @import "./components/Upload/Upload.css" screen;
 @import "./components/DictionaryPreview/dictionary-preview.css";
+@import "./components/CardPreview/card-preview.css";
 
 @import "views/Dictionary/Dictionary.css" screen;
 

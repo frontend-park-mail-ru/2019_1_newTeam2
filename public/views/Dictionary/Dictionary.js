@@ -69,7 +69,7 @@ export class Dictionary {
 		let deny = new Icon({
 			src: '/static/cross.png',
 			id: 'deny',
-			class: 'hidden-element',
+			classname: 'hidden-element',
 			handler: () => {
 				document.getElementById('submit').classList.add('hidden-element');
 				document.getElementById('deny').classList.add('hidden-element');
