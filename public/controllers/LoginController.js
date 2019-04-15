@@ -1,8 +1,8 @@
-import {Login} from "/views/Login/Login.js";
-import auth from "/models/AuthModel.js";
-import bus from "/services/bus.js"
-import validation from "/services/validation.js";
-import router from "/services/router.js";
+import {Login} from '/views/Login/Login.js';
+import auth from '/models/AuthModel.js';
+import bus from '/services/bus.js';
+import validation from '/services/validation.js';
+import router from '/services/router.js';
 
 
 export class LoginController {

@@ -1,47 +1,51 @@
-import ajax from "/services/ajax.js";
-import bus from "/services/bus.js";
+import ajax from '/services/ajax.js';
+import bus from '/services/bus.js';
 
 
 export class DictionaryModel {
     constructor() {
-        this.url = 'dictionary'
+        this.url = 'dictionary';
     }
 
     getSelfDicts({rows = 5, page = 1} = {rows: 5, page: 1}) {
         ajax.doGet({
             path: this.url + `?rows=${rows}&page=${page}`
         })
-        .then((res) => {
-            res.json()
-            .then( (res) => {
-                setTimeout(bus.emit.bind(bus), 0, 'dicts-loaded', res);
+            .then((res) => {
+                res.json()
+                    .then( (res) => {
+                        setTimeout(bus.emit.bind(bus), 0, 'dicts-loaded', res);
+                    })
+                    .catch( (err) => {
+                        // TODO(gleensande): обработка ошибки
+                        console.log(err);
+                    });
             })
             .catch( (err) => {
+                // TODO(gleensande): обработка ошибки
                 console.log(err);
             });
-        })
-        .catch( (err) => {
-            console.log(err)
-        });
     }
 
     getDict(id = 0) {
         ajax.doGet({
             path: this.url + '/' + id.toString(10)
         })
-        .then((res) => {
-            res.json()
             .then((res) => {
-                setTimeout(bus.emit.bind(bus), 0, 'dict-loaded', res);
+                res.json()
+                    .then((res) => {
+                        setTimeout(bus.emit.bind(bus), 0, 'dict-loaded', res);
+                    })
+                    .catch((err) => {
+                        // TODO(gleensande): обработка ошибки
+                        console.log(err);
+                    });
             })
             .catch((err) => {
+                // TODO(gleensande): обработка ошибки
                 console.log(err);
+                setTimeout(bus.emit.bind(bus), 0, 'load-dict-error');
             });
-        })
-        .catch((err) => {
-            console.log(err);
-            setTimeout(bus.emit.bind(bus), 0, 'load-dict-error');
-        });
     }
 
     createDict(body) {
@@ -49,43 +53,47 @@ export class DictionaryModel {
             path: this.url + '/',
             body: body
         })
-        .then((res) => {
-            res.json()
-            .then ((res) => {
-                setTimeout(bus.emit.bind(bus), 0, 'dict-created', res);
+            .then((res) => {
+                res.json()
+                    .then ((res) => {
+                        setTimeout(bus.emit.bind(bus), 0, 'dict-created', res);
+                    })
+                    .catch((err) => {
+                        // TODO(gleensande): обработка ошибки
+                        setTimeout(bus.emit.bind(bus), 0, 'create-dict-error', err);
+                    });
             })
-            .catch((err) => {
-                setTimeout(bus.emit.bind(bus), 0, 'create-dict-error', err);
+            .catch ((error) => {
+                // TODO(gleensande): обработка ошибки
+                setTimeout(bus.emit.bind(bus), 0, 'create-dict-error', error);
             });
-        })
-        .catch ((error) => {
-            setTimeout(bus.emit.bind(bus), 0, 'create-dict-error', error);
-        });
     }
 
     updateDict(id = 0, body) {
         ajax.doPut({
-            path: this.url + '/',
+            path: this.url + '/' + id,
             body: body
         })
-        .then(() => {
-            setTimeout(bus.emit.bind(bus), 0, 'dict-updated');
-        })
-        .catch ((error) => {
-            setTimeout(bus.emit.bind(bus), 0, 'update-dict-error', error);
-            console.log("some shit happened: " + error);
-        });
+            .then(() => {
+                setTimeout(bus.emit.bind(bus), 0, 'dict-updated');
+            })
+            .catch ((error) => {
+                setTimeout(bus.emit.bind(bus), 0, 'update-dict-error', error);
+                // TODO(gleensande): обработка ошибки
+                console.log('error while update dict' + error);
+            });
     }
 
     deleteDict(id = 0) {
         ajax.doDelete({
             path: this.url + '/' + id.toString(10)
         })
-        .then(() => {
-            setTimeout(bus.emit.bind(bus), 0, 'dict-deleted');
-        })
-        .catch((error) => {
-            setTimeout(bus.emit.bind(bus), 0, 'delete-dict-error', error);
-        });
+            .then(() => {
+                setTimeout(bus.emit.bind(bus), 0, 'dict-deleted');
+            })
+            .catch((error) => {
+                // TODO(gleensande): обработка ошибки
+                setTimeout(bus.emit.bind(bus), 0, 'delete-dict-error', error);
+            });
     }
 }

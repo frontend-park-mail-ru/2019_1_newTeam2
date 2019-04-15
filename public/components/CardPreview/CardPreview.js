@@ -1,6 +1,6 @@
 'use strict';
 
-import {Headline} from "/components/Headline/Headline.js";
+import { Headline } from '/components/Headline/Headline.js';
 
 export class CardPreview {
     constructor(card) {
@@ -16,12 +16,12 @@ export class CardPreview {
     render() {
         let outer = document.createElement('div');
         outer.classList.add('card-preview');
-        let word = new Headline ({
+        let word = new Headline({
             size: 'h2',
             textContent: this.word.name,
         }).render();
         outer.appendChild(word);
-        let translation = new Headline ({
+        let translation = new Headline({
             size: 'h2',
             textContent: this.translation.name,
         }).render();

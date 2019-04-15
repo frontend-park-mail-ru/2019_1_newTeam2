@@ -6,12 +6,12 @@ import {Button} from '/components/Button/Button.js';
 
 import router from '/services/router.js';
 import {baseUrl} from '/services/ajax.js';
-import bus from "/services/bus.js";
+import bus from '/services/bus.js';
 
 const application = document.getElementById('application');
 
 export class Profile{
-    render(options = {}) {
+    render() {
         const outer = application;
         outer.innerHTML = '';
 

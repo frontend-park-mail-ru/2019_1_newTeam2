@@ -1,7 +1,7 @@
-import {CardModel} from "/models/CardModel.js";
-import {DictionaryModel} from "/models/DictionaryModel.js";
-import {Card} from "/views/Card/Card.js";
-import bus from "/services/bus.js";
+import {CardModel} from '/models/CardModel.js';
+import {DictionaryModel} from '/models/DictionaryModel.js';
+import {Card} from '/views/Card/Card.js';
+import bus from '/services/bus.js';
 
 
 export class CardController {
@@ -15,7 +15,7 @@ export class CardController {
 
         this._onnewcardformsubmitted = (body) => {
             this.model.createCard(body, this.id);
-        }
+        };
 
         bus.on('new-card-form-submitted', this._onnewcardformsubmitted);
     }
