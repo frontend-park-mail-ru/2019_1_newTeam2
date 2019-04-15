@@ -7,6 +7,15 @@ class ValidationModule {
         this.emailRegExpr = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     }
 
+    findPathInArray(path, arr) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].test(path)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     checkLogin(login) {
         return this.loginRegExpr.test(login);
     }

@@ -8,17 +8,19 @@ export class Icon {
 		src = '',
 		handler = noop,
 		id = '',
+		classname = ''
 	} = {}) {
 		this._src = src;
 		this._handler = handler;
 		this._id = id;
+		this._class = classname;
 	}
 
 	render() {
 		const outer = document.createElement('span');
 		outer.innerHTML = iconTemplate({'path': this._src, 'id': this._id});
 
-		outer.addEventListener('click', this._handler);
+		outer.addEventListener('click', this._handler, true);
 	
 		return outer;
 	}

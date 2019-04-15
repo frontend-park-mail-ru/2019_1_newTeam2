@@ -1,5 +1,5 @@
-import ajax from "../services/ajax.js";
-import bus from "../services/bus.js";
+import ajax from "/services/ajax.js";
+import bus from "/services/bus.js";
 
 
 export class DictionaryModel {
@@ -11,43 +11,37 @@ export class DictionaryModel {
         ajax.doGet({
             path: this.url + `?rows=${rows}&page=${page}`
         })
-            .then(
-                (res) => {
-                    res.json()
-                        .then(
-                            (res) => {
-                                setTimeout(bus.emit.bind(bus), 0, 'dicts-loaded', res);
-                            },
-                            (err) => {
-                                console.log(err);
-                            }
-                        );
-                },
-                (err) => {
-                    console.log(err)
-                });
+        .then((res) => {
+            res.json()
+            .then( (res) => {
+                setTimeout(bus.emit.bind(bus), 0, 'dicts-loaded', res);
+            })
+            .catch( (err) => {
+                console.log(err);
+            });
+        })
+        .catch( (err) => {
+            console.log(err)
+        });
     }
 
     getDict(id = 0) {
         ajax.doGet({
             path: this.url + '/' + id.toString(10)
         })
-            .then(
-                (res) => {
-                    res.json()
-                        .then(
-                            (res) => {
-                                setTimeout(bus.emit.bind(bus), 0, 'dict-loaded', res);
-                            },
-                            (err) => {
-                                console.log(err);
-                            }
-                        );
-                },
-                (err) => {
-                    console.log(err);
-                    setTimeout(bus.emit.bind(bus), 0, 'load-dict-error');
-                });
+        .then((res) => {
+            res.json()
+            .then((res) => {
+                setTimeout(bus.emit.bind(bus), 0, 'dict-loaded', res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            setTimeout(bus.emit.bind(bus), 0, 'load-dict-error');
+        });
     }
 
     createDict(body) {
@@ -55,40 +49,43 @@ export class DictionaryModel {
             path: this.url + '/',
             body: body
         })
-            .then((res) => {
+        .then((res) => {
+            res.json()
+            .then ((res) => {
                 setTimeout(bus.emit.bind(bus), 0, 'dict-created', res);
             })
-            .catch ((error) => {
-                setTimeout(bus.emit.bind(bus), 0, 'create-dict-error', error);
+            .catch((err) => {
+                setTimeout(bus.emit.bind(bus), 0, 'create-dict-error', err);
             });
+        })
+        .catch ((error) => {
+            setTimeout(bus.emit.bind(bus), 0, 'create-dict-error', error);
+        });
     }
 
     updateDict(id = 0, body) {
         ajax.doPut({
             path: this.url + '/',
             body: body
-        }).then(
-            () => {
-                setTimeout(bus.emit.bind(bus), 0, 'dict-updated');
-            },
-            (error) => {
-                setTimeout(bus.emit.bind(bus), 0, 'update-dict-error', error);
-                console.log("some shit happened: " + error);
-            }
-        );
+        })
+        .then(() => {
+            setTimeout(bus.emit.bind(bus), 0, 'dict-updated');
+        })
+        .catch ((error) => {
+            setTimeout(bus.emit.bind(bus), 0, 'update-dict-error', error);
+            console.log("some shit happened: " + error);
+        });
     }
 
     deleteDict(id = 0) {
         ajax.doDelete({
             path: this.url + '/' + id.toString(10)
         })
-            .then(() => {
-                    setTimeout(bus.emit.bind(bus), 0, 'dict-deleted');
-                }
-            )
-            .catch((error) => {
-                    setTimeout(bus.emit.bind(bus), 0, 'delete-dict-error', error);
-                }
-            )
+        .then(() => {
+            setTimeout(bus.emit.bind(bus), 0, 'dict-deleted');
+        })
+        .catch((error) => {
+            setTimeout(bus.emit.bind(bus), 0, 'delete-dict-error', error);
+        });
     }
 }

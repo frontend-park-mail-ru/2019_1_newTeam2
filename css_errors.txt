@@ -1,0 +1,585 @@
+
+
+csslint: No errors in /home/gleensande/2019_1_newTeam2/public/components/Button/__text/_type_primary/button__text_type_primary.css.
+
+
+csslint: No errors in /home/gleensande/2019_1_newTeam2/public/components/Button/__text/_type_secondary/button__text_type_secondary.css.
+
+
+csslint: There are 2 problems in /home/gleensande/2019_1_newTeam2/public/components/Button/__text/button__text.css.
+
+button__text.css
+1: warning at line 1, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_type_primary/button__text_type_primary.css';
+
+button__text.css
+2: warning at line 2, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_type_secondary/button__text_type_secondary.css';
+
+
+csslint: There are 6 problems in /home/gleensande/2019_1_newTeam2/public/components/Button/_type_primary/button_type_primary.css.
+
+button_type_primary.css
+1: warning at line 2, col 5
+Rule doesn't have all its properties in alphabetical order.
+    .button_type_primary {
+
+button_type_primary.css
+2: warning at line 7, col 9
+Using width with padding-left can sometimes make elements larger than you expect.
+        padding-left: 20px;
+
+button_type_primary.css
+3: warning at line 8, col 9
+Using width with padding-right can sometimes make elements larger than you expect.
+        padding-right: 20px;
+
+button_type_primary.css
+4: warning at line 13, col 5
+Rule doesn't have all its properties in alphabetical order.
+    .button_type_primary {
+
+button_type_primary.css
+5: warning at line 18, col 9
+Using width with padding-left can sometimes make elements larger than you expect.
+        padding-left: 24px;
+
+button_type_primary.css
+6: warning at line 19, col 9
+Using width with padding-right can sometimes make elements larger than you expect.
+        padding-right: 24px;
+
+
+csslint: There are 2 problems in /home/gleensande/2019_1_newTeam2/public/components/Button/_type_secondary/button_type_secondary.css.
+
+button_type_secondary.css
+1: warning at line 2, col 5
+Rule doesn't have all its properties in alphabetical order.
+    .button_type_secondary {
+
+button_type_secondary.css
+2: warning at line 13, col 5
+Rule doesn't have all its properties in alphabetical order.
+    .button_type_secondary {
+
+
+csslint: There are 6 problems in /home/gleensande/2019_1_newTeam2/public/components/Button/_type_square/button_type_square.css.
+
+button_type_square.css
+1: warning at line 2, col 5
+Rule doesn't have all its properties in alphabetical order.
+    .button_type_square {
+
+button_type_square.css
+2: warning at line 7, col 9
+Using width with padding-left can sometimes make elements larger than you expect.
+        padding-left: 20px;
+
+button_type_square.css
+3: warning at line 8, col 9
+Using width with padding-right can sometimes make elements larger than you expect.
+        padding-right: 20px;
+
+button_type_square.css
+4: warning at line 14, col 5
+Rule doesn't have all its properties in alphabetical order.
+    .button_type_square {
+
+button_type_square.css
+5: warning at line 19, col 9
+Using width with padding-left can sometimes make elements larger than you expect.
+        padding-left: 12px;
+
+button_type_square.css
+6: warning at line 20, col 9
+Using width with padding-right can sometimes make elements larger than you expect.
+        padding-right: 12px;
+
+
+csslint: There are 7 problems in /home/gleensande/2019_1_newTeam2/public/components/Button/button.css.
+
+button.css
+1: warning at line 1, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_type_primary/button_type_primary.css' screen;
+
+button.css
+2: warning at line 2, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_type_secondary/button_type_secondary.css' screen;
+
+button.css
+3: warning at line 3, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_type_square/button_type_square.css' screen;
+
+button.css
+4: warning at line 5, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '__text/button__text.css';
+
+button.css
+5: warning at line 7, col 1
+Rule doesn't have all its properties in alphabetical order.
+.button {
+
+button.css
+6: warning at line 10, col 5
+The property -webkit-user-select is compatible with -moz-user-select and should be included as well.
+    -moz-user-select: -moz-none;
+
+button.css
+7: warning at line 10, col 5
+The property -ms-user-select is compatible with -moz-user-select and should be included as well.
+    -moz-user-select: -moz-none;
+
+
+csslint: There are 7 problems in /home/gleensande/2019_1_newTeam2/public/components/Checkbox/_size_big/checkbox_size_big.css.
+
+checkbox_size_big.css
+1: warning at line 1, col 1
+Rule doesn't have all its properties in alphabetical order.
+.checkbox_size_big {
+
+checkbox_size_big.css
+2: warning at line 6, col 1
+Rule doesn't have all its properties in alphabetical order.
+.checkbox_size_big label {
+
+checkbox_size_big.css
+3: warning at line 11, col 1
+Rule doesn't have all its properties in alphabetical order.
+.checkbox_size_big label:after {
+
+checkbox_size_big.css
+4: warning at line 16, col 5
+Using height with border can sometimes make elements larger than you expect.
+    border: 3px solid #8EE000;
+
+checkbox_size_big.css
+5: warning at line 16, col 5
+Using width with border can sometimes make elements larger than you expect.
+    border: 3px solid #8EE000;
+
+checkbox_size_big.css
+6: warning at line 17, col 5
+Using height with border-top can sometimes make elements larger than you expect.
+    border-top: none;
+
+checkbox_size_big.css
+7: warning at line 18, col 5
+Using width with border-right can sometimes make elements larger than you expect.
+    border-right: none;
+
+
+csslint: There are 7 problems in /home/gleensande/2019_1_newTeam2/public/components/Checkbox/_size_small/checkbox_size_small.css.
+
+checkbox_size_small.css
+1: warning at line 1, col 1
+Rule doesn't have all its properties in alphabetical order.
+.checkbox_size_small {    
+
+checkbox_size_small.css
+2: warning at line 8, col 1
+Rule doesn't have all its properties in alphabetical order.
+.checkbox_size_small label {
+
+checkbox_size_small.css
+3: warning at line 13, col 1
+Rule doesn't have all its properties in alphabetical order.
+.checkbox_size_small label:after {
+
+checkbox_size_small.css
+4: warning at line 18, col 5
+Using height with border can sometimes make elements larger than you expect.
+    border: 2px solid #8EE000;
+
+checkbox_size_small.css
+5: warning at line 18, col 5
+Using width with border can sometimes make elements larger than you expect.
+    border: 2px solid #8EE000;
+
+checkbox_size_small.css
+6: warning at line 19, col 5
+Using height with border-top can sometimes make elements larger than you expect.
+    border-top: none;
+
+checkbox_size_small.css
+7: warning at line 20, col 5
+Using width with border-right can sometimes make elements larger than you expect.
+    border-right: none;
+
+
+csslint: There are 4 problems in /home/gleensande/2019_1_newTeam2/public/components/Checkbox/checkbox.css.
+
+checkbox.css
+1: warning at line 1, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_size_big/checkbox_size_big.css';
+
+checkbox.css
+2: warning at line 2, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_size_small/checkbox_size_small.css';
+
+checkbox.css
+3: warning at line 15, col 1
+Rule doesn't have all its properties in alphabetical order.
+.checkbox label {
+
+checkbox.css
+4: warning at line 26, col 1
+Rule doesn't have all its properties in alphabetical order.
+.checkbox label:after {
+
+
+csslint: There are 3 problems in /home/gleensande/2019_1_newTeam2/public/components/GriseMerde/GriseMerde.css.
+
+GriseMerde.css
+1: warning at line 1, col 1
+Rule doesn't have all its properties in alphabetical order.
+.grise-merde {
+
+GriseMerde.css
+2: warning at line 7, col 1
+Rule doesn't have all its properties in alphabetical order.
+.big-grise-merde {
+
+GriseMerde.css
+3: warning at line 12, col 1
+Rule doesn't have all its properties in alphabetical order.
+.small-grise-merde {
+
+
+csslint: There is 1 problem in /home/gleensande/2019_1_newTeam2/public/components/GriseMerde/_size_big/grise-merde_size_big.css.
+
+grise-merde_size_big.css
+1: warning at line 1, col 1
+Rule doesn't have all its properties in alphabetical order.
+.grise-merde_size_big {
+
+
+csslint: There is 1 problem in /home/gleensande/2019_1_newTeam2/public/components/GriseMerde/_size_small/grise-merde_size_small.css.
+
+grise-merde_size_small.css
+1: warning at line 1, col 1
+Rule doesn't have all its properties in alphabetical order.
+.grise-merde_size_small {
+
+
+csslint: There are 2 problems in /home/gleensande/2019_1_newTeam2/public/components/GriseMerde/grise-merde.css.
+
+grise-merde.css
+1: warning at line 1, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_size_big/grise-merde_size_big.css';
+
+grise-merde.css
+2: warning at line 2, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_size_small/grise-merde_size_small.css';
+
+
+csslint: No errors in /home/gleensande/2019_1_newTeam2/public/components/Headline/_size_h1/headline_size_h1.css.
+
+
+csslint: No errors in /home/gleensande/2019_1_newTeam2/public/components/Headline/_size_h2/headline_size_h2.css.
+
+
+csslint: No errors in /home/gleensande/2019_1_newTeam2/public/components/Headline/_size_h3/headline_size_h3.css.
+
+
+csslint: No errors in /home/gleensande/2019_1_newTeam2/public/components/Headline/_size_h4/headline_size_h4.css.
+
+
+csslint: There are 5 problems in /home/gleensande/2019_1_newTeam2/public/components/Headline/headline.css.
+
+headline.css
+1: warning at line 1, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_size_h1/headline_size_h1.css' screen;
+
+headline.css
+2: warning at line 2, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_size_h2/headline_size_h2.css' screen;
+
+headline.css
+3: warning at line 3, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_size_h3/headline_size_h3.css' screen;
+
+headline.css
+4: warning at line 4, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_size_h4/headline_size_h4.css' screen;
+
+headline.css
+5: warning at line 6, col 1
+Rule doesn't have all its properties in alphabetical order.
+.headline {
+
+
+csslint: No errors in /home/gleensande/2019_1_newTeam2/public/components/Icon/icon.css.
+
+
+csslint: There are 4 problems in /home/gleensande/2019_1_newTeam2/public/components/Image/_type_dictionary/image_type_dictionary.css.
+
+image_type_dictionary.css
+1: warning at line 2, col 2
+Rule doesn't have all its properties in alphabetical order.
+	image_type_dictionary{
+
+image_type_dictionary.css
+2: warning at line 11, col 2
+Rule doesn't have all its properties in alphabetical order.
+	image_type_dictionary{
+
+image_type_dictionary.css
+3: warning at line 20, col 2
+Rule doesn't have all its properties in alphabetical order.
+	image_type_dictionary{
+
+image_type_dictionary.css
+4: warning at line 29, col 2
+Rule doesn't have all its properties in alphabetical order.
+	image_type_dictionary{
+
+
+csslint: There are 4 problems in /home/gleensande/2019_1_newTeam2/public/components/Image/_type_profile/image_type_profile.css.
+
+image_type_profile.css
+1: warning at line 2, col 2
+Rule doesn't have all its properties in alphabetical order.
+	image_type_profile {
+
+image_type_profile.css
+2: warning at line 11, col 2
+Rule doesn't have all its properties in alphabetical order.
+	image_type_profile {
+
+image_type_profile.css
+3: warning at line 20, col 2
+Rule doesn't have all its properties in alphabetical order.
+	image_type_profile {
+
+image_type_profile.css
+4: warning at line 29, col 2
+Rule doesn't have all its properties in alphabetical order.
+	image_type_profile {
+
+
+csslint: There are 5 problems in /home/gleensande/2019_1_newTeam2/public/components/Image/image.css.
+
+image.css
+1: warning at line 1, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_type_dictionary/image_type_dictionary.css' screen;
+
+image.css
+2: warning at line 2, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_type_profile/image_type_profile.css' screen;
+
+image.css
+3: warning at line 6, col 17
+Values of 0 shouldn't have units specified.
+    box-shadow: 0px 0px 4px 0px rgba(175,175,175,1);
+
+image.css
+4: warning at line 6, col 21
+Values of 0 shouldn't have units specified.
+    box-shadow: 0px 0px 4px 0px rgba(175,175,175,1);
+
+image.css
+5: warning at line 6, col 29
+Values of 0 shouldn't have units specified.
+    box-shadow: 0px 0px 4px 0px rgba(175,175,175,1);
+
+
+csslint: There are 4 problems in /home/gleensande/2019_1_newTeam2/public/components/Input/input.css.
+
+input.css
+1: warning at line 1, col 1
+Rule doesn't have all its properties in alphabetical order.
+.input {
+
+input.css
+2: warning at line 1, col 1
+Outlines should only be modified using :focus.
+.input {
+
+input.css
+3: warning at line 7, col 5
+Using height with border can sometimes make elements larger than you expect.
+    border: 2px solid #CFCFCF;
+
+input.css
+4: warning at line 18, col 5
+Unknown property 'caret-color'.
+    caret-color: #1CB0F6;
+
+
+csslint: No errors in /home/gleensande/2019_1_newTeam2/public/components/Link/_size_h1/link_size_h1.css.
+
+
+csslint: No errors in /home/gleensande/2019_1_newTeam2/public/components/Link/_size_h2/link_size_h2.css.
+
+
+csslint: No errors in /home/gleensande/2019_1_newTeam2/public/components/Link/_size_h3/link_size_h3.css.
+
+
+csslint: No errors in /home/gleensande/2019_1_newTeam2/public/components/Link/_size_h4/link_size_h4.css.
+
+
+csslint: There are 4 problems in /home/gleensande/2019_1_newTeam2/public/components/Link/link.css.
+
+link.css
+1: warning at line 1, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_size_h1/link_size_h1.css' screen;
+
+link.css
+2: warning at line 2, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_size_h2/link_size_h2.css' screen;
+
+link.css
+3: warning at line 3, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_size_h3/link_size_h3.css' screen;
+
+link.css
+4: warning at line 4, col 1
+@import prevents parallel downloads, use <link> instead.
+@import '_size_h4/link_size_h4.css' screen;
+
+
+csslint: There is 1 problem in /home/gleensande/2019_1_newTeam2/public/components/Table/Table.css.
+
+Table.css
+1: warning at line 1, col 1
+Rule doesn't have all its properties in alphabetical order.
+.table {
+
+
+csslint: There are 3 problems in /home/gleensande/2019_1_newTeam2/public/components/Upload/Upload.css.
+
+Upload.css
+1: warning at line 6, col 1
+Rule doesn't have all its properties in alphabetical order.
+.outerDivUpload {
+
+Upload.css
+2: warning at line 20, col 1
+Rule doesn't have all its properties in alphabetical order.
+.outerDivUpload label {
+
+Upload.css
+3: warning at line 42, col 2
+Rule doesn't have all its properties in alphabetical order.
+	.outerDivUpload {
+
+
+csslint: There are 15 problems in /home/gleensande/2019_1_newTeam2/public/main.css.
+
+main.css
+1: warning at line 1, col 1
+@import prevents parallel downloads, use <link> instead.
+@import "./components/Button/button.css" screen;
+
+main.css
+2: warning at line 2, col 1
+@import prevents parallel downloads, use <link> instead.
+@import "./components/Link/link.css" screen;
+
+main.css
+3: warning at line 3, col 1
+@import prevents parallel downloads, use <link> instead.
+@import "./components/Headline/headline.css" screen;
+
+main.css
+4: warning at line 4, col 1
+@import prevents parallel downloads, use <link> instead.
+@import "./components/Checkbox/checkbox.css" screen;
+
+main.css
+5: warning at line 5, col 1
+@import prevents parallel downloads, use <link> instead.
+@import "./components/Input/input.css" screen;
+
+main.css
+6: warning at line 6, col 1
+@import prevents parallel downloads, use <link> instead.
+@import "./components/Icon/icon.css" screen;
+
+main.css
+7: warning at line 7, col 1
+@import prevents parallel downloads, use <link> instead.
+@import "./components/Image/image.css" screen;
+
+main.css
+8: warning at line 8, col 1
+@import prevents parallel downloads, use <link> instead.
+@import "./components/GriseMerde/grise-merde.css" screen;
+
+main.css
+9: warning at line 9, col 1
+@import prevents parallel downloads, use <link> instead.
+@import "./components/Table/Table.css" screen;
+
+main.css
+10: warning at line 10, col 1
+@import prevents parallel downloads, use <link> instead.
+@import "./components/Upload/Upload.css" screen;
+
+main.css
+11: warning at line 12, col 1
+@import prevents parallel downloads, use <link> instead.
+@import "views/Dictionary/Dictionary.css" screen;
+
+main.css
+12: warning at line 14, col 1
+@import prevents parallel downloads, use <link> instead.
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
+
+main.css
+13: warning at line 16, col 1
+The universal selector (*) is known to be slow.
+* {
+
+main.css
+14: warning at line 16, col 1
+Rule doesn't have all its properties in alphabetical order.
+* {
+
+main.css
+15: warning at line 18, col 5
+The box-sizing property isn't supported in IE6 and IE7.
+    box-sizing: border-box;
+csslint: Could not read file data in /home/gleensande/2019_1_newTeam2/public/views/Card/Card.css. Is the file empty?
+
+
+csslint: There are 4 problems in /home/gleensande/2019_1_newTeam2/public/views/Dictionary/Dictionary.css.
+
+Dictionary.css
+1: warning at line 1, col 1
+Rule doesn't have all its properties in alphabetical order.
+.grise-centered {
+
+Dictionary.css
+2: warning at line 12, col 1
+Rule doesn't have all its properties in alphabetical order.
+.grey-background {
+
+Dictionary.css
+3: warning at line 19, col 5
+Fallback background-color (hex or RGB) should precede RGBA background-color.
+    background-color: rgba(117,117,117, 0.7);
+
+Dictionary.css
+4: warning at line 25, col 1
+Rule doesn't have all its properties in alphabetical order.
+.dialog {

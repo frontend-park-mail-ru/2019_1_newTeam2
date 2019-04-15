@@ -14,7 +14,7 @@ const application = document.getElementById('application');
 
 
 function testIcon() {
-    const icon = new Icon({ src: 'static/points.png' });
+    const icon = new Icon({ src: '/static/points.png' });
     application.appendChild(icon.render());
 }
 

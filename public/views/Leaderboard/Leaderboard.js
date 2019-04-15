@@ -1,11 +1,11 @@
 'use strict';
 
-import router from "../../services/router.js";
-import {Headline} from "../../components/Headline/Headline.js";
-import {Pagination} from "../../components/pagination.js";
-import {Table} from "../../components/Table/Table.js";
-import {Icon} from "../../components/Icon/Icon.js";
-import bus from "../../services/bus.js";
+import router from "/services/router.js";
+import {Headline} from "/components/Headline/Headline.js";
+import {Pagination} from "/components/pagination.js";
+import {Table} from "/components/Table/Table.js";
+import {Icon} from "/components/Icon/Icon.js";
+import bus from "/services/bus.js";
 
 const application = document.getElementById('application');
 
@@ -15,7 +15,7 @@ export class Leaderboard {
         outer.innerHTML = '';
 
         outer.appendChild(new Icon({
-            src: './static/home-icon.png',
+            src: '/static/home-icon.png',
             handler: () => {
                 router.go('menu');
             }
