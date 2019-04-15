@@ -1,9 +1,10 @@
 'use strict';
 
-// export const baseUrl = 'https://newteam2back.herokuapp.com/';
+
+export const baseUrl = 'https://newteam2back.herokuapp.com/';
 import bus from "./bus.js";
 
-export const baseUrl = 'http://localhost:8090/';
+// export const baseUrl = 'http://localhost:8090/';
 const bodyIncludesMethods = ['POST', 'PATCH', 'PUT'];
 
 /**
@@ -16,7 +17,7 @@ const bodyIncludesMethods = ['POST', 'PATCH', 'PUT'];
 * @returns {Promise}
 */
 const checkStatus = response => {
-	if (response.status >= 200 && response.status < 400) {
+	if (response.status >= 200 && response.status < 500) {
 		return response;
 	} else {
 		let error = new Error(response.statusText);

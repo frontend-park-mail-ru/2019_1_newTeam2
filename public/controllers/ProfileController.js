@@ -1,7 +1,7 @@
-import {Profile} from "../views/Profile/Profile.js";
-import {UserModel} from "../models/UserModel.js";
-import bus from "../services/bus.js";
-import {AvatarModel} from "../models/AvatarModel.js";
+import {Profile} from "/views/Profile/Profile.js";
+import {UserModel} from "/models/UserModel.js";
+import bus from "/services/bus.js";
+import {AvatarModel} from "/models/AvatarModel.js";
 
 export class ProfileController {
     index() {
