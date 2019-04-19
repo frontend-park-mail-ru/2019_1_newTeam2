@@ -50,7 +50,6 @@ export class Training {
 					}).render();
 					inner.appendChild(word);
 					card.variants.forEach((variant, index) => {
-
 						const onchoose = () => {
 							if (index === card.correct) {
 								result.push({correct: true, id: card.id});
@@ -75,11 +74,19 @@ export class Training {
 					yield inner;
 				}
 			}();
+			let page = pageGenerator.next();
+			if (!page.done) {
+				outer.innerText = '';
+				outer.appendChild(page.value);
+			} else {
+				bus.emit('training-finished', result);
+			}
 		};
 		bus.on('game-cards-loaded', this._ongamecardsloaded);
 	}
 
 	preventAllEvents() {
 		bus.off('dicts-loaded', this._ondictsloaded);
+		bus.off('game-cards-loaded', this._ongamecardsloaded);
 	}
 }
