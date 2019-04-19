@@ -4,6 +4,7 @@ import router from '/services/router.js';
 import bus from '/services/bus.js';
 import {Link} from "/components/Link/Link.js";
 import {GriseMerde} from "/components/GriseMerde/GriseMerde.js";
+import {Button} from "/components/Button/Button.js";
 
 const application = document.getElementById('application');
 
@@ -39,11 +40,43 @@ export class Training {
 
 		this._ongamecardsloaded = (cards) => {
 			let result = [];
+
+			const genNextPage = () => {
+				let page = pageGenerator.next();
+				if (!page.done) {
+					outer.innerText = '';
+					outer.appendChild(page.value);
+				} else {
+					outer.innerText = '';
+					let guessedRight = 0;
+					result.forEach((item) => {
+						if(item.correct) {
+							++guessedRight;
+						}
+					});
+					const head = new Headline({
+						textContent: 'Ваш результат: ' + guessedRight + '/' + cards.length,
+						size: 'h3',
+					}).render();
+					outer.appendChild(head);
+					const menuButton = new Button({
+						size: 'small',
+						name: 'Вернуться в меню',
+						handler: () => {
+							router.go('menu');
+						}
+					}).render();
+					outer.appendChild(menuButton);
+					bus.emit('training-finished', result);
+				}
+			};
+
 			const pageGenerator = function*() {
 				// TODO(Alex): extract to component
 				for(let index = 0; index < cards.length; ++index) {
 					const card = cards[index];
 					const inner = document.createElement('div');
+
 					const word = new GriseMerde({
 						size: 'big',
 						inner: card.word
@@ -56,14 +89,9 @@ export class Training {
 							} else {
 								result.push({correct: false, id: card.id});
 							}
-							let page = pageGenerator.next();
-							if (!page.done) {
-								outer.innerText = '';
-								outer.appendChild(page.value);
-							} else {
-								bus.emit('training-finished', result);
-							}
+							genNextPage();
 						};
+
 						const choice = new Link({
 							size: 'h4',
 							name: variant,
@@ -71,16 +99,11 @@ export class Training {
 						}).render();
 						inner.appendChild(choice);
 					});
+
 					yield inner;
 				}
 			}();
-			let page = pageGenerator.next();
-			if (!page.done) {
-				outer.innerText = '';
-				outer.appendChild(page.value);
-			} else {
-				bus.emit('training-finished', result);
-			}
+			genNextPage();
 		};
 		bus.on('game-cards-loaded', this._ongamecardsloaded);
 	}

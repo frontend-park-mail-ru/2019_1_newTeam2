@@ -1,7 +1,6 @@
 import {Training} from "/views/Training/Training.js";
 import {GameWordsModel} from "/models/GameWordsModel.js";
 import bus from "/services/bus.js";
-import router from "/services/router.js";
 import {DictionaryModel} from "/models/DictionaryModel.js";
 
 export class TrainingController {
@@ -21,7 +20,6 @@ export class TrainingController {
 
 	ontrainingfinished(result) {
 		this.gameModel.sendResult(result);
-		router.go('menu');
 	}
 
 	preventAllEvents() {
