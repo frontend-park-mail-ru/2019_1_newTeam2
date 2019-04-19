@@ -3,6 +3,7 @@
 import bus from "./bus.js";
 const bodyIncludesMethods = ['POST', 'PATCH', 'PUT', 'DELETE'];
 
+
 export const baseUrl = 'https://newteam2back.herokuapp.com/';
 
 // export const baseUrl = 'http://localhost:8090/';
@@ -59,12 +60,13 @@ class AjaxModule {
 			init.body = JSON.stringify(body);
 		}
 		return fetch(baseUrl + path, init)
-			.then(checkStatus)
-			.catch((response) => {
-				if(response === 'no internet!') {
+			.then((response) => {
+				if(response.status === 208) {
+					console.log(response);
 					setTimeout(bus.emit.bind(bus), 0, 'no-internet');
 				}
-			});
+				return response;
+			}).then(checkStatus);
 	}
 	/** 
    * Simple wrapper on private _ajax function

@@ -12,6 +12,7 @@
 @import "./components/CardPreview/card-preview.css";
 
 @import "views/Dictionary/Dictionary.css" screen;
+@import "views/Training/Training.css" screen;
 
 @import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
 
