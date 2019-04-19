@@ -17,11 +17,20 @@ export class CardController {
             this.model.createCard(body, this.id);
         };
 
+        this._oncardremoved = (cardId) => {
+            this.model.deleteCard({
+                dictionaryId: this.id,
+                cardId: cardId
+            });
+        };
+
         bus.on('new-card-form-submitted', this._onnewcardformsubmitted);
+        bus.on('card-removed', this._oncardremoved);
     }
 
     preventAllEvents() {
         this.view.preventAllEvents();
         bus.off('new-card-form-submitted', this._onnewcardformsubmitted);
+        bus.off('card-removed', this._oncardremoved);
     }
 }

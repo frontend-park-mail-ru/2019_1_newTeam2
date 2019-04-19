@@ -22,8 +22,7 @@ export class DictionaryPreview {
 
         let cross = new Icon({
             src: '/static/cross.png',
-            handler: (event) => {
-                event.preventDefault();
+            handler: () => {
                 document.getElementById(this.id).classList.add('hidden-element');
                 setTimeout(bus.emit.bind(bus), 0, 'dict-removed', this.id);
             }

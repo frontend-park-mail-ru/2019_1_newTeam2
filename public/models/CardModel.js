@@ -77,12 +77,13 @@ export class CardModel {
         );
     }
 
-    deleteCard(id = 0) {
+    deleteCard(body) {
         ajax.doDelete({
-            path: this.url + '/' + id.toString(10)
+            path: this.url + '/',
+            body: body
         })
             .then(() => {
-                setTimeout(bus.emit.bind(bus), 0, 'card-deleted');
+                setTimeout(bus.emit.bind(bus), 0, 'card-deleted', body.cardId);
             })
             .catch((error) => {
                 setTimeout(bus.emit.bind(bus), 0, 'delete-card-error', error);

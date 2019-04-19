@@ -142,10 +142,6 @@ export class Card {
 
         };
 
-        this._oncarddeleted = () => {
-
-        };
-
         this._ondeletecarderror = () => {
 
         };
@@ -159,7 +155,6 @@ export class Card {
         bus.on('create-card-error', this._oncreatecarderror);
         bus.on('card-updated', this._oncardupdated);
         bus.on('update-card-error', this._onupdatecarderror);
-        bus.on('card-deleted', this._oncarddeleted);
         bus.on('delete-card-error', this._ondeletecarderror);
     }
 
@@ -173,7 +168,6 @@ export class Card {
         bus.off('create-card-error', this._oncreatecarderror);
         bus.off('card-updated', this._oncardupdated);
         bus.off('update-card-error', this._onupdatecarderror);
-        bus.off('card-deleted', this._oncarddeleted);
         bus.off('delete-card-error', this._ondeletecarderror);
     }
 }
