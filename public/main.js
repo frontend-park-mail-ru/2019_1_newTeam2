@@ -7,6 +7,7 @@ import {SignupController} from "/controllers/SignupController.js";
 import {LoginController} from "/controllers/LoginController.js";
 import {DictionaryController} from "/controllers/DictionaryController.js";
 import {CardController} from "/controllers/CardController.js";
+import {TrainingController} from "/controllers/TrainingController.js";
 
 if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
@@ -28,6 +29,7 @@ const controllers = new Set([
     ['^dictionary$', CardController],
     ['^profile/me$', ProfileController],
     ['^dictionary/[0-9]+$', CardController],
+    ['^training$', TrainingController]
 ]);
 
 

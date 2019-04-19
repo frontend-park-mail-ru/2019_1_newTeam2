@@ -52,7 +52,7 @@ export class CardModel {
             path: this.url + '/?dictionaryId=' + dictId,
             body: body
         })
-            .then((response) => {
+            .then(() => {
                 setTimeout(bus.emit.bind(bus), 0, 'card-created');
             })
             .catch((error) => {

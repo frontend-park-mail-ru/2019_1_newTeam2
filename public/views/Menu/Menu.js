@@ -5,7 +5,7 @@ import {Button} from '/components/Button/Button.js';
 import router from '/services/router.js';
 
 const loginedButtonNames = {
-    //'train': 'Тренировка',
+    'training': 'Тренировка',
     'dictionaries/me': 'Мои словари',
     //'feed': 'Лента',
     'profile/me': 'Профиль',
