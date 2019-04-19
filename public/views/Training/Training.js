@@ -22,11 +22,11 @@ export class Training {
 
 		const outer = document.createElement('div');
 		application.appendChild(outer);
-
+		outer.classList.add('training-outer');
 		this._ondictsloaded = (dicts) => {
 			dicts.forEach((dict) => {
 				const link = new Link({
-					size: 'h6',
+					size: 'h2',
 					name: dict.name,
 					handler: () => {
 						bus.emit('dict-selected', dict.id);
@@ -93,7 +93,7 @@ export class Training {
 						};
 
 						const choice = new Link({
-							size: 'h4',
+							size: 'h3',
 							name: variant,
 							handler: onchoose
 						}).render();
