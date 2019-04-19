@@ -11,7 +11,7 @@ export class Headline {
     } = {}) {
         this._text = textContent;
         this._size = validSizes.includes(size) ? size : 'h1';
-		this._handler = someFunction;
+        this._handler = someFunction;
     }
 
     render () {

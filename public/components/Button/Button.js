@@ -1,6 +1,6 @@
 'use strict';
 
-const noop = () => {};
+const noop = () => { };
 const validTypes = ['primary', 'secondary', 'square'];
 
 export class Button {
@@ -18,9 +18,9 @@ export class Button {
         this._is_hidden = is_hidden;
     }
 
-    render () {
+    render() {
         const outer = document.createElement('span');
-		outer.innerHTML = buttonTemplate({
+        outer.innerHTML = buttonTemplate({
             'type_class': 'button_type_' + this._type,
             'text_class': 'button__text_type_' + this._type,
             'name': this._name,
@@ -28,8 +28,8 @@ export class Button {
             'id': this._id,
         });
 
-		outer.addEventListener('click', this._handler);
+        outer.addEventListener('click', this._handler);
 
-		return outer;
+        return outer;
     }
 }

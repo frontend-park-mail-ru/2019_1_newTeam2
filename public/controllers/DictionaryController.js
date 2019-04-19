@@ -1,11 +1,11 @@
-import {DictionaryModel} from "/models/DictionaryModel.js";
-import {Dictionary} from "/views/Dictionary/Dictionary.js";
-import bus from "/services/bus.js";
-import router from "/services/router.js"
+import {DictionaryModel} from '/models/DictionaryModel.js';
+import {Dictionary} from '/views/Dictionary/Dictionary.js';
+import bus from '/services/bus.js';
+import router from '/services/router.js';
 
 
 export class DictionaryController {
-    index(options = {}) {
+    index() {
         this.model = new DictionaryModel();
         this.view = new Dictionary();
         this.view.render();
@@ -16,12 +16,11 @@ export class DictionaryController {
         };
 
         this._on_dict_created = (dict) => {
-            console.log('Словарь успешно создан');
             router.go('dictionary/' + dict.id);
         };
 
         this._on_create_dict_error = () => {
-            alert('Произошла ошибка при создании словаря.');
+            //TODO(gleensande): обработка ошибки создания словаря
         };
 
         this._on_dict_removed = (id) => {

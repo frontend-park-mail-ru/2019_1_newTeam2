@@ -1,10 +1,10 @@
-import ajax from "/services/ajax.js";
-import bus from "/services/bus.js";
+import ajax from '/services/ajax.js';
+import bus from '/services/bus.js';
 
 
 export class CardModel {
     constructor() {
-        this.url = 'card'
+        this.url = 'card';
     }
 
     getCardsByDictId({ rows = 5, page = 1, id = 0 } = { rows: 5, page: 1, id: 0 }) {
@@ -17,11 +17,13 @@ export class CardModel {
                         setTimeout(bus.emit.bind(bus), 0, 'cards-loaded', res);
                     })
                     .catch((err) => {
+                        // TODO(gleensande): обработка ошибки
                         console.log(err);
                     });
             })
             .catch((err) => {
-                console.log(err)
+                // TODO(gleensande): обработка ошибки
+                console.log(err);
             });
     }
 
@@ -29,22 +31,21 @@ export class CardModel {
         ajax.doGet({
             path: this.url + '/' + id.toString(10)
         })
-            .then(
-                (res) => {
-                    res.json()
-                        .then(
-                            (res) => {
-                                setTimeout(bus.emit.bind(bus), 0, 'card-loaded', res);
-                            },
-                            (err) => {
-                                console.log(err);
-                            }
-                        );
-                },
-                (err) => {
-                    console.log(err);
-                    setTimeout(bus.emit.bind(bus), 0, 'load-card-error');
-                });
+            .then((res) => {
+                res.json()
+                    .then((res) => {
+                        setTimeout(bus.emit.bind(bus), 0, 'card-loaded', res);
+                    })
+                    .catch((err) => {
+                        // TODO(gleensande): обработка ошибки
+                        console.log(err);
+                    });
+            })
+            .catch((err) => {
+                // TODO(gleensande): обработка ошибки
+                console.log(err);
+                setTimeout(bus.emit.bind(bus), 0, 'load-card-error');
+            });
     }
 
     createCard(body, dictId) {
@@ -62,7 +63,7 @@ export class CardModel {
 
     updateCard(id = 0, body) {
         ajax.doPut({
-            path: this.url + '/',
+            path: this.url + '/' + id,
             body: body
         }).then(
             () => {
@@ -70,22 +71,22 @@ export class CardModel {
             },
             (error) => {
                 setTimeout(bus.emit.bind(bus), 0, 'update-card-error', error);
-                console.log("some shit happened: " + error);
+                // TODO(gleensande): обработка ошибки
+                console.log('ошибка во время обновления карты: ' + error);
             }
         );
     }
 
-    deleteCard(id = 0) {
+    deleteCard(body) {
         ajax.doDelete({
-            path: this.url + '/' + id.toString(10)
+            path: this.url + '/',
+            body: body
         })
             .then(() => {
-                setTimeout(bus.emit.bind(bus), 0, 'card-deleted');
-            }
-            )
+                setTimeout(bus.emit.bind(bus), 0, 'card-deleted', body.cardId);
+            })
             .catch((error) => {
                 setTimeout(bus.emit.bind(bus), 0, 'delete-card-error', error);
-            }
-            )
+            });
     }
 }

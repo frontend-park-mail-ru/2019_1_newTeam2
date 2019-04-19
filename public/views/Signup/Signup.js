@@ -7,12 +7,12 @@ import {Button} from '/components/Button/Button.js';
 import {Icon} from '/components/Icon/Icon.js';
 
 import router from '/services/router.js';
-import bus from "/services/bus.js";
+import bus from '/services/bus.js';
 
 const application = document.getElementById('application');
 
 export class Signup {
-    render(options = {}) {
+    render() {
         application.innerHTML = '';
         const outer = document.createElement('div');
         application.appendChild(outer);
@@ -92,26 +92,26 @@ export class Signup {
             }
 
             let profile = {
-                "username" : document.getElementById('login').value,
-                "email" : document.getElementById('email').value,
-                "password" : document.getElementById('password').value,
-                "langID" : 1, // по умолчанию
-                "pronounceOn" : 0 // по умолчанию
+                'username' : document.getElementById('login').value,
+                'email' : document.getElementById('email').value,
+                'password' : document.getElementById('password').value,
+                'langID' : 1, // по умолчанию
+                'pronounceOn' : 0 // по умолчанию
             };
 
             setTimeout(bus.emit.bind(bus), 0, 'signup-form-submitted', profile);
         });
         this._onwronglogin = () => {
-            loginTemplateText.classList.remove('hidden-element')
+            loginTemplateText.classList.remove('hidden-element');
         };
         this._onwrongpassword = () => {
-            passwordTemplateText.classList.remove('hidden-element')
+            passwordTemplateText.classList.remove('hidden-element');
         };
         this._onwrongemail = () => {
-            emailTemplateText.classList.remove('hidden-element')
+            emailTemplateText.classList.remove('hidden-element');
         };
         this._oncreateusererror = () => {
-            serverErrorText.classList.remove('hidden-element')
+            serverErrorText.classList.remove('hidden-element');
         };
 
         bus.on('wrong-login', this._onwronglogin);
