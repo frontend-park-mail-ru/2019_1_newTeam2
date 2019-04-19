@@ -1,7 +1,12 @@
 'use strict';
 
-export const baseUrl = 'http://localhost:8090/';//'https://newteam2back.herokuapp.com/';
+import bus from "./bus.js";
 const bodyIncludesMethods = ['POST', 'PATCH', 'PUT', 'DELETE'];
+
+export const baseUrl = 'https://newteam2back.herokuapp.com/';
+
+// export const baseUrl = 'http://localhost:8090/';
+
 
 /**
 * Checks the status of http answer
@@ -36,28 +41,33 @@ class AjaxModule {
 	 * 
 	 * @returns {Promise}
 	 */
-    _ajax ({
-        method = 'GET',
-        path = '/',
-        body = {},
-    } = {}) {
-        let init = {
-            method: method,
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-                'Charset': 'utf-8'
-            },
-            credentials: 'include'
-        };
-        if (bodyIncludesMethods.includes(method)) {
-            init.body = JSON.stringify(body);
-        }
-        return fetch(baseUrl + path, init)
-            .then(checkStatus);
-    }
-    /**
-	 * Simple wrapper on private _ajax function
+	_ajax ({
+		method = 'GET',
+		path = '/',
+		body = {},
+	} = {}) {
+		let init = {
+			method: method,
+			mode: 'cors',
+			headers: {
+				'Content-Type': 'application/json',
+				'Charset': 'utf-8'
+			},
+			credentials: 'include'
+		};
+		if (bodyIncludesMethods.includes(method)) {
+			init.body = JSON.stringify(body);
+		}
+		return fetch(baseUrl + path, init)
+			.then(checkStatus)
+			.catch((response) => {
+				if(response === 'no internet!') {
+					setTimeout(bus.emit.bind(bus), 0, 'no-internet');
+				}
+			});
+	}
+	/** 
+   * Simple wrapper on private _ajax function
 	 * Makes a GET http request
 	 *
 	 * @throws {Error} if request status is not in [200:300)
