@@ -53,9 +53,9 @@ export class Training {
 
 						const onchoose = () => {
 							if (index === card.correct) {
-								result.push('correct');
+								result.push({correct: true, id: card.id});
 							} else {
-								result.push('wrong');
+								result.push({correct: false, id: card.id});
 							}
 							let page = pageGenerator.next();
 							if (!page.done) {
