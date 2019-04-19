@@ -16,8 +16,13 @@ export class GameWordsModel {
 		ajax.doGet({
 			path: this.url + '?dict=' + dictId + '&words=' + wordNum,
 		})
-			.then((response) => {
-				setTimeout(bus.emit.bind(bus), 0, 'game-cards-loaded', response);
+			.then((res) => {
+				res.json()
+					.then(
+						(res) => {
+							setTimeout(bus.emit.bind(bus), 0, 'game-cards-loaded', res);
+						}
+					);
 			})
 			.catch((error) => {
 				setTimeout(bus.emit.bind(bus), 0, 'load-game-cards-error', error);
