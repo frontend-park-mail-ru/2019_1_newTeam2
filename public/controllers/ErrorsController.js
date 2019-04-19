@@ -1,5 +1,5 @@
 import {Errors} from '/views/Errors/Errors.js';
-import bus from "/services/bus.js";
+import bus from '/services/bus.js';
 
 export class ErrorsController {
     index() {
@@ -7,8 +7,8 @@ export class ErrorsController {
 
 
         this._on_not_found = () => {
-            this.view.render({errorText: "К сожалению, такая страница не найдена :("});
-        }
+            this.view.render({errorText: 'К сожалению, такая страница не найдена :('});
+        };
 
         bus.on('not-found-error', this._on_not_found);
     }

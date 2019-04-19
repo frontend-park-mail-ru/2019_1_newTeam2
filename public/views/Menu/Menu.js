@@ -26,7 +26,6 @@ export class Menu {
     render({authorised = false}) {
         const outer = application;
         outer.innerHTML = '';
-        outer.classList.add('centered');
         
         let buttons = [];
 

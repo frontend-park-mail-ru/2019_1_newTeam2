@@ -1,10 +1,10 @@
 'use strict';
 
-import {Headline} from "/components/Headline/Headline.js";
-import {Icon} from "/components/Icon/Icon.js";
-import {Link} from "/components/Link/Link.js";
-import bus from "/services/bus.js";
-import router from "/services/router.js";
+import {Headline} from '/components/Headline/Headline.js';
+import {Icon} from '/components/Icon/Icon.js';
+import {Link} from '/components/Link/Link.js';
+import bus from '/services/bus.js';
+import router from '/services/router.js';
 
 export class DictionaryPreview {
     constructor(dict) {
@@ -14,18 +14,17 @@ export class DictionaryPreview {
     }
 
     render() {
-        let outer = document.createElement("div");
-        outer.classList.add("grise-merde");
-        outer.classList.add("grise-merde_size_small");
-        outer.classList.add("dictionary-preview");
+        let outer = document.createElement('div');
+        outer.classList.add('grise-merde');
+        outer.classList.add('grise-merde_size_small');
+        outer.classList.add('dictionary-preview');
         outer.id = this.id;
 
         let cross = new Icon({
             src: '/static/cross.png',
-            handler: (event) => {
-                event.preventDefault();
+            handler: () => {
                 document.getElementById(this.id).classList.add('hidden-element');
-                setTimeout(bus.emit.bind(bus), 0, 'dict-removed', this.id)
+                setTimeout(bus.emit.bind(bus), 0, 'dict-removed', this.id);
             }
         }).render();
         outer.appendChild(cross);

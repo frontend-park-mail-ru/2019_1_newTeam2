@@ -1,12 +1,12 @@
 import router from '/services/router.js';
 
-import {LeaderboardController} from "/controllers/LeaderboardController.js";
-import {MenuController} from "/controllers/MenuController.js";
-import {ProfileController} from "/controllers/ProfileController.js";
-import {SignupController} from "/controllers/SignupController.js";
-import {LoginController} from "/controllers/LoginController.js";
-import {DictionaryController} from "/controllers/DictionaryController.js";
-import {CardController} from "/controllers/CardController.js";
+import {LeaderboardController} from '/controllers/LeaderboardController.js';
+import {MenuController} from '/controllers/MenuController.js';
+import {ProfileController} from '/controllers/ProfileController.js';
+import {SignupController} from '/controllers/SignupController.js';
+import {LoginController} from '/controllers/LoginController.js';
+import {DictionaryController} from '/controllers/DictionaryController.js';
+import {CardController} from '/controllers/CardController.js';
 
 if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
@@ -31,7 +31,7 @@ const controllers = new Set([
 ]);
 
 
-controllers.forEach((value, valueToo, controllers) => {
+controllers.forEach((value) => {
     router.register(value[0], value[1]);
 });
 

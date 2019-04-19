@@ -1,6 +1,6 @@
-import {UserModel} from "/models/UserModel.js";
-import {Leaderboard} from "/views/Leaderboard/Leaderboard.js";
-import bus from "/services/bus.js";
+import {UserModel} from '/models/UserModel.js';
+import {Leaderboard} from '/views/Leaderboard/Leaderboard.js';
+import bus from '/services/bus.js';
 
 
 export class LeaderboardController {

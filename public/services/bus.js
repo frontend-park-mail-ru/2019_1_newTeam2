@@ -2,7 +2,7 @@
 
 class EventBus {
     constructor() {
-        this.listeners = {}
+        this.listeners = {};
     }
 
     on(event, callback) {
@@ -12,12 +12,12 @@ class EventBus {
     }
 
     off(event, callback) {
-        this.listeners[event] = this.listeners[event].filter(c => c!==callback)
+        this.listeners[event] = this.listeners[event].filter(c => c!==callback);
     }
 
     emit(event, data) {
         if(this.listeners[event])
-            this.listeners[event].forEach(l => l(data))
+            this.listeners[event].forEach(l => l(data));
     }
 }
 

@@ -12,7 +12,7 @@ import bus from '/services/bus.js';
 const application = document.getElementById('application');
 
 export class Login {
-    render(options = {}) {
+    render() {
         application.innerText = '';
         const outer = document.createElement('div');
         application.appendChild(outer);
@@ -67,7 +67,7 @@ export class Login {
         });
 
         renderedSubmit.addEventListener( 'click', () => {
-             if (!serverErrorText.classList.contains('hidden-element')) {
+            if (!serverErrorText.classList.contains('hidden-element')) {
                 serverErrorText.classList.add('hidden-element');
             }
 
@@ -83,20 +83,20 @@ export class Login {
             let passwordText = document.getElementById('password').value;
 
             let profile = {
-                "username" : loginText,
-                "password" : passwordText
+                'username' : loginText,
+                'password' : passwordText
             };
 
             setTimeout(bus.emit.bind(bus), 0 , 'login-form-submitted', profile);
         });
         this._onwronglogin = () => {
-            loginTemplateText.classList.remove('hidden-element')
+            loginTemplateText.classList.remove('hidden-element');
         };
         this._onwrongpassword = () => {
-            passwordTemplateText.classList.remove('hidden-element')
+            passwordTemplateText.classList.remove('hidden-element');
         };
         this._onnologin = () => {
-            serverErrorText.classList.remove('hidden-element')
+            serverErrorText.classList.remove('hidden-element');
         };
         bus.on('wrong-login', this._onwronglogin);
         bus.on('wrong-password', this._onwrongpassword);

@@ -13,7 +13,7 @@ class RouterModule {
         
         window.addEventListener('popstate', () => {
             this.render();
-        })
+        });
     }
 
     register(path, controller) {
@@ -24,8 +24,8 @@ class RouterModule {
     go(path) {
         let i = validation.findPathInArray(path, this.paths);
         if (i === -1) {
-            console.log("path is not registered");
-            console.log(path);
+            // TODO(gleensande): обработка ошибки
+            console.log('path is not registered' + path);
             return;
         }
 
@@ -45,13 +45,13 @@ class RouterModule {
             currentPath = currentPath.substring(1, currentPath.length);
             let i = validation.findPathInArray(currentPath, this.paths);
             if (i === -1) {
-                console.log('path is not registered');
-                console.log(currentPath);
+                // TODO(gleensande): обработка ошибки
+                console.log('path is not registered' + currentPath);
                 return;
             }
             currentState = {
                 'path': currentPath
-            }
+            };
         }
 
         let i = validation.findPathInArray(currentState['path'], this.paths);
