@@ -129,9 +129,11 @@ class AjaxModule {
 	 */
     doDelete({
         path = '/',
+        body = {}
     } = {}) {
         return this._ajax({
             path,
+            body,
             method: 'DELETE',
         });
     }
@@ -157,6 +159,8 @@ class AjaxModule {
             method: 'PATCH',
         });
     }
+
+
     uploadAvatar({
         body
     } = {}) {

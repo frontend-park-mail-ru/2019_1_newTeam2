@@ -7,6 +7,7 @@ import bus from '/services/bus.js';
 export class CardController {
     index(options = {path: ''}) {
         [this.name, this.id] = options.path.split('/');
+        this.id = parseInt(this.id);
         this.dictionary = new DictionaryModel().getDict(this.id);
         this.model = new CardModel();
         this.view = new Card();
