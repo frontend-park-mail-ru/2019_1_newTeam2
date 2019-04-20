@@ -1,8 +1,31 @@
 .card-preview {
     padding: 5px;
-    border-radius: 20px;
-    width: 300px;
-    height: 100px;
+    border-radius: 4px;
+    width: 200px;
+    height: 30px;
+    line-height: 20px;
     margin-top: 5px;
+    border: 1px solid #dddddd;
+}
+
+.card-preview__cross-icon {
+    float: right;
+    cursor: pointer;
+    margin: 5px;
+    width: 10px;
+    height: 10px;
+}
+
+.card-preview_part_left {
     background-color: #dddddd;
+    float: left;
+    text-align: center;
+    -webkit-clip-path: polygon(0 0, 80% 0%, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 80% 0%, 100% 100%, 0 100%);
+}
+
+.card-preview_part_right {
+    background-color: white;
+    float: right;
+    text-align: center;
 }

@@ -19,28 +19,24 @@ export class CardPreview {
         let outer = document.createElement('div');
         outer.id = this.id;
 
+     
+
+        outer.classList.add('card-preview');
+        let word = document.createTextNode(this.word.name + ' / ');
+        outer.appendChild(word);
+
+        let translation = document.createTextNode(this.translation.name);
+        outer.appendChild(translation);
+
         let cross = new Icon({
             src: '/static/cross.png',
+            classname: 'card-preview__cross-icon',
             handler: () => {
                 document.getElementById(this.id).classList.add('hidden-element');
                 setTimeout(bus.emit.bind(bus), 0, 'card-removed', this.id);
             }
         }).render();
         outer.appendChild(cross);
-
-        outer.classList.add('card-preview');
-        let word = new Headline({
-            size: 'h2',
-            textContent: this.word.name,
-        }).render();
-        outer.appendChild(word);
-
-        let translation = new Headline({
-            size: 'h2',
-            textContent: this.translation.name,
-        }).render();
-        outer.appendChild(translation);
-
 
         return outer;
     }
