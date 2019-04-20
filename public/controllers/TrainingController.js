@@ -12,6 +12,21 @@ export class TrainingController {
 		this.gameModel = new GameWordsModel();
 		bus.on('dict-selected', this.ondictselected.bind(this));
 		bus.on('training-finished', this.ontrainingfinished.bind(this));
+
+		let page = 1;
+		const rows = 5;
+
+		this._onprevpage = () => {
+			page = page < 2 ? 1 : page - 1;
+			this.dictModel.getSelfDicts({rows:rows, page:page});
+		};
+		bus.on('prev-page', this._onprevpage);
+
+		this._onnextpage = () => {
+			page++;
+			this.dictModel.getSelfDicts({rows:rows, page:page});
+		};
+		bus.on('next-page', this._onnextpage);
 	}
 
 	ondictselected(dictID) {

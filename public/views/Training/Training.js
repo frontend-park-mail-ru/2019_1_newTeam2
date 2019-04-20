@@ -5,6 +5,7 @@ import bus from '/services/bus.js';
 import {Link} from "/components/Link/Link.js";
 import {GriseMerde} from "/components/GriseMerde/GriseMerde.js";
 import {Button} from "/components/Button/Button.js";
+import {Pagination} from "/components/pagination.js";
 
 const application = document.getElementById('application');
 
@@ -24,6 +25,7 @@ export class Training {
 		application.appendChild(outer);
 		outer.classList.add('training-outer');
 		this._ondictsloaded = (dicts) => {
+			outer.innerText = '';
 			dicts.forEach((dict) => {
 				const link = new Link({
 					size: 'h2',
@@ -34,6 +36,8 @@ export class Training {
 				}).render();
 				outer.appendChild(link);
 			});
+			const pagination = new Pagination();
+			pagination.render(outer);
 		};
 
 		bus.on('dicts-loaded', this._ondictsloaded);
