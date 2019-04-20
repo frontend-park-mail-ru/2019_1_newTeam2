@@ -7,7 +7,7 @@ import {Button} from '/components/Button/Button.js';
 import {Input} from '/components/Input/Input.js';
 import {DictionaryPreview} from '/components/DictionaryPreview/DictionaryPreview.js';
 import bus from '/services/bus.js';
-import {Pagination} from "/components/pagination.js";
+import {Pagination} from '/components/pagination.js';
 
 const application = document.getElementById('application');
 

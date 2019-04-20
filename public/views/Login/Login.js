@@ -34,14 +34,14 @@ export class Login {
         let loginTemplateText = document.createElement('div');
         loginTemplateText.classList.add('error-text');
         loginTemplateText.classList.add('hidden-element');
-        loginTemplateText.innerText = 'Строчные и прописные латинские буквы, цифры, _';
+        loginTemplateText.innerText = 'Пожалуйста, используйте только строчные и прописные латинские буквы, цифры и знак подчеркивания';
 
         let login = new Input({type: 'text', label: 'Логин* ', id: 'login', maxlen: 20});
 
         let passwordTemplateText = document.createElement('div');
         passwordTemplateText.classList.add('error-text');
         passwordTemplateText.classList.add('hidden-element');
-        passwordTemplateText.innerText = 'Строчные и прописные латинские буквы, цифры, _';
+        passwordTemplateText.innerText = 'Пожалуйста, используйте только строчные и прописные латинские буквы, цифры и знак подчеркивания';
 
         let password = new Input({ type: 'password', label: 'Пароль* ', id: 'password', maxlen: 20});
 

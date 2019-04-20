@@ -7,15 +7,16 @@
 .button {
     user-select: none;
     -moz-user-select: -moz-none;
-    background-color: #8EE000;
-    color: white;
+    color: black;
+    background-color: white;
     margin: 5px;
+    border-radius: 4px;
+    border: 2px solid #696161;
 }
 
 .button:hover {
     cursor: pointer;
-}
-
-.button:active {
+    color: white;
     background-color: #7ac70c;
+    transition: 0.2s;
 }
