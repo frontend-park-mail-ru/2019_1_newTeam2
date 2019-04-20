@@ -64,7 +64,7 @@ export class Training {
                     }).render();
                     outer.appendChild(head);
                     const menuButton = new Button({
-                        size: 'small',
+                        type: 'secondary',
                         name: 'Вернуться в меню',
                         handler: () => {
                             router.go('menu');
@@ -98,7 +98,7 @@ export class Training {
 
                         const choice = new Link({
                             size: 'h3',
-                            name: variant,
+                            name: variant + ' ', /* TODO(gleensande): fix this */
                             handler: onchoose
                         }).render();
                         inner.appendChild(choice);
