@@ -1,18 +1,20 @@
 @media screen and (min-width: 1200px) {
 	image_type_dictionary{
-        height: 100px;
-		width: 100px;
-		border-radius: 8px;
-		margin: 8px;
+		width: 198px;
+		height: 198px;
+		float: left;
+		-webkit-clip-path: polygon(0 0, 80% 0%, 100% 100%, 0 100%);
+				clip-path: polygon(0 0, 80% 0%, 100% 100%, 0 100%);
 	}
 }
 
 @media screen and (min-width: 700px) {
 	image_type_dictionary{
-        height: 50px;
-		width: 50px;
-		border-radius: 8px;
-		margin: 8px;
+		width: 198px;
+		height: 198px;
+		float: left;
+		-webkit-clip-path: polygon(0 0, 80% 0%, 100% 100%, 0 100%);
+				clip-path: polygon(0 0, 80% 0%, 100% 100%, 0 100%);
 	}
 }
 

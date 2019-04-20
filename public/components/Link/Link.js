@@ -8,15 +8,21 @@ export class Link {
         name = '',
         size = '',
         handler = noop,
+        classname = '',
     } = {}) {
         this._name = name;
         this._size = validSizes.includes(size) ? size : '';
         this._handler = handler;
+        this._classname = classname;
     }
 
     render() {
         const outer = document.createElement('span');
-        outer.innerHTML = linkTemplate({ 'size': 'link_size_' + this._size, 'name': this._name });
+        outer.innerHTML = linkTemplate({ 
+            'size': 'link_size_' + this._size,
+            'name': this._name,
+            'classname': this._classname
+        });
         
         outer.addEventListener('click', this._handler);
     

@@ -7,13 +7,18 @@ import {Button} from '/components/Button/Button.js';
 import {Input} from '/components/Input/Input.js';
 import {CardPreview} from '/components/CardPreview/CardPreview.js';
 import bus from '/services/bus.js';
+import {Pagination} from '/components/pagination.js';
 
 const application = document.getElementById('application');
 
 export class Card {
     render() {
         application.innerHTML = '';
-        application.appendChild(new Icon({
+        const forHeader = document.createElement('div');
+        const forContent = document.createElement('div');
+        const forPagination = document.createElement('div');
+
+        forHeader.appendChild(new Icon({
             src: '/static/home-icon.png',
             handler: () => {
                 router.go('menu');
@@ -22,10 +27,10 @@ export class Card {
 
         this._ondictloaded = (dict) => {
             const head1 = new Headline({textContent: dict.name}).render();
-            application.appendChild(head1);
+            forHeader.appendChild(head1);
 			
             const head2 = new Headline({size: 'h2', textContent: dict.description}).render();
-            application.appendChild(head2);
+            forHeader.appendChild(head2);
 
             const word = new Input({
                 id: 'word',
@@ -36,7 +41,7 @@ export class Card {
                 label: '',
             }).render();
             word.classList.add('hidden-element');
-            application.appendChild(word);
+            forHeader.appendChild(word);
 	
             const translation = new Input({
                 id: 'translation',
@@ -47,7 +52,7 @@ export class Card {
                 label: '',
             }).render();
             translation.classList.add('hidden-element');
-            application.appendChild(translation);
+            forHeader.appendChild(translation);
 			
             const submit = new Button({
                 type: 'secondary',
@@ -74,7 +79,7 @@ export class Card {
                     setTimeout(bus.emit.bind(bus), 0, 'new-card-form-submitted', card);
                 }
             }).render();
-            application.appendChild(submit);
+            forHeader.appendChild(submit);
 	
             let deny = new Icon({
                 src: '/static/cross.png',
@@ -91,7 +96,7 @@ export class Card {
                     dict.translation = document.getElementById('translation').value;
                 }
             }).render();
-            application.appendChild(deny);
+            forHeader.appendChild(deny);
 	
             let plus = new Icon({
                 src: '/static/plus.png',
@@ -104,17 +109,18 @@ export class Card {
                     document.getElementById('submit').classList.remove('hidden-element');
                 }
             }).render();
-            application.appendChild(plus);
-	
+            forHeader.appendChild(plus);
+
             let limiter = document.createElement('br');
-            application.appendChild(limiter);
+            forHeader.appendChild(limiter);
 	
         };
 
         this._oncardsloaded = (cards) => {
+            forContent.innerText = '';
             cards.forEach((card)=> {
                 let cardComponent = new CardPreview(card).render();
-                application.appendChild(cardComponent);
+                forContent.appendChild(cardComponent);
             });
         };
 
@@ -145,6 +151,13 @@ export class Card {
         this._ondeletecarderror = () => {
 
         };
+
+        const pagination = new Pagination();
+        pagination.render(forPagination);
+
+        application.appendChild(forHeader);
+        application.appendChild(forContent);
+        application.appendChild(forPagination);
 
         bus.on('dict-loaded', this._ondictloaded);
         bus.on('load-dict-error', this._onloaddicterror);

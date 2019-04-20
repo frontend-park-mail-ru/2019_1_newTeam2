@@ -2,7 +2,8 @@
 @import '_type_secondary/button__text_type_secondary.css';
 
 .button__text {
-    font-weight: 700;
+    font-weight: 400;
     letter-spacing: 0.6px;
     text-align: center;
+    vertical-align: middle;
 }

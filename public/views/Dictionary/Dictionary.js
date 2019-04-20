@@ -7,12 +7,15 @@ import {Button} from '/components/Button/Button.js';
 import {Input} from '/components/Input/Input.js';
 import {DictionaryPreview} from '/components/DictionaryPreview/DictionaryPreview.js';
 import bus from '/services/bus.js';
+import {Pagination} from '/components/pagination.js';
 
 const application = document.getElementById('application');
 
 export class Dictionary {
     render() {
         application.innerHTML = '';
+        const forContent = document.createElement('div');
+        const forPagination = document.createElement('div');
 
         application.appendChild(new Icon({
             src: '/static/home-icon.png',
@@ -99,12 +102,20 @@ export class Dictionary {
         let limiter = document.createElement('br');
         application.appendChild(limiter);
 
+
+        application.appendChild(forContent);
+        application.appendChild(forPagination);
+
         this._ondictsloaded = (dicts) => {
+            forContent.innerText = '';
             dicts.forEach((dict) => {
                 let preview = new DictionaryPreview(dict).render();
-                application.appendChild(preview);
+                forContent.appendChild(preview);
             });
         };
+
+        const pagination = new Pagination();
+        pagination.render(forPagination);
 
         bus.on('dicts-loaded', this._ondictsloaded);
     }

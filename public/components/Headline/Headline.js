@@ -8,10 +8,12 @@ export class Headline {
         size = 'h1',
         textContent = '',
         someFunction = noop,
+        classname = '',
     } = {}) {
         this._text = textContent;
         this._size = validSizes.includes(size) ? size : 'h1';
         this._handler = someFunction;
+        this._classname = classname;
     }
 
     render () {
@@ -19,7 +21,8 @@ export class Headline {
         headLineBoard.addEventListener('click', this._handler);
         headLineBoard.innerHTML = headlineTemplate({
             size: 'headline_size_' + this._size,
-            text: this._text
+            text: this._text,
+            classname: this._classname,
         });
         return headLineBoard;
     }

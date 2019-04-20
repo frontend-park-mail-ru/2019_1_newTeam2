@@ -4,11 +4,10 @@
 @import '_size_h4/link_size_h4.css' screen;
 
 .link {
-	color: #A560EB;
-	margin: 10px;
+	color: #437892;
 }
 
 .link:hover {
-	color: #8549BA;
+	color: #1e3452;
 	cursor: pointer;
 }

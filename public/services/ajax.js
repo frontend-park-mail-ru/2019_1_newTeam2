@@ -1,11 +1,10 @@
 'use strict';
 
-import bus from "./bus.js";
+import bus from './bus.js';
 const bodyIncludesMethods = ['POST', 'PATCH', 'PUT', 'DELETE'];
 
 
 export const baseUrl = 'https://newteam2back.herokuapp.com/';
-
 // export const baseUrl = 'http://localhost:8090/';
 
 
@@ -42,33 +41,33 @@ class AjaxModule {
 	 * 
 	 * @returns {Promise}
 	 */
-	_ajax ({
-		method = 'GET',
-		path = '/',
-		body = {},
-	} = {}) {
-		let init = {
-			method: method,
-			mode: 'cors',
-			headers: {
-				'Content-Type': 'application/json',
-				'Charset': 'utf-8'
-			},
-			credentials: 'include'
-		};
-		if (bodyIncludesMethods.includes(method)) {
-			init.body = JSON.stringify(body);
-		}
-		return fetch(baseUrl + path, init)
-			.then((response) => {
-				if(response.status === 208) {
-					console.log(response);
-					setTimeout(bus.emit.bind(bus), 0, 'no-internet');
-				}
-				return response;
-			}).then(checkStatus);
-	}
-	/** 
+    _ajax ({
+        method = 'GET',
+        path = '/',
+        body = {},
+    } = {}) {
+        let init = {
+            method: method,
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Charset': 'utf-8'
+            },
+            credentials: 'include'
+        };
+        if (bodyIncludesMethods.includes(method)) {
+            init.body = JSON.stringify(body);
+        }
+        return fetch(baseUrl + path, init)
+            .then((response) => {
+                if(response.status === 208) {
+                    console.log(response);
+                    setTimeout(bus.emit.bind(bus), 0, 'no-internet');
+                }
+                return response;
+            }).then(checkStatus);
+    }
+    /** 
    * Simple wrapper on private _ajax function
 	 * Makes a GET http request
 	 *

@@ -25,12 +25,29 @@ export class CardController {
             });
         };
 
+        let page = 1;
+        const rows = 5;
+
+        this._onprevpage = () => {
+            page = page < 2 ? 1 : page - 1;
+            this.model.getCardsByDictId({id: this.id, rows:rows, page:page});
+        };
+        bus.on('prev-page', this._onprevpage);
+
+        this._onnextpage = () => {
+            page++;
+            this.model.getCardsByDictId({id: this.id, rows:rows, page:page});
+        };
+        bus.on('next-page', this._onnextpage);
+
         bus.on('new-card-form-submitted', this._onnewcardformsubmitted);
         bus.on('card-removed', this._oncardremoved);
     }
 
     preventAllEvents() {
         this.view.preventAllEvents();
+        bus.off('next-page', this._onnextpage);
+        bus.off('prev-page', this._onprevpage);
         bus.off('new-card-form-submitted', this._onnewcardformsubmitted);
         bus.off('card-removed', this._oncardremoved);
     }
