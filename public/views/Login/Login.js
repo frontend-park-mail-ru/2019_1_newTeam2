@@ -89,15 +89,19 @@ export class Login {
 
             setTimeout(bus.emit.bind(bus), 0 , 'login-form-submitted', profile);
         });
+
         this._onwronglogin = () => {
             loginTemplateText.classList.remove('hidden-element');
         };
+
         this._onwrongpassword = () => {
             passwordTemplateText.classList.remove('hidden-element');
         };
+
         this._onnologin = () => {
             serverErrorText.classList.remove('hidden-element');
         };
+        
         bus.on('wrong-login', this._onwronglogin);
         bus.on('wrong-password', this._onwrongpassword);
         bus.on('no-login', this._onnologin);

@@ -10,8 +10,12 @@ export class LoginController {
         auth.logout();
         this.view = new Login();
         this.view.render();
-        this._onlogin = () => {
-            router.go('menu');
+        this._onlogin = (res) => {
+            if (res.status == 200) {
+                router.go('menu');
+            } else {
+                setTimeout(bus.emit.bind(bus), 0 , 'no-login');
+            }
         };
         this._onformsubmitted = (profile) => {
             let passed = true;
