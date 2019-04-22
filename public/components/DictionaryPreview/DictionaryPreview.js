@@ -21,8 +21,7 @@ export class DictionaryPreview {
 
         let image = new Image({
             callback: () => {
-                document.getElementById(this.id).classList.add('hidden-element');
-                setTimeout(bus.emit.bind(bus), 0, 'dict-removed', this.id);
+                router.go('dictionary/' + this.id);
             },
             type: 'dictionary',
             src: '/static/dictionary-image.png'
