@@ -1,5 +1,6 @@
 'use strict';
 
+import {View} from '/views/View.js';
 import {Headline} from '/components/Headline/Headline.js';
 import {Input} from '/components/Input/Input.js';
 import {Link} from '/components/Link/Link.js';
@@ -11,7 +12,7 @@ import bus from '/services/bus.js';
 
 const application = document.getElementById('application');
 
-export class Login {
+export class Login extends View {
     render() {
         application.innerText = '';
         const outer = document.createElement('div');
@@ -93,11 +94,13 @@ export class Login {
         renderedSignupLink.addEventListener( 'click', () => {
             router.go('signup');
         });
-
-        bus.on('wrong-login', this._onwronglogin, this);
-        bus.on('wrong-password', this._onwrongpassword, this);
-        bus.on('no-login', this._onnologin, this);
-
+        
+        this.listeners = new Set([
+            ['wrong-login', this._onwronglogin],
+            ['wrong-password', this._onwrongpassword],
+            ['no-login', this._onnologin],
+        ]);
+        super.subscribeAll();
     }
 
     _onwronglogin() {
@@ -112,9 +115,4 @@ export class Login {
         this.serverErrorText.classList.remove('hidden-element');
     }
 
-    preventAllEvents() {
-        bus.off('no-login', this._onnologin);
-        bus.off('wrong-login', this._onwronglogin);
-        bus.off('wrong-password', this._onwrongpassword);
-    }
 }

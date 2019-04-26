@@ -1,15 +1,15 @@
 'use strict';
 
+import {View} from '/views/View.js';
 import router from '/services/router.js';
 import {Headline} from '/components/Headline/Headline.js';
 import {Pagination} from '/components/pagination.js';
 import {Table} from '/components/Table/Table.js';
 import {Icon} from '/components/Icon/Icon.js';
-import bus from '/services/bus.js';
 
 const application = document.getElementById('application');
 
-export class Leaderboard {
+export class Leaderboard extends View {
     render() {
         let outer = application;
         outer.innerHTML = '';
@@ -33,8 +33,11 @@ export class Leaderboard {
         
         const pagination = new Pagination();
         pagination.render(this.forPagination);
-
-        bus.on('users-loaded', this._onload, this);
+        
+        this.listeners = new Set([
+            ['users-loaded', this._onload],
+        ]);
+        super.subscribeAll();
     }
 
     _onload(data) {
@@ -47,7 +50,4 @@ export class Leaderboard {
             childNode = this.table.render();
     }
 
-    preventAllEvents() {
-        bus.off('users-loaded', this._onload);
-    }
 }

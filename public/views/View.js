@@ -1,6 +1,6 @@
 import bus from '/services/bus.js';
 
-export class Controller {
+export class View {
     subscribeAll(){
         if (!this.listeners) {
             return;
@@ -12,8 +12,6 @@ export class Controller {
     }
 
     preventAllEvents(){
-        this.view.preventAllEvents();
-
         if (!this.listeners) {
             return;
         }

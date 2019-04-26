@@ -1,5 +1,6 @@
 'use strict';
 
+import {View} from '/views/View.js';
 import {Headline} from '/components/Headline/Headline.js';
 import {Icon} from '/components/Icon/Icon.js';
 import {Button} from '/components/Button/Button.js';
@@ -10,7 +11,7 @@ import bus from '/services/bus.js';
 
 const application = document.getElementById('application');
 
-export class Profile{
+export class Profile extends View {
     render() {
         const outer = application;
         outer.innerHTML = '';
@@ -66,6 +67,11 @@ export class Profile{
         });
         save.firstChild.classList.add('hidden-element');
 
+        this.listeners = new Set([
+            ['user-loaded', this._onuserloaded],
+        ]);
+        super.subscribeAll();
+
         bus.on('user-loaded', this._onuserloaded, this);
     }
 
@@ -78,9 +84,5 @@ export class Profile{
             this._user.path = this._user.baseUrl + this._user.path;
         }
         this.forData.innerHTML = profileTemplate(this._user);
-    }
-
-    preventAllEvents() {
-        bus.off('user-loaded', this._onuserloaded);
     }
 }

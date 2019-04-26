@@ -1,5 +1,6 @@
 'use strict';
 
+import {View} from '/views/View.js';
 import {Headline} from '/components/Headline/Headline.js';
 import {Input} from '/components/Input/Input.js';
 import {Link} from '/components/Link/Link.js';
@@ -11,7 +12,7 @@ import bus from '/services/bus.js';
 
 const application = document.getElementById('application');
 
-export class Signup {
+export class Signup extends View {
     render() {
         application.innerHTML = '';
         const outer = document.createElement('div');
@@ -106,10 +107,13 @@ export class Signup {
             router.go('login');
         });
 
-        bus.on('wrong-login', this._onwronglogin, this);
-        bus.on('wrong-password', this._onwrongpassword, this);
-        bus.on('wrong-email', this._onwrongemail, this);
-        bus.on('create-user-error', this._oncreateusererror, this);
+        this.listeners = new Set([
+            ['wrong-login', this._onwronglogin],
+            ['wrong-password', this._onwrongpassword],
+            ['wrong-email', this._onwrongemail],
+            ['create-user-error', this._oncreateusererror],
+        ]);
+        super.subscribeAll();
     }
 
     _onwronglogin() {
@@ -126,12 +130,5 @@ export class Signup {
 
     _oncreateusererror() {
         this.serverErrorText.classList.remove('hidden-element');
-    }
-
-    preventAllEvents() {
-        bus.off('create-user-error', this._oncreateusererror);
-        bus.off('wrong-login', this._onwronglogin);
-        bus.off('wrong-password', this._onwrongpassword);
-        bus.off('wrong-email', this._onwrongemail);
     }
 }

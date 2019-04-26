@@ -1,5 +1,6 @@
 'use strict';
 
+import {View} from '/views/View.js';
 import router from '/services/router.js';
 import {Headline} from '/components/Headline/Headline.js';
 import {Icon} from '/components/Icon/Icon.js';
@@ -11,7 +12,7 @@ import {Pagination} from '/components/pagination.js';
 
 const application = document.getElementById('application');
 
-export class Card {
+export class Card extends View {
     render() {
         application.innerHTML = '';
         this.forHeader = document.createElement('div');
@@ -32,16 +33,19 @@ export class Card {
         application.appendChild(this.forContent);
         application.appendChild(this.forPagination);
 
-        bus.on('dict-loaded', this._ondictloaded, this);
-        bus.on('load-dict-error', this._onloaddicterror, this);
-        bus.on('cards-loaded', this._oncardsloaded, this);
-        bus.on('card-loaded', this._oncardloaded, this);
-        bus.on('load-card-error', this._onloadcarderror, this);
-        bus.on('card-created', this._oncardcreated, this);
-        bus.on('create-card-error', this._oncreatecarderror, this);
-        bus.on('card-updated', this._oncardupdated, this);
-        bus.on('update-card-error', this._onupdatecarderror, this);
-        bus.on('delete-card-error', this._ondeletecarderror, this);
+        this.listeners = new Set([
+            ['dict-loaded', this._ondictloaded],
+            ['load-dict-error', this._onloaddicterror],
+            ['cards-loaded',this._oncardsloaded],
+            ['card-loaded', this._oncardloaded],
+            ['load-card-error', this._onloadcarderror],
+            ['card-created', this._oncardcreated],
+            ['create-card-error', this._oncreatecarderror],
+            ['card-updated', this._oncardupdated],
+            ['update-card-error', this._onupdatecarderror],
+            ['delete-card-error', this._ondeletecarderror],
+        ]);
+        super.subscribeAll();
     }
 
     _ondictloaded(dict) {
@@ -168,18 +172,5 @@ export class Card {
 
     _ondeletecarderror() {
 
-    }
-
-    preventAllEvents() {
-        bus.off('dict-loaded', this._ondictloaded);
-        bus.off('load-dict-error', this._onloaddicterror);
-        bus.off('cards-loaded', this._oncardsloaded);
-        bus.off('card-loaded', this._oncardloaded);
-        bus.off('load-card-error', this._onloadcarderror);
-        bus.off('card-created', this._oncardcreated);
-        bus.off('create-card-error', this._oncreatecarderror);
-        bus.off('card-updated', this._oncardupdated);
-        bus.off('update-card-error', this._onupdatecarderror);
-        bus.off('delete-card-error', this._ondeletecarderror);
     }
 }

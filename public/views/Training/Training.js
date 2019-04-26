@@ -1,3 +1,6 @@
+'use strict';
+
+import {View} from '/views/View.js';
 import {Icon} from '/components/Icon/Icon.js';
 import {Headline} from '/components/Headline/Headline.js';
 import router from '/services/router.js';
@@ -9,7 +12,7 @@ import {Pagination} from '/components/pagination.js';
 
 const application = document.getElementById('application');
 
-export class Training {
+export class Training extends View {
     render() {
         application.innerText = '';
 
@@ -24,9 +27,12 @@ export class Training {
         this.outer = document.createElement('div');
         application.appendChild(this.outer);
         this.outer.classList.add('training-outer');
-        
-        bus.on('dicts-loaded', this._ondictsloaded, this);
-        bus.on('game-cards-loaded', this._ongamecardsloaded, this);
+
+        this.listeners = new Set([
+            ['dicts-loaded', this._ondictsloaded],
+            ['game-cards-loaded', this._ongamecardsloaded],
+        ]);
+        super.subscribeAll();
     }
 
     _ondictsloaded(dicts) {
@@ -111,10 +117,5 @@ export class Training {
             }
         }();
         genNextPage();
-    }
-
-    preventAllEvents() {
-        bus.off('dicts-loaded', this._ondictsloaded);
-        bus.off('game-cards-loaded', this._ongamecardsloaded);
     }
 }

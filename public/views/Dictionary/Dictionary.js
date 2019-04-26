@@ -1,5 +1,6 @@
 'use strict';
 
+import {View} from '/views/View.js';
 import router from '/services/router.js';
 import {Headline} from '/components/Headline/Headline.js';
 import {Icon} from '/components/Icon/Icon.js';
@@ -11,7 +12,7 @@ import {Pagination} from '/components/pagination.js';
 
 const application = document.getElementById('application');
 
-export class Dictionary {
+export class Dictionary extends View {
     render() {
         application.innerHTML = '';
         this.forContent = document.createElement('div');
@@ -110,7 +111,10 @@ export class Dictionary {
         const pagination = new Pagination();
         pagination.render(this.forPagination);
 
-        bus.on('dicts-loaded', this._ondictsloaded, this);
+        this.listeners = new Set([
+            ['dicts-loaded', this._ondictsloaded],
+        ]);
+        super.subscribeAll();
     }
 
     _ondictsloaded(dicts) {
@@ -119,9 +123,5 @@ export class Dictionary {
             let preview = new DictionaryPreview(dict).render();
             this.forContent.appendChild(preview);
         });
-    }
-
-    preventAllEvents() {
-        bus.off('dicts-loaded', this._ondictsloaded);
     }
 }
