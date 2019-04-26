@@ -1,10 +1,11 @@
+import {Controller} from '/controllers/Controller.js';
 import {CardModel} from '/models/CardModel.js';
 import {DictionaryModel} from '/models/DictionaryModel.js';
 import {Card} from '/views/Card/Card.js';
 import bus from '/services/bus.js';
 
 
-export class CardController {
+export class CardController extends Controller{
     index(options = {path: ''}) {
         [this.name, this.id] = options.path.split('/');
         this.id = parseInt(this.id);
@@ -17,10 +18,14 @@ export class CardController {
         this.page = 1;
         this.rows = 5;
 
-        bus.on('prev-page', this._onprevpage, this);
-        bus.on('next-page', this._onnextpage, this);
-        bus.on('new-card-form-submitted', this._onnewcardformsubmitted, this);
-        bus.on('card-removed', this._oncardremoved, this);
+        this.listeners = new Set ([
+            ['prev-page', this._onprevpage],
+            ['next-page', this._onnextpage],
+            ['new-card-form-submitted', this._onnewcardformsubmitted],
+            ['card-removed', this._oncardremoved],
+        ]);
+
+        super.subscribeAll();
     }
 
     _onnewcardformsubmitted(body) {
@@ -42,13 +47,5 @@ export class CardController {
     _onnextpage() {
         this.page++;
         this.model.getCardsByDictId({id: this.id, rows:this.rows, page:this.page});
-    }
-
-    preventAllEvents() {
-        this.view.preventAllEvents();
-        bus.off('next-page', this._onnextpage);
-        bus.off('prev-page', this._onprevpage);
-        bus.off('new-card-form-submitted', this._onnewcardformsubmitted);
-        bus.off('card-removed', this._oncardremoved);
     }
 }

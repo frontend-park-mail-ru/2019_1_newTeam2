@@ -23,6 +23,8 @@ const unloginedButtonNames = {
 const application = document.getElementById('application');
 
 export class Menu {
+    preventAllEvents() {}
+
     render({authorised = false}) {
         const outer = application;
         outer.innerHTML = '';

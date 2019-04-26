@@ -1,3 +1,4 @@
+import {Controller} from '/controllers/Controller.js';
 import {Login} from '/views/Login/Login.js';
 import auth from '/models/AuthModel.js';
 import bus from '/services/bus.js';
@@ -5,14 +6,18 @@ import validation from '/services/validation.js';
 import router from '/services/router.js';
 
 
-export class LoginController {
+export class LoginController extends Controller {
     index() {
         auth.logout();
         this.view = new Login();
         this.view.render();
-        
-        bus.on('login', this._onlogin, this);
-        bus.on('login-form-submitted', this._onformsubmitted, this);
+
+        this.listeners = new Set ([
+            ['login', this._onlogin],
+            ['login-form-submitted', this._onformsubmitted],
+        ]);
+
+        super.subscribeAll();
     }
 
     _onlogin(res) {
@@ -38,11 +43,5 @@ export class LoginController {
         if(passed) {
             auth.login(profile);
         }
-    }
-
-    preventAllEvents() {
-        this.view.preventAllEvents();
-        bus.off('login', this._onlogin);
-        bus.off('login-form-submitted', this._onformsubmitted);
     }
 }

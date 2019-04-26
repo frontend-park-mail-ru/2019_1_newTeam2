@@ -1,3 +1,4 @@
+import {Controller} from '/controllers/Controller.js';
 import {Signup} from '/views/Signup/Signup.js';
 import auth from '/models/AuthModel.js';
 import bus from '/services/bus.js';
@@ -6,15 +7,19 @@ import router from '/services/router.js';
 import {UserModel} from '/models/UserModel.js';
 
 
-export class SignupController {
+export class SignupController extends Controller {
     index() {
         auth.logout();
         this.view = new Signup();
         this.user = new UserModel();
         this.view.render();
-        
-        bus.on('user-created', this._onusercreated, this);
-        bus.on('signup-form-submitted', this._onformsubmitted, this);
+
+        this.listeners = new Set ([
+            ['user-created', this._onusercreated],
+            ['signup-form-submitted', this._onformsubmitted],
+        ]);
+
+        super.subscribeAll();
     }
 
     _onusercreated() {
@@ -40,11 +45,5 @@ export class SignupController {
         if(passed) {
             this.user.createUser(profile);
         }
-    }
-
-    preventAllEvents() {
-        this.view.preventAllEvents();
-        bus.off('user-created', this._onusercreated);
-        bus.off('signup-form-submitted', this._onformsubmitted);
     }
 }

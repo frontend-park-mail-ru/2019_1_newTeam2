@@ -1,7 +1,7 @@
 'use strict';
 
 import ajax from '/services/ajax.js';
-import bus from '/services/bus.js';
+import bus from '/services/bus.js'; 
 
 class AuthModel {
     isAuthorised() {
@@ -9,10 +9,13 @@ class AuthModel {
             path: 'session/'
         })
             .then((res) => {
-                if(res.status === 200)
+                if(res.status === 200) {
                     bus.emit('logged-in', res);
-                else
+                    console.log('logged-in');
+                } else {
                     bus.emit('logged-out');
+                    console.log('logged-out');
+                }
             })
             .catch(() => {
                 bus.emit('logged-out');

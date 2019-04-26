@@ -1,9 +1,9 @@
+import {Controller} from '/controllers/Controller.js';
 import {UserModel} from '/models/UserModel.js';
 import {Leaderboard} from '/views/Leaderboard/Leaderboard.js';
-import bus from '/services/bus.js';
 
 
-export class LeaderboardController {
+export class LeaderboardController extends Controller {
     index() {
         this.view = new Leaderboard();
         this.view.render();
@@ -14,8 +14,12 @@ export class LeaderboardController {
 
         this.users.getUsers(this.rows, this.page);
 
-        bus.on('prev-page', this._onprevpage, this);
-        bus.on('next-page', this._onnextpage, this);
+        this.listeners = new Set ([
+            ['prev-page', this._onprevpage],
+            ['next-page', this._onnextpage],
+        ]);
+
+        super.subscribeAll();
     }
 
     _onprevpage() {
@@ -26,11 +30,5 @@ export class LeaderboardController {
     _onnextpage() {
         this.page++;
         this.users.getUsers(this.rows, this.page);
-    }
-
-    preventAllEvents() {
-        this.view.preventAllEvents();
-        bus.off('prev-page', this._onprevpage);
-        bus.off('next-page', this._onnextpage);
     }
 }

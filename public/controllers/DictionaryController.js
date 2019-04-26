@@ -1,10 +1,10 @@
+import {Controller} from '/controllers/Controller.js';
 import {DictionaryModel} from '/models/DictionaryModel.js';
 import {Dictionary} from '/views/Dictionary/Dictionary.js';
-import bus from '/services/bus.js';
 import router from '/services/router.js';
  
 
-export class DictionaryController {
+export class DictionaryController extends Controller{
     index() {
         this.model = new DictionaryModel();
         this.view = new Dictionary();
@@ -12,13 +12,17 @@ export class DictionaryController {
         this.model.getSelfDicts();
         this.page = 1;
         this.rows = 5;
-        
-        bus.on('prev-page', this._onprevpage, this);
-        bus.on('next-page', this._onnextpage, this);
-        bus.on('new-dict-form-submitted', this._onnewdict, this);
-        bus.on('dict-created', this._on_dict_created, this);
-        bus.on('create-dict-error', this._on_create_dict_error, this);
-        bus.on('dict-removed', this._on_dict_removed, this);
+
+        this.listeners = new Set ([
+            ['prev-page', this._onprevpage],
+            ['next-page', this._onnextpage],
+            ['new-dict-form-submitted', this._onnewdict],
+            ['dict-created', this._on_dict_created],
+            ['create-dict-error', this._on_create_dict_error],
+            ['dict-removed', this._on_dict_removed],
+        ]);
+
+        super.subscribeAll();
     }
 
     _on_dict_created(dict) {
@@ -51,15 +55,5 @@ export class DictionaryController {
             rows:this.rows, 
             page:this.page
         });
-    }
-
-    preventAllEvents() {
-        this.view.preventAllEvents();
-        bus.off('next-page', this._onnextpage);
-        bus.off('prev-page', this._onprevpage);
-        bus.off('new-dict-form-submitted', this._onnewdict);
-        bus.off('dict-created', this._on_dict_created);
-        bus.off('create-dict-error', this._on_create_dict_error);
-        bus.off('dict-removed', this._on_dict_removed);
     }
 }
