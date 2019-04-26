@@ -10,31 +10,32 @@ export class TrainingController {
         this.dictModel = new DictionaryModel();
         this.dictModel.getSelfDicts();
         this.gameModel = new GameWordsModel();
-        bus.on('dict-selected', this.ondictselected.bind(this));
-        bus.on('training-finished', this.ontrainingfinished.bind(this));
-
-        let page = 1;
-        const rows = 5;
-
-        this._onprevpage = () => {
-            page = page < 2 ? 1 : page - 1;
-            this.dictModel.getSelfDicts({rows:rows, page:page});
-        };
-        bus.on('prev-page', this._onprevpage);
-
-        this._onnextpage = () => {
-            page++;
-            this.dictModel.getSelfDicts({rows:rows, page:page});
-        };
-        bus.on('next-page', this._onnextpage);
+        
+        this.page = 1;
+        this.rows = 5;
+        
+        bus.on('dict-selected', this._ondictselected, this);
+        bus.on('training-finished', this._ontrainingfinished, this);
+        bus.on('prev-page', this._onprevpage, this);
+        bus.on('next-page', this._onnextpage, this);
     }
 
-    ondictselected(dictID) {
+    _ondictselected(dictID) {
         this.gameModel.getCards(dictID, 10);
     }
 
-    ontrainingfinished(result) {
+    _ontrainingfinished(result) {
         this.gameModel.sendResult(result);
+    }
+
+    _onprevpage() {
+        this.page = this.page < 2 ? 1 : this.page - 1;
+        this.dictModel.getSelfDicts({rows: this.rows, page: this.page});
+    }
+
+    _onnextpage() {
+        this.page++;
+        this.dictModel.getSelfDicts({rows:this.rows, page:this.page});
     }
 
     preventAllEvents() {

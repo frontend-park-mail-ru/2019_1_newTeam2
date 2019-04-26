@@ -26,28 +26,28 @@ export class Signup {
 
         let headline = new Headline({size: 'h1', textContent: 'Регистрация'});
 
-        let serverErrorText = document.createElement('div');
-        serverErrorText.classList.add('error-text');
-        serverErrorText.classList.add('hidden-element');
+        this.serverErrorText = document.createElement('div');
+        this.serverErrorText.classList.add('error-text');
+        this.serverErrorText.classList.add('hidden-element');
 
-        let loginTemplateText = document.createElement('div');
-        loginTemplateText.classList.add('error-text');
-        loginTemplateText.classList.add('hidden-element');
-        loginTemplateText.innerText = 'Пожалуйста, используйте только строчные и прописные латинские буквы, цифры и знак подчеркивания';
+        this.loginTemplateText = document.createElement('div');
+        this.loginTemplateText.classList.add('error-text');
+        this.loginTemplateText.classList.add('hidden-element');
+        this.loginTemplateText.innerText = 'Пожалуйста, используйте только строчные и прописные латинские буквы, цифры и знак подчеркивания';
 
         let login = new Input({type: 'text', label: 'Логин* ', id: 'login', maxlen: 20});
 
-        let passwordTemplateText = document.createElement('div');
-        passwordTemplateText.classList.add('error-text');
-        passwordTemplateText.classList.add('hidden-element');
-        passwordTemplateText.innerText = 'Пожалуйста, используйте только строчные и прописные латинские буквы, цифры и знак подчеркивания';
+        this.passwordTemplateText = document.createElement('div');
+        this.passwordTemplateText.classList.add('error-text');
+        this.passwordTemplateText.classList.add('hidden-element');
+        this.passwordTemplateText.innerText = 'Пожалуйста, используйте только строчные и прописные латинские буквы, цифры и знак подчеркивания';
 
         let password = new Input({ type: 'password', label: 'Пароль* ', id: 'password', maxlen: 20});
 
-        let emailTemplateText = document.createElement('div');
-        emailTemplateText.classList.add('error-text');
-        emailTemplateText.classList.add('hidden-element');
-        emailTemplateText.innerText = 'Пожалуйста, введите валидный email-адрес, аналогичный example@mail.ru';
+        this.emailTemplateText = document.createElement('div');
+        this.emailTemplateText.classList.add('error-text');
+        this.emailTemplateText.classList.add('hidden-element');
+        this.emailTemplateText.innerText = 'Пожалуйста, введите валидный email-адрес, аналогичный example@mail.ru';
 
         let email = new Input({ type: 'email', label: 'Email* ', id: 'email', maxlen: 50});
         
@@ -58,12 +58,12 @@ export class Signup {
         let renderedLoginLink = loginLink.render();
         
         outer.appendChild(headline.render());
-        outer.appendChild(serverErrorText);
-        outer.appendChild(loginTemplateText);
+        outer.appendChild(this.serverErrorText);
+        outer.appendChild(this.loginTemplateText);
         outer.appendChild(login.render());
-        outer.appendChild(emailTemplateText);
+        outer.appendChild(this.emailTemplateText);
         outer.appendChild(email.render());
-        outer.appendChild(passwordTemplateText);
+        outer.appendChild(this.passwordTemplateText);
         outer.appendChild(password.render());
         outer.appendChild(renderedSubmit);
         outer.appendChild(renderedLoginLink);
@@ -75,20 +75,20 @@ export class Signup {
         });
 
         renderedSubmit.addEventListener( 'click', () => {
-            if (!serverErrorText.classList.contains('hidden-element')) {
-                serverErrorText.classList.add('hidden-element');
+            if (!this.serverErrorText.classList.contains('hidden-element')) {
+                this.serverErrorText.classList.add('hidden-element');
             }
 
-            if (!loginTemplateText.classList.contains('hidden-element')) {
-                loginTemplateText.classList.add('hidden-element');
+            if (!this.loginTemplateText.classList.contains('hidden-element')) {
+                this.loginTemplateText.classList.add('hidden-element');
             }
 
-            if (!passwordTemplateText.classList.contains('hidden-element')) {
-                passwordTemplateText.classList.add('hidden-element');
+            if (!this.passwordTemplateText.classList.contains('hidden-element')) {
+                this.passwordTemplateText.classList.add('hidden-element');
             }   
             
-            if (!emailTemplateText.classList.contains('hidden-element')) {
-                emailTemplateText.classList.add('hidden-element');
+            if (!this.emailTemplateText.classList.contains('hidden-element')) {
+                this.emailTemplateText.classList.add('hidden-element');
             }
 
             let profile = {
@@ -101,27 +101,31 @@ export class Signup {
 
             bus.emit('signup-form-submitted', profile);
         });
-        this._onwronglogin = () => {
-            loginTemplateText.classList.remove('hidden-element');
-        };
-        this._onwrongpassword = () => {
-            passwordTemplateText.classList.remove('hidden-element');
-        };
-        this._onwrongemail = () => {
-            emailTemplateText.classList.remove('hidden-element');
-        };
-        this._oncreateusererror = () => {
-            serverErrorText.classList.remove('hidden-element');
-        };
-
-        bus.on('wrong-login', this._onwronglogin);
-        bus.on('wrong-password', this._onwrongpassword);
-        bus.on('wrong-email', this._onwrongemail);
-        bus.on('create-user-error', this._oncreateusererror);
-
+        
         renderedLoginLink.addEventListener( 'click', () => {
             router.go('login');
         });
+
+        bus.on('wrong-login', this._onwronglogin, this);
+        bus.on('wrong-password', this._onwrongpassword, this);
+        bus.on('wrong-email', this._onwrongemail, this);
+        bus.on('create-user-error', this._oncreateusererror, this);
+    }
+
+    _onwronglogin() {
+        this.loginTemplateText.classList.remove('hidden-element');
+    }
+
+    _onwrongpassword() {
+        this.passwordTemplateText.classList.remove('hidden-element');
+    }
+
+    _onwrongemail() {
+        this.emailTemplateText.classList.remove('hidden-element');
+    }
+
+    _oncreateusererror() {
+        this.serverErrorText.classList.remove('hidden-element');
     }
 
     preventAllEvents() {

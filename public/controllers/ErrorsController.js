@@ -5,12 +5,11 @@ export class ErrorsController {
     index() {
         this.view = new Errors();
 
+        bus.on('not-found-error', this._on_not_found, this);
+    }
 
-        this._on_not_found = () => {
-            this.view.render({errorText: 'К сожалению, такая страница не найдена :('});
-        };
-
-        bus.on('not-found-error', this._on_not_found);
+    _on_not_found() {
+        this.view.render({errorText: 'К сожалению, такая страница не найдена :('});
     }
 
     preventAllEvents() {

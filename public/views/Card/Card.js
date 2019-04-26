@@ -14,161 +14,160 @@ const application = document.getElementById('application');
 export class Card {
     render() {
         application.innerHTML = '';
-        const forHeader = document.createElement('div');
-        const forContent = document.createElement('div');
-        const forPagination = document.createElement('div');
+        this.forHeader = document.createElement('div');
+        this.forContent = document.createElement('div');
+        this.forPagination = document.createElement('div');
 
-        forHeader.appendChild(new Icon({
+        this.forHeader.appendChild(new Icon({
             src: '/static/home-icon.png',
             handler: () => {
                 router.go('menu');
             }
         }).render());
 
-        this._ondictloaded = (dict) => {
-            const head1 = new Headline({textContent: dict.name}).render();
-            forHeader.appendChild(head1);
-			
-            const head2 = new Headline({size: 'h2', textContent: dict.description}).render();
-            forHeader.appendChild(head2);
-
-            const word = new Input({
-                id: 'word',
-                type: 'text',
-                value: '',
-                placeholder: 'Слово (русский)',
-                maxlen: 50,
-                label: '',
-            }).render();
-            word.classList.add('hidden-element');
-            forHeader.appendChild(word);
-	
-            const translation = new Input({
-                id: 'translation',
-                type: 'text',
-                value: '',
-                placeholder: 'Перевод (английский)',
-                maxlen: 50,
-                label: '',
-            }).render();
-            translation.classList.add('hidden-element');
-            forHeader.appendChild(translation);
-			
-            const submit = new Button({
-                type: 'secondary',
-                name: 'Сохранить',
-                id: 'submit',
-                is_hidden: 'hidden-element',
-                handler: () => {
-                    document.getElementById('submit').classList.add('hidden-element');
-                    document.getElementById('deny').classList.add('hidden-element');
-                    word.classList.add('hidden-element');
-                    translation.classList.add('hidden-element');
-                    document.getElementById('plus').classList.remove('hidden-element');
-                    let card = {
-                        'id': 0,
-                        'word': {
-                            'name': document.getElementById('word').value,
-                            'langID': 1
-                        },
-                        'translation': {
-                            'name': document.getElementById('translation').value,
-                            'langID': 2
-                        }
-                    };
-                    bus.emit('new-card-form-submitted', card);
-                }
-            }).render();
-            forHeader.appendChild(submit);
-	
-            let deny = new Icon({
-                src: '/static/cross.png',
-                id: 'deny',
-                classname: 'hidden-element',
-                handler: () => {
-                    document.getElementById('submit').classList.add('hidden-element');
-                    document.getElementById('deny').classList.add('hidden-element');
-                    word.classList.add('hidden-element');
-                    translation.classList.add('hidden-element');
-                    document.getElementById('plus').classList.remove('hidden-element');
-                    let dict = {};
-                    dict.word = document.getElementById('word').value;
-                    dict.translation = document.getElementById('translation').value;
-                }
-            }).render();
-            forHeader.appendChild(deny);
-	
-            let plus = new Icon({
-                src: '/static/plus.png',
-                id: 'plus',
-                handler: () => {
-                    document.getElementById('plus').classList.add('hidden-element');
-                    document.getElementById('deny').classList.remove('hidden-element');
-                    word.classList.remove('hidden-element');
-                    translation.classList.remove('hidden-element');
-                    document.getElementById('submit').classList.remove('hidden-element');
-                }
-            }).render();
-            forHeader.appendChild(plus);
-
-            let limiter = document.createElement('br');
-            forHeader.appendChild(limiter);
-	
-        };
-
-        this._oncardsloaded = (cards) => {
-            forContent.innerText = '';
-            cards.forEach((card)=> {
-                let cardComponent = new CardPreview(card).render();
-                forContent.appendChild(cardComponent);
-            });
-        };
-
-        this._oncardloaded = () => {
-
-        };
-
-        this._onloadcarderror = () => {
-
-        };
-
-        this._oncardcreated = () => {
-
-        };
-
-        this._oncreatecarderror = () => {
-
-        };
-
-        this._oncardupdated = () => {
-
-        };
-
-        this._onupdatecarderror = () => {
-
-        };
-
-        this._ondeletecarderror = () => {
-
-        };
-
         const pagination = new Pagination();
-        pagination.render(forPagination);
+        pagination.render(this.forPagination);
 
-        application.appendChild(forHeader);
-        application.appendChild(forContent);
-        application.appendChild(forPagination);
+        application.appendChild(this.forHeader);
+        application.appendChild(this.forContent);
+        application.appendChild(this.forPagination);
 
-        bus.on('dict-loaded', this._ondictloaded);
-        bus.on('load-dict-error', this._onloaddicterror);
-        bus.on('cards-loaded', this._oncardsloaded);
-        bus.on('card-loaded', this._oncardloaded);
-        bus.on('load-card-error', this._onloadcarderror);
-        bus.on('card-created', this._oncardcreated);
-        bus.on('create-card-error', this._oncreatecarderror);
-        bus.on('card-updated', this._oncardupdated);
-        bus.on('update-card-error', this._onupdatecarderror);
-        bus.on('delete-card-error', this._ondeletecarderror);
+        bus.on('dict-loaded', this._ondictloaded, this);
+        bus.on('load-dict-error', this._onloaddicterror, this);
+        bus.on('cards-loaded', this._oncardsloaded, this);
+        bus.on('card-loaded', this._oncardloaded, this);
+        bus.on('load-card-error', this._onloadcarderror, this);
+        bus.on('card-created', this._oncardcreated, this);
+        bus.on('create-card-error', this._oncreatecarderror, this);
+        bus.on('card-updated', this._oncardupdated, this);
+        bus.on('update-card-error', this._onupdatecarderror, this);
+        bus.on('delete-card-error', this._ondeletecarderror, this);
+    }
+
+    _ondictloaded(dict) {
+        const head1 = new Headline({textContent: dict.name}).render();
+        this.forHeader.appendChild(head1);
+        
+        const head2 = new Headline({size: 'h2', textContent: dict.description}).render();
+        this.forHeader.appendChild(head2);
+
+        const word = new Input({
+            id: 'word',
+            type: 'text',
+            value: '',
+            placeholder: 'Слово (русский)',
+            maxlen: 50,
+            label: '',
+        }).render();
+        word.classList.add('hidden-element');
+        this.forHeader.appendChild(word);
+
+        const translation = new Input({
+            id: 'translation',
+            type: 'text',
+            value: '',
+            placeholder: 'Перевод (английский)',
+            maxlen: 50,
+            label: '',
+        }).render();
+        translation.classList.add('hidden-element');
+        this.forHeader.appendChild(translation);
+        
+        const submit = new Button({
+            type: 'secondary',
+            name: 'Сохранить',
+            id: 'submit',
+            is_hidden: 'hidden-element',
+            handler: () => {
+                document.getElementById('submit').classList.add('hidden-element');
+                document.getElementById('deny').classList.add('hidden-element');
+                word.classList.add('hidden-element');
+                translation.classList.add('hidden-element');
+                document.getElementById('plus').classList.remove('hidden-element');
+                let card = {
+                    'id': 0,
+                    'word': {
+                        'name': document.getElementById('word').value,
+                        'langID': 1
+                    },
+                    'translation': {
+                        'name': document.getElementById('translation').value,
+                        'langID': 2
+                    }
+                };
+                bus.emit('new-card-form-submitted', card);
+            }
+        }).render();
+        this.forHeader.appendChild(submit);
+
+        let deny = new Icon({
+            src: '/static/cross.png',
+            id: 'deny',
+            classname: 'hidden-element',
+            handler: () => {
+                document.getElementById('submit').classList.add('hidden-element');
+                document.getElementById('deny').classList.add('hidden-element');
+                word.classList.add('hidden-element');
+                translation.classList.add('hidden-element');
+                document.getElementById('plus').classList.remove('hidden-element');
+                let dict = {};
+                dict.word = document.getElementById('word').value;
+                dict.translation = document.getElementById('translation').value;
+            }
+        }).render();
+        this.forHeader.appendChild(deny);
+
+        let plus = new Icon({
+            src: '/static/plus.png',
+            id: 'plus',
+            handler: () => {
+                document.getElementById('plus').classList.add('hidden-element');
+                document.getElementById('deny').classList.remove('hidden-element');
+                word.classList.remove('hidden-element');
+                translation.classList.remove('hidden-element');
+                document.getElementById('submit').classList.remove('hidden-element');
+            }
+        }).render();
+        this.forHeader.appendChild(plus);
+
+        let limiter = document.createElement('br');
+        this.forHeader.appendChild(limiter);
+    }
+        
+    _oncardsloaded(cards) {
+        this.forContent.innerText = '';
+        cards.forEach((card)=> {
+            let cardComponent = new CardPreview(card).render();
+            this.forContent.appendChild(cardComponent);
+        });
+    }
+
+    _oncardloaded() {
+
+    }
+
+    _onloadcarderror() {
+
+    }
+
+    _oncardcreated() {
+
+    }
+
+    _oncreatecarderror() {
+
+    }
+
+    _oncardupdated() {
+
+    }
+
+    _onupdatecarderror() {
+
+    }
+
+    _ondeletecarderror() {
+
     }
 
     preventAllEvents() {

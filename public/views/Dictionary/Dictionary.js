@@ -14,8 +14,8 @@ const application = document.getElementById('application');
 export class Dictionary {
     render() {
         application.innerHTML = '';
-        const forContent = document.createElement('div');
-        const forPagination = document.createElement('div');
+        this.forContent = document.createElement('div');
+        this.forPagination = document.createElement('div');
 
         application.appendChild(new Icon({
             src: '/static/home-icon.png',
@@ -103,21 +103,22 @@ export class Dictionary {
         application.appendChild(limiter);
 
 
-        application.appendChild(forContent);
-        application.appendChild(forPagination);
+        application.appendChild(this.forContent);
+        application.appendChild(this.forPagination);
 
-        this._ondictsloaded = (dicts) => {
-            forContent.innerText = '';
-            dicts.forEach((dict) => {
-                let preview = new DictionaryPreview(dict).render();
-                forContent.appendChild(preview);
-            });
-        };
 
         const pagination = new Pagination();
-        pagination.render(forPagination);
+        pagination.render(this.forPagination);
 
-        bus.on('dicts-loaded', this._ondictsloaded);
+        bus.on('dicts-loaded', this._ondictsloaded, this);
+    }
+
+    _ondictsloaded(dicts) {
+        this.forContent.innerText = '';
+        dicts.forEach((dict) => {
+            let preview = new DictionaryPreview(dict).render();
+            this.forContent.appendChild(preview);
+        });
     }
 
     preventAllEvents() {

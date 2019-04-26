@@ -10,16 +10,22 @@ export class ProfileController {
         this.view.render();
         this.user = new UserModel();
         this.user.getSelf();
-        bus.on('user-upload-avatar', this.avatar.uploadAvatar);
-        this._onedituser = (data) => {
-            this.user.updateUser(data.id, data);
-        };
-        bus.on('edit-user', this._onedituser);
+        
+        bus.on('user-upload-avatar', this._onuseruploadavatar, this);
+        bus.on('edit-user', this._onedituser, this);
+    }
+
+    _onuseruploadavatar() {
+        this.avatar.uploadAvatar;
+    }
+
+    _onedituser(data) {
+        this.user.updateUser(data.id, data);
     }
 
     preventAllEvents() {
         this.view.preventAllEvents();
-        bus.off('user-upload-avatar', this.avatar.uploadAvatar);
+        bus.off('user-upload-avatar', this._onuseruploadavatar);
         bus.off('edit-user', this._onedituser);
     }
 }

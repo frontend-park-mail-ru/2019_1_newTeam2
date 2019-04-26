@@ -25,23 +25,23 @@ export class Login {
         }).render());
 
         let headline = new Headline({size: 'h1', textContent: 'Авторизация'});
-        let serverErrorText = document.createElement('div');
-        serverErrorText.classList.add('error-text');
-        serverErrorText.classList.add('hidden-element');
-        serverErrorText.innerText = 'Неправильный логин или пароль';
+        this.serverErrorText = document.createElement('div');
+        this.serverErrorText.classList.add('error-text');
+        this.serverErrorText.classList.add('hidden-element');
+        this.serverErrorText.innerText = 'Неправильный логин или пароль';
 
 
-        let loginTemplateText = document.createElement('div');
-        loginTemplateText.classList.add('error-text');
-        loginTemplateText.classList.add('hidden-element');
-        loginTemplateText.innerText = 'Пожалуйста, используйте только строчные и прописные латинские буквы, цифры и знак подчеркивания';
+        this.loginTemplateText = document.createElement('div');
+        this.loginTemplateText.classList.add('error-text');
+        this.loginTemplateText.classList.add('hidden-element');
+        this.loginTemplateText.innerText = 'Пожалуйста, используйте только строчные и прописные латинские буквы, цифры и знак подчеркивания';
 
         let login = new Input({type: 'text', label: 'Логин* ', id: 'login', maxlen: 20});
 
-        let passwordTemplateText = document.createElement('div');
-        passwordTemplateText.classList.add('error-text');
-        passwordTemplateText.classList.add('hidden-element');
-        passwordTemplateText.innerText = 'Пожалуйста, используйте только строчные и прописные латинские буквы, цифры и знак подчеркивания';
+        this.passwordTemplateText = document.createElement('div');
+        this.passwordTemplateText.classList.add('error-text');
+        this.passwordTemplateText.classList.add('hidden-element');
+        this.passwordTemplateText.innerText = 'Пожалуйста, используйте только строчные и прописные латинские буквы, цифры и знак подчеркивания';
 
         let password = new Input({ type: 'password', label: 'Пароль* ', id: 'password', maxlen: 20});
 
@@ -52,10 +52,10 @@ export class Login {
         let renderedSignupLink = signupLink.render();
         
         outer.appendChild(headline.render());
-        outer.appendChild(serverErrorText);
-        outer.appendChild(loginTemplateText);
+        outer.appendChild(this.serverErrorText);
+        outer.appendChild(this.loginTemplateText);
         outer.appendChild(login.render());
-        outer.appendChild(passwordTemplateText);
+        outer.appendChild(this.passwordTemplateText);
         outer.appendChild(password.render());
         outer.appendChild(renderedSubmit);
         outer.appendChild(renderedSignupLink);
@@ -67,16 +67,16 @@ export class Login {
         });
 
         renderedSubmit.addEventListener( 'click', () => {
-            if (!serverErrorText.classList.contains('hidden-element')) {
-                serverErrorText.classList.add('hidden-element');
+            if (!this.serverErrorText.classList.contains('hidden-element')) {
+                this.serverErrorText.classList.add('hidden-element');
             }
 
-            if (!loginTemplateText.classList.contains('hidden-element')) {
-                loginTemplateText.classList.add('hidden-element');
+            if (!this.loginTemplateText.classList.contains('hidden-element')) {
+                this.loginTemplateText.classList.add('hidden-element');
             }
 
-            if (!passwordTemplateText.classList.contains('hidden-element')) {
-                passwordTemplateText.classList.add('hidden-element');
+            if (!this.passwordTemplateText.classList.contains('hidden-element')) {
+                this.passwordTemplateText.classList.add('hidden-element');
             }         
 
             let loginText = document.getElementById('login').value;
@@ -89,26 +89,27 @@ export class Login {
 
             bus.emit('login-form-submitted', profile);
         });
-
-        this._onwronglogin = () => {
-            loginTemplateText.classList.remove('hidden-element');
-        };
-
-        this._onwrongpassword = () => {
-            passwordTemplateText.classList.remove('hidden-element');
-        };
-
-        this._onnologin = () => {
-            serverErrorText.classList.remove('hidden-element');
-        };
         
-        bus.on('wrong-login', this._onwronglogin);
-        bus.on('wrong-password', this._onwrongpassword);
-        bus.on('no-login', this._onnologin);
-
         renderedSignupLink.addEventListener( 'click', () => {
             router.go('signup');
         });
+
+        bus.on('wrong-login', this._onwronglogin, this);
+        bus.on('wrong-password', this._onwrongpassword, this);
+        bus.on('no-login', this._onnologin, this);
+
+    }
+
+    _onwronglogin() {
+        this.loginTemplateText.classList.remove('hidden-element');
+    }
+
+    _onwrongpassword() {
+        this.passwordTemplateText.classList.remove('hidden-element');
+    }
+
+    _onnologin() {
+        this.serverErrorText.classList.remove('hidden-element');
     }
 
     preventAllEvents() {

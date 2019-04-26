@@ -14,34 +14,34 @@ export class CardController {
         this.view.render();
         this.model.getCardsByDictId({id: this.id});
 
-        this._onnewcardformsubmitted = (body) => {
-            this.model.createCard(body, this.id); 
-        };
-
-        this._oncardremoved = (cardId) => {
-            this.model.deleteCard({
-                dictionaryId: this.id,
-                cardId: cardId
-            });
-        };
-
         this.page = 1;
         this.rows = 5;
 
-        this._onprevpage = () => {
-            this.page = this.page < 2 ? 1 : this.page - 1;
-            this.model.getCardsByDictId({id: this.id, rows:this.rows, page:this.page});
-        };
-        bus.on('prev-page', this._onprevpage);
+        bus.on('prev-page', this._onprevpage, this);
+        bus.on('next-page', this._onnextpage, this);
+        bus.on('new-card-form-submitted', this._onnewcardformsubmitted, this);
+        bus.on('card-removed', this._oncardremoved, this);
+    }
 
-        this._onnextpage = () => {
-            this.page++;
-            this.model.getCardsByDictId({id: this.id, rows:this.rows, page:this.page});
-        };
-        bus.on('next-page', this._onnextpage);
+    _onnewcardformsubmitted(body) {
+        this.model.createCard(body, this.id); 
+    }
 
-        bus.on('new-card-form-submitted', this._onnewcardformsubmitted);
-        bus.on('card-removed', this._oncardremoved);
+    _oncardremoved(cardId) {
+        this.model.deleteCard({
+            dictionaryId: this.id,
+            cardId: cardId
+        });
+    }
+
+    _onprevpage() {
+        this.page = this.page < 2 ? 1 : this.page - 1;
+        this.model.getCardsByDictId({id: this.id, rows:this.rows, page:this.page});
+    }
+    
+    _onnextpage() {
+        this.page++;
+        this.model.getCardsByDictId({id: this.id, rows:this.rows, page:this.page});
     }
 
     preventAllEvents() {

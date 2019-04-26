@@ -24,25 +24,27 @@ export class Leaderboard {
         const head = new Headline({textContent: 'Лидеры'}).render();
         outer.appendChild(head);
 
-        const forTable = document.createElement('div');
-        const forPagination = document.createElement('div');
-        outer.appendChild(forTable);
-        outer.appendChild(forPagination);
+        this.forTable = document.createElement('div');
+        this.forPagination = document.createElement('div');
+        outer.appendChild(this.forTable);
+        outer.appendChild(this.forPagination);
 
-        const table = new Table();
-        this._onload = (data) => {
-            console.log(data);
-            table.data = data;
-            let childNode = forTable.firstChild;
-            if(!childNode)
-                forTable.appendChild(table.render());
-            else
-                childNode = table.render();
-        };
-        bus.on('users-loaded', this._onload);
-
+        this.table = new Table();
+        
         const pagination = new Pagination();
-        pagination.render(forPagination);
+        pagination.render(this.forPagination);
+
+        bus.on('users-loaded', this._onload, this);
+    }
+
+    _onload(data) {
+        this.table.data = data;
+        let childNode = this.forTable.firstChild;
+        if(!childNode) {
+            this.forTable.appendChild(this.table.render());
+        }
+        else
+            childNode = this.table.render();
     }
 
     preventAllEvents() {

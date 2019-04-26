@@ -10,7 +10,7 @@ import {Pagination} from '/components/pagination.js';
 const application = document.getElementById('application');
 
 export class Training {
-    render(options = {}) {
+    render() {
         application.innerText = '';
 
         application.appendChild(new Icon({
@@ -21,95 +21,96 @@ export class Training {
         }).render());
 
 
-        const outer = document.createElement('div');
-        application.appendChild(outer);
-        outer.classList.add('training-outer');
-        this._ondictsloaded = (dicts) => {
-            outer.innerText = '';
-            dicts.forEach((dict) => {
-                const link = new Link({
-                    size: 'h2',
-                    name: dict.name,
+        this.outer = document.createElement('div');
+        application.appendChild(this.outer);
+        this.outer.classList.add('training-outer');
+        
+        bus.on('dicts-loaded', this._ondictsloaded, this);
+        bus.on('game-cards-loaded', this._ongamecardsloaded, this);
+    }
+
+    _ondictsloaded(dicts) {
+        this.outer.innerText = '';
+        dicts.forEach((dict) => {
+            const link = new Link({
+                size: 'h2',
+                name: dict.name,
+                handler: () => {
+                    bus.emit('dict-selected', dict.id);
+                }
+            }).render();
+            this.outer.appendChild(link);
+        });
+        const pagination = new Pagination();
+        pagination.render(this.outer);
+    }
+
+    _ongamecardsloaded(cards) {
+        let result = [];
+
+        const genNextPage = () => {
+            let page = pageGenerator.next();
+            if (!page.done) {
+                this.outer.innerText = '';
+                this.outer.appendChild(page.value);
+            } else {
+                this.outer.innerText = '';
+                let guessedRight = 0;
+                result.forEach((item) => {
+                    if(item.correct) {
+                        ++guessedRight;
+                    }
+                });
+                const head = new Headline({
+                    textContent: 'Ваш результат: ' + guessedRight + '/' + cards.length,
+                    size: 'h3',
+                }).render();
+                this.outer.appendChild(head);
+                const menuButton = new Button({
+                    type: 'secondary',
+                    name: 'Вернуться в меню',
                     handler: () => {
-                        bus.emit('dict-selected', dict.id);
+                        router.go('menu');
                     }
                 }).render();
-                outer.appendChild(link);
-            });
-            const pagination = new Pagination();
-            pagination.render(outer);
+                this.outer.appendChild(menuButton);
+                bus.emit('training-finished', result);
+            }
         };
 
-        bus.on('dicts-loaded', this._ondictsloaded);
+        const pageGenerator = function*() {
+            // TODO(Alex): extract to component
+            for(let index = 0; index < cards.length; ++index) {
+                const card = cards[index];
+                const inner = document.createElement('div');
 
-        this._ongamecardsloaded = (cards) => {
-            let result = [];
-
-            const genNextPage = () => {
-                let page = pageGenerator.next();
-                if (!page.done) {
-                    outer.innerText = '';
-                    outer.appendChild(page.value);
-                } else {
-                    outer.innerText = '';
-                    let guessedRight = 0;
-                    result.forEach((item) => {
-                        if(item.correct) {
-                            ++guessedRight;
+                const word = new GriseMerde({
+                    size: 'big',
+                    inner: card.word
+                }).render();
+                inner.appendChild(word);
+                card.variants.forEach((variant, index) => {
+                    const onchoose = () => {
+                        if (index === card.correct) {
+                            result.push({correct: true, id: card.id});
+                        } else {
+                            result.push({correct: false, id: card.id});
                         }
-                    });
-                    const head = new Headline({
-                        textContent: 'Ваш результат: ' + guessedRight + '/' + cards.length,
+                        genNextPage();
+                    };
+
+                    const choice = new Link({
                         size: 'h3',
+                        name: variant + ' ', /* TODO(gleensande): fix this */
+                        handler: onchoose
                     }).render();
-                    outer.appendChild(head);
-                    const menuButton = new Button({
-                        type: 'secondary',
-                        name: 'Вернуться в меню',
-                        handler: () => {
-                            router.go('menu');
-                        }
-                    }).render();
-                    outer.appendChild(menuButton);
-                    bus.emit('training-finished', result);
-                }
-            };
+                    inner.appendChild(choice);
+                });
 
-            const pageGenerator = function*() {
-                // TODO(Alex): extract to component
-                for(let index = 0; index < cards.length; ++index) {
-                    const card = cards[index];
-                    const inner = document.createElement('div');
-
-                    const word = new GriseMerde({
-                        size: 'big',
-                        inner: card.word
-                    }).render();
-                    inner.appendChild(word);
-                    card.variants.forEach((variant, index) => {
-                        const onchoose = () => {
-                            if (index === card.correct) {
-                                result.push({correct: true, id: card.id});
-                            } else {
-                                result.push({correct: false, id: card.id});
-                            }
-                            genNextPage();
-                        };
-
-                        const choice = new Link({
-                            size: 'h3',
-                            name: variant + ' ', /* TODO(gleensande): fix this */
-                            handler: onchoose
-                        }).render();
-                        inner.appendChild(choice);
-                    });
-
-                    yield inner;
-                }
-            }();
-            genNextPage();
-        };
-        bus.on('game-cards-loaded', this._ongamecardsloaded);
+                yield inner;
+            }
+        }();
+        genNextPage();
     }
 
     preventAllEvents() {

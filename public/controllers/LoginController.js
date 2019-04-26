@@ -10,31 +10,34 @@ export class LoginController {
         auth.logout();
         this.view = new Login();
         this.view.render();
-        this._onlogin = (res) => {
-            if (res.status == 200) {
-                router.go('menu');
-            } else {
-                bus.emit('no-login');
-            }
-        };
-        this._onformsubmitted = (profile) => {
-            let passed = true;
-            if (!validation.checkLogin(profile.username)) {
-                bus.emit('wrong-login', profile);
-                passed = false;
-            }
+        
+        bus.on('login', this._onlogin, this);
+        bus.on('login-form-submitted', this._onformsubmitted, this);
+    }
 
-            if (!validation.checkPassword(profile.password)) {
-                bus.emit('wrong-password', profile);
-                passed = false;
-            }
+    _onlogin(res) {
+        if (res.status == 200) {
+            router.go('menu');
+        } else {
+            bus.emit('no-login');
+        }
+    }
 
-            if(passed) {
-                auth.login(profile);
-            }
-        };
-        bus.on('login', this._onlogin);
-        bus.on('login-form-submitted', this._onformsubmitted);
+    _onformsubmitted(profile) {
+        let passed = true;
+        if (!validation.checkLogin(profile.username)) {
+            bus.emit('wrong-login', profile);
+            passed = false;
+        }
+
+        if (!validation.checkPassword(profile.password)) {
+            bus.emit('wrong-password', profile);
+            passed = false;
+        }
+
+        if(passed) {
+            auth.login(profile);
+        }
     }
 
     preventAllEvents() {

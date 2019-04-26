@@ -12,31 +12,34 @@ export class SignupController {
         this.view = new Signup();
         this.user = new UserModel();
         this.view.render();
-        this._onusercreated = () => {
-            router.go('menu');
-        };
-        this._onformsubmitted = (profile) => {
-            let passed = true;
-            if(!validation.checkLogin(profile.username)) {
-                bus.emit('wrong-login', profile);
-                passed = false;
-            }
+        
+        bus.on('user-created', this._onusercreated, this);
+        bus.on('signup-form-submitted', this._onformsubmitted, this);
+    }
 
-            if(!validation.checkPassword(profile.password)) {
-                bus.emit('wrong-password', profile);
-                passed = false;
-            }
+    _onusercreated() {
+        router.go('menu');
+    }
 
-            if(!validation.checkEmail(profile.email)) {
-                bus.emit('wrong-email', profile);
-                passed = false;
-            }
-            if(passed) {
-                this.user.createUser(profile);
-            }
-        };
-        bus.on('user-created', this._onusercreated);
-        bus.on('signup-form-submitted', this._onformsubmitted);
+    _onformsubmitted(profile) {
+        let passed = true;
+        if(!validation.checkLogin(profile.username)) {
+            bus.emit('wrong-login', profile);
+            passed = false;
+        }
+
+        if(!validation.checkPassword(profile.password)) {
+            bus.emit('wrong-password', profile);
+            passed = false;
+        }
+
+        if(!validation.checkEmail(profile.email)) {
+            bus.emit('wrong-email', profile);
+            passed = false;
+        }
+        if(passed) {
+            this.user.createUser(profile);
+        }
     }
 
     preventAllEvents() {

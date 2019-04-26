@@ -26,24 +26,12 @@ export class Profile{
         outer.appendChild(headline.render());
 
 
-        let forData = document.createElement('div');
+        this.forData = document.createElement('div');
         let forButton = document.createElement('div');
 
-        outer.appendChild(forData);
+        outer.appendChild(this.forData);
         outer.appendChild(forButton);
 
-        this._onuserloaded = (data) => {
-            data.baseUrl = baseUrl;
-            this._user = data;
-            if (!this._user.path) {
-                this._user.path = '/static/avatar-default.png';
-            } else {
-                this._user.path = this._user.baseUrl + this._user.path;
-            }
-            forData.innerHTML = profileTemplate(this._user);
-        };
-
-        bus.on('user-loaded', this._onuserloaded);
 
         let edit = new Button({type: 'secondary', name: 'Редактировать'}).render();
         forButton.appendChild(edit);
@@ -51,7 +39,7 @@ export class Profile{
         edit.addEventListener('click', () => {
             edit.firstChild.classList.add('hidden-element');
             save.firstChild.classList.remove('hidden-element');
-            forData.innerHTML = profileeditTemplate(this._user);
+            this.forData.innerHTML = profileeditTemplate(this._user);
         });
 
         let save = new Button({type: 'secondary', name: 'Сохранить'}).render();
@@ -74,9 +62,22 @@ export class Profile{
             if(fileUpload.value) {
                 bus.emit('user-upload-avatar', fileUpload.files[0]);
             }
-            forData.innerHTML = profileTemplate(this._user);
+            this.forData.innerHTML = profileTemplate(this._user);
         });
         save.firstChild.classList.add('hidden-element');
+
+        bus.on('user-loaded', this._onuserloaded, this);
+    }
+
+    _onuserloaded(data) {
+        data.baseUrl = baseUrl;
+        this._user = data;
+        if (!this._user.path) {
+            this._user.path = '/static/avatar-default.png';
+        } else {
+            this._user.path = this._user.baseUrl + this._user.path;
+        }
+        this.forData.innerHTML = profileTemplate(this._user);
     }
 
     preventAllEvents() {
