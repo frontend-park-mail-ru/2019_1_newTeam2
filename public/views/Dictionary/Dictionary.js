@@ -64,7 +64,7 @@ export class Dictionary {
                 let dict = {};
                 dict.name = document.getElementById('name').value;
                 dict.description = document.getElementById('description').value;
-                setTimeout(bus.emit.bind(bus), 0, 'new-dict-form-submitted', dict);
+                bus.emit('new-dict-form-submitted', dict);
             }
         }).render();
         application.appendChild(submit);

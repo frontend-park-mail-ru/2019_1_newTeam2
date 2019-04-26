@@ -2,7 +2,7 @@ import {DictionaryModel} from '/models/DictionaryModel.js';
 import {Dictionary} from '/views/Dictionary/Dictionary.js';
 import bus from '/services/bus.js';
 import router from '/services/router.js';
-
+ 
 
 export class DictionaryController {
     index() {

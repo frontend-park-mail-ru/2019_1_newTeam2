@@ -10,12 +10,12 @@ class AuthModel {
         })
             .then((res) => {
                 if(res.status === 200)
-                    setTimeout(bus.emit.bind(bus), 0 , 'logged-in', res);
+                    bus.emit('logged-in', res);
                 else
-                    setTimeout(bus.emit.bind(bus), 0 , 'logged-out');
+                    bus.emit('logged-out');
             })
             .catch(() => {
-                setTimeout(bus.emit.bind(bus), 0 , 'logged-out');
+                bus.emit('logged-out');
             });
     }
 
@@ -31,12 +31,12 @@ class AuthModel {
             body: profile
         })
             .then( (res) => {
-                setTimeout(bus.emit.bind(bus), 0 , 'login', res);
+                bus.emit('login', res);
             })
             .catch((err) => {
                 // TODO(gleensande): обработка ошибки
                 console.log(err);
-                setTimeout(bus.emit.bind(bus), 0 , 'no-login');
+                bus.emit('no-login');
             });
     }
 }

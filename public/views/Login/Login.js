@@ -87,7 +87,7 @@ export class Login {
                 'password' : passwordText
             };
 
-            setTimeout(bus.emit.bind(bus), 0 , 'login-form-submitted', profile);
+            bus.emit('login-form-submitted', profile);
         });
 
         this._onwronglogin = () => {

@@ -15,7 +15,7 @@ export class CardController {
         this.model.getCardsByDictId({id: this.id});
 
         this._onnewcardformsubmitted = (body) => {
-            this.model.createCard(body, this.id);
+            this.model.createCard(body, this.id); 
         };
 
         this._oncardremoved = (cardId) => {
@@ -25,18 +25,18 @@ export class CardController {
             });
         };
 
-        let page = 1;
-        const rows = 5;
+        this.page = 1;
+        this.rows = 5;
 
         this._onprevpage = () => {
-            page = page < 2 ? 1 : page - 1;
-            this.model.getCardsByDictId({id: this.id, rows:rows, page:page});
+            this.page = this.page < 2 ? 1 : this.page - 1;
+            this.model.getCardsByDictId({id: this.id, rows:this.rows, page:this.page});
         };
         bus.on('prev-page', this._onprevpage);
 
         this._onnextpage = () => {
-            page++;
-            this.model.getCardsByDictId({id: this.id, rows:rows, page:page});
+            this.page++;
+            this.model.getCardsByDictId({id: this.id, rows:this.rows, page:this.page});
         };
         bus.on('next-page', this._onnextpage);
 

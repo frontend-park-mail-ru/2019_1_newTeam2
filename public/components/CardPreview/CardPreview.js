@@ -36,7 +36,7 @@ export class CardPreview {
             classname: 'card-preview__cross-icon',
             handler: () => {
                 document.getElementById(this.id).classList.add('hidden-element');
-                setTimeout(bus.emit.bind(bus), 0, 'card-removed', this.id);
+                bus.emit('card-removed', this.id);
             }
         }).render();
         rightPart.appendChild(cross);

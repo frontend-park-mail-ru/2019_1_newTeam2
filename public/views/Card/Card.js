@@ -76,7 +76,7 @@ export class Card {
                             'langID': 2
                         }
                     };
-                    setTimeout(bus.emit.bind(bus), 0, 'new-card-form-submitted', card);
+                    bus.emit('new-card-form-submitted', card);
                 }
             }).render();
             forHeader.appendChild(submit);

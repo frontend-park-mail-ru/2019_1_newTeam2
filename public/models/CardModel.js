@@ -14,7 +14,7 @@ export class CardModel {
             .then((res) => {
                 res.json()
                     .then((res) => {
-                        setTimeout(bus.emit.bind(bus), 0, 'cards-loaded', res);
+                        bus.emit('cards-loaded', res);
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
@@ -34,7 +34,7 @@ export class CardModel {
             .then((res) => {
                 res.json()
                     .then((res) => {
-                        setTimeout(bus.emit.bind(bus), 0, 'card-loaded', res);
+                        bus.emit('card-loaded', res);
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
@@ -44,7 +44,7 @@ export class CardModel {
             .catch((err) => {
                 // TODO(gleensande): обработка ошибки
                 console.log(err);
-                setTimeout(bus.emit.bind(bus), 0, 'load-card-error');
+                bus.emit('load-card-error');
             });
     }
 
@@ -54,10 +54,10 @@ export class CardModel {
             body: body
         })
             .then(() => {
-                setTimeout(bus.emit.bind(bus), 0, 'card-created');
+                bus.emit('card-created');
             })
             .catch((error) => {
-                setTimeout(bus.emit.bind(bus), 0, 'create-card-error', error);
+                bus.emit('create-card-error', error);
             });
     }
 
@@ -67,10 +67,10 @@ export class CardModel {
             body: body
         }).then(
             () => {
-                setTimeout(bus.emit.bind(bus), 0, 'card-updated');
+                bus.emit('card-updated');
             },
             (error) => {
-                setTimeout(bus.emit.bind(bus), 0, 'update-card-error', error);
+                bus.emit('update-card-error', error);
                 // TODO(gleensande): обработка ошибки
                 console.log('ошибка во время обновления карты: ' + error);
             }
@@ -83,10 +83,10 @@ export class CardModel {
             body: body
         })
             .then(() => {
-                setTimeout(bus.emit.bind(bus), 0, 'card-deleted', body.cardId);
+                bus.emit('card-deleted', body.cardId);
             })
             .catch((error) => {
-                setTimeout(bus.emit.bind(bus), 0, 'delete-card-error', error);
+                bus.emit('delete-card-error', error);
             });
     }
 }

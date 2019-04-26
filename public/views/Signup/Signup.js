@@ -99,7 +99,7 @@ export class Signup {
                 'pronounceOn' : 0 // по умолчанию
             };
 
-            setTimeout(bus.emit.bind(bus), 0, 'signup-form-submitted', profile);
+            bus.emit('signup-form-submitted', profile);
         });
         this._onwronglogin = () => {
             loginTemplateText.classList.remove('hidden-element');

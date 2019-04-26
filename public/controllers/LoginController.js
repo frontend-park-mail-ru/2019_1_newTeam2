@@ -14,18 +14,18 @@ export class LoginController {
             if (res.status == 200) {
                 router.go('menu');
             } else {
-                setTimeout(bus.emit.bind(bus), 0 , 'no-login');
+                bus.emit('no-login');
             }
         };
         this._onformsubmitted = (profile) => {
             let passed = true;
             if (!validation.checkLogin(profile.username)) {
-                setTimeout(bus.emit.bind(bus), 0 , 'wrong-login', profile);
+                bus.emit('wrong-login', profile);
                 passed = false;
             }
 
             if (!validation.checkPassword(profile.password)) {
-                setTimeout(bus.emit.bind(bus), 0 , 'wrong-password', profile);
+                bus.emit('wrong-password', profile);
                 passed = false;
             }
 

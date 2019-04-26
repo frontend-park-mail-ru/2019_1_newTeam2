@@ -69,10 +69,10 @@ export class Profile{
                     this._user[`${input.name}`] = input.value;
                 }
             );
-            setTimeout(bus.emit.bind(bus), 0, 'edit-user', this._user);
+            bus.emit('edit-user', this._user);
             const fileUpload = document.getElementsByName('file')[0];
             if(fileUpload.value) {
-                setTimeout(bus.emit.bind(bus), 0, 'user-upload-avatar', fileUpload.files[0]);
+                bus.emit('user-upload-avatar', fileUpload.files[0]);
             }
             forData.innerHTML = profileTemplate(this._user);
         });

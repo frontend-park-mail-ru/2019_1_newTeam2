@@ -11,7 +11,7 @@ export const baseUrl = 'https://newteam2back.herokuapp.com/';
 /**
 * Checks the status of http answer
 * 
-* @throws {Error} if request status is not in [200:300)
+* @throws {Error} if request status is not in [200:500)
 * 
 * @param  {object} response
 * 
@@ -27,20 +27,27 @@ const checkStatus = response => {
     }
 };
 
+/**
+ * Module Ajax
+ * 
+ * @class 
+ * @classdesc a module for creating ajax requests
+ * 
+ */
 class AjaxModule {
     /**
-	 * Private _ajax function
-	 * Makes a http request
-	 * 
-	 * @throws {Error} if request status is not in [200:300)
-	 * 
-	 * @param  {object} [unnamed = {}]
-	 * @param  {string} [unnamed.method = 'GET']
-	 * @param  {string} [unnamed.path = '/'] 
-	 * @param  {object} [unnamed.body = {}]
-	 * 
-	 * @returns {Promise}
-	 */
+     * Private _ajax function
+     * Makes a http request
+     * 
+     * @throws {Error} if request status is not in [200:500)
+     * 
+     * @param  {object} [unnamed = {}]
+     * @param  {string} [unnamed.method = 'GET']
+     * @param  {string} [unnamed.path = '/'] 
+     * @param  {object} [unnamed.body = {}]
+     * 
+     * @returns {Promise}
+     */
     _ajax ({
         method = 'GET',
         path = '/',
@@ -62,39 +69,41 @@ class AjaxModule {
             .then((response) => {
                 if(response.status === 208) {
                     console.log(response);
-                    setTimeout(bus.emit.bind(bus), 0, 'no-internet');
+                    bus.emit('no-internet');
                 }
                 return response;
             }).then(checkStatus);
     }
+
     /** 
-   * Simple wrapper on private _ajax function
-	 * Makes a GET http request
-	 *
-	 * @throws {Error} if request status is not in [200:300)
-	 *
-	 * @param  {object} [unnamed = {}]
-	 * @param  {string} [unnamed.path = '/']
-	 *
-	 * @returns {Promise}
-	 */
+     * Simple wrapper on private _ajax function
+     * Makes a GET http request
+     *
+     * @throws {Error} if request status is not in [200:500)
+     *
+     * @param  {object} [unnamed = {}]
+     * @param  {string} [unnamed.path = '/']
+     *
+     * @returns {Promise}
+     */
     doGet({
         path = '/',
     } = {}) {
         return this._ajax({path: path});
     }
+
     /**
-	 * Simple wrapper on private _ajax function
-	 * Makes a POST http request
-	 * 
-	 * @throws {Error} if request status is not in [200:300)
-	 * 
-	 * @param  {object} [unnamed = {}] 
-	 * @param  {string} [unnamed.path = '/'] 
-	 * @param  {object} [unnamed.body = {}]
-	 * 
-	 * @returns {Promise}
-	 */
+     * Simple wrapper on private _ajax function
+     * Makes a POST http request
+     * 
+     * @throws {Error} if request status is not in [200:500)
+     * 
+     * @param  {object} [unnamed = {}] 
+     * @param  {string} [unnamed.path = '/'] 
+     * @param  {object} [unnamed.body = {}]
+     * 
+     * @returns {Promise}
+     */
     doPost({
         path = '/',
         body = {},
@@ -105,18 +114,19 @@ class AjaxModule {
             method: 'POST',
         });
     }
+
     /**
-	 * Simple wrapper on private _ajax function
-	 * Makes a PUT http request
-	 * 
-	 * @throws {Error} if request status is not in [200:300)
-	 * 
-	 * @param  {object} [unnamed = {}] 
-	 * @param  {string} [unnamed.path = '/'] 
-	 * @param  {object} [unnamed.body = {}]
-	 * 
-	 * @returns {Promise}
-	 */
+     * Simple wrapper on private _ajax function
+     * Makes a PUT http request
+     * 
+     * @throws {Error} if request status is not in [200:500)
+     * 
+     * @param  {object} [unnamed = {}] 
+     * @param  {string} [unnamed.path = '/'] 
+     * @param  {object} [unnamed.body = {}]
+     * 
+     * @returns {Promise}
+     */
     doPut({
         path = '/',
         body = {},
@@ -127,17 +137,18 @@ class AjaxModule {
             method: 'PUT',
         });
     }
+
     /**
-	 * Simple wrapper on private _ajax function
-	 * Makes a DELETE http request
-	 * 
-	 * @throws {Error} if request status is not in [200:300)
-	 * 
-	 * @param  {object} [unnamed = {}] 
-	 * @param  {string} [unnamed.path = '/'] 
-	 *
-	 * @returns {Promise}
-	 */
+     * Simple wrapper on private _ajax function
+     * Makes a DELETE http request
+     * 
+     * @throws {Error} if request status is not in [200:500)
+     * 
+     * @param  {object} [unnamed = {}] 
+     * @param  {string} [unnamed.path = '/'] 
+     *
+     * @returns {Promise}
+     */
     doDelete({
         path = '/',
         body = {}
@@ -148,18 +159,19 @@ class AjaxModule {
             method: 'DELETE',
         });
     }
+
     /**
-	 * Simple wrapper on private _ajax function
-	 * Makes a PUT http request
-	 * 
-	 * @throws {Error} if request status is not in [200:300)
-	 * 
-	 * @param  {object} [unnamed = {}] 
-	 * @param  {string} [unnamed.path = '/'] 
-	 * @param  {object} [unnamed.body = {}]
-	 * 
-	 * @returns {Promise}
-	 */
+     * Simple wrapper on private _ajax function
+     * Makes a PUT http request
+     * 
+     * @throws {Error} if request status is not in [200:500)
+     * 
+     * @param  {object} [unnamed = {}] 
+     * @param  {string} [unnamed.path = '/'] 
+     * @param  {object} [unnamed.body = {}]
+     * 
+     * @returns {Promise}
+     */
     doPatch({
         path = '/',
         body = {},
@@ -171,7 +183,15 @@ class AjaxModule {
         });
     }
 
-
+    /**
+     * Makes a request to post avatar
+     * 
+     * @throws {Error} if request status is not in [200:500)
+     * 
+     * @param  {object} [body]
+     * 
+     * @returns {Promise}
+     */
     uploadAvatar({
         body
     } = {}) {

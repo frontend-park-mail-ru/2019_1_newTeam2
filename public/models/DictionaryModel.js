@@ -14,7 +14,7 @@ export class DictionaryModel {
             .then((res) => {
                 res.json()
                     .then( (res) => {
-                        setTimeout(bus.emit.bind(bus), 0, 'dicts-loaded', res);
+                        bus.emit('dicts-loaded', res);
                     })
                     .catch( (err) => {
                         // TODO(gleensande): обработка ошибки
@@ -34,7 +34,7 @@ export class DictionaryModel {
             .then((res) => {
                 res.json()
                     .then((res) => {
-                        setTimeout(bus.emit.bind(bus), 0, 'dict-loaded', res);
+                        bus.emit('dict-loaded', res);
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
@@ -44,7 +44,7 @@ export class DictionaryModel {
             .catch((err) => {
                 // TODO(gleensande): обработка ошибки
                 console.log(err);
-                setTimeout(bus.emit.bind(bus), 0, 'load-dict-error');
+                bus.emit('load-dict-error');
             });
     }
 
@@ -56,16 +56,16 @@ export class DictionaryModel {
             .then((res) => {
                 res.json()
                     .then ((res) => {
-                        setTimeout(bus.emit.bind(bus), 0, 'dict-created', res);
+                        bus.emit('dict-created', res);
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
-                        setTimeout(bus.emit.bind(bus), 0, 'create-dict-error', err);
+                        bus.emit('create-dict-error', err);
                     });
             })
             .catch ((error) => {
                 // TODO(gleensande): обработка ошибки
-                setTimeout(bus.emit.bind(bus), 0, 'create-dict-error', error);
+                bus.emit('create-dict-error', error);
             });
     }
 
@@ -75,10 +75,10 @@ export class DictionaryModel {
             body: body
         })
             .then(() => {
-                setTimeout(bus.emit.bind(bus), 0, 'dict-updated');
+                bus.emit('dict-updated');
             })
             .catch ((error) => {
-                setTimeout(bus.emit.bind(bus), 0, 'update-dict-error', error);
+                bus.emit('update-dict-error', error);
                 // TODO(gleensande): обработка ошибки
                 console.log('error while update dict' + error);
             });
@@ -89,11 +89,11 @@ export class DictionaryModel {
             path: this.url + '/' + id.toString(10)
         })
             .then(() => {
-                setTimeout(bus.emit.bind(bus), 0, 'dict-deleted');
+                bus.emit('dict-deleted');
             })
             .catch((error) => {
                 // TODO(gleensande): обработка ошибки
-                setTimeout(bus.emit.bind(bus), 0, 'delete-dict-error', error);
+                bus.emit('delete-dict-error', error);
             });
     }
 }

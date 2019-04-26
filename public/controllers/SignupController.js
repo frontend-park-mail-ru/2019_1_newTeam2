@@ -18,17 +18,17 @@ export class SignupController {
         this._onformsubmitted = (profile) => {
             let passed = true;
             if(!validation.checkLogin(profile.username)) {
-                setTimeout(bus.emit.bind(bus), 0 , 'wrong-login', profile);
+                bus.emit('wrong-login', profile);
                 passed = false;
             }
 
             if(!validation.checkPassword(profile.password)) {
-                setTimeout(bus.emit.bind(bus), 0 , 'wrong-password', profile);
+                bus.emit('wrong-password', profile);
                 passed = false;
             }
 
             if(!validation.checkEmail(profile.email)) {
-                setTimeout(bus.emit.bind(bus), 0 , 'wrong-email', profile);
+                bus.emit('wrong-email', profile);
                 passed = false;
             }
             if(passed) {
