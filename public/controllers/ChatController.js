@@ -3,6 +3,7 @@ import {Chat} from '/views/Chat/Chat.js';
 import {UserModel} from '/models/UserModel.js';
 import auth from '/models/AuthModel.js';
 import bus from '/services/bus.js';
+import ws from "../services/webSocket.js";
 
 export class ChatController extends Controller {
     index() {
@@ -13,11 +14,23 @@ export class ChatController extends Controller {
             ['logged-in', this._onloggedin],
             ['logged-out', this._onloggedout],
             ['ws-message-received', this._onmessagereceived],
+            ['user-loaded', this._onuserloaded],
+            ['message-form-submitted', this._onmessageformsubmitted],
         ]);
 
         super.subscribeAll();
 
         this.model = new UserModel();
+        this.model.getSelf();
+    }
+
+    _onuserloaded(data) {
+        this.selfid = data.id;
+    }
+
+    _onmessageformsubmitted(text) {
+        while(!this.selfid);
+        ws.send({message: text, id: this.selfid});
     }
 
     _onloggedin() {
@@ -55,6 +68,6 @@ export class ChatController extends Controller {
         if(document.hidden) {
             this._notify(data.message);
         }
-        bus.emit('name-got');
+        bus.emit('name-got', data);
     }
 }

@@ -55,7 +55,6 @@ export class Chat extends View {
     }
 
     _onmessageformsubmitted(text) {
-        ws.send({message: text});
         const message = new ChatMessage({author: 'me', text: text}).render();
         this.forData.appendChild(message);
         message.scrollIntoView();
@@ -66,7 +65,7 @@ export class Chat extends View {
     }
 
     _onnamegot(data) {
-        const message = new ChatMessage({author: 'partner', authorName: data.name, text: data.message}).render();
+        const message = new ChatMessage({author: 'partner', text: data.message}).render();
         this.forData.appendChild(message);
         message.scrollIntoView();
     }
