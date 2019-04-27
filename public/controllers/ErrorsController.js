@@ -1,21 +1,18 @@
+import {Controller} from '/controllers/Controller.js';
 import {Errors} from '/views/Errors/Errors.js';
-import bus from '/services/bus.js';
 
-export class ErrorsController {
+export class ErrorsController extends Controller {
     index() {
         this.view = new Errors();
 
+        this.listeners = new Set ([
+            ['prev-page', this._onnotfound],
+        ]);
 
-        this._on_not_found = () => {
-            this.view.render({errorText: 'К сожалению, такая страница не найдена :('});
-        };
-
-        bus.on('not-found-error', this._on_not_found);
+        super.subscribeAll();
     }
 
-    preventAllEvents() {
-        this.view.preventAllEvents();
-        // От этого события не надо отписываться никогда ??
-        // bus.off('not-found-error', this._on_not_found);
+    _onnotfound() {
+        this.view.render({errorText: 'К сожалению, такая страница не найдена :('});
     }
 }

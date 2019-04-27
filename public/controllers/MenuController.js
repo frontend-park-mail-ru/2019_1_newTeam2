@@ -1,23 +1,25 @@
+import {Controller} from '/controllers/Controller.js';
 import {Menu} from '/views/Menu/Menu.js';
 import auth from '/models/AuthModel.js';
-import bus from '/services/bus.js';
 
-export class MenuController {
+export class MenuController extends Controller {
     index() {
-        const menu = new Menu();
+        this.view = new Menu();
         auth.isAuthorised();
-        this._onloggedin = () => {
-            menu.render({authorised: true});
-        };
-        bus.on('logged-in', this._onloggedin);
-        this._onloggedout = () => {
-            menu.render({authorised: false});
-        };
-        bus.on('logged-out', this._onloggedout);
+        
+        this.listeners = new Set ([
+            ['logged-in', this._onloggedin],
+            ['logged-out', this._onloggedout],
+        ]);
+
+        super.subscribeAll();
     }
 
-    preventAllEvents() {
-        bus.off('logged-in', this._onloggedin);
-        bus.off('logged-out', this._onloggedout);
+    _onloggedin() {
+        this.view.render({authorised: true});
+    }
+    
+    _onloggedout() {
+        this.view.render({authorised: false});
     }
 }

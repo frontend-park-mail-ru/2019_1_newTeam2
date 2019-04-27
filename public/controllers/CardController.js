@@ -1,10 +1,11 @@
+import {Controller} from '/controllers/Controller.js';
 import {CardModel} from '/models/CardModel.js';
 import {DictionaryModel} from '/models/DictionaryModel.js';
 import {Card} from '/views/Card/Card.js';
 import bus from '/services/bus.js';
 
 
-export class CardController {
+export class CardController extends Controller{
     index(options = {path: ''}) {
         [this.name, this.id] = options.path.split('/');
         this.id = parseInt(this.id);
@@ -14,41 +15,37 @@ export class CardController {
         this.view.render();
         this.model.getCardsByDictId({id: this.id});
 
-        this._onnewcardformsubmitted = (body) => {
-            this.model.createCard(body, this.id);
-        };
+        this.page = 1;
+        this.rows = 5;
 
-        this._oncardremoved = (cardId) => {
-            this.model.deleteCard({
-                dictionaryId: this.id,
-                cardId: cardId
-            });
-        };
+        this.listeners = new Set ([
+            ['prev-page', this._onprevpage],
+            ['next-page', this._onnextpage],
+            ['new-card-form-submitted', this._onnewcardformsubmitted],
+            ['card-removed', this._oncardremoved],
+        ]);
 
-        let page = 1;
-        const rows = 5;
-
-        this._onprevpage = () => {
-            page = page < 2 ? 1 : page - 1;
-            this.model.getCardsByDictId({id: this.id, rows:rows, page:page});
-        };
-        bus.on('prev-page', this._onprevpage);
-
-        this._onnextpage = () => {
-            page++;
-            this.model.getCardsByDictId({id: this.id, rows:rows, page:page});
-        };
-        bus.on('next-page', this._onnextpage);
-
-        bus.on('new-card-form-submitted', this._onnewcardformsubmitted);
-        bus.on('card-removed', this._oncardremoved);
+        super.subscribeAll();
     }
 
-    preventAllEvents() {
-        this.view.preventAllEvents();
-        bus.off('next-page', this._onnextpage);
-        bus.off('prev-page', this._onprevpage);
-        bus.off('new-card-form-submitted', this._onnewcardformsubmitted);
-        bus.off('card-removed', this._oncardremoved);
+    _onnewcardformsubmitted(body) {
+        this.model.createCard(body, this.id); 
+    }
+
+    _oncardremoved(cardId) {
+        this.model.deleteCard({
+            dictionaryId: this.id,
+            cardId: cardId
+        });
+    }
+
+    _onprevpage() {
+        this.page = this.page < 2 ? 1 : this.page - 1;
+        this.model.getCardsByDictId({id: this.id, rows:this.rows, page:this.page});
+    }
+    
+    _onnextpage() {
+        this.page++;
+        this.model.getCardsByDictId({id: this.id, rows:this.rows, page:this.page});
     }
 }

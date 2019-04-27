@@ -1,45 +1,45 @@
+import {Controller} from '/controllers/Controller.js';
 import {Training} from '/views/Training/Training.js';
 import {GameWordsModel} from '/models/GameWordsModel.js';
 import bus from '/services/bus.js';
 import {DictionaryModel} from '/models/DictionaryModel.js';
 
-export class TrainingController {
+export class TrainingController extends Controller {
     index() {
         this.view = new Training();
         this.view.render();
         this.dictModel = new DictionaryModel();
         this.dictModel.getSelfDicts();
         this.gameModel = new GameWordsModel();
-        bus.on('dict-selected', this.ondictselected.bind(this));
-        bus.on('training-finished', this.ontrainingfinished.bind(this));
+        
+        this.page = 1;
+        this.rows = 5;
+        
+        this.listeners = new Set ([
+            ['prev-page', this._onprevpage],
+            ['next-page', this._onnextpage],
+            ['dict-selected', this._ondictselected],
+            ['training-finished', this._ontrainingfinished],
+        ]);
 
-        let page = 1;
-        const rows = 5;
-
-        this._onprevpage = () => {
-            page = page < 2 ? 1 : page - 1;
-            this.dictModel.getSelfDicts({rows:rows, page:page});
-        };
-        bus.on('prev-page', this._onprevpage);
-
-        this._onnextpage = () => {
-            page++;
-            this.dictModel.getSelfDicts({rows:rows, page:page});
-        };
-        bus.on('next-page', this._onnextpage);
+        super.subscribeAll();
     }
 
-    ondictselected(dictID) {
+    _ondictselected(dictID) {
         this.gameModel.getCards(dictID, 10);
     }
 
-    ontrainingfinished(result) {
+    _ontrainingfinished(result) {
         this.gameModel.sendResult(result);
     }
 
-    preventAllEvents() {
-        this.view.preventAllEvents();
-        bus.off('dict-selected', this.ondictselected);
-        bus.off('training-finished', this.ontrainingfinished);
+    _onprevpage() {
+        this.page = this.page < 2 ? 1 : this.page - 1;
+        this.dictModel.getSelfDicts({rows: this.rows, page: this.page});
+    }
+
+    _onnextpage() {
+        this.page++;
+        this.dictModel.getSelfDicts({rows:this.rows, page:this.page});
     }
 }

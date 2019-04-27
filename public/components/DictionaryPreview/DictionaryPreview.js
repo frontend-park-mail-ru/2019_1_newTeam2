@@ -21,8 +21,7 @@ export class DictionaryPreview {
 
         let image = new Image({
             callback: () => {
-                document.getElementById(this.id).classList.add('hidden-element');
-                setTimeout(bus.emit.bind(bus), 0, 'dict-removed', this.id);
+                router.go('dictionary/' + this.id);
             },
             type: 'dictionary',
             src: '/static/dictionary-image.png'
@@ -35,7 +34,7 @@ export class DictionaryPreview {
             classname: 'dictionary-preview__cross-icon',
             handler: () => {
                 document.getElementById(this.id).classList.add('hidden-element');
-                setTimeout(bus.emit.bind(bus), 0, 'dict-removed', this.id);
+                bus.emit('dict-removed', this.id);
             }
         }).render();
         outer.appendChild(cross);

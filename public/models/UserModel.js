@@ -24,7 +24,7 @@ export class UserModel {
             .then((res) => {
                 res.json()
                     .then((res) => {
-                        setTimeout(bus.emit.bind(bus), 0, 'user-loaded', res);
+                        bus.emit('user-loaded', res);
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
@@ -44,7 +44,7 @@ export class UserModel {
             .then((res) => {
                 res.json()
                     .then((res) => {
-                        setTimeout(bus.emit.bind(bus), 0, 'user-loaded', res);
+                        bus.emit('user-loaded', res);
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
@@ -64,7 +64,7 @@ export class UserModel {
             .then((res) => {
                 res.json()
                     .then((res) => {
-                        setTimeout(bus.emit.bind(bus), 0, 'users-loaded', res);
+                        bus.emit('users-loaded', res);
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
@@ -84,10 +84,10 @@ export class UserModel {
             body: body
         })
             .then(() => {
-                setTimeout(bus.emit.bind(bus), 0, 'user-updated');
+                bus.emit('user-updated');
             })
             .catch((error) => {
-                setTimeout(bus.emit.bind(bus), 0, 'update-user-error', error);
+                bus.emit('update-user-error', error);
                 // TODO(gleensande): обработка ошибки
                 console.log('some shit happened: ' + error);
             });
@@ -99,10 +99,10 @@ export class UserModel {
             body: body
         })
             .then(() => {
-                setTimeout(bus.emit.bind(bus), 0, 'user-created');
+                bus.emit('user-created');
             })
             .catch ((error) => {
-                setTimeout(bus.emit.bind(bus), 0, 'create-user-error', error);
+                bus.emit('create-user-error', error);
             });
     }
 
@@ -111,10 +111,10 @@ export class UserModel {
             path: this.url + '/' + id.toString(10)
         })
             .then(() => {
-                setTimeout(bus.emit.bind(bus), 0, 'user-deleted');
+                bus.emit('user-deleted');
             })
             .catch((error) => {
-                setTimeout(bus.emit.bind(bus), 0, 'delete-user-error', error);
+                bus.emit('delete-user-error', error);
             });
     }
 }

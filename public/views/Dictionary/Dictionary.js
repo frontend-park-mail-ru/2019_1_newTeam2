@@ -1,5 +1,6 @@
 'use strict';
 
+import {View} from '/views/View.js';
 import router from '/services/router.js';
 import {Headline} from '/components/Headline/Headline.js';
 import {Icon} from '/components/Icon/Icon.js';
@@ -11,11 +12,11 @@ import {Pagination} from '/components/pagination.js';
 
 const application = document.getElementById('application');
 
-export class Dictionary {
+export class Dictionary extends View {
     render() {
         application.innerHTML = '';
-        const forContent = document.createElement('div');
-        const forPagination = document.createElement('div');
+        this.forContent = document.createElement('div');
+        this.forPagination = document.createElement('div');
 
         application.appendChild(new Icon({
             src: '/static/home-icon.png',
@@ -64,7 +65,7 @@ export class Dictionary {
                 let dict = {};
                 dict.name = document.getElementById('name').value;
                 dict.description = document.getElementById('description').value;
-                setTimeout(bus.emit.bind(bus), 0, 'new-dict-form-submitted', dict);
+                bus.emit('new-dict-form-submitted', dict);
             }
         }).render();
         application.appendChild(submit);
@@ -103,24 +104,24 @@ export class Dictionary {
         application.appendChild(limiter);
 
 
-        application.appendChild(forContent);
-        application.appendChild(forPagination);
+        application.appendChild(this.forContent);
+        application.appendChild(this.forPagination);
 
-        this._ondictsloaded = (dicts) => {
-            forContent.innerText = '';
-            dicts.forEach((dict) => {
-                let preview = new DictionaryPreview(dict).render();
-                forContent.appendChild(preview);
-            });
-        };
 
         const pagination = new Pagination();
-        pagination.render(forPagination);
+        pagination.render(this.forPagination);
 
-        bus.on('dicts-loaded', this._ondictsloaded);
+        this.listeners = new Set([
+            ['dicts-loaded', this._ondictsloaded],
+        ]);
+        super.subscribeAll();
     }
 
-    preventAllEvents() {
-        bus.off('dicts-loaded', this._ondictsloaded);
+    _ondictsloaded(dicts) {
+        this.forContent.innerText = '';
+        dicts.forEach((dict) => {
+            let preview = new DictionaryPreview(dict).render();
+            this.forContent.appendChild(preview);
+        });
     }
 }

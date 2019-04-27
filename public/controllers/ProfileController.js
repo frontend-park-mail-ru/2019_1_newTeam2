@@ -1,25 +1,29 @@
+import {Controller} from '/controllers/Controller.js';
 import {Profile} from '/views/Profile/Profile.js';
 import {UserModel} from '/models/UserModel.js';
-import bus from '/services/bus.js';
 import {AvatarModel} from '/models/AvatarModel.js';
 
-export class ProfileController {
+export class ProfileController extends Controller {
     index() {
         this.avatar = new AvatarModel();
         this.view = new Profile();
         this.view.render();
         this.user = new UserModel();
         this.user.getSelf();
-        bus.on('user-upload-avatar', this.avatar.uploadAvatar);
-        this._onedituser = (data) => {
-            this.user.updateUser(data.id, data);
-        };
-        bus.on('edit-user', this._onedituser);
+        
+        this.listeners = new Set ([
+            ['user-upload-avatar', this._onuseruploadavatar],
+            ['edit-user', this._onedituser],
+        ]);
+
+        super.subscribeAll();
     }
 
-    preventAllEvents() {
-        this.view.preventAllEvents();
-        bus.off('user-upload-avatar', this.avatar.uploadAvatar);
-        bus.off('edit-user', this._onedituser);
+    _onuseruploadavatar() {
+        this.avatar.uploadAvatar;
+    }
+
+    _onedituser(data) {
+        this.user.updateUser(data.id, data);
     }
 }

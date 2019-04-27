@@ -20,12 +20,12 @@ export class GameWordsModel {
                 res.json()
                     .then(
                         (res) => {
-                            setTimeout(bus.emit.bind(bus), 0, 'game-cards-loaded', res);
+                            bus.emit('game-cards-loaded', res);
                         }
                     );
             })
             .catch((error) => {
-                setTimeout(bus.emit.bind(bus), 0, 'load-game-cards-error', error);
+                bus.emit('load-game-cards-error', error);
             });
     }
 
@@ -35,10 +35,10 @@ export class GameWordsModel {
             body: body
         })
             .then(() => {
-                setTimeout(bus.emit.bind(bus), 0, 'game-result-sent');
+                bus.emit('game-result-sent');
             })
             .catch((error) => {
-                setTimeout(bus.emit.bind(bus), 0, 'load-game-card-error', error);
+                bus.emit('load-game-card-error', error);
             });
     }
 }

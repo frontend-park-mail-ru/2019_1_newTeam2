@@ -1,31 +1,34 @@
+import {Controller} from '/controllers/Controller.js';
 import {UserModel} from '/models/UserModel.js';
 import {Leaderboard} from '/views/Leaderboard/Leaderboard.js';
-import bus from '/services/bus.js';
 
 
-export class LeaderboardController {
-    index({rows = 10, page = 1}) {
+export class LeaderboardController extends Controller {
+    index() {
         this.view = new Leaderboard();
         this.view.render();
         this.users = new UserModel();
-        this.users.getUsers(rows, page);
 
-        this._onprevpage = () => {
-            page = page < 2 ? 1 : page - 1;
-            this.users.getUsers(rows, page);
-        };
-        bus.on('prev-page', this._onprevpage);
+        this.rows = 10;
+        this.page = 1;
 
-        this._onnextpage = () => {
-            page++;
-            this.users.getUsers(rows, page);
-        };
-        bus.on('next-page', this._onnextpage);
+        this.users.getUsers(this.rows, this.page);
+
+        this.listeners = new Set ([
+            ['prev-page', this._onprevpage],
+            ['next-page', this._onnextpage],
+        ]);
+
+        super.subscribeAll();
     }
 
-    preventAllEvents() {
-        this.view.preventAllEvents();
-        bus.off('prev-page', this._onprevpage);
-        bus.off('next-page', this._onnextpage);
+    _onprevpage() {
+        this.page = this.page < 2 ? 1 : this.page - 1;
+        this.users.getUsers(this.rows, this.page);
+    }
+
+    _onnextpage() {
+        this.page++;
+        this.users.getUsers(this.rows, this.page);
     }
 }
