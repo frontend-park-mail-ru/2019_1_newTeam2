@@ -1,6 +1,5 @@
 'use strict';
 
-import {Headline} from '/components/Headline/Headline.js';
 import {Image} from '/components/Image/Image.js';
 import {Icon} from '/components/Icon/Icon.js';
 import {Link} from '/components/Link/Link.js';

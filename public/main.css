@@ -12,6 +12,7 @@
 @import "./components/CardPreview/card-preview.css";
 @import "./components/ChatData/chat-data.css";
 @import "./components/ChatMessage/chat-message.css";
+@import "./components/ChatForm/chat-form.css";
 
 @import "views/Dictionary/Dictionary.css" screen;
 @import "views/Training/Training.css" screen;

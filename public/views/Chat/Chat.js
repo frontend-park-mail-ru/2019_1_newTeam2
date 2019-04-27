@@ -3,12 +3,12 @@
 import {View} from '/views/View.js';
 import {Headline} from '/components/Headline/Headline.js';
 import {Icon} from '/components/Icon/Icon.js';
-import {Button} from '/components/Button/Button.js';
 import {ChatData} from '/components/ChatData/ChatData.js';
 import {ChatMessage} from '/components/ChatMessage/ChatMessage.js';
-import ws from '/services/webSocket.js';
+import {ChatForm} from '/components/ChatForm/ChatForm.js';
 
 import router from '/services/router.js';
+import ws from '/services/webSocket.js';
 
 const application = document.getElementById('application');
 
@@ -33,17 +33,26 @@ export class Chat extends View {
         this.forData = new ChatData().render();
         outer.appendChild(this.forData);
 
-        
-        const forInput = document.createElement('div');
-        outer.appendChild(forInput);
+        this.forInput = document.createElement('div');
+        outer.appendChild(this.forInput);
 
+        this.forInput.appendChild(new ChatForm().render()); // TODO(): on ws opened
 
-        let send = new Button({type: 'secondary', name: 'Отправить'}).render();
-        forInput.appendChild(send);
         this.listeners = new Set([
+            ['message-form-submitted', this._onmessageformsubmitted],
+            ['ws-opened', this._onwsopened],
             ['ws-message-received', this._onmessagereceived],
         ]);
         super.subscribeAll();
+    }
+
+    _onmessageformsubmitted(text) {
+        ws.send(text);
+        this.forData.appendChild(new ChatMessage({author: 'me', text: text}).render());
+    }
+
+    _onwsopened() {
+        this.forInput.appendChild(new ChatForm().render());
     }
 
     _onmessagereceived(text) {

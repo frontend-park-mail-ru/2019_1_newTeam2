@@ -1,6 +1,5 @@
 'use strict';
 
-import { Headline } from '/components/Headline/Headline.js';
 import { Icon } from '/components/Icon/Icon.js';
 import bus from '/services/bus.js';
 
