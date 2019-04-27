@@ -1,8 +1,39 @@
+.chat-message-area {
+    width: 100%;
+    overflow: auto;
+}
+
+.chat-name {
+    font-style: italic;
+    margin: 4px 4px 0px 4px;
+    padding: 2px;
+}
+
+.chat-name__left {
+    float: left;
+}
+
+.chat-name__right {
+    float: right;
+}
+
+.breaker {
+    width: 100%;
+    height: 1px;
+    clear: both;
+}
+
 .chat-message {
-    width: 200px;
     border: 2px solid #6d6767;
     border-radius: 4px;
-    margin: 4px;
+    margin: 2px 4px 4px 4px;
+    padding: 2px;
+    max-width: 300px;
+    white-space: pre-wrap;      /* CSS3 */   
+    white-space: -moz-pre-wrap; /* Firefox */    
+    white-space: -pre-wrap;     /* Opera <7 */   
+    white-space: -o-pre-wrap;   /* Opera 7 */    
+    word-wrap: break-word;      /* IE */
 }
 
 .chat-message__left {

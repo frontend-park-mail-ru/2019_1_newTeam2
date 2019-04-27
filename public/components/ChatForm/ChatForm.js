@@ -27,11 +27,20 @@ export class ChatForm {
             name: 'Отправить',
             handler: (() => {
                 const text = document.getElementById('message').value;
+                if (!text) {
+                    return;
+                }
                 document.getElementById('message').value = '';
                 bus.emit('message-form-submitted', text);
             }),
         }).render();
         outer.appendChild(send);
+
+        outer.addEventListener( 'keyup', (event) => {
+            if(event.keyCode === 13){ // Enter button clicked
+                send.click();
+            }
+        });
 
         return outer;
     }
