@@ -8,7 +8,6 @@ import {ChatMessage} from '/components/ChatMessage/ChatMessage.js';
 import {ChatForm} from '/components/ChatForm/ChatForm.js';
 
 import router from '/services/router.js';
-import ws from '/services/webSocket.js';
 
 const application = document.getElementById('application');
 
