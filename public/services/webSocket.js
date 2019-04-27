@@ -1,9 +1,10 @@
-import {baseUrl} from '/services/ajax.js';
 import bus from '/services/bus.js';
+
+const chatUrl = 'localhost:8091/'; // TODO(Deploy): change url for deploy
 
 class WebSocketService {
     constructor() {
-        this.ws = new WebSocket(`ws://${baseUrl}chat/enter/`);
+        this.ws = new WebSocket(`ws://${chatUrl}chat/enter/`);
         this.ws.addEventListener('open', () => {
             bus.emit('ws-opened');
         });
