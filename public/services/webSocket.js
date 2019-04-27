@@ -9,12 +9,12 @@ model.getSelf();
 
 class WebSocketService {
     constructor() {
-        bus.on('user-loaded', this._callback);
+        bus.on('user-loaded', this._callback, this);
     }
 
     _callback(data) {
         bus.off('user-loaded', this._callback);
-        this.ws = new WebSocket(`ws://${chatUrl}chat/enter/${this.id}`);
+        this.ws = new WebSocket(`ws://${chatUrl}chat/enter/${data.id}`);
         this.ws.addEventListener('open', () => {
             bus.emit('ws-opened');
         });
