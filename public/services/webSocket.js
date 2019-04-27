@@ -8,13 +8,14 @@ class WebSocketService {
             bus.emit('ws-opened');
         });
 
-        this.ws.addEventListener('message', (data) => {
-            bus.emit('ws-message-received', data);
+        this.ws.addEventListener('message', (event) => {
+            const msg = JSON.parse(event.data);
+            bus.emit('ws-message-received', msg);
         });
     }
 
     send(data) {
-        this.ws.send(data);
+        this.ws.send(JSON.stringify(data));
     }
 }
 
