@@ -71,8 +71,6 @@ export class Profile extends View {
             ['user-loaded', this._onuserloaded],
         ]);
         super.subscribeAll();
-
-        bus.on('user-loaded', this._onuserloaded, this);
     }
 
     _onuserloaded(data) {
