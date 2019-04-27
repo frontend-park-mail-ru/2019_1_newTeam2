@@ -1,4 +1,4 @@
-import baseUrl from '/services/ajax.js';
+import {baseUrl} from '/services/ajax.js';
 import bus from '/services/bus.js';
 
 class WebSocketService {
