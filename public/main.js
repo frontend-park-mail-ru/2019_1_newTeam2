@@ -9,7 +9,9 @@ import {LoginController} from '/controllers/LoginController.js';
 import {DictionaryController} from '/controllers/DictionaryController.js';
 import {CardController} from '/controllers/CardController.js';
 import {ChatController} from '/controllers/ChatController.js';
+import {IframeChat} from '/components/IframeChat/IframeChat.js';
 
+document.getElementsByTagName('body')[0].appendChild(new IframeChat().render());
 
 if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
