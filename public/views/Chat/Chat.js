@@ -41,6 +41,7 @@ export class Chat extends View {
         this.listeners = new Set([
             ['message-form-submitted', this._onmessageformsubmitted],
             ['ws-opened', this._onwsopened],
+            ['ws-message-received', this._onmessagereceived],
         ]);
         super.subscribeAll();
     }
@@ -53,4 +54,9 @@ export class Chat extends View {
     _onwsopened() {
         this.forInput.appendChild(new ChatForm().render());
     }
+
+    _onmessagereceived(text) {
+        this.forData.appendChild(new ChatMessage({author: 'partner', text: text}).render());
+    }
+
 }
