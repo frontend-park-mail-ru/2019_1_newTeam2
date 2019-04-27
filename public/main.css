@@ -10,6 +10,8 @@
 @import "./components/Upload/Upload.css" screen;
 @import "./components/DictionaryPreview/dictionary-preview.css";
 @import "./components/CardPreview/card-preview.css";
+@import "./components/ChatData/chat-data.css";
+@import "./components/ChatMessage/chat-message.css";
 
 @import "views/Dictionary/Dictionary.css" screen;
 @import "views/Training/Training.css" screen;

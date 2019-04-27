@@ -7,6 +7,7 @@ import router from '/services/router.js';
 
 const loginedButtonNames = {
     'training': 'Тренировка',
+    'chat': 'Языковой чат',
     'dictionaries/me': 'Мои словари',
     'profile/me': 'Профиль',
     'leaderboard': 'Таблица лидеров',
@@ -15,6 +16,7 @@ const loginedButtonNames = {
 
 const unloginedButtonNames = {
     'login': 'Войти',
+    'chat': 'Языковой чат',
     'leaderboard': 'Таблица лидеров',
     'signup': 'Зарегистрироваться'
 };

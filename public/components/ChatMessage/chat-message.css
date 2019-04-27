@@ -1,0 +1,16 @@
+.chat-message {
+    width: 200px;
+    border: 2px solid #6d6767;
+    border-radius: 4px;
+    margin: 4px;
+}
+
+.chat-message__left {
+    float: left;
+    background-color: #e48c8c;
+}
+
+.chat-message__right {
+    float: right;
+    background-color: #b1bcf8;
+}

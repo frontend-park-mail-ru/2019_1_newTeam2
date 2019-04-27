@@ -8,6 +8,7 @@ import {SignupController} from '/controllers/SignupController.js';
 import {LoginController} from '/controllers/LoginController.js';
 import {DictionaryController} from '/controllers/DictionaryController.js';
 import {CardController} from '/controllers/CardController.js';
+import {ChatController} from '/controllers/ChatController.js';
 
 
 if('serviceWorker' in navigator) {
@@ -30,7 +31,8 @@ const controllers = new Set([
     ['^dictionary$', CardController],
     ['^profile/me$', ProfileController],
     ['^dictionary/[0-9]+$', CardController],
-    ['^training$', TrainingController]
+    ['^training$', TrainingController],
+    ['^chat$', ChatController]
 ]);
 
 
