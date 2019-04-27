@@ -16,6 +16,10 @@ export class Chat extends View {
     render({authorised = false}) {
         application.innerHTML = '';
 
+        if (Notification.permission !== 'denied') {
+            Notification.requestPermission();
+        }
+
         const outer = application;
         outer.innerHTML = '';
 
@@ -57,7 +61,33 @@ export class Chat extends View {
         this.forInput.appendChild(new ChatForm().render());
     }
 
+    _notify(data) {
+        if (!'Notification' in window) {
+            console.error('notifications not supported');
+            return;
+        }
+
+        if (Notification.permission === 'granted') {
+            new Notification(data);
+            return;
+        }
+
+        if (Notification.permission !== 'denied') {
+            Notification
+                .requestPermission()
+                .then((permission) => {
+                    if (permission === 'granted') {
+                        new Notification(data);
+                        return;
+                    }
+                })
+        }
+    }
+
     _onmessagereceived(text) {
+        if(document.hidden) {
+            this._notify(data);
+        }
         const message = new ChatMessage({author: 'partner', text: text}).render();
         this.forData.appendChild(message);
         message.scrollIntoView();
