@@ -16,7 +16,6 @@ const loginedButtonNames = {
 
 const unloginedButtonNames = {
     'login': 'Войти',
-    'chat': 'Языковой чат',
     'leaderboard': 'Таблица лидеров',
     'signup': 'Зарегистрироваться'
 };

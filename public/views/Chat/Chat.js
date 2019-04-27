@@ -14,17 +14,11 @@ const application = document.getElementById('application');
 
 export class Chat extends View {
     render({authorised = false}) {
-        application.innerHTML = '';
-
-        if (Notification.permission !== 'denied') {
-            Notification.requestPermission();
-        }
-
         const outer = application;
         outer.innerHTML = '';
 
-        const nameOfHeadline = authorised ? 'Языковой чат' : 'Анонимный языковой чат';
-        const headline = new Headline({size: 'h1', textContent: nameOfHeadline});
+        const nameOfHeadline = 'Языковой чат';
+        const headline = new Headline({size: 'h1', textContent: nameOfHeadline}).render();
 
         outer.appendChild(new Icon({
             src: '/static/home-icon.png',
@@ -32,20 +26,30 @@ export class Chat extends View {
                 router.go('menu');
             }
         }).render());
-        outer.appendChild(headline.render());
+        outer.appendChild(headline);
+
+        if (!authorised) {
+            const needToLogin = new Headline({size: 'h1', textContent: 'Чтобы участвовать в беседе, зайдите в систему'}).render();
+            outer.appendChild(needToLogin);
+            return;
+        }
 
         this.forData = new ChatData().render();
         outer.appendChild(this.forData);
 
+
+        if (Notification.permission !== 'denied') {
+            Notification.requestPermission();
+        }
+
+        
         this.forInput = document.createElement('div');
         outer.appendChild(this.forInput);
-
-        this.forInput.appendChild(new ChatForm().render()); // TODO(): on ws opened
 
         this.listeners = new Set([
             ['message-form-submitted', this._onmessageformsubmitted],
             ['ws-opened', this._onwsopened],
-            ['ws-message-received', this._onmessagereceived],
+            ['name-got', this._onnamegot],
         ]);
         super.subscribeAll();
     }
@@ -61,34 +65,8 @@ export class Chat extends View {
         this.forInput.appendChild(new ChatForm().render());
     }
 
-    _notify(data) {
-        if (!'Notification' in window) {
-            console.error('notifications not supported');
-            return;
-        }
-
-        if (Notification.permission === 'granted') {
-            new Notification(data);
-            return;
-        }
-
-        if (Notification.permission !== 'denied') {
-            Notification
-                .requestPermission()
-                .then((permission) => {
-                    if (permission === 'granted') {
-                        new Notification(data);
-                        return;
-                    }
-                })
-        }
-    }
-
-    _onmessagereceived(data) {
-        if(document.hidden) {
-            this._notify(data.message);
-        }
-        const message = new ChatMessage({author: 'partner', text: data.message}).render();
+    _onnamegot(data) {
+        const message = new ChatMessage({author: 'partner', authorName: data.name, text: data.message}).render();
         this.forData.appendChild(message);
         message.scrollIntoView();
     }
