@@ -3,7 +3,7 @@ import bus from '/services/bus.js';
 
 class WebSocketService {
     constructor() {
-        this.ws = new WebSocket(`ws://${baseUrl}/chat/enter/`);
+        this.ws = new WebSocket(`ws://${baseUrl}chat/enter/`);
         this.ws.addEventListener('open', () => {
             bus.emit('ws-opened');
         });
