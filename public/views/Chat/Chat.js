@@ -3,11 +3,12 @@
 import {View} from '/views/View.js';
 import {Headline} from '/components/Headline/Headline.js';
 import {Icon} from '/components/Icon/Icon.js';
-import {Button} from '/components/Button/Button.js';
 import {ChatData} from '/components/ChatData/ChatData.js';
 import {ChatMessage} from '/components/ChatMessage/ChatMessage.js';
+import {ChatForm} from '/components/ChatForm/ChatForm.js';
 
 import router from '/services/router.js';
+import ws from '/services/webSocket.js';
 
 const application = document.getElementById('application');
 
@@ -18,8 +19,8 @@ export class Chat extends View {
         const outer = application;
         outer.innerHTML = '';
 
-        let nameOfHeadline = authorised ? 'Языковой чат' : 'Анонимный языковой чат';
-        let headline = new Headline({size: 'h1', textContent: nameOfHeadline});
+        const nameOfHeadline = authorised ? 'Языковой чат' : 'Анонимный языковой чат';
+        const headline = new Headline({size: 'h1', textContent: nameOfHeadline});
 
         outer.appendChild(new Icon({
             src: '/static/home-icon.png',
@@ -29,20 +30,27 @@ export class Chat extends View {
         }).render());
         outer.appendChild(headline.render());
 
-        let forData = new ChatData().render();
-        outer.appendChild(forData);
+        this.forData = new ChatData().render();
+        outer.appendChild(this.forData);
 
-        forData.appendChild(new ChatMessage({author: 'me', text: 'HELLO'}).render());
-        forData.appendChild(new ChatMessage({author: 'partner', text: 'WORD'}).render());
+        this.forInput = document.createElement('div');
+        outer.appendChild(this.forInput);
 
+        this.forInput.appendChild(new ChatForm().render()); // TODO(): on ws opened
 
+        this.listeners = new Set([
+            ['message-form-submitted', this._onmessageformsubmitted],
+            ['ws-opened', this._onwsopened],
+        ]);
+        super.subscribeAll();
+    }
 
-        
-        let forInput = document.createElement('div');
-        outer.appendChild(forInput);
+    _onmessageformsubmitted(text) {
+        ws.send(text);
+        this.forData.appendChild(new ChatMessage({author: 'me', text: text}).render());
+    }
 
-
-        let send = new Button({type: 'secondary', name: 'Отправить'}).render();
-        forInput.appendChild(send);
+    _onwsopened() {
+        this.forInput.appendChild(new ChatForm().render());
     }
 }
