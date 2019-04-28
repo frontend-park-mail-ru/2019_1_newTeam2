@@ -64,7 +64,9 @@ export class Dictionary extends View {
                 document.getElementById('plus').classList.remove('hidden-element');
                 let dict = {};
                 dict.name = document.getElementById('name').value;
+                document.getElementById('name').value = '';
                 dict.description = document.getElementById('description').value;
+                document.getElementById('description').value = '';
                 bus.emit('new-dict-form-submitted', dict);
             }
         }).render();

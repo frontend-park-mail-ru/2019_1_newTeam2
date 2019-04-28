@@ -83,11 +83,6 @@ export class Card extends View {
             id: 'submit',
             is_hidden: 'hidden-element',
             handler: () => {
-                document.getElementById('submit').classList.add('hidden-element');
-                document.getElementById('deny').classList.add('hidden-element');
-                word.classList.add('hidden-element');
-                translation.classList.add('hidden-element');
-                document.getElementById('plus').classList.remove('hidden-element');
                 let card = {
                     'id': 0,
                     'word': {
@@ -99,6 +94,8 @@ export class Card extends View {
                         'langID': 2
                     }
                 };
+                document.getElementById('word').value = '';
+                document.getElementById('translation').value = '';
                 bus.emit('new-card-form-submitted', card);
             }
         }).render();

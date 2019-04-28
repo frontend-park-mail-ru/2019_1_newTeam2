@@ -1,7 +1,8 @@
 import bus from '/services/bus.js';
 import {UserModel} from "../models/UserModel.js";
 
-const chatUrl = 'newteam2back.herokuapp.com/'; // TODO(Deploy): change url for deploy
+//const chatUrl = 'newteam2back.herokuapp.com/'; // TODO(Deploy): change url for deploy
+const chatUrl = 'localhost:8091/';
 
 const model = new UserModel();
 model.getSelf();
