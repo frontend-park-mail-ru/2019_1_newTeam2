@@ -1,38 +1,18 @@
 'use strict';
 
-import {View} from '/views/View.js';
-import {Headline} from '/components/Headline/Headline.js';
-import {Icon} from '/components/Icon/Icon.js';
+import {Page} from '/views/Page.js';
 import {Button} from '/components/Button/Button.js';
 
-import router from '/services/router.js';
 import {baseUrl} from '/services/ajax.js';
 import bus from '/services/bus.js';
 
-const application = document.getElementById('application');
-
-export class Profile extends View {
+export class Profile extends Page {
     render() {
-        const outer = application;
-        outer.innerHTML = '';
+        super.renderBase();
+        super.renderBaseHeader('Мой профиль');
 
-        let headline = new Headline({size: 'h1', textContent: 'Мой профиль'});
-
-        outer.appendChild(new Icon({
-            src: '/static/home-icon.png',
-            handler: () => {
-                router.go('menu');
-            }
-        }).render());
-        outer.appendChild(headline.render());
-
-
-        this.forData = document.createElement('div');
         let forButton = document.createElement('div');
-
-        outer.appendChild(this.forData);
-        outer.appendChild(forButton);
-
+        this.outer.appendChild(forButton);
 
         let edit = new Button({type: 'secondary', name: 'Редактировать'}).render();
         forButton.appendChild(edit);
@@ -40,7 +20,7 @@ export class Profile extends View {
         edit.addEventListener('click', () => {
             edit.firstChild.classList.add('hidden-element');
             save.firstChild.classList.remove('hidden-element');
-            this.forData.innerHTML = profileeditTemplate(this._user);
+            this.forContent.innerHTML = profileeditTemplate(this._user);
         });
 
         let save = new Button({type: 'secondary', name: 'Сохранить'}).render();
@@ -63,7 +43,7 @@ export class Profile extends View {
             if(fileUpload.value) {
                 bus.emit('user-upload-avatar', fileUpload.files[0]);
             }
-            this.forData.innerHTML = profileTemplate(this._user);
+            this.forContent.innerHTML = profileTemplate(this._user);
         });
         save.firstChild.classList.add('hidden-element');
 
@@ -81,6 +61,6 @@ export class Profile extends View {
         } else {
             this._user.path = this._user.baseUrl + this._user.path;
         }
-        this.forData.innerHTML = profileTemplate(this._user);
+        this.forContent.innerHTML = profileTemplate(this._user);
     }
 }
