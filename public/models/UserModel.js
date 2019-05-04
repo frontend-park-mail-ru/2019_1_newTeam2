@@ -44,7 +44,7 @@ export class UserModel {
             .then((res) => {
                 res.json()
                     .then((res) => {
-                        bus.emit('user-loaded', res);
+                        bus.emit('self-loaded', res);
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки

@@ -67,7 +67,7 @@ class AjaxModule {
         }
         return fetch(baseUrl + path, init)
             .then((response) => {
-                if(response.status === 208) {
+                if(response.status === 408) {
                     console.log(response);
                     bus.emit('no-internet');
                 }

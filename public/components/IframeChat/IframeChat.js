@@ -3,6 +3,8 @@
 
 import {Icon} from "/components/Icon/Icon.js";
 
+// does not work, creates separate client
+
 export class IframeChat {
 	render () {
 		const outer = document.createElement('div');
