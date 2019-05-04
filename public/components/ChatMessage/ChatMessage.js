@@ -1,19 +1,24 @@
 'use strict';
+import {baseUrl} from '/services/ajax.js';
 
 const validAuthors = ['me', 'partner'];
 
 export class ChatMessage {
     constructor({
         author = 'me',
-        text = '',
         authorName = '-anonymous-',
+        authorId = '/me',
+        text = '',
+        avatarUrl = '',
     } = {}) {
         this.author = validAuthors.includes(author) ? author : 'me';
         this.authorName = authorName;
         if (author == 'me') {
             this.authorName = '@me';
         }
+        this.authorId = authorId;
         this.text = text;
+        this.avatarUrl = avatarUrl ? (baseUrl + avatarUrl) : '/static/avatar-default.png';
     }
 
     render() {
