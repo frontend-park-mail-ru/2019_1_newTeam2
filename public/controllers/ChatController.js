@@ -3,10 +3,11 @@ import {Chat} from '/views/Chat/Chat.js';
 import {UserModel} from '/models/UserModel.js';
 import auth from '/models/AuthModel.js';
 import bus from '/services/bus.js';
-import ws from "../services/webSocket.js";
+import {WebSocketService} from '/services/chatWebSocket.js';
 
 export class ChatController extends Controller {
     index() {
+        this.ws = new WebSocketService();
         this.view = new Chat();
         auth.isAuthorised();
         
@@ -29,8 +30,7 @@ export class ChatController extends Controller {
     }
 
     _onmessageformsubmitted(text) {
-        while(!this.selfid);
-        ws.send({message: text, id: this.selfid});
+        this.ws.send({message: text});
     }
 
     _onloggedin() {
