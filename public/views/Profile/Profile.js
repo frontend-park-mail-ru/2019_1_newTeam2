@@ -68,7 +68,7 @@ export class Profile extends View {
         save.firstChild.classList.add('hidden-element');
 
         this.listeners = new Set([
-            ['user-loaded', this._onuserloaded],
+            ['self-loaded', this._onuserloaded],
         ]);
         super.subscribeAll();
     }

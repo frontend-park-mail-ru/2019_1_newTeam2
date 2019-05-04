@@ -4,8 +4,8 @@ import bus from './bus.js';
 const bodyIncludesMethods = ['POST', 'PATCH', 'PUT', 'DELETE'];
 
 
-export const baseUrl = 'https://newteam2back.herokuapp.com/';
-// export const baseUrl = 'http://localhost:8090/';
+// export const baseUrl = 'https://newteam2back.herokuapp.com/';
+export const baseUrl = 'http://localhost:8090/';
 
 
 /**
@@ -67,7 +67,7 @@ class AjaxModule {
         }
         return fetch(baseUrl + path, init)
             .then((response) => {
-                if(response.status === 208) {
+                if(response.status === 408) {
                     console.log(response);
                     bus.emit('no-internet');
                 }
