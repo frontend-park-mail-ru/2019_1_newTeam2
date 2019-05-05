@@ -1,9 +1,9 @@
-import {Controller} from '/controllers/Controller.js';
-import {Chat} from '/views/Chat/Chat.js';
-import {UserModel} from '/models/UserModel.js';
-import auth from '/models/AuthModel.js';
-import bus from '/services/bus.js';
-import {WebSocketService} from '/services/chatWebSocket.js';
+import {Controller} from 'Controllers/Controller.js';
+import {Chat} from 'Views/Chat/Chat.js';
+import {UserModel} from 'Models/UserModel.js';
+import auth from 'Models/AuthModel.js';
+import bus from 'Services/bus.js';
+import {WebSocketService} from 'Services/chatWebSocket.js';
 
 export class ChatController extends Controller {
     index() {

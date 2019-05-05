@@ -1,11 +1,11 @@
 'use strict';
 
-import {Page} from '/views/Page.js';
-import {Icon} from '/components/Icon/Icon.js';
-import {Button} from '/components/Button/Button.js';
-import {Input} from '/components/Input/Input.js';
-import {DictionaryPreview} from '/components/DictionaryPreview/DictionaryPreview.js';
-import bus from '/services/bus.js';
+import {Page} from 'Views/Page.js';
+import {Icon} from 'Components/Icon/Icon.js';
+import {Button} from 'Components/Button/Button.js';
+import {Input} from 'Components/Input/Input.js';
+import {DictionaryPreview} from 'Components/DictionaryPreview/DictionaryPreview.js';
+import bus from 'Services/bus.js';
 
 
 export class Dictionary extends Page {

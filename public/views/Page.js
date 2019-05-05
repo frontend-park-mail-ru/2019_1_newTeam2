@@ -1,10 +1,10 @@
-import {View} from '/views/View.js';
+import {View} from 'Views/View.js';
 
-import {Icon} from '/components/Icon/Icon.js';
-import {Headline} from '/components/Headline/Headline.js';
-import {Pagination} from '/components/pagination.js';
+import {Icon} from 'Components/Icon/Icon.js';
+import {Headline} from 'Components/Headline/Headline.js';
+import {Pagination} from 'Components/pagination.js';
 
-import router from '/services/router.js';
+import router from 'Services/router.js';
 
 const application = document.getElementById('application');
 

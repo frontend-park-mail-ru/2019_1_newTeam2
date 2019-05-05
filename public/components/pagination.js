@@ -1,7 +1,7 @@
 'use strict';
 
-import {Button} from '/components/Button/Button.js';
-import bus from '/services/bus.js';
+import {Button} from 'Components/Button/Button.js';
+import bus from 'Services/bus.js';
 
 export class Pagination {
     render(div) {

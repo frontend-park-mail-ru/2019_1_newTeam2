@@ -1,5 +1,5 @@
 'use strict';
-import {baseUrl} from '/services/ajax.js';
+import {baseUrl} from 'Services/ajax.js';
 
 const validAuthors = ['me', 'partner'];
 

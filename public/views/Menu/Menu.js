@@ -1,9 +1,9 @@
 'use strict';
 
-import {Page} from '/views/Page.js';
-import {Button} from '/components/Button/Button.js';
+import {Page} from 'Views/Page.js';
+import {Button} from 'Components/Button/Button.js';
 
-import router from '/services/router.js';
+import router from 'Services/router.js';
 
 const loginedButtonNames = {
     'training': 'Тренировка',

@@ -1,15 +1,15 @@
-import router from '/services/router.js';
+import router from 'Services/router.js';
 
-import {TrainingController} from '/controllers/TrainingController.js';
-import {LeaderboardController} from '/controllers/LeaderboardController.js';
-import {MenuController} from '/controllers/MenuController.js';
-import {ProfileController} from '/controllers/ProfileController.js';
-import {SignupController} from '/controllers/SignupController.js';
-import {LoginController} from '/controllers/LoginController.js';
-import {DictionaryController} from '/controllers/DictionaryController.js';
-import {CardController} from '/controllers/CardController.js';
-import {ChatController} from '/controllers/ChatController.js';
-// import {IframeChat} from '/components/IframeChat/IframeChat.js';
+import {TrainingController} from 'Controllers/TrainingController.js';
+import {LeaderboardController} from 'Controllers/LeaderboardController.js';
+import {MenuController} from 'Controllers/MenuController.js';
+import {ProfileController} from 'Controllers/ProfileController.js';
+import {SignupController} from 'Controllers/SignupController.js';
+import {LoginController} from 'Controllers/LoginController.js';
+import {DictionaryController} from 'Controllers/DictionaryController.js';
+import {CardController} from 'Controllers/CardController.js';
+import {ChatController} from 'Controllers/ChatController.js';
+// import {IframeChat} from 'Components/IframeChat/IframeChat.js';
 
 // document.getElementsByTagName('body')[0].appendChild(new IframeChat().render());
 

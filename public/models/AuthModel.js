@@ -1,7 +1,7 @@
 'use strict';
 
-import ajax from '/services/ajax.js';
-import bus from '/services/bus.js'; 
+import ajax from 'Services/ajax.js';
+import bus from 'Services/bus.js'; 
 
 class AuthModel {
     isAuthorised() {

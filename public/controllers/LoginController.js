@@ -1,9 +1,9 @@
-import {Controller} from '/controllers/Controller.js';
-import {Login} from '/views/Login/Login.js';
-import auth from '/models/AuthModel.js';
-import bus from '/services/bus.js';
-import validation from '/services/validation.js';
-import router from '/services/router.js';
+import {Controller} from 'Controllers/Controller.js';
+import {Login} from 'Views/Login/Login.js';
+import auth from 'Models/AuthModel.js';
+import bus from 'Services/bus.js';
+import validation from 'Services/validation.js';
+import router from 'Services/router.js';
 
 
 export class LoginController extends Controller {

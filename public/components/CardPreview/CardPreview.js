@@ -1,7 +1,7 @@
 'use strict';
 
-import { Icon } from '/components/Icon/Icon.js';
-import bus from '/services/bus.js';
+import { Icon } from 'Components/Icon/Icon.js';
+import bus from 'Services/bus.js';
 
 export class CardPreview {
     constructor(card) {

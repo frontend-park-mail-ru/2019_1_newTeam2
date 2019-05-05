@@ -1,6 +1,6 @@
-import {Controller} from '/controllers/Controller.js';
-import {Menu} from '/views/Menu/Menu.js';
-import auth from '/models/AuthModel.js';
+import {Controller} from 'Controllers/Controller.js';
+import {Menu} from 'Views/Menu/Menu.js';
+import auth from 'Models/AuthModel.js';
 
 export class MenuController extends Controller {
     index() {

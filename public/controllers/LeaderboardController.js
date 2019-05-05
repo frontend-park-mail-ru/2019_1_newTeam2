@@ -1,6 +1,6 @@
-import {Controller} from '/controllers/Controller.js';
-import {UserModel} from '/models/UserModel.js';
-import {Leaderboard} from '/views/Leaderboard/Leaderboard.js';
+import {Controller} from 'Controllers/Controller.js';
+import {UserModel} from 'Models/UserModel.js';
+import {Leaderboard} from 'Views/Leaderboard/Leaderboard.js';
 
 
 export class LeaderboardController extends Controller {

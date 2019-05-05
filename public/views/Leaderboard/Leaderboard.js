@@ -1,7 +1,7 @@
 'use strict';
 
-import {Page} from '/views/Page.js';
-import {Table} from '/components/Table/Table.js';
+import {Page} from 'Views/Page.js';
+import {Table} from 'Components/Table/Table.js';
 
 export class Leaderboard extends Page {
     render() {

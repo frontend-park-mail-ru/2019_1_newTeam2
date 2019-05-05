@@ -1,10 +1,10 @@
 'use strict';
 
-import {Page} from '/views/Page.js';
-import {Button} from '/components/Button/Button.js';
+import {Page} from 'Views/Page.js';
+import {Button} from 'Components/Button/Button.js';
 
-import {baseUrl} from '/services/ajax.js';
-import bus from '/services/bus.js';
+import {baseUrl} from 'Services/ajax.js';
+import bus from 'Services/bus.js';
 
 export class Profile extends Page {
     render() {

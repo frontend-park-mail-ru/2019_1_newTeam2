@@ -1,13 +1,13 @@
 'use strict';
 
-import {Page} from '/views/Page.js';
-import {Headline} from '/components/Headline/Headline.js';
-import router from '/services/router.js';
-import bus from '/services/bus.js';
-import {Link} from '/components/Link/Link.js';
-import {GriseMerde} from '/components/GriseMerde/GriseMerde.js';
-import {Button} from '/components/Button/Button.js';
-import {Pagination} from '/components/pagination.js';
+import {Page} from 'Views/Page.js';
+import {Headline} from 'Components/Headline/Headline.js';
+import router from 'Services/router.js';
+import bus from 'Services/bus.js';
+import {Link} from 'Components/Link/Link.js';
+import {GriseMerde} from 'Components/GriseMerde/GriseMerde.js';
+import {Button} from 'Components/Button/Button.js';
+import {Pagination} from 'Components/pagination.js';
 
 export class Training extends Page {
     render() {

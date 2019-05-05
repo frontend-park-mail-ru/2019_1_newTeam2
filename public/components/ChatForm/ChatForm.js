@@ -1,9 +1,9 @@
 'use strict';
 
-import {Input} from '/components/Input/Input.js';
-import {Button} from '/components/Button/Button.js';
+import {Input} from 'Components/Input/Input.js';
+import {Button} from 'Components/Button/Button.js';
 
-import bus from '/services/bus.js';
+import bus from 'Services/bus.js';
 
 export class ChatForm {
     constructor() {

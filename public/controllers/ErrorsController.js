@@ -1,5 +1,5 @@
-import {Controller} from '/controllers/Controller.js';
-import {Errors} from '/views/Errors/Errors.js';
+import {Controller} from 'Controllers/Controller.js';
+import {Errors} from 'Views/Errors/Errors.js';
 
 export class ErrorsController extends Controller {
     index() {
