@@ -18,7 +18,7 @@ export class WebSocketService {
                 bus.emit('ws-message-received', msg);
             });
         }
-    };
+    }
 
     send(data) {
         ws.send(JSON.stringify(data));

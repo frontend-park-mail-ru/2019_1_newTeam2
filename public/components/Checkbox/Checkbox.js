@@ -1,5 +1,7 @@
 'use strict';
 
+const checkboxTemplate = require('Templates/Checkbox.pug');
+
 const noop = () => { };
 const validSizes = ['big', 'small'];
 

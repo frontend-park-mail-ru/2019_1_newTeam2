@@ -1,5 +1,7 @@
 'use strict';
 
+const imageTemplate = require('Templates/Image.pug');
+
 const noop = () => {};
 
 export class Image {

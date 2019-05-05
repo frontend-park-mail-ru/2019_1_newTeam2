@@ -7,7 +7,7 @@ import bus from 'Services/bus.js';
 import {Link} from 'Components/Link/Link.js';
 import {GriseMerde} from 'Components/GriseMerde/GriseMerde.js';
 import {Button} from 'Components/Button/Button.js';
-import {Pagination} from 'Components/pagination.js';
+import {Pagination} from 'Components/Pagination/Pagination.js';
 
 export class Training extends Page {
     render() {

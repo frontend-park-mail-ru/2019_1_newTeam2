@@ -2,7 +2,7 @@ import {View} from 'Views/View.js';
 
 import {Icon} from 'Components/Icon/Icon.js';
 import {Headline} from 'Components/Headline/Headline.js';
-import {Pagination} from 'Components/pagination.js';
+import {Pagination} from 'Components/Pagination/Pagination.js';
 
 import router from 'Services/router.js';
 

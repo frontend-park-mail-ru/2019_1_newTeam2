@@ -1,5 +1,7 @@
 'use strict';
 
+const grisemerdeTemplate = require('Templates/GriseMerde.pug');
+
 const validSizes = ['small', 'big'];
 
 export class GriseMerde {

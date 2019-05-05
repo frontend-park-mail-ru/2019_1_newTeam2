@@ -15,10 +15,10 @@ import {ChatController} from 'Controllers/ChatController.js';
 
 if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js')
-        .then((reg) => {
+        .then((/*reg*/) => {
             // console.log(reg);
         })
-        .catch((err) => {
+        .catch((/*err*/) => {
             // console.log(err);
         });
 }

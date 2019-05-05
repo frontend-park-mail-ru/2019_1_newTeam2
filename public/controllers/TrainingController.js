@@ -1,7 +1,6 @@
 import {Controller} from 'Controllers/Controller.js';
 import {Training} from 'Views/Training/Training.js';
 import {GameWordsModel} from 'Models/GameWordsModel.js';
-import bus from 'Services/bus.js';
 import {DictionaryModel} from 'Models/DictionaryModel.js';
 
 export class TrainingController extends Controller {

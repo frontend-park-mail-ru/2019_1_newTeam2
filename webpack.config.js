@@ -14,6 +14,12 @@ module.exports = {
             Services: path.resolve(__dirname, './public/services'),
             Models: path.resolve(__dirname, './public/models'),
             Views: path.resolve(__dirname, './public/views'),
+            Templates: path.resolve(__dirname, './public/templates')
         }
+    },
+    module: {
+        rules: [
+            { test: /\.pug$/, use: 'pug-loader' }
+        ]
     }
 };

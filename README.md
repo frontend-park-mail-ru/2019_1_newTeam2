@@ -9,7 +9,13 @@
  - [Чуриков Сергей](https://github.com/sergeychur)
  - [Смехунов Алексей](https://github.com/Sighr)
 
-
 ## Frontend
-[Адрес фронта]
-(https://newwordtrainer.herokuapp.com/)
+[Старый адрес](https://newwordtrainer.herokuapp.com/)
+[Новый адрес](http://new-words.ru/)
+[Репозиторий](https://github.com/frontend-park-mail-ru/2019_1_newTeam2)
+
+## Backend
+[Старый адрес](https://newwordtrainer.herokuapp.com/)
+[Новый адрес](http://new-words.ru/api)
+[Репозиторий](https://github.com/go-park-mail-ru/2019_1_newTeam2)
+

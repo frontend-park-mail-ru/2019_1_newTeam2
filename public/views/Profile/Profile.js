@@ -1,5 +1,8 @@
 'use strict';
 
+const profileTemplate = require('Templates/Profile.pug');
+const profileeditTemplate = require('Templates/ProfileEdit.pug');
+
 import {Page} from 'Views/Page.js';
 import {Button} from 'Components/Button/Button.js';
 
