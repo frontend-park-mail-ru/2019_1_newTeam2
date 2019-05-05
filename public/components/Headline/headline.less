@@ -1,41 +1,23 @@
+@import '../../styles/headlineSizes.less';
+
 .headline {
     word-wrap: break-word;
     font-weight: 500;
     margin: 5px;
 }
 
-@media screen and (min-width: 700px) {
-    .headline_size_h1 {
-        font-size: 42px;
-    }
-
-    .headline_size_h2 {
-        font-size: 36px;
-    }
-
-    .headline_size_h3 {
-        font-size: 30px;
-    }
-
-    .headline_size_h4 {
-        font-size: 24px;
-    }
+.headline_size_h1 {
+    .h1();
 }
 
-@media screen and (min-width: 300px) {
-    .headline_size_h1 {
-        font-size: 20px;
-    }
+.headline_size_h2 {
+    .h2();
+}
 
-    .headline_size_h2 {
-        font-size: 17px;
-    }
+.headline_size_h3 {
+    .h3();
+}
 
-    .headline_size_h3 {
-        font-size: 14px;
-    }
-
-    .headline_size_h4 {
-        font-size: 11px;
-    }
+.headline_size_h4 {
+    .h4();
 }

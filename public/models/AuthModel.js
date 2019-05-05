@@ -11,10 +11,8 @@ class AuthModel {
             .then((res) => {
                 if(res.status === 200) {
                     bus.emit('logged-in', res);
-                    console.log('logged-in');
                 } else {
                     bus.emit('logged-out');
-                    console.log('logged-out');
                 }
             })
             .catch(() => {
