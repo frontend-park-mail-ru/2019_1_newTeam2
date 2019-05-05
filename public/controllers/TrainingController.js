@@ -1,8 +1,7 @@
-import {Controller} from '/controllers/Controller.js';
-import {Training} from '/views/Training/Training.js';
-import {GameWordsModel} from '/models/GameWordsModel.js';
-import bus from '/services/bus.js';
-import {DictionaryModel} from '/models/DictionaryModel.js';
+import {Controller} from 'Controllers/Controller.js';
+import {Training} from 'Views/Training/Training.js';
+import {GameWordsModel} from 'Models/GameWordsModel.js';
+import {DictionaryModel} from 'Models/DictionaryModel.js';
 
 export class TrainingController extends Controller {
     index() {

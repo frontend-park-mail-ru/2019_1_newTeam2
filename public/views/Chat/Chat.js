@@ -1,14 +1,14 @@
 'use strict';
 
-import {View} from '/views/View.js';
-import {Headline} from '/components/Headline/Headline.js';
-import {Icon} from '/components/Icon/Icon.js';
-import {ChatData} from '/components/ChatData/ChatData.js';
-import {ChatMessage} from '/components/ChatMessage/ChatMessage.js';
-import {ChatForm} from '/components/ChatForm/ChatForm.js';
+import {View} from 'Views/View.js';
+import {Headline} from 'Components/Headline/Headline.js';
+import {Icon} from 'Components/Icon/Icon.js';
+import {ChatData} from 'Components/ChatData/ChatData.js';
+import {ChatMessage} from 'Components/ChatMessage/ChatMessage.js';
+import {ChatForm} from 'Components/ChatForm/ChatForm.js';
 
-import router from '/services/router.js';
-import {chatWebSocket} from '/services/chatWebSocket.js';
+import router from 'Services/router.js';
+import {chatWebSocket} from 'Services/chatWebSocket.js';
 
 const application = document.getElementById('application');
 

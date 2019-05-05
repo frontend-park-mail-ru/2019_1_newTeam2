@@ -1,5 +1,7 @@
 'use strict';
 
+const uploadTemplate = require('Templates/Upload.pug');
+
 const noop = () => {};
 
 export class Upload {

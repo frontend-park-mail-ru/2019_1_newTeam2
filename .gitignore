@@ -1,4 +1,5 @@
 *node_modules*
 *sw*
 .idea
-public/components/pug_compiled
+*pug_compiled*
+*dist*

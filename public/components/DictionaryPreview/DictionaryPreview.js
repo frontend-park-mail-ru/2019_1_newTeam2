@@ -1,10 +1,10 @@
 'use strict';
 
-import {Image} from '/components/Image/Image.js';
-import {Icon} from '/components/Icon/Icon.js';
-import {Link} from '/components/Link/Link.js';
-import bus from '/services/bus.js';
-import router from '/services/router.js';
+import {Image} from 'Components/Image/Image.js';
+import {Icon} from 'Components/Icon/Icon.js';
+import {Link} from 'Components/Link/Link.js';
+import bus from 'Services/bus.js';
+import router from 'Services/router.js';
 
 export class DictionaryPreview {
     constructor(dict) {

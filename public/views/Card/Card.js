@@ -1,12 +1,12 @@
 'use strict';
 
-import {Page} from '/views/Page.js';
-import {Headline} from '/components/Headline/Headline.js';
-import {Icon} from '/components/Icon/Icon.js';
-import {Button} from '/components/Button/Button.js';
-import {Input} from '/components/Input/Input.js';
-import {CardPreview} from '/components/CardPreview/CardPreview.js';
-import bus from '/services/bus.js';
+import {Page} from 'Views/Page.js';
+import {Headline} from 'Components/Headline/Headline.js';
+import {Icon} from 'Components/Icon/Icon.js';
+import {Button} from 'Components/Button/Button.js';
+import {Input} from 'Components/Input/Input.js';
+import {CardPreview} from 'Components/CardPreview/CardPreview.js';
+import bus from 'Services/bus.js';
 
 
 export class Card extends Page {

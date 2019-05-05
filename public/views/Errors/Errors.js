@@ -1,6 +1,6 @@
 'use strict';
 
-import {Page} from '/views/Page.js';
+import {Page} from 'Views/Page.js';
 
 export class Error extends Page {
     render() {

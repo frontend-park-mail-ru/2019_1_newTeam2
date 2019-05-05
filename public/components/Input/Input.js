@@ -1,5 +1,7 @@
 'use strict';
 
+const inputTemplate = require('Templates/Input.pug');
+
 const validTypes = ['text', 'email', 'tel', 'password'];
 
 export class Input {

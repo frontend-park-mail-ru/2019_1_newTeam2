@@ -1,4 +1,4 @@
-import bus from '/services/bus.js';
+import bus from 'Services/bus.js';
 
 export class Controller {
     subscribeAll(){

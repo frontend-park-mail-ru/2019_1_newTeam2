@@ -1,4 +1,4 @@
-import ajax from '/services/ajax.js';
+import ajax from 'Services/ajax.js';
 
 export class AvatarModel {
     uploadAvatar(file) {

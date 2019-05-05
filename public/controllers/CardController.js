@@ -1,8 +1,7 @@
-import {Controller} from '/controllers/Controller.js';
-import {CardModel} from '/models/CardModel.js';
-import {DictionaryModel} from '/models/DictionaryModel.js';
-import {Card} from '/views/Card/Card.js';
-import bus from '/services/bus.js';
+import {Controller} from 'Controllers/Controller.js';
+import {CardModel} from 'Models/CardModel.js';
+import {DictionaryModel} from 'Models/DictionaryModel.js';
+import {Card} from 'Views/Card/Card.js';
 
 
 export class CardController extends Controller{

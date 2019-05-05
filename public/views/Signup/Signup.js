@@ -1,12 +1,12 @@
 'use strict';
 
-import {Page} from '/views/Page.js';
-import {Input} from '/components/Input/Input.js';
-import {Link} from '/components/Link/Link.js';
-import {Button} from '/components/Button/Button.js';
+import {Page} from 'Views/Page.js';
+import {Input} from 'Components/Input/Input.js';
+import {Link} from 'Components/Link/Link.js';
+import {Button} from 'Components/Button/Button.js';
 
-import router from '/services/router.js';
-import bus from '/services/bus.js';
+import router from 'Services/router.js';
+import bus from 'Services/bus.js';
 
 export class Signup extends Page {
     render() {

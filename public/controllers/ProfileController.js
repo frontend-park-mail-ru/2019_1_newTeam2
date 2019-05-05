@@ -1,7 +1,7 @@
-import {Controller} from '/controllers/Controller.js';
-import {Profile} from '/views/Profile/Profile.js';
-import {UserModel} from '/models/UserModel.js';
-import {AvatarModel} from '/models/AvatarModel.js';
+import {Controller} from 'Controllers/Controller.js';
+import {Profile} from 'Views/Profile/Profile.js';
+import {UserModel} from 'Models/UserModel.js';
+import {AvatarModel} from 'Models/AvatarModel.js';
 
 export class ProfileController extends Controller {
     index() {

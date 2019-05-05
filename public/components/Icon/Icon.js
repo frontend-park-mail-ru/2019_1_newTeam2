@@ -1,5 +1,7 @@
 'use strict';
 
+const iconTemplate = require('Templates/Icon.pug');
+
 const noop = () => {};
 
 export class Icon {

@@ -1,7 +1,7 @@
-import {Controller} from '/controllers/Controller.js';
-import {DictionaryModel} from '/models/DictionaryModel.js';
-import {Dictionary} from '/views/Dictionary/Dictionary.js';
-import router from '/services/router.js';
+import {Controller} from 'Controllers/Controller.js';
+import {DictionaryModel} from 'Models/DictionaryModel.js';
+import {Dictionary} from 'Views/Dictionary/Dictionary.js';
+import router from 'Services/router.js';
  
 
 export class DictionaryController extends Controller{

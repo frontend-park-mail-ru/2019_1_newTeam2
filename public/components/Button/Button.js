@@ -1,5 +1,7 @@
 'use strict';
 
+const buttonTemplate = require('Templates/Button.pug');
+
 const noop = () => { };
 const validTypes = ['primary', 'secondary', 'square'];
 

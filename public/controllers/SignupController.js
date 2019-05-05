@@ -1,10 +1,10 @@
-import {Controller} from '/controllers/Controller.js';
-import {Signup} from '/views/Signup/Signup.js';
-import auth from '/models/AuthModel.js';
-import bus from '/services/bus.js';
-import validation from '/services/validation.js';
-import router from '/services/router.js';
-import {UserModel} from '/models/UserModel.js';
+import {Controller} from 'Controllers/Controller.js';
+import {Signup} from 'Views/Signup/Signup.js';
+import auth from 'Models/AuthModel.js';
+import bus from 'Services/bus.js';
+import validation from 'Services/validation.js';
+import router from 'Services/router.js';
+import {UserModel} from 'Models/UserModel.js';
 
 
 export class SignupController extends Controller {

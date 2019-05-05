@@ -1,3 +1,6 @@
+'use strict';
+
+const tableTemplate = require('Templates/Table.pug');
 
 export class Table {
     /**
