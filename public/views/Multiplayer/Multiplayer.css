@@ -1,0 +1,10 @@
+.game {
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-fail-text {
+    color: red;
+    font-size: large;
+    position: absolute;
+}
