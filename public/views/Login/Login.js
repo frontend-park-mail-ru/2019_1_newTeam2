@@ -1,36 +1,22 @@
 'use strict';
 
-import {View} from '/views/View.js';
-import {Headline} from '/components/Headline/Headline.js';
+import {Page} from '/views/Page.js';
 import {Input} from '/components/Input/Input.js';
 import {Link} from '/components/Link/Link.js';
 import {Button} from '/components/Button/Button.js';
-import {Icon} from '/components/Icon/Icon.js';
 
 import router from '/services/router.js';
 import bus from '/services/bus.js';
 
-const application = document.getElementById('application');
-
-export class Login extends View {
+export class Login extends Page {
     render() {
-        application.innerText = '';
-        const outer = document.createElement('div');
-        application.appendChild(outer);
+        super.renderBase();
+        super.renderBaseHeader('Авторизация');
 
-        outer.appendChild(new Icon({
-            src: '/static/home-icon.png',
-            handler: () => {
-                router.go('menu');
-            }
-        }).render());
-
-        let headline = new Headline({size: 'h1', textContent: 'Авторизация'});
         this.serverErrorText = document.createElement('div');
         this.serverErrorText.classList.add('error-text');
         this.serverErrorText.classList.add('hidden-element');
         this.serverErrorText.innerText = 'Неправильный логин или пароль';
-
 
         this.loginTemplateText = document.createElement('div');
         this.loginTemplateText.classList.add('error-text');
@@ -52,16 +38,15 @@ export class Login extends View {
         let renderedSubmit = submit.render();
         let renderedSignupLink = signupLink.render();
         
-        outer.appendChild(headline.render());
-        outer.appendChild(this.serverErrorText);
-        outer.appendChild(this.loginTemplateText);
-        outer.appendChild(login.render());
-        outer.appendChild(this.passwordTemplateText);
-        outer.appendChild(password.render());
-        outer.appendChild(renderedSubmit);
-        outer.appendChild(renderedSignupLink);
+        this.forContent.appendChild(this.serverErrorText);
+        this.forContent.appendChild(this.loginTemplateText);
+        this.forContent.appendChild(login.render());
+        this.forContent.appendChild(this.passwordTemplateText);
+        this.forContent.appendChild(password.render());
+        this.forContent.appendChild(renderedSubmit);
+        this.forContent.appendChild(renderedSignupLink);
 
-        outer.addEventListener( 'keyup', (event) => {
+        this.outer.addEventListener( 'keyup', (event) => {
             if(event.keyCode === 13){ // Enter button clicked
                 renderedSubmit.click();
             }

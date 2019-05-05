@@ -1,31 +1,17 @@
 'use strict';
 
-import {View} from '/views/View.js';
-import {Headline} from '/components/Headline/Headline.js';
+import {Page} from '/views/Page.js';
 import {Input} from '/components/Input/Input.js';
 import {Link} from '/components/Link/Link.js';
 import {Button} from '/components/Button/Button.js';
-import {Icon} from '/components/Icon/Icon.js';
 
 import router from '/services/router.js';
 import bus from '/services/bus.js';
 
-const application = document.getElementById('application');
-
-export class Signup extends View {
+export class Signup extends Page {
     render() {
-        application.innerHTML = '';
-        const outer = document.createElement('div');
-        application.appendChild(outer);
-        
-        outer.appendChild(new Icon({
-            src: '/static/home-icon.png',
-            handler: () => {
-                router.go('menu');
-            }
-        }).render());
-
-        let headline = new Headline({size: 'h1', textContent: 'Регистрация'});
+        super.renderBase();
+        super.renderBaseHeader('Регистрация');
 
         this.serverErrorText = document.createElement('div');
         this.serverErrorText.classList.add('error-text');
@@ -58,18 +44,17 @@ export class Signup extends View {
         let renderedSubmit = submit.render();
         let renderedLoginLink = loginLink.render();
         
-        outer.appendChild(headline.render());
-        outer.appendChild(this.serverErrorText);
-        outer.appendChild(this.loginTemplateText);
-        outer.appendChild(login.render());
-        outer.appendChild(this.emailTemplateText);
-        outer.appendChild(email.render());
-        outer.appendChild(this.passwordTemplateText);
-        outer.appendChild(password.render());
-        outer.appendChild(renderedSubmit);
-        outer.appendChild(renderedLoginLink);
+        this.outer.appendChild(this.serverErrorText);
+        this.outer.appendChild(this.loginTemplateText);
+        this.outer.appendChild(login.render());
+        this.outer.appendChild(this.emailTemplateText);
+        this.outer.appendChild(email.render());
+        this.outer.appendChild(this.passwordTemplateText);
+        this.outer.appendChild(password.render());
+        this.outer.appendChild(renderedSubmit);
+        this.outer.appendChild(renderedLoginLink);
 
-        outer.addEventListener( 'keyup', (event) => {
+        this.outer.addEventListener( 'keyup', (event) => {
             if(event.keyCode === 13){ // Enter button clicked
                 renderedSubmit.click();
             }
