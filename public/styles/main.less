@@ -1,0 +1,52 @@
+@import "../components/Button/button.less";
+@import "../components/Link/link.less";
+@import "../components/Headline/headline.less";
+@import "../components/Checkbox/checkbox.less";
+@import "../components/Input/input.less";
+@import "../components/Icon/icon.less";
+@import "../components/Image/image.less";
+@import "../components/GriseMerde/grise-merde.less";
+@import "../components/Table/Table.less";
+@import "../components/Upload/Upload.less";
+@import "../components/DictionaryPreview/dictionary-preview.less";
+@import "../components/CardPreview/card-preview.less";
+@import "../components/ChatData/chat-data.less";
+@import "../components/ChatMessage/chat-message.less";
+@import "../components/ChatForm/chat-form.less";
+
+@import "../views/Dictionary/Dictionary.less";
+@import "../views/Multiplayer/Multiplayer.less";
+@import "../views/Training/Training.less";
+
+@import "colorScheme.less";
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+/*html { 
+    background: url('/static/background.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}*/
+
+.main {
+    text-align: center;
+}
+
+#application {
+    display: inline-block;
+    text-align: left;
+}
+
+.error-text {
+    width: 300px;
+    color: @textErrorColor;
+}
+
+.hidden-element{
+    display: none;
+}

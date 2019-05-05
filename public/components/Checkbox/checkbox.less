@@ -1,3 +1,5 @@
+@import '../../styles/colorScheme.less';
+
 /* hide browser checkbox */
 input[type=checkbox] {
 	visibility: hidden;
@@ -14,8 +16,8 @@ input[type=checkbox] {
     position: absolute;
     top: 0;
     left: 0;
-    background: white;
-    border: 2px solid #8EE000;
+    background: @backgroundColor;
+    border: 2px solid @borderColor;
     border-radius: 4px;
 }
 
@@ -49,7 +51,7 @@ input[type=checkbox] {
     height: 5px;
     top: 6px;
     left: 5px;
-    border: 3px solid #8EE000;
+    border: 3px solid @borderColor;
     border-top: none;
     border-right: none;
 }
@@ -71,7 +73,7 @@ input[type=checkbox] {
     height: 2px;
     top: 2px;
     left: 1px;
-    border: 2px solid #8EE000;
+    border: 2px solid @borderColor;
     border-top: none;
     border-right: none;
 }

@@ -1,17 +1,19 @@
+@import '../../styles/colorScheme.less';
+
 .button {
     user-select: none;
     -moz-user-select: -moz-none;
-    color: black;
-    background-color: white;
+    color: @textColor;
+    background-color: @backgroundColor;
     margin: 5px;
     border-radius: 4px;
-    border: 2px solid #696161;
+    border: 2px solid @borderNegativeColor;
 }
 
 .button:hover {
     cursor: pointer;
-    color: white;
-    background-color: #696161;
+    color: @textNegativeColor;
+    background-color: @backgroundNegativeColor;
     transition: 0.2s;
 }
 

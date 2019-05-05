@@ -1,3 +1,5 @@
+@import '../../styles/colorScheme.less';
+
 .card-preview__cross-icon {
     float: right;
     cursor: pointer;
@@ -11,7 +13,7 @@
         border-radius: 4px;
         width: 280px;
         margin-top: 5px;
-        border: 1px solid #dddddd;
+        border: 1px solid @borderColor;
         overflow: auto;
         display: block;
     }
@@ -19,8 +21,8 @@
     .card-preview_part_left {
         border-radius: 4px 0px 0px 4px;
         width: 140px;
-        background-color: #747171;
-        color: white;
+        background-color: @backgroundNegativeColor;
+        color: @textNegativeColor;
         text-align: center;
         vertical-align: middle;
         display: inline-block;
@@ -31,7 +33,7 @@
     .card-preview_part_right {
         border-radius: 0px 4px 4px 0px;
         width: 138px;
-        background-color: white;
+        background-color: @backgroundColor;
         text-align: center;
         vertical-align: middle;
         display: inline-block;
@@ -43,7 +45,7 @@
         border-radius: 4px;
         width: 400px;
         margin-top: 5px;
-        border: 1px solid #dddddd;
+        border: 1px solid @borderColor;
         overflow: auto;
         display: block;
     }
@@ -51,8 +53,8 @@
     .card-preview_part_left {
         border-radius: 4px 0px 0px 4px;
         width: 210px;
-        background-color: #747171;
-        color: white;
+        background-color: @backgroundNegativeColor;
+        color: @textNegativeColor;
         text-align: center;
         vertical-align: middle;
         display: inline-block;
@@ -63,7 +65,7 @@
     .card-preview_part_right {
         border-radius: 0px 4px 4px 0px;
         width: 188px;
-        background-color: white;
+        background-color: @backgroundColor;
         text-align: center;
         vertical-align: middle;
         display: inline-block;

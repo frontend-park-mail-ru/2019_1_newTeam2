@@ -11,7 +11,7 @@ import {CardController} from 'Controllers/CardController.js';
 import {ChatController} from 'Controllers/ChatController.js';
 import {MultiplayerController} from 'Controllers/MultiplayerController.js';
 
-import './main.less';
+import 'Styles/main.less';
 
 if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js')

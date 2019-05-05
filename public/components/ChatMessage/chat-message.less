@@ -1,3 +1,5 @@
+@import '../../styles/colorScheme.less';
+
 .chat-message-area {
     width: 100%;
     overflow: auto;
@@ -24,7 +26,7 @@
 }
 
 .chat-message {
-    border: 2px solid #6d6767;
+    border: 2px solid @borderColor;
     border-radius: 4px;
     margin: 2px 4px 4px 4px;
     padding: 2px;
@@ -38,10 +40,10 @@
 
 .chat-message__left {
     float: left;
-    background-color: #e48c8c;
+    background-color: @messagePartnerColor;
 }
 
 .chat-message__right {
     float: right;
-    background-color: #b1bcf8;
+    background-color: @messageMeColor;
 }
