@@ -59,8 +59,9 @@ export class Multiplayer extends View {
 	}
 
 	_ongameleaderboardupdate(data) {
+		this.forLeadBoard.innerText = '';
 		this.table.data = data.payload.players;
-		this.forLeadBoard = this.table.render();
+		this.forLeadBoard.appendChild(this.table.render());
 	}
 
 	_ongamenewtask(data) {
