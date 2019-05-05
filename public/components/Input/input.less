@@ -1,3 +1,5 @@
+@import '../../styles/colorScheme.less';
+
 @media screen and (min-width: 700px) {
     .input {
         width: 680px;
@@ -6,7 +8,7 @@
         padding-left: 20px;
         padding-right: 20px;
         font-size: 17px;
-        border: 2px solid #CFCFCF;
+        border: 2px solid @borderColor;
         outline: none;
         margin: 5px;
     }
@@ -20,17 +22,17 @@
         padding-left: 20px;
         padding-right: 20px;
         font-size: 17px;
-        border: 2px solid #CFCFCF;
+        border: 2px solid @borderColor;
         outline: none;
         margin: 5px;
     }
 }
 
 .input:disabled {
-    background: #F0F0F0;
+    background: @backgroundLightNegativeColor;
 }
 
 .input:focus {
-    border-color: #437892;
-    caret-color: #437892;
+    border-color: @inputFocusColor;
+    caret-color: @inputFocusColor;
 }

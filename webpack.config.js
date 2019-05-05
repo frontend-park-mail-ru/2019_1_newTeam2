@@ -14,7 +14,8 @@ module.exports = {
             Services: path.resolve(__dirname, './public/services'),
             Models: path.resolve(__dirname, './public/models'),
             Views: path.resolve(__dirname, './public/views'),
-            Templates: path.resolve(__dirname, './public/templates')
+            Templates: path.resolve(__dirname, './public/templates'),
+            Styles: path.resolve(__dirname, './public/styles')
         }
     },
     module: {

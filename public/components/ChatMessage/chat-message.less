@@ -1,3 +1,6 @@
+@import '../../styles/colorScheme.less';
+@import '../../styles/breakWord.less';
+
 .chat-message-area {
     width: 100%;
     overflow: auto;
@@ -24,24 +27,20 @@
 }
 
 .chat-message {
-    border: 2px solid #6d6767;
+    border: 2px solid @borderColor;
     border-radius: 4px;
     margin: 2px 4px 4px 4px;
     padding: 2px;
     max-width: 300px;
-    white-space: pre-wrap;      /* CSS3 */   
-    white-space: -moz-pre-wrap; /* Firefox */    
-    white-space: -pre-wrap;     /* Opera <7 */   
-    white-space: -o-pre-wrap;   /* Opera 7 */    
-    word-wrap: break-word;      /* IE */
+    .breakWord();
 }
 
 .chat-message__left {
     float: left;
-    background-color: #e48c8c;
+    background-color: @messagePartnerColor;
 }
 
 .chat-message__right {
     float: right;
-    background-color: #b1bcf8;
+    background-color: @messageMeColor;
 }

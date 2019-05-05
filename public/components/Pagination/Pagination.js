@@ -1,20 +1,18 @@
 'use strict';
 
-import {Button} from 'Components/Button/Button.js';
+import {Icon} from 'Components/Icon/Icon.js';
 import bus from 'Services/bus.js';
 
 export class Pagination {
     render(div) {
-        const buttonPrev = new Button({
-            type: 'square',
-            name: '<',
+        const buttonPrev = new Icon({
+            src: '/static/left.png',
             handler: () => {
                 bus.emit('prev-page');
             }
         }).render();
-        const buttonNext = new Button({
-            type: 'square',
-            name: '>',
+        const buttonNext = new Icon({
+            src: '/static/right.png',
             handler: () => {
                 bus.emit('next-page');
             }

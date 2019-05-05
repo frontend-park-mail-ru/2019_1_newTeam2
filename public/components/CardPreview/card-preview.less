@@ -1,3 +1,5 @@
+@import '../../styles/colorScheme.less';
+
 .card-preview__cross-icon {
     float: right;
     cursor: pointer;
@@ -6,66 +8,54 @@
     height: 10px;
 }
 
-@media screen and (min-width: 300px) {
-    .card-preview {
-        border-radius: 4px;
+.card-preview {
+    border-radius: 4px;
+    margin-top: 5px;
+    border: 1px solid @borderColor;
+    overflow: auto;
+    display: block;
+
+    @media screen and (min-width: 700px) {
+        width: 400px;
+    }
+
+    @media screen and (min-width: 300px) {
         width: 280px;
-        margin-top: 5px;
-        border: 1px solid #dddddd;
-        overflow: auto;
-        display: block;
-    }
-
-    .card-preview_part_left {
-        border-radius: 4px 0px 0px 4px;
-        width: 140px;
-        background-color: #747171;
-        color: white;
-        text-align: center;
-        vertical-align: middle;
-        display: inline-block;
-        -webkit-clip-path: polygon(0 0, 90% 0%, 100% 100%, 0 100%);
-        clip-path: polygon(0 0, 90% 0%, 100% 100%, 0 100%);
-    }
-
-    .card-preview_part_right {
-        border-radius: 0px 4px 4px 0px;
-        width: 138px;
-        background-color: white;
-        text-align: center;
-        vertical-align: middle;
-        display: inline-block;
     }
 }
 
-@media screen and (min-width: 700px) {
-    .card-preview {
-        border-radius: 4px;
-        width: 400px;
-        margin-top: 5px;
-        border: 1px solid #dddddd;
-        overflow: auto;
-        display: block;
-    }
+.card-preview_part_left {
+    border-radius: 4px 0px 0px 4px;
+    background-color: @backgroundNegativeColor;
+    color: @textNegativeColor;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    -webkit-clip-path: polygon(0 0, 90% 0%, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 90% 0%, 100% 100%, 0 100%);
 
-    .card-preview_part_left {
-        border-radius: 4px 0px 0px 4px;
+    @media screen and (min-width: 700px) {
         width: 210px;
-        background-color: #747171;
-        color: white;
-        text-align: center;
-        vertical-align: middle;
-        display: inline-block;
-        -webkit-clip-path: polygon(0 0, 90% 0%, 100% 100%, 0 100%);
-        clip-path: polygon(0 0, 90% 0%, 100% 100%, 0 100%);
     }
 
-    .card-preview_part_right {
-        border-radius: 0px 4px 4px 0px;
+    @media screen and (min-width: 300px) {
+        width: 140px;
+    }
+}
+
+.card-preview_part_right {
+    border-radius: 0px 4px 4px 0px;
+    width: 138px;
+    background-color: @backgroundColor;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+
+    @media screen and (min-width: 700px) {
         width: 188px;
-        background-color: white;
-        text-align: center;
-        vertical-align: middle;
-        display: inline-block;
+    }
+
+    @media screen and (min-width: 300px) {
+        width: 138px;
     }
 }

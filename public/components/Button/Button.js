@@ -3,7 +3,7 @@
 const buttonTemplate = require('Templates/Button.pug');
 
 const noop = () => { };
-const validTypes = ['primary', 'secondary', 'square'];
+const validTypes = ['primary', 'secondary'];
 
 export class Button {
     constructor({
