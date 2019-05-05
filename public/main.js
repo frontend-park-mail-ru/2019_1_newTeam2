@@ -9,6 +9,7 @@ import {LoginController} from 'Controllers/LoginController.js';
 import {DictionaryController} from 'Controllers/DictionaryController.js';
 import {CardController} from 'Controllers/CardController.js';
 import {ChatController} from 'Controllers/ChatController.js';
+import {MultiplayerController} from "Controllers/MultiplayerController.js";
 
 import './main.less';
 

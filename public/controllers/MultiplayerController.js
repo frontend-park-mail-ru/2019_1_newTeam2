@@ -1,6 +1,6 @@
-import {Controller} from '/controllers/Controller.js';
-import {Multiplayer} from "/views/Multiplayer/Multiplayer.js";
-import bus from "/services/bus.js";
+import {Controller} from 'Controllers/Controller.js';
+import {Multiplayer} from "Views/Multiplayer/Multiplayer.js";
+import bus from "Services/bus.js";
 
 export class MultiplayerController extends Controller {
 	index() {

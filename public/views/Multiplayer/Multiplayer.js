@@ -1,11 +1,11 @@
 'use strict';
 
-import {View} from '/views/View.js';
-import {Icon} from '/components/Icon/Icon.js';
-import router from '/services/router.js';
-import {GriseMerde} from '/components/GriseMerde/GriseMerde.js';
-import {multiplayerWebSocket} from "/services/multiplayerWebSocket.js";
-import {Table} from "/components/Table/Table.js";
+import {View} from 'Views/View.js';
+import {Icon} from 'Components/Icon/Icon.js';
+import router from 'Services/router.js';
+import {GriseMerde} from 'Components/GriseMerde/GriseMerde.js';
+import {multiplayerWebSocket} from "Services/multiplayerWebSocket.js";
+import {Table} from "Components/Table/Table.js";
 
 const application = document.getElementById('application');
 
