@@ -8,7 +8,7 @@ import {ChatMessage} from '/components/ChatMessage/ChatMessage.js';
 import {ChatForm} from '/components/ChatForm/ChatForm.js';
 
 import router from '/services/router.js';
-import {WebSocketService} from '/services/chatWebSocket.js';
+import {chatWebSocket} from '/services/chatWebSocket.js';
 
 const application = document.getElementById('application');
 
@@ -18,7 +18,7 @@ export class Chat extends View {
         const outer = application;
         outer.innerHTML = '';
 
-        this.ws = new WebSocketService();
+        this.ws = new chatWebSocket();
 
         const nameOfHeadline = 'Языковой чат';
         const headline = new Headline({size: 'h1', textContent: nameOfHeadline}).render();

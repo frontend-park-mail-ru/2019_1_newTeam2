@@ -5,7 +5,7 @@ const chatUrl = 'localhost:8091/';
 
 let ws;
 
-export class WebSocketService {
+export class chatWebSocket {
     constructor() {
         if(!ws) {
             ws = new WebSocket(`ws://${chatUrl}chat/enter/1`);
