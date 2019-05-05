@@ -15,6 +15,7 @@
 @import "./components/ChatForm/chat-form.css";
 
 @import "views/Dictionary/Dictionary.css" screen;
+@import "views/Multiplayer/Multiplayer.css" screen;
 @import "views/Training/Training.css" screen;
 
 

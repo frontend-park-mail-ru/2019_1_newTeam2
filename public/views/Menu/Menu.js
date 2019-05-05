@@ -6,6 +6,7 @@ import {Button} from '/components/Button/Button.js';
 import router from '/services/router.js';
 
 const loginedButtonNames = {
+    'game': 'Играть',
     'training': 'Тренировка',
     'chat': 'Языковой чат',
     'dictionaries/me': 'Мои словари',

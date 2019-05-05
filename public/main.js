@@ -9,6 +9,7 @@ import {LoginController} from '/controllers/LoginController.js';
 import {DictionaryController} from '/controllers/DictionaryController.js';
 import {CardController} from '/controllers/CardController.js';
 import {ChatController} from '/controllers/ChatController.js';
+import {MultiplayerController} from "./controllers/MultiplayerController.js";
 // import {IframeChat} from '/components/IframeChat/IframeChat.js';
 
 // document.getElementsByTagName('body')[0].appendChild(new IframeChat().render());
@@ -34,7 +35,8 @@ const controllers = new Set([
     ['^profile/me$', ProfileController],
     ['^dictionary/[0-9]+$', CardController],
     ['^training$', TrainingController],
-    ['^chat$', ChatController]
+    ['^chat$', ChatController],
+    ['^game$', MultiplayerController],
 ]);
 
 

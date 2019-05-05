@@ -26,14 +26,14 @@ export class Training extends Page {
     _ondictsloaded(dicts) {
         this.forContent.innerText = '';
         dicts.forEach((dict) => {
-            const link = new Link({
-                size: 'h2',
-                name: dict.name,
-                handler: () => {
-                    bus.emit('dict-selected', dict.id);
-                }
+            const merde = new GriseMerde({
+                size: 'small',
+                inner: dict.name,
             }).render();
-            this.forContent.appendChild(link);
+            merde.addEventListener('click', () => {
+                bus.emit('dict-selected', dict.id);
+            });
+            this.forContent.appendChild(merde);
         });
         const pagination = new Pagination();
         pagination.render(this.forContent);
@@ -93,11 +93,11 @@ export class Training extends Page {
                         genNextPage();
                     };
 
-                    const choice = new Link({
-                        size: 'h3',
-                        name: variant + ' ', /* TODO(gleensande): fix this */
-                        handler: onchoose
+                    const choice = new GriseMerde({
+                        size: 'small',
+                        inner: variant + ' ', /* TODO(gleensande): fix this */
                     }).render();
+                    choice.addEventListener('click', onchoose);
                     inner.appendChild(choice);
                 });
 

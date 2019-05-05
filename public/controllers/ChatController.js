@@ -3,11 +3,11 @@ import {Chat} from '/views/Chat/Chat.js';
 import {UserModel} from '/models/UserModel.js';
 import auth from '/models/AuthModel.js';
 import bus from '/services/bus.js';
-import {WebSocketService} from '/services/chatWebSocket.js';
+import {chatWebSocket} from '/services/chatWebSocket.js';
 
 export class ChatController extends Controller {
     index() {
-        this.ws = new WebSocketService();
+        this.ws = new chatWebSocket();
         this.view = new Chat();
         auth.isAuthorised();
         
