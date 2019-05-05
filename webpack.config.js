@@ -19,7 +19,18 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.pug$/, use: 'pug-loader' }
+            {
+                test: /\.pug$/,
+                use: 'pug-loader' 
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'less-loader'
+                ]
+            }
         ]
     }
 };

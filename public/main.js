@@ -9,7 +9,8 @@ import {LoginController} from 'Controllers/LoginController.js';
 import {DictionaryController} from 'Controllers/DictionaryController.js';
 import {CardController} from 'Controllers/CardController.js';
 import {ChatController} from 'Controllers/ChatController.js';
-// import {IframeChat} from 'Components/IframeChat/IframeChat.js';
+
+import './main.less';
 
 // document.getElementsByTagName('body')[0].appendChild(new IframeChat().render());
 
