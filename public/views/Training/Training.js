@@ -1,7 +1,6 @@
 'use strict';
 
-import {View} from '/views/View.js';
-import {Icon} from '/components/Icon/Icon.js';
+import {Page} from '/views/Page.js';
 import {Headline} from '/components/Headline/Headline.js';
 import router from '/services/router.js';
 import bus from '/services/bus.js';
@@ -10,23 +9,12 @@ import {GriseMerde} from '/components/GriseMerde/GriseMerde.js';
 import {Button} from '/components/Button/Button.js';
 import {Pagination} from '/components/pagination.js';
 
-const application = document.getElementById('application');
-
-export class Training extends View {
+export class Training extends Page {
     render() {
-        application.innerText = '';
+        super.renderBase();
+        super.renderBaseHeader('Тренировка');
 
-        application.appendChild(new Icon({
-            src: '/static/home-icon.png',
-            handler: () => {
-                router.go('menu');
-            }
-        }).render());
-
-
-        this.outer = document.createElement('div');
-        application.appendChild(this.outer);
-        this.outer.classList.add('training-outer');
+        this.forContent.classList.add('training-outer');
 
         this.listeners = new Set([
             ['dicts-loaded', this._ondictsloaded],
@@ -36,7 +24,7 @@ export class Training extends View {
     }
 
     _ondictsloaded(dicts) {
-        this.outer.innerText = '';
+        this.forContent.innerText = '';
         dicts.forEach((dict) => {
             const merde = new GriseMerde({
                 size: 'small',
@@ -45,10 +33,10 @@ export class Training extends View {
             merde.addEventListener('click', () => {
                 bus.emit('dict-selected', dict.id);
             });
-            this.outer.appendChild(merde);
+            this.forContent.appendChild(merde);
         });
         const pagination = new Pagination();
-        pagination.render(this.outer);
+        pagination.render(this.forContent);
     }
 
     _ongamecardsloaded(cards) {
@@ -57,10 +45,10 @@ export class Training extends View {
         const genNextPage = () => {
             let page = pageGenerator.next();
             if (!page.done) {
-                this.outer.innerText = '';
-                this.outer.appendChild(page.value);
+                this.forContent.innerText = '';
+                this.forContent.appendChild(page.value);
             } else {
-                this.outer.innerText = '';
+                this.forContent.innerText = '';
                 let guessedRight = 0;
                 result.forEach((item) => {
                     if(item.correct) {
@@ -71,7 +59,7 @@ export class Training extends View {
                     textContent: 'Ваш результат: ' + guessedRight + '/' + cards.length,
                     size: 'h3',
                 }).render();
-                this.outer.appendChild(head);
+                this.forContent.appendChild(head);
                 const menuButton = new Button({
                     type: 'secondary',
                     name: 'Вернуться в меню',
@@ -79,7 +67,7 @@ export class Training extends View {
                         router.go('menu');
                     }
                 }).render();
-                this.outer.appendChild(menuButton);
+                this.forContent.appendChild(menuButton);
                 bus.emit('training-finished', result);
             }
         };

@@ -1,37 +1,19 @@
 'use strict';
 
-import {View} from '/views/View.js';
-import router from '/services/router.js';
+import {Page} from '/views/Page.js';
 import {Headline} from '/components/Headline/Headline.js';
 import {Icon} from '/components/Icon/Icon.js';
 import {Button} from '/components/Button/Button.js';
 import {Input} from '/components/Input/Input.js';
 import {CardPreview} from '/components/CardPreview/CardPreview.js';
 import bus from '/services/bus.js';
-import {Pagination} from '/components/pagination.js';
 
-const application = document.getElementById('application');
 
-export class Card extends View {
+export class Card extends Page {
     render() {
-        application.innerHTML = '';
-        this.forHeader = document.createElement('div');
-        this.forContent = document.createElement('div');
-        this.forPagination = document.createElement('div');
-
-        this.forHeader.appendChild(new Icon({
-            src: '/static/home-icon.png',
-            handler: () => {
-                router.go('menu');
-            }
-        }).render());
-
-        const pagination = new Pagination();
-        pagination.render(this.forPagination);
-
-        application.appendChild(this.forHeader);
-        application.appendChild(this.forContent);
-        application.appendChild(this.forPagination);
+        super.renderBase();
+        super.renderBaseHeader();
+        super.renderBasePagination();
 
         this.listeners = new Set([
             ['dict-loaded', this._ondictloaded],

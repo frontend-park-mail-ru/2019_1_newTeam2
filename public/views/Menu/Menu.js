@@ -1,6 +1,6 @@
 'use strict';
 
-import {View} from '/views/View.js';
+import {Page} from '/views/Page.js';
 import {Button} from '/components/Button/Button.js';
 
 import router from '/services/router.js';
@@ -21,12 +21,10 @@ const unloginedButtonNames = {
     'signup': 'Зарегистрироваться'
 };
 
-const application = document.getElementById('application');
 
-export class Menu extends View {
+export class Menu extends Page {
     render({authorised = false}) {
-        const outer = application;
-        outer.innerHTML = '';
+        super.renderBase();
         
         let buttons = [];
 
@@ -49,8 +47,8 @@ export class Menu extends View {
             createButtons(unloginedButtonNames);
         }
         
-        buttons.forEach( item => {
-            outer.appendChild(item);
+        buttons.forEach( button => {
+            this.forContent.appendChild(button);
         });
     }
 }

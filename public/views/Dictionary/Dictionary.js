@@ -1,34 +1,19 @@
 'use strict';
 
-import {View} from '/views/View.js';
-import router from '/services/router.js';
-import {Headline} from '/components/Headline/Headline.js';
+import {Page} from '/views/Page.js';
 import {Icon} from '/components/Icon/Icon.js';
 import {Button} from '/components/Button/Button.js';
 import {Input} from '/components/Input/Input.js';
 import {DictionaryPreview} from '/components/DictionaryPreview/DictionaryPreview.js';
 import bus from '/services/bus.js';
-import {Pagination} from '/components/pagination.js';
 
-const application = document.getElementById('application');
 
-export class Dictionary extends View {
+export class Dictionary extends Page {
     render() {
-        application.innerHTML = '';
-        this.forContent = document.createElement('div');
-        this.forPagination = document.createElement('div');
-
-        application.appendChild(new Icon({
-            src: '/static/home-icon.png',
-            handler: () => {
-                router.go('menu');
-            }
-        }).render());
-
-        application.appendChild(new Headline({
-            textContent: 'Мои словари'
-        }).render());
-
+        super.renderBase();
+        super.renderBaseHeader('Мои словари');
+        super.renderBasePagination();
+        
         const name = new Input({
             id: 'name',
             type: 'text',
@@ -38,7 +23,7 @@ export class Dictionary extends View {
             label: '',
         }).render();
         name.classList.add('hidden-element');
-        application.appendChild(name);
+        this.forHeader.appendChild(name);
 
         const description = new Input({
             id: 'description',
@@ -49,7 +34,7 @@ export class Dictionary extends View {
             label: '',
         }).render();
         description.classList.add('hidden-element');
-        application.appendChild(description);
+        this.forHeader.appendChild(description);
 		
         const submit = new Button({
             type: 'secondary',
@@ -70,7 +55,7 @@ export class Dictionary extends View {
                 bus.emit('new-dict-form-submitted', dict);
             }
         }).render();
-        application.appendChild(submit);
+        this.forHeader.appendChild(submit);
 
         let deny = new Icon({
             src: '/static/cross.png',
@@ -87,7 +72,7 @@ export class Dictionary extends View {
                 dict.description = document.getElementById('description').value;
             }
         }).render();
-        application.appendChild(deny);
+        this.forHeader.appendChild(deny);
 
         let plus = new Icon({
             src: '/static/plus.png',
@@ -100,18 +85,7 @@ export class Dictionary extends View {
                 document.getElementById('submit').classList.remove('hidden-element');
             }
         }).render();
-        application.appendChild(plus);
-
-        let limiter = document.createElement('br');
-        application.appendChild(limiter);
-
-
-        application.appendChild(this.forContent);
-        application.appendChild(this.forPagination);
-
-
-        const pagination = new Pagination();
-        pagination.render(this.forPagination);
+        this.forHeader.appendChild(plus);
 
         this.listeners = new Set([
             ['dicts-loaded', this._ondictsloaded],
