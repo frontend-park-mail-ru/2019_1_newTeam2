@@ -1,0 +1,79 @@
+@import '../../styles/colorScheme.less';
+
+/* hide browser checkbox */
+input[type=checkbox] {
+	visibility: hidden;
+}
+
+/* area of checkbox */
+.checkbox {
+    position: relative;
+
+    /* area of checkbox */
+    label {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: @backgroundColor;
+        border: 2px solid @borderColor;
+        border-radius: 4px;
+
+        /* tick */
+        &:after {
+            opacity: 0;
+            content: '';
+            position: absolute;
+            background: transparent;
+        
+            transform: rotate(-45deg);
+        }
+    }
+
+    /* checked */
+    input[type=checkbox]:checked + label:after {
+        opacity: 1;
+    }
+}
+
+.checkbox_size_big {
+	width: 25px;
+    height: 25px;
+    
+    label {
+        width: 25px;
+        height: 25px;
+
+        &:after {
+            width: 9px;
+            height: 5px;
+            top: 6px;
+            left: 5px;
+            border: 3px solid @borderColor;
+            border-top: none;
+            border-right: none;
+        }
+    }
+}
+
+.checkbox_size_small {
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    margin: 3px;
+    
+    label {
+        width: 13px;
+        height: 13px;
+
+        &:after {
+            width: 5px;
+            height: 2px;
+            top: 2px;
+            left: 1px;
+            border: 2px solid @borderColor;
+            border-top: none;
+            border-right: none;
+        }
+    }
+}

@@ -1,47 +1,34 @@
 'use strict';
 
-import {Headline} from '/components/Headline/Headline.js';
-import {Input} from '/components/Input/Input.js';
-import {Link} from '/components/Link/Link.js';
-import {Button} from '/components/Button/Button.js';
-import {Icon} from '/components/Icon/Icon.js';
+import {Page} from 'Views/Page.js';
+import {Input} from 'Components/Input/Input.js';
+import {Link} from 'Components/Link/Link.js';
+import {Button} from 'Components/Button/Button.js';
 
-import router from '/services/router.js';
-import bus from '/services/bus.js';
+import router from 'Services/router.js';
+import bus from 'Services/bus.js';
 
-const application = document.getElementById('application');
+export class Login extends Page {
+    render() {
+        super.renderBase();
+        super.renderBaseHeader('Авторизация');
 
-export class Login {
-    render(options = {}) {
-        application.innerText = '';
-        const outer = document.createElement('div');
-        application.appendChild(outer);
+        this.serverErrorText = document.createElement('div');
+        this.serverErrorText.classList.add('error-text');
+        this.serverErrorText.classList.add('hidden-element');
+        this.serverErrorText.innerText = 'Неправильный логин или пароль';
 
-        outer.appendChild(new Icon({
-            src: '/static/home-icon.png',
-            handler: () => {
-                router.go('menu');
-            }
-        }).render());
-
-        let headline = new Headline({size: 'h1', textContent: 'Авторизация'});
-        let serverErrorText = document.createElement('div');
-        serverErrorText.classList.add('error-text');
-        serverErrorText.classList.add('hidden-element');
-        serverErrorText.innerText = 'Неправильный логин или пароль';
-
-
-        let loginTemplateText = document.createElement('div');
-        loginTemplateText.classList.add('error-text');
-        loginTemplateText.classList.add('hidden-element');
-        loginTemplateText.innerText = 'Строчные и прописные латинские буквы, цифры, _';
+        this.loginTemplateText = document.createElement('div');
+        this.loginTemplateText.classList.add('error-text');
+        this.loginTemplateText.classList.add('hidden-element');
+        this.loginTemplateText.innerText = 'Пожалуйста, используйте только строчные и прописные латинские буквы, цифры и знак подчеркивания';
 
         let login = new Input({type: 'text', label: 'Логин* ', id: 'login', maxlen: 20});
 
-        let passwordTemplateText = document.createElement('div');
-        passwordTemplateText.classList.add('error-text');
-        passwordTemplateText.classList.add('hidden-element');
-        passwordTemplateText.innerText = 'Строчные и прописные латинские буквы, цифры, _';
+        this.passwordTemplateText = document.createElement('div');
+        this.passwordTemplateText.classList.add('error-text');
+        this.passwordTemplateText.classList.add('hidden-element');
+        this.passwordTemplateText.innerText = 'Пожалуйста, используйте только строчные и прописные латинские буквы, цифры и знак подчеркивания';
 
         let password = new Input({ type: 'password', label: 'Пароль* ', id: 'password', maxlen: 20});
 
@@ -51,65 +38,66 @@ export class Login {
         let renderedSubmit = submit.render();
         let renderedSignupLink = signupLink.render();
         
-        outer.appendChild(headline.render());
-        outer.appendChild(serverErrorText);
-        outer.appendChild(loginTemplateText);
-        outer.appendChild(login.render());
-        outer.appendChild(passwordTemplateText);
-        outer.appendChild(password.render());
-        outer.appendChild(renderedSubmit);
-        outer.appendChild(renderedSignupLink);
+        this.forContent.appendChild(this.serverErrorText);
+        this.forContent.appendChild(this.loginTemplateText);
+        this.forContent.appendChild(login.render());
+        this.forContent.appendChild(this.passwordTemplateText);
+        this.forContent.appendChild(password.render());
+        this.forContent.appendChild(renderedSubmit);
+        this.forContent.appendChild(renderedSignupLink);
 
-        outer.addEventListener( 'keyup', (event) => {
+        this.outer.addEventListener( 'keyup', (event) => {
             if(event.keyCode === 13){ // Enter button clicked
                 renderedSubmit.click();
             }
         });
 
         renderedSubmit.addEventListener( 'click', () => {
-             if (!serverErrorText.classList.contains('hidden-element')) {
-                serverErrorText.classList.add('hidden-element');
+            if (!this.serverErrorText.classList.contains('hidden-element')) {
+                this.serverErrorText.classList.add('hidden-element');
             }
 
-            if (!loginTemplateText.classList.contains('hidden-element')) {
-                loginTemplateText.classList.add('hidden-element');
+            if (!this.loginTemplateText.classList.contains('hidden-element')) {
+                this.loginTemplateText.classList.add('hidden-element');
             }
 
-            if (!passwordTemplateText.classList.contains('hidden-element')) {
-                passwordTemplateText.classList.add('hidden-element');
+            if (!this.passwordTemplateText.classList.contains('hidden-element')) {
+                this.passwordTemplateText.classList.add('hidden-element');
             }         
 
             let loginText = document.getElementById('login').value;
             let passwordText = document.getElementById('password').value;
 
             let profile = {
-                "username" : loginText,
-                "password" : passwordText
+                'username' : loginText,
+                'password' : passwordText
             };
 
-            setTimeout(bus.emit.bind(bus), 0 , 'login-form-submitted', profile);
+            bus.emit('login-form-submitted', profile);
         });
-        this._onwronglogin = () => {
-            loginTemplateText.classList.remove('hidden-element')
-        };
-        this._onwrongpassword = () => {
-            passwordTemplateText.classList.remove('hidden-element')
-        };
-        this._onnologin = () => {
-            serverErrorText.classList.remove('hidden-element')
-        };
-        bus.on('wrong-login', this._onwronglogin);
-        bus.on('wrong-password', this._onwrongpassword);
-        bus.on('no-login', this._onnologin);
-
+        
         renderedSignupLink.addEventListener( 'click', () => {
             router.go('signup');
         });
+        
+        this.listeners = new Set([
+            ['wrong-login', this._onwronglogin],
+            ['wrong-password', this._onwrongpassword],
+            ['no-login', this._onnologin],
+        ]);
+        super.subscribeAll();
     }
 
-    preventAllEvents() {
-        bus.off('no-login', this._onnologin);
-        bus.off('wrong-login', this._onwronglogin);
-        bus.off('wrong-password', this._onwrongpassword);
+    _onwronglogin() {
+        this.loginTemplateText.classList.remove('hidden-element');
     }
+
+    _onwrongpassword() {
+        this.passwordTemplateText.classList.remove('hidden-element');
+    }
+
+    _onnologin() {
+        this.serverErrorText.classList.remove('hidden-element');
+    }
+
 }

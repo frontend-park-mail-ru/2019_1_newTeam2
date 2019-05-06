@@ -1,23 +1,23 @@
 'use strict';
 
-import ajax from '/services/ajax.js';
-import bus from "/services/bus.js";
+import ajax from 'Services/ajax.js';
+import bus from 'Services/bus.js'; 
 
 class AuthModel {
     isAuthorised() {
         ajax.doGet({
             path: 'session/'
         })
-            .then(
-                (res) => {
-                    if(res.status === 200)
-                        setTimeout(bus.emit.bind(bus), 0 , 'logged-in', res);
-                    else
-                        setTimeout(bus.emit.bind(bus), 0 , 'logged-out');
-                },
-                (err) => {
-                    setTimeout(bus.emit.bind(bus), 0 , 'logged-out');
-                });
+            .then((res) => {
+                if(res.status === 200) {
+                    bus.emit('logged-in', res);
+                } else {
+                    bus.emit('logged-out');
+                }
+            })
+            .catch(() => {
+                bus.emit('logged-out');
+            });
     }
 
     logout() {
@@ -31,15 +31,14 @@ class AuthModel {
             path: 'session/',
             body: profile
         })
-            .then(
-                (res) => {
-                    setTimeout(bus.emit.bind(bus), 0 , 'login', res);
-                },
-                (err) => {
-                    console.log(err);
-                    setTimeout(bus.emit.bind(bus), 0 , 'no-login');
-                }
-            );
+            .then( (res) => {
+                bus.emit('login', res);
+            })
+            .catch((err) => {
+                // TODO(gleensande): обработка ошибки
+                console.log(err);
+                bus.emit('no-login');
+            });
     }
 }
 

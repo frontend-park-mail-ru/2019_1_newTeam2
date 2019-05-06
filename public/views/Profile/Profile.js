@@ -1,52 +1,21 @@
 'use strict';
 
-import {Headline} from '/components/Headline/Headline.js';
-import {Icon} from '/components/Icon/Icon.js';
-import {Button} from '/components/Button/Button.js';
+const profileTemplate = require('Templates/Profile.pug');
+const profileeditTemplate = require('Templates/ProfileEdit.pug');
 
-import router from '/services/router.js';
-import {baseUrl} from '/services/ajax.js';
-import bus from "/services/bus.js";
+import {Page} from 'Views/Page.js';
+import {Button} from 'Components/Button/Button.js';
 
-const application = document.getElementById('application');
+import {baseUrl} from 'Services/ajax.js';
+import bus from 'Services/bus.js';
 
-export class Profile{
-    render(options = {}) {
-        const outer = application;
-        outer.innerHTML = '';
-        outer.classList.add('centered');
+export class Profile extends Page {
+    render() {
+        super.renderBase();
+        super.renderBaseHeader('Мой профиль');
 
-
-        let headline = new Headline({size: 'h1', textContent: 'Мой профиль'});
-
-        outer.appendChild(new Icon({
-            src: '/static/home-icon.png',
-            handler: () => {
-                router.go('menu');
-            }
-        }).render());
-        outer.appendChild(headline.render());
-
-
-        let forData = document.createElement('div');
         let forButton = document.createElement('div');
-
-        outer.appendChild(forData);
-        outer.appendChild(forButton);
-
-        this._onuserloaded = (data) => {
-            data.baseUrl = baseUrl;
-            this._user = data;
-            console.log(this._user.path);
-            if (!this._user.path) {
-                this._user.path = '/static/avatar-default.png';
-            } else {
-                this._user.path = this._user.baseUrl + this._user.path;
-            }
-            forData.innerHTML = profileTemplate(this._user);
-        };
-
-        bus.on('user-loaded', this._onuserloaded);
+        this.outer.appendChild(forButton);
 
         let edit = new Button({type: 'secondary', name: 'Редактировать'}).render();
         forButton.appendChild(edit);
@@ -54,7 +23,7 @@ export class Profile{
         edit.addEventListener('click', () => {
             edit.firstChild.classList.add('hidden-element');
             save.firstChild.classList.remove('hidden-element');
-            forData.innerHTML = profileeditTemplate(this._user);
+            this.forContent.innerHTML = profileeditTemplate(this._user);
         });
 
         let save = new Button({type: 'secondary', name: 'Сохранить'}).render();
@@ -72,17 +41,29 @@ export class Profile{
                     this._user[`${input.name}`] = input.value;
                 }
             );
-            setTimeout(bus.emit.bind(bus), 0, 'edit-user', this._user);
+            bus.emit('edit-user', this._user);
             const fileUpload = document.getElementsByName('file')[0];
             if(fileUpload.value) {
-                setTimeout(bus.emit.bind(bus), 0, 'user-upload-avatar', fileUpload.files[0]);
+                bus.emit('user-upload-avatar', fileUpload.files[0]);
             }
-            forData.innerHTML = profileTemplate(this._user);
+            this.forContent.innerHTML = profileTemplate(this._user);
         });
         save.firstChild.classList.add('hidden-element');
+
+        this.listeners = new Set([
+            ['self-loaded', this._onuserloaded],
+        ]);
+        super.subscribeAll();
     }
 
-    preventAllEvents() {
-        bus.off('user-loaded', this._onuserloaded);
+    _onuserloaded(data) {
+        data.baseUrl = baseUrl;
+        this._user = data;
+        if (!this._user.path) {
+            this._user.path = '/static/avatar-default.png';
+        } else {
+            this._user.path = this._user.baseUrl + this._user.path;
+        }
+        this.forContent.innerHTML = profileTemplate(this._user);
     }
 }

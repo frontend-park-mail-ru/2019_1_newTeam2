@@ -1,6 +1,7 @@
 'use strict';
 
-import {Headline} from "/components/Headline/Headline.js";
+import { Icon } from 'Components/Icon/Icon.js';
+import bus from 'Services/bus.js';
 
 export class CardPreview {
     constructor(card) {
@@ -15,16 +16,30 @@ export class CardPreview {
 
     render() {
         let outer = document.createElement('div');
-        let word = new Headline ({
-            size: 'h3',
-            textContent: this.word.name,
+        outer.id = this.id;
+
+        outer.classList.add('card-preview');
+
+        let leftPart = document.createElement('div');
+        leftPart.classList.add('card-preview_part_left');
+        leftPart.innerText = this.word.name;
+        outer.appendChild(leftPart);
+
+        let rightPart = document.createElement('div');
+        rightPart.classList.add('card-preview_part_right');
+        rightPart.innerText = this.translation.name;
+        outer.appendChild(rightPart);
+
+        let cross = new Icon({
+            src: '/static/cross.png',
+            classname: 'card-preview__cross-icon',
+            handler: () => {
+                document.getElementById(this.id).classList.add('hidden-element');
+                bus.emit('card-removed', this.id);
+            }
         }).render();
-        outer.appendChild(word);
-        let translation = new Headline ({
-            size: 'h4',
-            textContent: this.translation.name,
-        }).render();
-        outer.appendChild(translation);
+        rightPart.appendChild(cross);
+
         return outer;
     }
 }

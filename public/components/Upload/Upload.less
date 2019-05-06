@@ -1,0 +1,51 @@
+@import '../../styles/colorScheme.less';
+
+.outerDivUpload {
+	position: relative;
+	overflow: hidden;
+	height: 40px;
+	background: @backgroundNegativeColor;
+	color: @textNegativeColor;
+	text-align: center;
+	border-radius: 10px;
+
+	&:hover {
+		background: @backgroundLightNegativeColor;
+	}
+
+	input[type="file"] {
+		display: none;
+	}
+
+	label {
+		display: inline-block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
+	}
+
+	span {
+		font-weight: bold;
+		line-height: 40px;
+	}
+
+	@media screen and (max-width: 300px) {
+		width: 100%;
+	}
+
+	@media screen and (min-width: 300px) {
+		width: 100%;
+		max-width: 550px;
+	}
+
+	@media screen and (min-width: 700px) {
+		width: 250px;
+	}
+
+	@media screen and (min-width: 1200px) {
+		width: 250px;
+	}
+}

@@ -1,32 +1,30 @@
 'use strict';
 
-import {Button} from '/components/Button/Button.js';
+import {Page} from 'Views/Page.js';
+import {Button} from 'Components/Button/Button.js';
 
-import router from '/services/router.js';
+import router from 'Services/router.js';
 
 const loginedButtonNames = {
-    //'train': 'Тренировка',
+    'game': 'Играть',
+    'training': 'Тренировка',
+    'chat': 'Языковой чат',
     'dictionaries/me': 'Мои словари',
-    //'feed': 'Лента',
     'profile/me': 'Профиль',
     'leaderboard': 'Таблица лидеров',
     'login': 'Выйти'
 };
 
 const unloginedButtonNames = {
-    //'trainSample': 'Пробная тренировка',
     'login': 'Войти',
     'leaderboard': 'Таблица лидеров',
     'signup': 'Зарегистрироваться'
 };
 
-const application = document.getElementById('application');
 
-export class Menu {
+export class Menu extends Page {
     render({authorised = false}) {
-        const outer = application;
-        outer.innerHTML = '';
-        outer.classList.add('centered');
+        super.renderBase();
         
         let buttons = [];
 
@@ -49,8 +47,8 @@ export class Menu {
             createButtons(unloginedButtonNames);
         }
         
-        buttons.forEach( item => {
-            outer.appendChild(item);
+        buttons.forEach( button => {
+            this.forContent.appendChild(button);
         });
     }
 }

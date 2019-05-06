@@ -1,22 +1,11 @@
-import router from "/services/router.js";
-import {Headline} from "/components/Headline/Headline.js";
-import {Icon} from "/components/Icon/Icon.js";
+'use strict';
 
-const application = document.getElementById('application');
+import {Page} from 'Views/Page.js';
 
-export class Dictionary {
-	render(options = {}) {
-		application.innerHTML = '';
-
-		application.appendChild(new Icon({
-			src: '/static/home-icon.png',
-			handler: () => {
-				router.go('menu');
-			}
-		}).render());
-
-		application.appendChild(new Headline({
-			textContent: options.errorText
-        }).render());
+export class Error extends Page {
+    render() {
+        super.renderBase();
+        super.renderBaseHeader('К сожалению, возникла ошибка');
+        super.renderBasePagination();
     }
 }

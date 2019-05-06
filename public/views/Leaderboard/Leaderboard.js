@@ -1,51 +1,30 @@
 'use strict';
 
-import router from "/services/router.js";
-import {Headline} from "/components/Headline/Headline.js";
-import {Pagination} from "/components/pagination.js";
-import {Table} from "/components/Table/Table.js";
-import {Icon} from "/components/Icon/Icon.js";
-import bus from "/services/bus.js";
+import {Page} from 'Views/Page.js';
+import {Table} from 'Components/Table/Table.js';
 
-const application = document.getElementById('application');
-
-export class Leaderboard {
+export class Leaderboard extends Page {
     render() {
-        let outer = application;
-        outer.innerHTML = '';
+        super.renderBase();
+        super.renderBaseHeader('Лидеры');
+        super.renderBasePagination();
 
-        outer.appendChild(new Icon({
-            src: '/static/home-icon.png',
-            handler: () => {
-                router.go('menu');
-            }
-        }).render());
-
-        const head = new Headline({textContent: 'Лидеры'}).render();
-        outer.appendChild(head);
-
-        const forTable = document.createElement('div');
-        const forPagination = document.createElement('div');
-        outer.appendChild(forTable);
-        outer.appendChild(forPagination);
-
-        const table = new Table();
-        this._onload = (data) => {
-            console.log(data);
-            table.data = data;
-            let childNode = forTable.firstChild;
-            if(!childNode)
-                forTable.appendChild(table.render());
-            else
-                childNode = table.render();
-        };
-        bus.on('users-loaded', this._onload);
-
-        const pagination = new Pagination();
-        pagination.render(forPagination);
+        this.table = new Table();
+        
+        this.listeners = new Set([
+            ['users-loaded', this._onload],
+        ]);
+        super.subscribeAll();
     }
 
-    preventAllEvents() {
-        bus.off('users-loaded', this._onload);
+    _onload(data) {
+        this.table.data = data;
+        let childNode = this.forContent.firstChild;
+        if(!childNode) {
+            this.forContent.appendChild(this.table.render());
+        }
+        else {
+            childNode = this.table.render();
+        }
     }
 }

@@ -1,44 +1,59 @@
-import {DictionaryModel} from "/models/DictionaryModel.js";
-import {Dictionary} from "/views/Dictionary/Dictionary.js";
-import bus from "/services/bus.js";
-import router from "/services/router.js"
+import {Controller} from 'Controllers/Controller.js';
+import {DictionaryModel} from 'Models/DictionaryModel.js';
+import {Dictionary} from 'Views/Dictionary/Dictionary.js';
+import router from 'Services/router.js';
+ 
 
-
-export class DictionaryController {
-    index(options = {}) {
+export class DictionaryController extends Controller{
+    index() {
         this.model = new DictionaryModel();
         this.view = new Dictionary();
         this.view.render();
         this.model.getSelfDicts();
+        this.page = 1;
+        this.rows = 5;
 
-        this._onnewdict = (dict) => {
-            this.model.createDict(dict);
-        };
+        this.listeners = new Set ([
+            ['prev-page', this._onprevpage],
+            ['next-page', this._onnextpage],
+            ['new-dict-form-submitted', this._onnewdict],
+            ['dict-created', this._on_dict_created],
+            ['create-dict-error', this._on_create_dict_error],
+            ['dict-removed', this._on_dict_removed],
+        ]);
 
-        this._on_dict_created = (dict) => {
-            console.log('Словарь успешно создан');
-            router.go('dictionary/' + dict.id);
-        };
-
-        this._on_create_dict_error = () => {
-            alert('Произошла ошибка при создании словаря.');
-        };
-
-        this._on_dict_removed = (id) => {
-            this.model.deleteDict(id);
-        }
-
-        bus.on('new-dict-form-submitted', this._onnewdict);
-        bus.on('dict-created', this._on_dict_created);
-        bus.on('create-dict-error', this._on_create_dict_error);
-        bus.on('dict-removed', this._on_dict_removed);
+        super.subscribeAll();
     }
 
-    preventAllEvents() {
-        this.view.preventAllEvents();
-        bus.off('new-dict-form-submitted', this._onnewdict);
-        bus.off('dict-created', this._on_dict_created);
-        bus.off('create-dict-error', this._on_create_dict_error);
-        bus.off('dict-removed', this._on_dict_removed);
+    _on_dict_created(dict) {
+        router.go('dictionary/' + dict.id);
+    }
+
+    _on_create_dict_error() {
+        //TODO(gleensande): обработка ошибки создания словаря
+    }
+
+    _on_dict_removed(id) {
+        this.model.deleteDict(id);
+    }
+
+    _onnewdict(dict) {
+        this.model.createDict(dict);
+    }
+
+    _onprevpage() {
+        this.page = this.page < 2 ? 1 : this.page - 1;
+        this.model.getSelfDicts({
+            rows: this.rows, 
+            page: this.page
+        });
+    }
+
+    _onnextpage() {
+        this.page++;
+        this.model.getSelfDicts({
+            rows:this.rows, 
+            page:this.page
+        });
     }
 }
