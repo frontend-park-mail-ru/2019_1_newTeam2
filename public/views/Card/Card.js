@@ -26,6 +26,8 @@ export class Card extends Page {
             ['card-updated', this._oncardupdated],
             ['update-card-error', this._onupdatecarderror],
             ['delete-card-error', this._ondeletecarderror],
+            ['wrong-word', this._onwrongword],
+            ['wrong-translation', this._onwrongtranslation],
         ]);
         super.subscribeAll();
     }
@@ -151,5 +153,13 @@ export class Card extends Page {
 
     _ondeletecarderror() {
 
+    }
+
+    _onwrongword(word) {
+        console.log(word);
+    }
+
+    _onwrongtranslation(word) {
+        console.log(word);
     }
 }

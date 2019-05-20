@@ -3,6 +3,9 @@ import {CardModel} from 'Models/CardModel.js';
 import {DictionaryModel} from 'Models/DictionaryModel.js';
 import {Card} from 'Views/Card/Card.js';
 
+import validation from 'Services/validation.js';
+import bus from 'Services/bus.js';
+
 
 export class CardController extends Controller{
     index(options = {path: ''}) {
@@ -28,7 +31,20 @@ export class CardController extends Controller{
     }
 
     _onnewcardformsubmitted(body) {
-        this.model.createCard(body, this.id); 
+        let passed = true;
+        if(!validation.checkWord(body.word, 'Eng')) {
+            bus.emit('wrong-word', body.word);
+            passed = false;
+        }
+
+        if(!validation.checkWord(body.word, 'Rus')) {
+            bus.emit('wrong-translation', body.translation);
+            passed = false;
+        }
+
+        if(passed) {
+            this.model.createCard(body, this.id);
+        }
     }
 
     _oncardremoved(cardId) {
