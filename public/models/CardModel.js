@@ -54,7 +54,7 @@ export class CardModel {
             body: body
         })
             .then(() => {
-                bus.emit('card-created');
+                bus.emit('card-created', body);
             })
             .catch((error) => {
                 bus.emit('create-card-error', error);

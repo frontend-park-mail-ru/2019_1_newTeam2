@@ -17,7 +17,6 @@ export class Card extends Page {
 
         this.listeners = new Set([
             ['dict-loaded', this._ondictloaded],
-            ['load-dict-error', this._onloaddicterror],
             ['cards-loaded',this._oncardsloaded],
             ['card-loaded', this._oncardloaded],
             ['load-card-error', this._onloadcarderror],
@@ -67,7 +66,7 @@ export class Card extends Page {
             id: 'submit',
             is_hidden: 'hidden-element',
             handler: () => {
-                let card = {
+                const card = {
                     'id': 0,
                     'word': {
                         'name': document.getElementById('word').value,
@@ -85,7 +84,7 @@ export class Card extends Page {
         }).render();
         this.forHeader.appendChild(submit);
 
-        let deny = new Icon({
+        const deny = new Icon({
             src: '/static/cross.png',
             id: 'deny',
             classname: 'hidden-element',
@@ -102,7 +101,7 @@ export class Card extends Page {
         }).render();
         this.forHeader.appendChild(deny);
 
-        let plus = new Icon({
+        const plus = new Icon({
             src: '/static/plus.png',
             id: 'plus',
             handler: () => {
@@ -115,44 +114,21 @@ export class Card extends Page {
         }).render();
         this.forHeader.appendChild(plus);
 
-        let limiter = document.createElement('br');
+        const limiter = document.createElement('br');
         this.forHeader.appendChild(limiter);
     }
         
     _oncardsloaded(cards) {
         this.forContent.innerText = '';
         cards.forEach((card)=> {
-            let cardComponent = new CardPreview(card).render();
+            const cardComponent = new CardPreview(card).render();
             this.forContent.appendChild(cardComponent);
         });
     }
 
-    _oncardloaded() {
-
-    }
-
-    _onloadcarderror() {
-
-    }
-
-    _oncardcreated() {
-
-    }
-
-    _oncreatecarderror() {
-
-    }
-
-    _oncardupdated() {
-
-    }
-
-    _onupdatecarderror() {
-
-    }
-
-    _ondeletecarderror() {
-
+    _oncardcreated(card) {
+        const cardComponent = new CardPreview(card).render();
+        this.forContent.appendChild(cardComponent);
     }
 
     _onwrongword(word) {
