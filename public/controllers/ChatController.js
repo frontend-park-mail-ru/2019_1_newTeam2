@@ -15,18 +15,10 @@ export class ChatController extends Controller {
             ['logged-in', this._onloggedin],
             ['logged-out', this._onloggedout],
             ['ws-message-received', this._onmessagereceived],
-            ['user-loaded', this._onuserloaded],
             ['message-form-submitted', this._onmessageformsubmitted],
         ]);
 
         super.subscribeAll();
-
-        this.model = new UserModel();
-        this.model.getSelf();
-    }
-
-    _onuserloaded(data) {
-        this.selfid = data.id;
     }
 
     _onmessageformsubmitted(text) {
@@ -34,11 +26,11 @@ export class ChatController extends Controller {
     }
 
     _onloggedin() {
-        this.view.render({authorised: true});
+        this.view.render({authorised: true, ws: this.ws});
     }
     
     _onloggedout() {
-        this.view.render({authorised: false});
+        this.view.render({authorised: false, ws: this.ws});
     }
 
     _notify(data) {
