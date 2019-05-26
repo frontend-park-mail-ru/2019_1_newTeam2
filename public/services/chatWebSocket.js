@@ -1,7 +1,6 @@
 import bus from 'Services/bus.js';
 
-// const chatUrl = 'newteam2back.herokuapp.com/'; // TODO(Deploy): change url for deploy
-const chatUrl = 'localhost:8091/';
+const chatUrl = 'http://new-words.ru/chat/';
 
 let ws;
 

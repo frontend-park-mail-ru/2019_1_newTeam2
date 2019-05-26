@@ -3,9 +3,7 @@
 import bus from './bus.js';
 const bodyIncludesMethods = ['POST', 'PATCH', 'PUT', 'DELETE'];
 
-
-// export const baseUrl = 'https://newteam2back.herokuapp.com/';
-export const baseUrl = 'http://localhost:8092/';
+export const baseUrl = 'http://new-words.ru/api/';
 
 
 /**
