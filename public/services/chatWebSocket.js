@@ -1,6 +1,6 @@
 import bus from 'Services/bus.js';
 
-const chatUrl = 'http://new-words.ru/chat/';
+const chatUrl = 'http://new-words.ru/world_chat/';
 
 let ws;
 
@@ -17,9 +17,17 @@ export class chatWebSocket {
                 bus.emit('ws-message-received', msg);
             });
         }
+        else {
+            bus.emit('ws-opened');
+        }
     }
 
     send(data) {
         ws.send(JSON.stringify(data));
+    }
+
+    destroy() {
+        ws.close();
+        ws = false;
     }
 }
