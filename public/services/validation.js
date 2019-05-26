@@ -5,9 +5,9 @@ class ValidationModule {
         this.loginRegExpr = /^[a-zA-Z0-9-_]+$/;
         this.passwordRegExpr = /^[a-zA-Z0-9-_]+$/;
         this.emailRegExpr = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        this.wordRegExpr = new Map();
-        this.wordRegExpr.set('Eng', /^[a-zA-Z0-9-_\s]*$/);
-        this.wordRegExpr.set('Rus', /^А-ЯЁа-яё0-9-_\s]*$/);
+        this.wordRegExpr = new Map(); 
+        this.wordRegExpr.set('Eng', /^[a-zA-Z0-9-_\s]+$/);
+        this.wordRegExpr.set('Rus', /^А-ЯЁа-яё0-9-_\s]+$/);
     }
 
     findPathInArray(path, arr) {
@@ -35,7 +35,7 @@ class ValidationModule {
         if (!this.wordRegExpr.has(lang)) {
             return;
         }
-        return this.wordRegExpr[lang].test(word);
+        return this.wordRegExpr.get(lang).test(word);
     }
 
 }
