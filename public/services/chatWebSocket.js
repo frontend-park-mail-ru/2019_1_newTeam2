@@ -7,7 +7,7 @@ let ws;
 export class chatWebSocket {
     constructor() {
         if(!ws) {
-            ws = new WebSocket(`ws://${chatUrl}chat/enter/1`);
+            ws = new WebSocket(`ws://${chatUrl}chat/`);
             ws.addEventListener('open', () => {
                 bus.emit('ws-opened');
             });
