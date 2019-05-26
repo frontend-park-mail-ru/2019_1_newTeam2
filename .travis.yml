@@ -5,7 +5,7 @@ script:
 - chmod 600 ./2019_1_newTeam2_id_rsa.pem 
 - ssh-keyscan -H 89.208.199.170 >> ~/.ssh/known_hosts
 - webpack
-- scp -i ./2019_1_newTeam2_id_rsa.pem ./public/dist/bundle.js ubuntu@89.208.199.170:/home/ubuntu/www
+- scp -i ./2019_1_newTeam2_id_rsa.pem ./public/dist/bundle.js ubuntu@89.208.199.170:/home/ubuntu/www/public/dist
 branches:
   only:
   - dev
