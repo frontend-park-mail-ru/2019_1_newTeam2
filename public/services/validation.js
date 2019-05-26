@@ -7,7 +7,7 @@ class ValidationModule {
         this.emailRegExpr = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         this.wordRegExpr = new Map(); 
         this.wordRegExpr.set('Eng', /^[a-zA-Z0-9-_\s]+$/);
-        this.wordRegExpr.set('Rus', /^А-ЯЁа-яё0-9-_\s]+$/);
+        this.wordRegExpr.set('Rus', /^[А-ЯЁа-яё0-9-_\s]+$/);
     }
 
     findPathInArray(path, arr) {
@@ -33,9 +33,16 @@ class ValidationModule {
 
     checkWord(word, lang) {
         if (!this.wordRegExpr.has(lang)) {
-            return;
+            return false;
         }
-        return this.wordRegExpr.get(lang).test(word);
+        if (this.wordRegExpr.get(lang).test(word)) {
+            cosole.log('валидация не прошла');
+            console.log(word);
+            console.log(lang);
+            console.log(wordRegExpr.get(lang));
+            return false;
+        }
+        return true;
     }
 
 }

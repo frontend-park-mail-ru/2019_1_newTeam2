@@ -32,12 +32,12 @@ export class CardController extends Controller{
 
     _onnewcardformsubmitted(body) {
         let passed = true;
-        if(!validation.checkWord(body.word, 'Eng')) {
+        if(!validation.checkWord(body.word, 'Rus')) {
             bus.emit('wrong-word', body.word);
             passed = false;
         }
 
-        if(!validation.checkWord(body.word, 'Rus')) {
+        if(!validation.checkWord(body.word, 'Eng')) {
             bus.emit('wrong-translation', body.translation);
             passed = false;
         }
