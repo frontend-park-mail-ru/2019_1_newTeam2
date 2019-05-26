@@ -5,7 +5,7 @@ const gameUrl = 'new-words.ru/';
 
 export class multiplayerWebSocket {
     constructor() {
-        this.ws = new WebSocket(`ws://${gameUrl}game`);
+        this.ws = new WebSocket(`wss://${gameUrl}game`);
         this.ws.addEventListener('open', () => {
             bus.emit('game-ws-opened');
         });
