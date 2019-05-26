@@ -1,6 +1,6 @@
 import bus from 'Services/bus.js';
 
-const gameUrl = 'http://new-words.ru/';
+const gameUrl = 'new-words.ru/';
 
 
 export class multiplayerWebSocket {

@@ -1,6 +1,6 @@
 import bus from 'Services/bus.js';
 
-const chatUrl = 'http://new-words.ru/world_chat/';
+const chatUrl = 'new-words.ru/world_chat/';
 
 let ws;
 
