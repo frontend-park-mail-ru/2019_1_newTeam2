@@ -37,7 +37,7 @@ export class CardController extends Controller{
             passed = false;
         }
 
-        if(!validation.checkWord(body.word, 'Eng')) {
+        if(!validation.checkWord(body.translation, 'Eng')) {
             bus.emit('wrong-translation', body.translation);
             passed = false;
         }
