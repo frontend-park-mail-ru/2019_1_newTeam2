@@ -9,6 +9,7 @@ import {ChatForm} from 'Components/ChatForm/ChatForm.js';
 
 import router from 'Services/router.js';
 import {chatWebSocket} from 'Services/chatWebSocket.js';
+import bus from "Services/bus.js";
 
 const application = document.getElementById('application');
 
@@ -36,14 +37,17 @@ export class Chat extends View {
             outer.appendChild(needToLogin);
             return;
         }
-
+        this.forHistory = document.createElement("div");
         this.forData = new ChatData().render();
+        outer.appendChild(this.forHistory);
         outer.appendChild(this.forData);
 
 
         if (Notification.permission !== 'denied') {
             Notification.requestPermission();
         }
+
+        bus.emit('get-history');
 
         
         this.forInput = document.createElement('div');
@@ -61,6 +65,13 @@ export class Chat extends View {
         const message = new ChatMessage({author: 'me', text: text}).render();
         this.forData.appendChild(message);
         message.scrollIntoView();
+    }
+
+    _onhistoryloaded(data) {
+        data.forEach(mes => {
+            const message = new ChatMessage({author: 'partner', text: mes.message}).render();
+            document.insertBefore(message, this.forHistory);
+        });
     }
 
     _onwsopened() {
