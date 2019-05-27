@@ -11,13 +11,13 @@ const loginedButtonNames = {
     'chat': 'Языковой чат',
     'dictionaries/me': 'Мои словари',
     'profile/me': 'Профиль',
-    'leaderboard': 'Таблица лидеров',
+    'leaderboard/1': 'Таблица лидеров',
     'login': 'Выйти'
 };
 
 const unloginedButtonNames = {
     'login': 'Войти',
-    'leaderboard': 'Таблица лидеров',
+    'leaderboard/1': 'Таблица лидеров',
     'signup': 'Зарегистрироваться'
 };
 

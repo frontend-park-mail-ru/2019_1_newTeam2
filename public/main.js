@@ -28,7 +28,7 @@ const controllers = new Set([
     ['^menu$', MenuController],
     ['^login$', LoginController],
     ['^dictionaries/me$', DictionaryController],
-    ['^leaderboard$', LeaderboardController],
+    ['^leaderboard/[0-9]+$', LeaderboardController],
     ['^signup$', SignupController],
     ['^dictionary$', CardController],
     ['^profile/me$', ProfileController],
