@@ -30,20 +30,20 @@ export class CardController extends Controller{
         super.subscribeAll();
     }
 
-    _onnewcardformsubmitted(body) {
+    _onnewcardformsubmitted(card) {
         let passed = true;
-        if(!validation.checkWord(body.word, 'Rus')) {
-            bus.emit('wrong-word', body.word);
+        if(!validation.checkWord(card.word.name, 'Rus')) {
+            bus.emit('wrong-word', card.word.name);
             passed = false;
         }
 
-        if(!validation.checkWord(body.translation, 'Eng')) {
-            bus.emit('wrong-translation', body.translation);
+        if(!validation.checkWord(card.translation.name, 'Eng')) {
+            bus.emit('wrong-translation', card.translation.name);
             passed = false;
         }
 
         if(passed) {
-            this.model.createCard(body, this.id);
+            this.model.createCard(card, this.id);
         }
     }
 

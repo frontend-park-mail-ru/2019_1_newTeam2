@@ -36,10 +36,10 @@ class ValidationModule {
             return false;
         }
         if (this.wordRegExpr.get(lang).test(word)) {
-            cosole.log('валидация не прошла');
+            console.log('валидация не прошла');
             console.log(word);
             console.log(lang);
-            console.log(wordRegExpr.get(lang));
+            console.log(this.wordRegExpr.get(lang));
             return false;
         }
         return true;

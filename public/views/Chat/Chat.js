@@ -68,7 +68,7 @@ export class Chat extends View {
     }
 
     _onnamegot(data) {
-        console.log(data);
+        // data format: { id: 4, message: "Welcome to Word chat!)" }
         const message = new ChatMessage({author: 'partner', text: data.message}).render();
         this.forData.appendChild(message);
         message.scrollIntoView();
