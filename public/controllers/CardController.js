@@ -31,6 +31,18 @@ export class CardController extends Controller{
     }
 
     _onnewcardformsubmitted(card) {
+        // TODO(gleensande): move to Card view
+        let word = document.getElementById('word');
+        let translation = document.getElementById('translation');
+        
+        if (word.classList.contains('input_error')) {
+            word.classList.remove('input_error');
+        }
+
+        if (translation.classList.contains('input_error')) {
+            translation.classList.remove('input_error');
+        }
+
         let passed = true;
         if(!validation.checkWord(card.word.name, 'Rus')) {
             bus.emit('wrong-word', card.word.name);
@@ -43,18 +55,6 @@ export class CardController extends Controller{
         }
 
         if(passed) {
-            // TODO(gleensande): move to Card view
-            let word = document.getElementById('word');
-            let translation = document.getElementById('translation');
-            
-            if (word.classList.contains('input_error')) {
-                word.classList.remove('input_error');
-            }
-
-            if (translation.classList.contains('input_error')) {
-                translation.classList.remove('input_error');
-            }
-
             word.value = '';
             translation.value = '';
 
