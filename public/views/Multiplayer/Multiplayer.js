@@ -60,6 +60,7 @@ export class Multiplayer extends View {
 
     _ongameleaderboardupdate(data) {
         this.forLeadBoard.innerText = '';
+        data.payload.players.sort((l, r) => l.score > r.score);
         this.table.data = data.payload.players;
         this.forLeadBoard.appendChild(this.table.render());
     }
