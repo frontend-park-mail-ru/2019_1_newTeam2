@@ -38,7 +38,7 @@ export class Card extends Page {
         const head2 = new Headline({size: 'h2', textContent: dict.description}).render();
         this.forHeader.appendChild(head2);
 
-        const word = new Input({
+        this.word = new Input({
             id: 'word',
             type: 'text',
             value: '',
@@ -46,10 +46,10 @@ export class Card extends Page {
             maxlen: 50,
             label: '',
         }).render();
-        word.classList.add('hidden-element');
-        this.forHeader.appendChild(word);
+        this.word.classList.add('hidden-element');
+        this.forHeader.appendChild(this.word);
 
-        const translation = new Input({
+        this.translation = new Input({
             id: 'translation',
             type: 'text',
             value: '',
@@ -57,8 +57,8 @@ export class Card extends Page {
             maxlen: 50,
             label: '',
         }).render();
-        translation.classList.add('hidden-element');
-        this.forHeader.appendChild(translation);
+        this.translation.classList.add('hidden-element');
+        this.forHeader.appendChild(this.translation);
         
         const submit = new Button({
             type: 'secondary',
@@ -77,8 +77,6 @@ export class Card extends Page {
                         'langID': 2
                     }
                 };
-                document.getElementById('word').value = '';
-                document.getElementById('translation').value = '';
                 bus.emit('new-card-form-submitted', card);
             }
         }).render();
@@ -91,8 +89,8 @@ export class Card extends Page {
             handler: () => {
                 document.getElementById('submit').classList.add('hidden-element');
                 document.getElementById('deny').classList.add('hidden-element');
-                word.classList.add('hidden-element');
-                translation.classList.add('hidden-element');
+                this.word.classList.add('hidden-element');
+                this.translation.classList.add('hidden-element');
                 document.getElementById('plus').classList.remove('hidden-element');
                 let dict = {};
                 dict.word = document.getElementById('word').value;
@@ -107,8 +105,8 @@ export class Card extends Page {
             handler: () => {
                 document.getElementById('plus').classList.add('hidden-element');
                 document.getElementById('deny').classList.remove('hidden-element');
-                word.classList.remove('hidden-element');
-                translation.classList.remove('hidden-element');
+                this.word.classList.remove('hidden-element');
+                this.translation.classList.remove('hidden-element');
                 document.getElementById('submit').classList.remove('hidden-element');
             }
         }).render();
@@ -132,10 +130,10 @@ export class Card extends Page {
     }
 
     _onwrongword(word) {
-        console.log(word);
+        this.word.classList.add('input_error');
     }
 
     _onwrongtranslation(word) {
-        console.log(word);
+        this.translation.classList.add('input_error');
     }
 }
