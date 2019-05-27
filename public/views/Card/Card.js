@@ -130,10 +130,10 @@ export class Card extends Page {
     }
 
     _onwrongword(word) {
-        this.word.classList.add('input_error');
+        document.getElementById('word').classList.add('input_error');
     }
 
     _onwrongtranslation(word) {
-        this.translation.classList.add('input_error');
+        document.getElementById('translation').classList.add('input_error');
     }
 }
