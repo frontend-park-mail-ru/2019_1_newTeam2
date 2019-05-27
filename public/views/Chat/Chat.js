@@ -13,12 +13,11 @@ import {chatWebSocket} from 'Services/chatWebSocket.js';
 const application = document.getElementById('application');
 
 export class Chat extends View {
-    render({authorised = false}) {
-        application.innerHTML = '';
+    render({authorised = false, ws = new chatWebSocket()}) {
         const outer = application;
         outer.innerHTML = '';
 
-        this.ws = new chatWebSocket();
+        this.ws = ws;
 
         const nameOfHeadline = 'Языковой чат';
         const headline = new Headline({size: 'h1', textContent: nameOfHeadline}).render();
@@ -26,6 +25,7 @@ export class Chat extends View {
         outer.appendChild(new Icon({
             src: '/static/home-icon.png',
             handler: () => {
+                this.ws.destroy();
                 router.go('menu');
             }
         }).render());
@@ -68,6 +68,7 @@ export class Chat extends View {
     }
 
     _onnamegot(data) {
+        // data format: { id: 4, message: "Welcome to Word chat!)" }
         const message = new ChatMessage({author: 'partner', text: data.message}).render();
         this.forData.appendChild(message);
         message.scrollIntoView();

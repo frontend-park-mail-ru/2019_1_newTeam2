@@ -1,12 +1,11 @@
 import bus from 'Services/bus.js';
 
-// const chatUrl = 'newteam2back.herokuapp.com/'; // TODO(Deploy): change url for deploy
-const gameUrl = 'localhost:8093/';
+const gameUrl = 'new-words.ru/multiplayer/';
 
 
 export class multiplayerWebSocket {
     constructor() {
-        this.ws = new WebSocket(`ws://${gameUrl}game`);
+        this.ws = new WebSocket(`wss://${gameUrl}game`);
         this.ws.addEventListener('open', () => {
             bus.emit('game-ws-opened');
         });
