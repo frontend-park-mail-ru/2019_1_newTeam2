@@ -4,7 +4,6 @@ import {Page} from 'Views/Page.js';
 import {Headline} from 'Components/Headline/Headline.js';
 import router from 'Services/router.js';
 import bus from 'Services/bus.js';
-import {Link} from 'Components/Link/Link.js';
 import {GriseMerde} from 'Components/GriseMerde/GriseMerde.js';
 import {Button} from 'Components/Button/Button.js';
 import {Pagination} from 'Components/Pagination/Pagination.js';
