@@ -18,7 +18,6 @@ export class Leaderboard extends Page {
     }
 
     _onload(data) {
-        data.sort((f, s) => f.score > s.score);
         this.table.data = data;
         let childNode = this.forContent.firstChild;
         if(!childNode) {
