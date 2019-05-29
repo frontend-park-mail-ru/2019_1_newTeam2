@@ -12,7 +12,6 @@ import bus from 'Services/bus.js';
 export class Card extends Page {
     render() {
         super.renderBase();
-        super.renderBaseHeader();
         super.renderBasePagination();
 
         this.listeners = new Set([
@@ -32,8 +31,7 @@ export class Card extends Page {
     }
 
     _ondictloaded(dict) {
-        const head1 = new Headline({textContent: dict.name}).render();
-        this.forHeader.appendChild(head1);
+        super.renderBaseHeader('Словарь: ' + dict.name);
         
         const head2 = new Headline({size: 'h2', textContent: dict.description}).render();
         this.forHeader.appendChild(head2);

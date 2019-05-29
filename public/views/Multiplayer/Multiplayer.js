@@ -1,6 +1,6 @@
 'use strict';
 
-import {Page} from 'Page/Page.js';
+import {Page} from 'Views/Page.js';
 import {GriseMerde} from 'Components/GriseMerde/GriseMerde.js';
 import {multiplayerWebSocket} from 'Services/multiplayerWebSocket.js';
 import {Table} from 'Components/Table/Table.js';
