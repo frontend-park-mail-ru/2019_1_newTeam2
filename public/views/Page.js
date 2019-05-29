@@ -29,6 +29,13 @@ export class Page extends View {
             }
         }).render());
 
+        this.forHeader.appendChild(new Icon({
+            src: '/static/left.png',
+            handler: () => {
+                router.back();
+            }
+        }).render());
+
         this.forHeader.appendChild(new Headline({
             textContent: nameOfPage,
         }).render());

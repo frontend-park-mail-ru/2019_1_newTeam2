@@ -73,6 +73,10 @@ class RouterModule {
         this.currentController.index(options);
     }
 
+    back() {
+        window.history.back();
+    }
+
 }
 
 export default new RouterModule();

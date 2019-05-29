@@ -31,9 +31,9 @@ export class Card extends Page {
     }
 
     _ondictloaded(dict) {
-        super.renderBaseHeader('Словарь: ' + dict.name);
+        super.renderBaseHeader('Словарь: ${dict.name}');
         
-        const head2 = new Headline({size: 'h2', textContent: dict.description}).render();
+        const head2 = new Headline({size: 'h2', textContent: 'Описание: ${dict.description}'}).render();
         this.forHeader.appendChild(head2);
 
         this.word = new Input({
