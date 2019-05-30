@@ -31,8 +31,8 @@ export class ChatController extends Controller {
         this.view.render({authorised: true, ws: this.ws});
     }
 
-    _ongethistory() {
-        this.model.getCardsByDictId();
+    _ongethistory(page) {
+        this.model.getChatHistory({page: page});
     }
     
     _onloggedout() {
@@ -56,7 +56,6 @@ export class ChatController extends Controller {
                 .then((permission) => {
                     if (permission === 'granted') {
                         new Notification(data);
-                        return;
                     }
                 });
         }

@@ -7,7 +7,7 @@ export class ChatHistory {
 		this.url = 'world_chat/chat/history';
 	}
 
-	getCardsByDictId({page = 1} = {page: 1}) {
+	getChatHistory({page = 1} = {page: 1}) {
 		const rows = 20;
 		ajax.doGet({
 			path: this.url + `?&rows=${rows}&page=${page}`

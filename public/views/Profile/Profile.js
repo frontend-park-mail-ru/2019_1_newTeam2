@@ -61,8 +61,6 @@ export class Profile extends Page {
         this._user = data;
         if (!this._user.path) {
             this._user.path = '/static/avatar-default.png';
-        } else {
-            this._user.path = this._user.baseUrl + this._user.path;
         }
         this.forContent.innerHTML = profileTemplate(this._user);
     }
