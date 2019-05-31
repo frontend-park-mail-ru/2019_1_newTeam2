@@ -23,9 +23,18 @@ export class Page extends View {
 
     renderBaseHeader(nameOfPage = '') {
         this.forHeader.appendChild(new Icon({
-            src: '/static/home-icon.png',
+            src: '/static/icons/home.png',
+            id: 'home',
             handler: () => {
                 router.go('menu');
+            }
+        }).render());
+
+        this.forHeader.appendChild(new Icon({
+            src: '/static/icons/back.png',
+            id: 'back',
+            handler: () => {
+                router.back();
             }
         }).render());
 

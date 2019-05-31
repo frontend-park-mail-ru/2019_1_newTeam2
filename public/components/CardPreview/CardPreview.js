@@ -31,7 +31,7 @@ export class CardPreview {
         outer.appendChild(rightPart);
 
         let cross = new Icon({
-            src: '/static/cross.png',
+            src: '/static/icons/close.png',
             classname: 'card-preview__cross-icon',
             handler: () => {
                 document.getElementById(this.id).classList.add('hidden-element');

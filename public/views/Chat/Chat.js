@@ -9,7 +9,7 @@ import {ChatForm} from 'Components/ChatForm/ChatForm.js';
 
 import router from 'Services/router.js';
 import {chatWebSocket} from 'Services/chatWebSocket.js';
-import bus from "Services/bus.js";
+import bus from 'Services/bus.js';
 
 const application = document.getElementById('application');
 
@@ -24,7 +24,7 @@ export class Chat extends View {
         const headline = new Headline({size: 'h1', textContent: nameOfHeadline}).render();
 
         outer.appendChild(new Icon({
-            src: '/static/home-icon.png',
+            src: '/static/icons/home.png',
             handler: () => {
                 this.ws.destroy();
                 router.go('menu');

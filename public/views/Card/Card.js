@@ -12,7 +12,6 @@ import bus from 'Services/bus.js';
 export class Card extends Page {
     render() {
         super.renderBase();
-        super.renderBaseHeader();
         super.renderBasePagination();
 
         this.listeners = new Set([
@@ -32,10 +31,9 @@ export class Card extends Page {
     }
 
     _ondictloaded(dict) {
-        const head1 = new Headline({textContent: dict.name}).render();
-        this.forHeader.appendChild(head1);
+        super.renderBaseHeader('Словарь: ' + dict.name);
         
-        const head2 = new Headline({size: 'h2', textContent: dict.description}).render();
+        const head2 = new Headline({size: 'h2', textContent: 'Описание: ' + dict.description}).render();
         this.forHeader.appendChild(head2);
 
         this.word = new Input({
@@ -83,7 +81,7 @@ export class Card extends Page {
         this.forHeader.appendChild(submit);
 
         const deny = new Icon({
-            src: '/static/cross.png',
+            src: '/static/icons/close.png',
             id: 'deny',
             classname: 'hidden-element',
             handler: () => {
@@ -100,7 +98,7 @@ export class Card extends Page {
         this.forHeader.appendChild(deny);
 
         const plus = new Icon({
-            src: '/static/plus.png',
+            src: '/static/icons/plus.png',
             id: 'plus',
             handler: () => {
                 document.getElementById('plus').classList.add('hidden-element');

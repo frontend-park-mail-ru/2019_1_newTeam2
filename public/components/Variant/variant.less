@@ -1,0 +1,50 @@
+@import '../../styles/colorScheme.less';
+@import '../../styles/breakWord.less';
+
+
+.variant {
+    border: 1px solid gainsboro;
+    height: 40px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    line-height: 40px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
+    float: left;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    .breakWord();
+}
+
+
+.variant_type_quest {
+    background-color: #DDDDDD;    
+    margin-bottom: 20px;
+    
+    @media screen and (min-width: 300px) {
+        width: 280px;
+    }
+
+    @media screen and (min-width: 700px) {
+        width: 570px;
+    }
+
+}
+
+.variant_type_variant {
+    background-color: white;
+    cursor: pointer;
+    width: 280px;
+
+    &:active {
+        opacity: 0.9;
+        transform: translateX(4px);
+        transform: translateY(4px);
+        box-shadow: none;
+    }
+}

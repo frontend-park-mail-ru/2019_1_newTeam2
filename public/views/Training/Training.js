@@ -4,14 +4,14 @@ import {Page} from 'Views/Page.js';
 import {Headline} from 'Components/Headline/Headline.js';
 import router from 'Services/router.js';
 import bus from 'Services/bus.js';
-import {GriseMerde} from 'Components/GriseMerde/GriseMerde.js';
+import {Variant} from 'Components/Variant/Variant.js';
 import {Button} from 'Components/Button/Button.js';
-import {Pagination} from 'Components/Pagination/Pagination.js';
 
 export class Training extends Page {
     render() {
         super.renderBase();
         super.renderBaseHeader('Тренировка');
+        super.renderBasePagination();
 
         this.forContent.classList.add('training-outer');
 
@@ -25,7 +25,7 @@ export class Training extends Page {
     _ondictsloaded(dicts) {
         this.forContent.innerText = '';
         dicts.forEach((dict) => {
-            const merde = new GriseMerde({
+            const merde = new Variant({
                 size: 'small',
                 inner: dict.name,
             }).render();
@@ -34,8 +34,6 @@ export class Training extends Page {
             });
             this.forContent.appendChild(merde);
         });
-        const pagination = new Pagination();
-        pagination.render(this.forContent);
     }
 
     _ongamecardsloaded(cards) {
@@ -77,7 +75,7 @@ export class Training extends Page {
                 const card = cards[index];
                 const inner = document.createElement('div');
 
-                const word = new GriseMerde({
+                const word = new Variant({
                     size: 'big',
                     inner: card.word
                 }).render();
@@ -92,9 +90,9 @@ export class Training extends Page {
                         genNextPage();
                     };
 
-                    const choice = new GriseMerde({
+                    const choice = new Variant({
                         size: 'small',
-                        inner: variant + ' ', /* TODO(gleensande): fix this */
+                        inner: variant + ' ',
                     }).render();
                     choice.addEventListener('click', onchoose);
                     inner.appendChild(choice);

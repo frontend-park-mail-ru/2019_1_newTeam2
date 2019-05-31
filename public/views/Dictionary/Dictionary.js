@@ -58,7 +58,7 @@ export class Dictionary extends Page {
         this.forHeader.appendChild(submit);
 
         let deny = new Icon({
-            src: '/static/cross.png',
+            src: '/static/icons/close.png',
             id: 'deny',
             classname: 'hidden-element',
             handler: () => {
@@ -75,7 +75,7 @@ export class Dictionary extends Page {
         this.forHeader.appendChild(deny);
 
         let plus = new Icon({
-            src: '/static/plus.png',
+            src: '/static/icons/plus.png',
             id: 'plus',
             handler: () => {
                 document.getElementById('plus').classList.add('hidden-element');
