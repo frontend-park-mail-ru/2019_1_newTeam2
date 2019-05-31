@@ -1,13 +1,13 @@
 import bus from 'Services/bus.js';
 
-const chatUrl = 'new-words.ru/world_chat/';
+export const chatUrl = 'new-words.ru/world_chat/';
 
 let ws;
 
 export class chatWebSocket {
     constructor() {
         if(!ws) {
-            ws = new WebSocket(`wss://${chatUrl}chat/enter/`);
+            ws = new WebSocket(`wss://${chatUrl}chat/enter/`); // TODO(Deploy): wss
             ws.addEventListener('open', () => {
                 bus.emit('ws-opened');
             });
