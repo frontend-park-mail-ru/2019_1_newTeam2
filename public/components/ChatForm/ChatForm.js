@@ -1,7 +1,7 @@
 'use strict';
 
 import {Input} from 'Components/Input/Input.js';
-import {Button} from 'Components/Button/Button.js';
+import {Icon} from 'Components/Button/Button.js';
 
 import bus from 'Services/bus.js';
 
@@ -22,9 +22,8 @@ export class ChatForm {
         }).render();
         outer.appendChild(input);
 
-        const send = new Button({
-            type: 'secondary', 
-            name: 'Отправить',
+        const send = new Icon({
+            src: '/static/icons/send.png',
             handler: (() => {
                 const text = document.getElementById('message').value;
                 if (!text) {

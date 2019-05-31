@@ -1,10 +1,18 @@
 @import '../../styles/colorScheme.less';
 
 .chat-data {
-    height: 400px;
-    width: 400px;
     border: 1px solid @borderColor;
     border-radius: 4px;
     background-color: @backgroundColor;
     overflow: auto;
+
+    @media screen and (min-width: 300px) {
+        height: 400px;
+        width: 290px;
+    }
+
+    @media screen and (min-width: 700px) {
+        height: 380px;
+        width: 600px;
+    }
 }
