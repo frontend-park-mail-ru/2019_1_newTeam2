@@ -37,9 +37,11 @@ export class Chat extends View {
             outer.appendChild(needToLogin);
             return;
         }
-        this.forHistory = document.createElement('div');
+        this.forHistory = document.createElement("div");
+        this.forHistoryAnchor = document.createElement("div");
         this.forData = new ChatData().render();
-        outer.appendChild(this.forHistory);
+        this.forHistory.appendChild(this.forHistoryAnchor);
+        this.forData.appendChild(this.forHistory);
         outer.appendChild(this.forData);
 
 
@@ -57,6 +59,7 @@ export class Chat extends View {
             ['message-form-submitted', this._onmessageformsubmitted],
             ['ws-opened', this._onwsopened],
             ['name-got', this._onnamegot],
+            ['history-loaded', this._onhistoryloaded],
         ]);
         super.subscribeAll();
     }
@@ -68,10 +71,15 @@ export class Chat extends View {
     }
 
     _onhistoryloaded(data) {
+        let ref;
         data.forEach(mes => {
             const message = new ChatMessage({author: 'partner', text: mes.message}).render();
-            document.insertBefore(message, this.forHistory);
+            ref = message;
+            this.forHistory.insertBefore(message, this.forHistoryAnchor);
         });
+        if(ref) {
+            ref.scrollIntoView();
+        }
     }
 
     _onwsopened() {
