@@ -1,7 +1,7 @@
 'use strict';
 
 import {Input} from 'Components/Input/Input.js';
-import {Icon} from 'Components/Button/Button.js';
+import {Icon} from 'Components/Icon/Icon.js';
 
 import bus from 'Services/bus.js';
 
