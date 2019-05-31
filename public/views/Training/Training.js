@@ -6,12 +6,12 @@ import router from 'Services/router.js';
 import bus from 'Services/bus.js';
 import {GriseMerde} from 'Components/GriseMerde/GriseMerde.js';
 import {Button} from 'Components/Button/Button.js';
-import {Pagination} from 'Components/Pagination/Pagination.js';
 
 export class Training extends Page {
     render() {
         super.renderBase();
         super.renderBaseHeader('Тренировка');
+        super.renderBasePagination();
 
         this.forContent.classList.add('training-outer');
 
@@ -34,8 +34,6 @@ export class Training extends Page {
             });
             this.forContent.appendChild(merde);
         });
-        const pagination = new Pagination();
-        pagination.render(this.forContent);
     }
 
     _ongamecardsloaded(cards) {

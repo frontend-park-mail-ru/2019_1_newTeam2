@@ -14,7 +14,6 @@ const application = document.getElementById('application');
 export class Multiplayer extends Page {
     render() {
         super.renderBase();
-        super.renderBaseHeader('Мультиплеер');
 
         this.forHeader.appendChild(new Icon({
             src: '/static/icons/home.png',
