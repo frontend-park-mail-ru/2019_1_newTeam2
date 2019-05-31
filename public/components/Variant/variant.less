@@ -1,4 +1,6 @@
 @import '../../styles/colorScheme.less';
+@import '../../styles/breakWord.less';
+
 
 .variant {
     border: 1px solid gainsboro;
@@ -16,6 +18,7 @@
     float: left;
     margin-top: 10px;
     margin-right: 10px;
+    .breakWord();
 }
 
 
@@ -36,6 +39,7 @@
 .variant_type_variant {
     background-color: white;
     cursor: pointer;
+    width: 280px;
 
     &:active {
         opacity: 0.9;
