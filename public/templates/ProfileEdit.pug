@@ -5,5 +5,6 @@ p
     | Email:
     input(type="email" value=email name="email" class='input')
     br
-    input(type="file" value=file name="file")
-img(src=path width=100 height=100)
+    input(type="file" value=file name="file" id="file" class="hidden-element")
+label(for="file")
+    img(src=path width=100 height=100 class="image-button" id="avatar")
