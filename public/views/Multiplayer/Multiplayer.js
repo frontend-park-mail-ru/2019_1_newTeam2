@@ -4,6 +4,10 @@ import {Page} from 'Views/Page.js';
 import {GriseMerde} from 'Components/GriseMerde/GriseMerde.js';
 import {multiplayerWebSocket} from 'Services/multiplayerWebSocket.js';
 import {Table} from 'Components/Table/Table.js';
+import {Icon} from 'Components/Icon/Icon.js';
+import {Headline} from 'Components/Headline/Headline.js';
+
+import router from 'Services/router.js';
 
 const application = document.getElementById('application');
 
@@ -11,10 +15,30 @@ export class Multiplayer extends Page {
     render() {
         super.renderBase();
         super.renderBaseHeader('Мультиплеер');
-        this.ws = new multiplayerWebSocket();
 
-        document.getElementById('home').addEventListener('click', this._onpageclosed);
-        document.getElementById('back').addEventListener('click', this._onpageclosed);
+        this.forHeader.appendChild(new Icon({
+            src: '/static/icons/home.png',
+            id: 'home',
+            handler: () => {
+                this.ws.destroy();
+                router.go('menu');
+            }
+        }).render());
+
+        this.forHeader.appendChild(new Icon({
+            src: '/static/icons/back.png',
+            id: 'back',
+            handler: () => {
+                this.ws.destroy();
+                router.back();
+            }
+        }).render());
+
+        this.forHeader.appendChild(new Headline({
+            textContent: 'Мультиплеер',
+        }).render());
+
+        this.ws = new multiplayerWebSocket();
 
         this.forTask = document.createElement('div');
         this.forWord = document.createElement('div');
@@ -90,9 +114,5 @@ export class Multiplayer extends Page {
             });
             this.forVariants.appendChild(merde);
         });
-    }
-
-    _onpageclosed() {
-        this.ws.destroy();
     }
 }
