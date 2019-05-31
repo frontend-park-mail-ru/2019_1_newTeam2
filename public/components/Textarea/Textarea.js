@@ -2,11 +2,11 @@
 
 const textareaTemplate = require('Templates/Textarea.pug');
 
-export class Input {
+export class Textarea {
     constructor(object = {
         id: '',
         value: '',
-        placeholder: 'Ваше сообщение',
+        placeholder: '',
         disabled: '',
     }) {
         this._object = object;

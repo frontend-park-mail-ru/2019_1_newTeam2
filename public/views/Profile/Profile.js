@@ -1,6 +1,6 @@
 'use strict';
 
-import router from "Services/router.js";
+import router from 'Services/router.js';
 
 const profileTemplate = require('Templates/Profile.pug');
 const profileeditTemplate = require('Templates/ProfileEdit.pug');
@@ -41,7 +41,7 @@ export class Profile extends Page {
                     fr.readAsDataURL(files[0]);
                 }
                 else {
-                    router.go('profile/me')
+                    router.go('profile/me');
                 }
             };
             document.getElementById('file').onchange = changeFunc;

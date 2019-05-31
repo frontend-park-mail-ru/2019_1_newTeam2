@@ -47,8 +47,8 @@ export class Multiplayer extends Page {
         this.table = new Table();
         this.table.fields = ['Ник', 'Очки'];
 
-        this.forContent.classList.add('game');
-        this.forVariants.classList.add('game');
+        this.forContent.classList.add('playground');
+        this.forVariants.classList.add('playground');
 
 
         this.failText = document.createElement('div');

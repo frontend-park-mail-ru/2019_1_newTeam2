@@ -3,7 +3,7 @@ import {Chat} from 'Views/Chat/Chat.js';
 import auth from 'Models/AuthModel.js';
 import bus from 'Services/bus.js';
 import {chatWebSocket} from 'Services/chatWebSocket.js';
-import {ChatHistory} from "Models/ChatHistory.js";
+import {ChatHistory} from 'Models/ChatHistory.js';
 
 export class ChatController extends Controller {
     index() {

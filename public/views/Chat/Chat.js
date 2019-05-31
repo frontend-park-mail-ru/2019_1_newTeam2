@@ -9,7 +9,7 @@ import {ChatForm} from 'Components/ChatForm/ChatForm.js';
 
 import router from 'Services/router.js';
 import {chatWebSocket} from 'Services/chatWebSocket.js';
-import bus from "Services/bus.js";
+import bus from 'Services/bus.js';
 
 const application = document.getElementById('application');
 
