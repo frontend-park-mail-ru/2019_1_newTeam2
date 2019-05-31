@@ -24,6 +24,7 @@ export class Page extends View {
     renderBaseHeader(nameOfPage = '') {
         this.forHeader.appendChild(new Icon({
             src: '/static/icons/home.png',
+            id: 'home',
             handler: () => {
                 router.go('menu');
             }
@@ -31,6 +32,7 @@ export class Page extends View {
 
         this.forHeader.appendChild(new Icon({
             src: '/static/icons/back.png',
+            id: 'back',
             handler: () => {
                 router.back();
             }

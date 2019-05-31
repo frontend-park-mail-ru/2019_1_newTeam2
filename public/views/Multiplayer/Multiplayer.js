@@ -13,6 +13,9 @@ export class Multiplayer extends Page {
         super.renderBaseHeader('Мультиплеер');
         this.ws = new multiplayerWebSocket();
 
+        document.getElementById('home').addEventListener('click', this._onpageclosed);
+        document.getElementById('back').addEventListener('click', this._onpageclosed);
+
         this.forTask = document.createElement('div');
         this.forWord = document.createElement('div');
         this.forVariants = document.createElement('div');
@@ -87,5 +90,9 @@ export class Multiplayer extends Page {
             });
             this.forVariants.appendChild(merde);
         });
+    }
+
+    _onpageclosed() {
+        this.ws.destroy();
     }
 }
