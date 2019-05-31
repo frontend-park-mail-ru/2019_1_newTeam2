@@ -26,6 +26,7 @@ export class Profile extends Page {
             edit.firstChild.classList.add('hidden-element');
             save.firstChild.classList.remove('hidden-element');
             this.forContent.innerHTML = profileeditTemplate(this._user);
+
             const changeFunc = (event) => {
                 const files = event.target.files;
                 if(files && files.length) {
@@ -62,11 +63,6 @@ export class Profile extends Page {
                 }
             );
             bus.emit('edit-user', this._user);
-            // const fileUpload = document.getElementsByName('file')[0];
-            // if(fileUpload.value) {
-            //     bus.emit('user-upload-avatar', fileUpload.files[0]);
-            // }
-            this.forContent.innerHTML = profileTemplate(this._user);
         });
         save.firstChild.classList.add('hidden-element');
 

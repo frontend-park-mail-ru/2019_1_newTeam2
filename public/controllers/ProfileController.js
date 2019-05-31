@@ -25,5 +25,6 @@ export class ProfileController extends Controller {
 
     _onedituser(data) {
         this.user.updateUser(data.id, data);
+        this.user.getSelf();
     }
 }
