@@ -1,6 +1,6 @@
 'use strict';
 
-import {Input} from 'Components/Input/Input.js';
+import {Textarea} from 'Components/Textarea/Textarea.js';
 import {Icon} from 'Components/Icon/Icon.js';
 
 import bus from 'Services/bus.js';
@@ -15,9 +15,8 @@ export class ChatForm {
         outer.classList.add('chat-form');
         outer.id = 'message-form';
 
-        const input = new Input({
+        const input = new Textarea({
             id: 'message',
-            type: 'text',
             placeholder: 'Ваше сообщение',
         }).render();
         outer.appendChild(input);

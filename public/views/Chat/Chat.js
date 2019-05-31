@@ -37,7 +37,7 @@ export class Chat extends View {
             outer.appendChild(needToLogin);
             return;
         }
-        this.forHistory = document.createElement("div");
+        this.forHistory = document.createElement('div');
         this.forData = new ChatData().render();
         outer.appendChild(this.forHistory);
         outer.appendChild(this.forData);

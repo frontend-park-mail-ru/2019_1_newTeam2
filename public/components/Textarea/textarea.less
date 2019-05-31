@@ -1,0 +1,42 @@
+@import '../../styles/colorScheme.less';
+
+@media screen and (min-width: 700px) {
+    .textarea {
+        border-radius: 8px;
+        cols: 70;
+        rows: 5;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 17px;
+        border: 2px solid @borderColor;
+        outline: none;
+        margin: 5px;
+    }
+}
+
+@media screen and (min-width: 300px) {
+    .textarea {
+        border-radius: 8px;
+        cols: 70;
+        rows: 5;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 17px;
+        border: 2px solid @borderColor;
+        outline: none;
+        margin: 5px;
+    }
+}
+
+.textarea:disabled {
+    background: @backgroundLightNegativeColor;
+}
+
+.textarea:focus {
+    border-color: @inputFocusColor;
+    caret-color: @inputFocusColor;
+}
+
+.textarea_error {
+    border-color: @inputErrorColor;
+}
