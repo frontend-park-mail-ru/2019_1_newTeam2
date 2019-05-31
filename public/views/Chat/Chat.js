@@ -24,7 +24,7 @@ export class Chat extends View {
         const headline = new Headline({size: 'h1', textContent: nameOfHeadline}).render();
 
         outer.appendChild(new Icon({
-            src: '/static/home-icon.png',
+            src: '/static/icons/home.png',
             handler: () => {
                 this.ws.destroy();
                 router.go('menu');

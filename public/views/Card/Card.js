@@ -81,7 +81,7 @@ export class Card extends Page {
         this.forHeader.appendChild(submit);
 
         const deny = new Icon({
-            src: '/static/cross.png',
+            src: '/static/icons/close.png',
             id: 'deny',
             classname: 'hidden-element',
             handler: () => {
@@ -98,7 +98,7 @@ export class Card extends Page {
         this.forHeader.appendChild(deny);
 
         const plus = new Icon({
-            src: '/static/plus.png',
+            src: '/static/icons/plus.png',
             id: 'plus',
             handler: () => {
                 document.getElementById('plus').classList.add('hidden-element');

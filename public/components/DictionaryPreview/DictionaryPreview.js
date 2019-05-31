@@ -29,7 +29,7 @@ export class DictionaryPreview {
         outer.appendChild(image);
 
         let cross = new Icon({
-            src: '/static/cross.png',
+            src: 'static/icons/close.png',
             classname: 'dictionary-preview__cross-icon',
             handler: () => {
                 document.getElementById(this.id).classList.add('hidden-element');
