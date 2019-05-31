@@ -1,7 +1,7 @@
 'use strict';
 
 import {Page} from 'Views/Page.js';
-import {GriseMerde} from 'Components/GriseMerde/GriseMerde.js';
+import {Variant} from 'Components/Variant/Variant.js';
 import {multiplayerWebSocket} from 'Services/multiplayerWebSocket.js';
 import {Table} from 'Components/Table/Table.js';
 import {Icon} from 'Components/Icon/Icon.js';
@@ -84,14 +84,14 @@ export class Multiplayer extends Page {
         this.forWord.innerText = '';
         this.forVariants.innerText = '';
 
-        this.forWord.appendChild(new GriseMerde(
+        this.forWord.appendChild(new Variant(
             {
                 size: 'big',
                 inner: data.payload.question
             }).render()
         );
         data.payload.words.forEach((word) => {
-            const merde = new GriseMerde(
+            const merde = new Variant(
                 {
                     size: 'small',
                     inner: word

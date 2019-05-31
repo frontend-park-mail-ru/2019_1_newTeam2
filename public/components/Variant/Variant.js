@@ -1,10 +1,10 @@
 'use strict';
 
-const grisemerdeTemplate = require('Templates/GriseMerde.pug');
+const variantTemplate = require('Templates/Variant.pug');
 
 const validSizes = ['small', 'big'];
 
-export class GriseMerde {
+export class Variant {
     constructor(object = {
         inner: '',
         size: '',
@@ -18,7 +18,7 @@ export class GriseMerde {
 
     render() {
         let el = document.createElement('div');
-        el.innerHTML = grisemerdeTemplate(this._object);
+        el.innerHTML = variantTemplate(this._object);
         return el;
     }
 }
