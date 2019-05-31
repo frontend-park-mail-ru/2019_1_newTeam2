@@ -50,6 +50,7 @@ class AjaxModule {
         method = 'GET',
         path = '/',
         body = {},
+		base = baseUrl
     } = {}) {
         let init = {
             method: method,
@@ -63,7 +64,7 @@ class AjaxModule {
         if (bodyIncludesMethods.includes(method)) {
             init.body = JSON.stringify(body);
         }
-        return fetch(baseUrl + path, init)
+        return fetch(base + path, init)
             .then((response) => {
                 if(response.status === 408) {
                     console.log(response);
@@ -86,8 +87,9 @@ class AjaxModule {
      */
     doGet({
         path = '/',
+		base = baseUrl,
     } = {}) {
-        return this._ajax({path: path});
+        return this._ajax({path: path, base: base});
     }
 
     /**
