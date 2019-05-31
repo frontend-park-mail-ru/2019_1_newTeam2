@@ -21,22 +21,6 @@
     }
 }
 
-.dictionary-preview__image { 
-    width: 198px;
-    height: 198px;
-    float: left;
-
-    @media screen and (min-width: 300px) {
-        -webkit-clip-path: polygon(0 0, 100% 0%, 100% 80%, 0 100%);
-                clip-path: polygon(0 0, 100% 0%, 100% 80%, 0 100%);
-    }
-
-    @media screen and (min-width: 700px) {
-        -webkit-clip-path: polygon(0 0, 80% 0%, 100% 100%, 0 100%);
-                clip-path: polygon(0 0, 80% 0%, 100% 100%, 0 100%);
-    }
-}
-
 .dictionary-preview__cross-icon {
     float: right;
     cursor: pointer;
@@ -56,6 +40,7 @@
 
     @media screen and (min-width: 300px) {
         width: 100px;
+        paddind-left: 10px;
     }
 
     @media screen and (min-width: 700px) {

@@ -1,49 +1,28 @@
 @import '../../styles/colorScheme.less';
 
-.grise-merde {
-    background-color: @backgroundLightNegativeColor;
-    border-radius: 4px;
-    text-align: center;
-    margin-right: 5px;
-    margin-top: 5px;
-    float: left;
-    user-select: none;
-    -moz-user-select: none;
-    cursor: pointer;
-}
-
-.grise-merde_size_small {
-    width: 124px;
-    height: 40px;
-    line-height: 40px;
-}
-
-.grise-merde_size_big {
-    width: 200px;
-    height: 20px;
-}
-
-.quest {
+.variant {
     border: 1px solid gainsboro;
     height: 40px;
-    background-color: #DDDDDD;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     line-height: 40px;
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
-    box-sizing: border-box;
     border-radius: 4px;
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
     -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
     box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
     float: left;
+    margin-top: 10px;
+    margin-right: 10px;
+}
 
+
+.variant_type_quest {
+    background-color: #DDDDDD;    
+    margin-bottom: 10px;
+    
     @media screen and (min-width: 300px) {
         width: 280px;
     }
@@ -54,27 +33,9 @@
 
 }
 
-.variant {
-    border: 1px solid gainsboro;
-    width: 280px;
-    height: 40px;
+.variant_type_variant {
     background-color: white;
     cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    line-height: 40px;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
-    -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
-    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
-    float: left;
-    margin-top: 10px;
-    margin-right: 10px;
 
     &:active {
         opacity: 0.9;

@@ -92,7 +92,7 @@ export class Training extends Page {
 
                     const choice = new Variant({
                         size: 'small',
-                        inner: variant + ' ', /* TODO(gleensande): fix this */
+                        inner: variant + ' ',
                     }).render();
                     choice.addEventListener('click', onchoose);
                     inner.appendChild(choice);

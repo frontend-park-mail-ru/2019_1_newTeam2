@@ -25,7 +25,6 @@ export class DictionaryPreview {
             type: 'dictionary',
             src: '/static/dictionary-image.png'
         }).render();
-        image.classList.add('dictionary-preview__image');
         outer.appendChild(image);
 
         let cross = new Icon({

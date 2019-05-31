@@ -11,7 +11,7 @@ export class Variant {
         id: '',
     }) {
         object.size = validSizes.includes(object.size) ? object.size : 'small';
-        object.size = 'grise-merde_size_' + object.size;
+        object.size = object.size === 'big' ? 'variant_type_quest' : 'variant_type_variant';
         object.inner = object.inner instanceof Node ? object.inner.outerHTML : object.inner;
         this._object = object;
     }
