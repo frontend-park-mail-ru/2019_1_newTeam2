@@ -23,7 +23,7 @@ export class Hint {
         let hintBoard = document.createElement('div');
         hintBoard.addEventListener('click', this._handler);
         hintBoard.innerHTML = hintTemplate({
-            headline: this._headline,
+            text: this._headline,
             content: this._content,
             classname: this._classname,
             id: this._id,
