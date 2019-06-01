@@ -12,6 +12,16 @@ export class Dictionary extends Page {
     render() {
         super.renderBase();
         super.renderBaseHeader('Мои словари');
+        const hintString = `Этот раздел поможет кастомизировать приложение под ваши нужды.\n
+        Добавляйте словари, нажав +\n
+        Добавляйте по карточкам или из файла.`;
+        const hint = {
+            headline: 'Мои словари',
+            content:  hintString,
+            id: 'hint',
+            classname: 'hidden-element',
+        };
+        super.renderHint(hint);
         super.renderBasePagination();
         
         const name = new Input({

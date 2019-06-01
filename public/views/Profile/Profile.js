@@ -17,7 +17,7 @@ export class Profile extends Page {
         super.renderBaseHeader('Мой профиль');
         const hint = {
             headline: 'Профиль',
-            content: 'Здесь вы можете просмотреть или изменить свой профиль!',
+            content: 'Здесь вы можете просмотреть или изменить свой профиль',
             id: 'hint',
             classname: 'hidden-element',
         };

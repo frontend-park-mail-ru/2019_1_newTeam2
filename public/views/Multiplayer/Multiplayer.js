@@ -38,6 +38,16 @@ export class Multiplayer extends Page {
             textContent: 'Мультиплеер',
         }).render());
 
+        const hintString = `Посоревнуйтесь в знаниях со своими друзьями!\n
+        Угадывайте слова на скорость\n`;
+        const hint = {
+            headline: 'Мультиплеер',
+            content:  hintString,
+            id: 'hint',
+            classname: 'hidden-element',
+        };
+        super.renderHint(hint);
+
         this.ws = new multiplayerWebSocket();
 
         this.forTask = document.createElement('div');
