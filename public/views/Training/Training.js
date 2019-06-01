@@ -9,12 +9,13 @@ import {Button} from 'Components/Button/Button.js';
 
 export class Training extends Page {
     render() {
-        this.hint = {
+        const hint = {
             headline: 'Тренировка',
             content: 'Здесь вы можете тренировать любые свои словари!',
             id: 'hint',
             classname: 'hidden-element',
         };
+        super.renderHint(hint);
         super.renderBase();
         super.renderBaseHeader('Тренировка');
         super.renderBasePagination();

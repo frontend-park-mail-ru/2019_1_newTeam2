@@ -20,7 +20,9 @@ export class Page extends View {
         this.outer.appendChild(this.forHeader);
         this.outer.appendChild(this.forContent);
         this.outer.appendChild(this.forPagination);
+    }
 
+    renderHint(hint) {
         const defaultHint = {
             headline: 'Подсказка!',
             content: 'Подсказок нет :)',
@@ -28,11 +30,11 @@ export class Page extends View {
             classname: 'hidden-element',
         };
 
-        if (!this.hint) {
-            this.hint = defaultHint;
+        if (!hint) {
+            hint = defaultHint;
         }
 
-        this.info = new Hint(this.hint).render();
+        this.info = new Hint(hint).render();
         document.getElementsByClassName('main')[0].insertBefore(this.info, this.outer);
     }
 
