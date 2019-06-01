@@ -51,7 +51,13 @@ export class Chat extends View {
 
         bus.emit('get-history');
 
-        
+        this.forData.addEventListener('scroll', (event) => {
+            const element = event.target;
+            if(element.scrollTop === 0) {
+                bus.emit('get-history');
+            }
+        });
+
         this.forInput = document.createElement('div');
         outer.appendChild(this.forInput);
 
@@ -71,11 +77,17 @@ export class Chat extends View {
     }
 
     _onhistoryloaded(data) {
+        if(!data.length) {
+            bus.emit('no-more-history');
+        }
         let ref;
         data.forEach(mes => {
             const message = new ChatMessage({author: 'partner', text: mes.message}).render();
-            ref = message;
+            if(!ref) {
+                ref = message;
+            }
             this.forHistory.insertBefore(message, this.forHistoryAnchor);
+            this.forHistoryAnchor = message;
         });
         if(ref) {
             ref.scrollIntoView();

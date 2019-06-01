@@ -10,6 +10,7 @@ export class ChatController extends Controller {
         this.model = new ChatHistory();
         this.ws = new chatWebSocket();
         this.view = new Chat();
+        this.page = 1;
         auth.isAuthorised();
         
         this.listeners = new Set ([
@@ -18,9 +19,14 @@ export class ChatController extends Controller {
             ['logged-out', this._onloggedout],
             ['ws-message-received', this._onmessagereceived],
             ['message-form-submitted', this._onmessageformsubmitted],
+            ['no-more-history', this._onnomorehistory],
         ]);
 
         super.subscribeAll();
+    }
+
+    _onnomorehistory() {
+        this.stopGetHist = true;
     }
 
     _onmessageformsubmitted(text) {
@@ -31,8 +37,12 @@ export class ChatController extends Controller {
         this.view.render({authorised: true, ws: this.ws});
     }
 
-    _ongethistory(page) {
-        this.model.getChatHistory({page: page});
+    _ongethistory() {
+        if(this.stopGetHist) {
+            return;
+        }
+        this.model.getChatHistory({page: this.page});
+        this.page++;
     }
     
     _onloggedout() {
