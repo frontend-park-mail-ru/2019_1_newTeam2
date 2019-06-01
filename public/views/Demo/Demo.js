@@ -19,7 +19,6 @@ export class Demo extends Page {
             classname: 'hidden-element',
         };
         super.renderHint(hint);
-        super.renderBasePagination();
 
         this.forContent.classList.add('training-outer');
 
@@ -30,7 +29,7 @@ export class Demo extends Page {
     }
 
     _ongamecardsloaded(cards) {
-        /* let result = [];
+        /*let result = [];
 
         const genNextPage = () => {
             let page = pageGenerator.next();
@@ -63,7 +62,6 @@ export class Demo extends Page {
         };
 
         const pageGenerator = function*() {
-            // TODO(Alex): extract to component
             for(let index = 0; index < cards.length; ++index) {
                 const card = cards[index];
                 const inner = document.createElement('div');
