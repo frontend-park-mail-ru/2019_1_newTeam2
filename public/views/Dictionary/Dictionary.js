@@ -13,8 +13,7 @@ export class Dictionary extends Page {
         super.renderBase();
         super.renderBaseHeader('Мои словари');
         const hintString = `Этот раздел поможет кастомизировать приложение под ваши нужды.\n
-        Добавляйте словари, нажав +\n
-        Добавляйте по карточкам или из файла.`;
+        Добавляйте словари, нажав +\n`;
         const hint = {
             headline: 'Мои словари',
             content:  hintString,
@@ -87,6 +86,7 @@ export class Dictionary extends Page {
         let plus = new Icon({
             src: '/static/icons/plus.png',
             id: 'plus',
+            classname: 'plus-icon',
             handler: () => {
                 document.getElementById('plus').classList.add('hidden-element');
                 document.getElementById('deny').classList.remove('hidden-element');

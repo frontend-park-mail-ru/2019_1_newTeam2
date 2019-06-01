@@ -100,6 +100,7 @@ export class Card extends Page {
         const plus = new Icon({
             src: '/static/icons/plus.png',
             id: 'plus',
+            classname: 'plus-icon',
             handler: () => {
                 document.getElementById('plus').classList.add('hidden-element');
                 document.getElementById('deny').classList.remove('hidden-element');
