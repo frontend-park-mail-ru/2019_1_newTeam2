@@ -11,11 +11,11 @@ export class About extends Page {
 
         /* имя, описание */
         const persons = {
-            'Наш github #1': 'backend',
-            'Наш github #2': 'frontend',
+            'Наш backend': 'репозиторий',
+            'Наш frontend': 'репозиторий',
             'Зайцев Дмитрий' : 'Ментор проекта',
             'Чуриков Сергей': 'backend',
-            'Смехунов Алексей': 'frontend',
+            'Смехунов Алексей': 'fullstack',
             'Атасунц Владимир': 'backend',
             'Никифорова Ирина':  'frontend',
         };

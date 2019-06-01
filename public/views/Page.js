@@ -20,9 +20,11 @@ export class Page extends View {
         this.outer.appendChild(this.forHeader);
         this.outer.appendChild(this.forContent);
         this.outer.appendChild(this.forPagination);
+        this.hasHint = false;
     }
 
     renderHint(hint) {
+        this.hasHint = true;
         this.info = new Hint(hint).render();
         this.outer.insertBefore(this.info, this.forHeader);
 
@@ -38,6 +40,9 @@ export class Page extends View {
             src: '/static/icons/back.png',
             id: 'back',
             handler: () => {
+                if (this.hasHint) {
+                    this.closeInfo();
+                }
                 router.back();
             }
         }).render());
@@ -46,8 +51,10 @@ export class Page extends View {
             src: '/static/icons/home.png',
             id: 'home',
             handler: () => {
+                if (this.hasHint) {
+                    this.closeInfo();
+                }
                 router.go('menu');
-                this.closeInfo();
             }
         }).render());
 
