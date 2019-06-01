@@ -27,7 +27,7 @@ export class Page extends View {
             id: 'hint',
             classname: 'hidden-element',
         }).render();
-        this.outer.insertBefore(this.info, this.outer);
+        document.getElementsByClassName('main')[0].insertBefore(this.info, this.outer);
     }
 
     renderBaseHeader(nameOfPage = '') {
