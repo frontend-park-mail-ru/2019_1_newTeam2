@@ -10,6 +10,13 @@ export class About extends Page {
         super.renderBase();
         super.renderBaseHeader('О проекте');
 
-        new Link({size: '', name: 'Наш проект на github'});
+        const repository = new Link({
+            size: '', 
+            name: 'Наш проект на github',
+            handler: () => {
+                window.open('https://github.com/frontend-park-mail-ru/2019_1_newTeam2');
+            }
+        }).render();
+        this.forContent.appendChild(repository);
     }
 }
