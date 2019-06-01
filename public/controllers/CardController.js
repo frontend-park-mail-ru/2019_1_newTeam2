@@ -18,7 +18,7 @@ export class CardController extends Controller{
         this.model.getCardsByDictId({id: this.id});
 
         this.page = 1;
-        this.rows = 5;
+        this.rows = 15;
 
         this.listeners = new Set ([
             ['prev-page', this._onprevpage],

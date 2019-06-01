@@ -19,8 +19,6 @@ export class Demo extends Page {
         };
         super.renderHint(hint);
 
-        this.forContent.classList.add('training-outer');
-
         this.listeners = new Set([
             ['demo-cards-loaded', this._ondemocardsloaded],
         ]);

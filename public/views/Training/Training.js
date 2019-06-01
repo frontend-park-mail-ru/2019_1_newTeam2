@@ -23,8 +23,6 @@ export class Training extends Page {
         super.renderHint(hint);
         super.renderBasePagination();
 
-        this.forContent.classList.add('training-outer');
-
         this.listeners = new Set([
             ['dicts-loaded', this._ondictsloaded],
             ['game-cards-loaded', this._ongamecardsloaded],
