@@ -24,7 +24,6 @@ export class Multiplayer extends Page {
             }
         }).render());
 
-
         this.forHeader.appendChild(new Icon({
             src: '/static/icons/home.png',
             id: 'home',
@@ -33,6 +32,16 @@ export class Multiplayer extends Page {
                 router.go('menu');
             }
         }).render());
+
+        this.forHeader.appendChild(new Icon({
+            src: '/static/icons/info.png',
+            id: 'hint-icon',
+            classname: 'hidden-element',
+            handler: () => {
+                this.openOrCloseInfo();
+            }
+        }).render());
+
 
         this.forHeader.appendChild(new Headline({
             textContent: 'Мультиплеер',
