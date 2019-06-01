@@ -4,12 +4,14 @@ import auth from 'Models/AuthModel.js';
 import bus from 'Services/bus.js';
 import {chatWebSocket} from 'Services/chatWebSocket.js';
 import {ChatHistory} from 'Models/ChatHistory.js';
+import {UserModel} from "Models/UserModel.js";
 
 export class ChatController extends Controller {
     index() {
-		auth.isAuthorised();
-		this.model = new ChatHistory();
-		this.view = new Chat();
+        this.userModel = new UserModel();
+        this.view = new Chat();
+        auth.isAuthorised();
+        this.chatModel = new ChatHistory();
 		this.page = 1;
         this.listeners = new Set ([
             ['logged-in', this._onloggedin],
@@ -18,16 +20,21 @@ export class ChatController extends Controller {
             ['ws-message-received', this._onmessagereceived],
             ['message-form-submitted', this._onmessageformsubmitted],
 			['no-more-history', this._onnomorehistory],
-			['chat-view-ready', this._onchatviewready],
-
+            ['self-loaded', this._onuserloaded],
+            ['ws-opened', this._onwsopened],
         ]);
 
         super.subscribeAll();
     }
 
-	_onchatviewready() {
-		this.ws = new chatWebSocket();
-	}
+    _onuserloaded(user) {
+        this.view.render({authorised: this.authorised, user: user});
+        this.ws = new chatWebSocket();
+    }
+
+    _onwsopened() {
+        this.view.showInput(this.ws);
+    }
 
     _onnomorehistory() {
         this.stopGetHist = true;
@@ -38,19 +45,21 @@ export class ChatController extends Controller {
     }
 
     _onloggedin() {
-        this.view.render({authorised: true, ws: this.ws});
+        this.authorised = true;
+        this.userModel.getSelf();
     }
 
     _ongethistory() {
         if(this.stopGetHist) {
             return;
         }
-        this.model.getChatHistory({page: this.page});
+        this.chatModel.getChatHistory({page: this.page});
         this.page++;
     }
     
     _onloggedout() {
-        this.view.render({authorised: false, ws: this.ws});
+        this.authorised = false;
+        this.userModel.getSelf();
     }
 
     _notify(data) {

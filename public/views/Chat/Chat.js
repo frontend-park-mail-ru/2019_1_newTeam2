@@ -12,11 +12,9 @@ import {chatWebSocket} from 'Services/chatWebSocket.js';
 import bus from 'Services/bus.js';
 
 export class Chat extends Page {
-    render({authorised = false, ws = new chatWebSocket()}) {
+    render({authorised = false, user = {}}) {
+        this.user = user;
         super.renderBase();
-
-        this.ws = ws;
-
         this.forHeader.appendChild(new Icon({
             src: '/static/icons/back.png',
             id: 'back',
@@ -68,16 +66,19 @@ export class Chat extends Page {
 
         this.listeners = new Set([
             ['message-form-submitted', this._onmessageformsubmitted],
-            ['ws-opened', this._onwsopened],
             ['name-got', this._onnamegot],
             ['history-loaded', this._onhistoryloaded],
         ]);
-        bus.emit('chat-view-ready');
         super.subscribeAll();
     }
 
+    showInput(ws) {
+        this.ws = ws;
+        this.forInput.appendChild(new ChatForm().render());
+    }
+
     _onmessageformsubmitted(text) {
-        const message = new ChatMessage({author: 'me', authorName: text.username, text: text}).render();
+        const message = new ChatMessage({author: 'me', authorName: this.user.username, text: text}).render();
         this.forData.appendChild(message);
         message.scrollIntoView();
     }
@@ -88,7 +89,11 @@ export class Chat extends Page {
         }
         let ref;
         data.forEach(mes => {
-            const message = new ChatMessage({author: 'partner', authorName: mes.username, text: mes.message}).render();
+            let init = {author: 'partner', authorName: mes.username, text: mes.message};
+            if(mes.username === this.user.username) {
+                init.author = 'me';
+            }
+            const message = new ChatMessage(init).render();
             if(!ref) {
                 ref = message;
             }
@@ -100,13 +105,14 @@ export class Chat extends Page {
         }
     }
 
-    _onwsopened() {
-        this.forInput.appendChild(new ChatForm().render());
-    }
 
     _onnamegot(data) {
         // data format: { id: 4, message: "Welcome to Word chat!)" }
-        const message = new ChatMessage({author: 'partner', authorName: data.username, text: data.message}).render();
+        let init = {author: 'partner', authorName: data.username, text: data.message};
+        if(data.username === this.user.username) {
+            init.author = 'me';
+        }
+        const message = new ChatMessage(init).render();
         this.forData.appendChild(message);
         message.scrollIntoView();
     }
