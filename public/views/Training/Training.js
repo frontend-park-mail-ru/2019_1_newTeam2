@@ -9,6 +9,7 @@ import {Button} from 'Components/Button/Button.js';
 
 export class Training extends Page {
     render() {
+        super.renderBase();
         const hint = {
             headline: 'Тренировка',
             content: 'Здесь вы можете тренировать любые свои словари!',
@@ -16,7 +17,6 @@ export class Training extends Page {
             classname: 'hidden-element',
         };
         super.renderHint(hint);
-        super.renderBase();
         super.renderBaseHeader('Тренировка');
         super.renderBasePagination();
 

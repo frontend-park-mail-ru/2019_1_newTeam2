@@ -13,6 +13,7 @@ import bus from 'Services/bus.js';
 
 export class Profile extends Page {
     render() {
+        super.renderBase();
         const hint = {
             headline: 'Профиль',
             content: 'Здесь вы можете просмотреть или изменить свой профиль!',
@@ -20,7 +21,6 @@ export class Profile extends Page {
             classname: 'hidden-element',
         };
         super.renderHint(hint);
-        super.renderBase();
         super.renderBaseHeader('Мой профиль');
 
         let forButton = document.createElement('div');
