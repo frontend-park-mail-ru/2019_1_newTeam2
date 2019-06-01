@@ -21,12 +21,18 @@ export class Page extends View {
         this.outer.appendChild(this.forContent);
         this.outer.appendChild(this.forPagination);
 
-        this.info = new Hint({
+        const defaultHint = {
             headline: 'Подсказка!',
-            content: 'Здесь будет находиться подсказка',
+            content: 'Подсказок нет :)',
             id: 'hint',
             classname: 'hidden-element',
-        }).render();
+        };
+
+        if (!this.hint) {
+            this.hint = defaultHint;
+        }
+
+        this.info = new Hint(this.hint).render();
         document.getElementsByClassName('main')[0].insertBefore(this.info, this.outer);
     }
 
