@@ -1,6 +1,6 @@
 'use strict';
 
-import {View} from 'Views/View.js';
+import {Page} from 'Views/Page.js';
 import {Headline} from 'Components/Headline/Headline.js';
 import {Icon} from 'Components/Icon/Icon.js';
 import {ChatData} from 'Components/ChatData/ChatData.js';
@@ -11,38 +11,42 @@ import router from 'Services/router.js';
 import {chatWebSocket} from 'Services/chatWebSocket.js';
 import bus from 'Services/bus.js';
 
-const application = document.getElementById('application');
-
-export class Chat extends View {
+export class Chat extends Page {
     render({authorised = false, ws = new chatWebSocket()}) {
-        const outer = application;
-        outer.innerHTML = '';
+        super.renderBase();
 
         this.ws = ws;
 
-        const nameOfHeadline = 'Языковой чат';
-        const headline = new Headline({size: 'h1', textContent: nameOfHeadline}).render();
+        this.forHeader.appendChild(new Icon({
+            src: '/static/icons/back.png',
+            id: 'back',
+            handler: () => {
+                router.back();
+            }
+        }).render());
 
-        outer.appendChild(new Icon({
+        this.forHeader.appendChild(new Icon({
             src: '/static/icons/home.png',
             handler: () => {
                 this.ws.destroy();
                 router.go('menu');
             }
         }).render());
-        outer.appendChild(headline);
+
+        const headline = new Headline({size: 'h1', textContent: 'Языковой чат'}).render();
+        this.forHeader.appendChild(headline);
 
         if (!authorised) {
             const needToLogin = new Headline({size: 'h1', textContent: 'Чтобы участвовать в беседе, зайдите в систему'}).render();
-            outer.appendChild(needToLogin);
+            this.forContent.appendChild(needToLogin);
             return;
         }
-        this.forHistory = document.createElement("div");
-        this.forHistoryAnchor = document.createElement("div");
+        this.forHistory = document.createElement('div');
+        this.forHistoryAnchor = document.createElement('div');
         this.forData = new ChatData().render();
         this.forHistory.appendChild(this.forHistoryAnchor);
         this.forData.appendChild(this.forHistory);
-        outer.appendChild(this.forData);
+        this.forContent.appendChild(this.forData);
 
 
         if (Notification.permission !== 'denied') {
@@ -53,7 +57,7 @@ export class Chat extends View {
 
         
         this.forInput = document.createElement('div');
-        outer.appendChild(this.forInput);
+        this.forContent.appendChild(this.forInput);
 
         this.listeners = new Set([
             ['message-form-submitted', this._onmessageformsubmitted],
