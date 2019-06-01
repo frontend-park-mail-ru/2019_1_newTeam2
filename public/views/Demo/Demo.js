@@ -23,13 +23,13 @@ export class Demo extends Page {
         this.forContent.classList.add('training-outer');
 
         this.listeners = new Set([
-            ['game-cards-loaded', this._ongamecardsloaded],
+            ['demo-cards-loaded', this._ondemocardsloaded],
         ]);
         super.subscribeAll();
     }
 
-    _ongamecardsloaded(cards) {
-        /*let result = [];
+    _ondemocardsloaded(cards) {
+        let result = [];
 
         const genNextPage = () => {
             let page = pageGenerator.next();
@@ -57,7 +57,6 @@ export class Demo extends Page {
                     }
                 }).render();
                 this.forContent.appendChild(menuButton);
-                bus.emit('training-finished', result);
             }
         };
 
@@ -68,15 +67,15 @@ export class Demo extends Page {
 
                 const word = new Variant({
                     size: 'big',
-                    inner: card.word
+                    inner: card.question
                 }).render();
                 inner.appendChild(word);
-                card.variants.forEach((variant, index) => {
+                card.words.forEach((variant) => {
                     const onchoose = () => {
-                        if (index === card.correct) {
-                            result.push({correct: true, id: card.id});
+                        if (variant === card.answer) {
+                            result.push({correct: true});
                         } else {
-                            result.push({correct: false, id: card.id});
+                            result.push({correct: false});
                         }
                         genNextPage();
                     };
@@ -92,6 +91,6 @@ export class Demo extends Page {
                 yield inner;
             }
         }();
-        genNextPage();*/
+        genNextPage();
     }
 }
