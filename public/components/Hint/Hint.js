@@ -24,9 +24,10 @@ export class Hint {
         hintBoard.addEventListener('click', this._handler);
         hintBoard.innerHTML = hintTemplate({
             headline: this._headline,
-            text: this._content,
+            content: this._content,
             classname: this._classname,
             id: this._id,
+            size: 'headline_size_h2',
         });
         return hintBoard;
     }

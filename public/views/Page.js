@@ -25,8 +25,8 @@ export class Page extends View {
             headline: 'Подсказка!',
             content: 'Здесь будет находиться подсказка',
             id: 'hint',
+            classname: 'hidden-element',
         }).render();
-        this.info.classList.add('hidden-element');
         this.outer.appendChild(this.info);
     }
 
