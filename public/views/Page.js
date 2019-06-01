@@ -23,29 +23,10 @@ export class Page extends View {
     }
 
     renderHint(hint) {
-        const defaultHint = {
-            headline: 'Подсказка!',
-            content: 'Подсказок нет :)',
-            id: 'hint',
-            classname: 'hidden-element',
-        };
-
-        if (!hint) {
-            hint = defaultHint;
-        }
-
         this.info = new Hint(hint).render();
         this.outer.insertBefore(this.info, this.forHeader);
 
-        const hintIcon = new Icon({
-            src: '/static/icons/info.png',
-            id: 'info',
-            handler: () => {
-                this.openOrCloseInfo();
-            }
-        }).render();
-        const homeIcon = document.getElementById('home');
-        this.forHeader.insertBefore(hintIcon, homeIcon);
+        document.getElementById('hint').classList.remove('hidden-element');
     }
 
     renderBaseHeader(nameOfPage = '') {
@@ -63,6 +44,15 @@ export class Page extends View {
             handler: () => {
                 router.go('menu');
                 this.closeInfo();
+            }
+        }).render());
+
+        this.forHeader.appendChild(new Icon({
+            src: '/static/icons/info.png',
+            id: 'info',
+            classname: 'hidden-element',
+            handler: () => {
+                this.openOrCloseInfo();
             }
         }).render());
 
