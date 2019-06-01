@@ -14,7 +14,7 @@ export class About extends Page {
             'Наш проект на github': 'https://github.com/frontend-park-mail-ru/2019_1_newTeam2',
             'Зайцев Дмитрий (наш ментор)' : 'https://github.com/HaseProgram',
             'Чуриков Сергей (backend)': 'https://github.com/sergeychur',
-            'Смехунов Алексей (fronend)': 'https://github.com/Sighr',
+            'Смехунов Алексей (frontend)': 'https://github.com/Sighr',
             'Атасунц Владимир (backend)': 'https://github.com/Tsaanstu',
         };
 
@@ -32,6 +32,7 @@ export class About extends Page {
 
         renderedLinks.forEach( link => {
             this.forContent.appendChild(link);
+            this.forContent.appendChild(document.createElement('br'));
         });
     }
 }

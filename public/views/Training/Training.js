@@ -11,9 +11,12 @@ export class Training extends Page {
     render() {
         super.renderBase();
         super.renderBaseHeader('Тренировка');
+        const hintString = `Здесь вы можете тренировать любые свои словари!
+Добавить их можно в Меню -> Мои словари -> +.
+Словари должны быть непустыми!`;
         const hint = {
             headline: 'Тренировка',
-            content: 'Здесь вы можете тренировать любые свои словари!',
+            content:  hintString,
             id: 'hint',
             classname: 'hidden-element',
         };
