@@ -77,7 +77,7 @@ export class Chat extends Page {
     }
 
     _onmessageformsubmitted(text) {
-        const message = new ChatMessage({author: 'me', authorName: mes.username, text: text}).render();
+        const message = new ChatMessage({author: 'me', authorName: text.username, text: text}).render();
         this.forData.appendChild(message);
         message.scrollIntoView();
     }
@@ -106,7 +106,7 @@ export class Chat extends Page {
 
     _onnamegot(data) {
         // data format: { id: 4, message: "Welcome to Word chat!)" }
-        const message = new ChatMessage({author: 'partner', authorName: mes.username, text: data.message}).render();
+        const message = new ChatMessage({author: 'partner', authorName: data.username, text: data.message}).render();
         this.forData.appendChild(message);
         message.scrollIntoView();
     }
