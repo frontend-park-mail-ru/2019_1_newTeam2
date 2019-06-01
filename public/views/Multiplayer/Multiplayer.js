@@ -92,8 +92,18 @@ export class Multiplayer extends Page {
 
     _ongameleaderboardupdate(data) {
         this.forLeadBoard.innerText = '';
-        data.payload.players.sort((l, r) => {
-            return l.score < r.score ?  true : l.score > r.score ? false : l.username < r.username;
+        data.payload.players.sort((a, b) => {
+            if (a.score > b.score) {
+                return -1;
+            } else if (a.score === b.score) {
+                if (a.username > b.username) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            } else {
+                return 1;
+            }
         });
         this.table.data = data.payload.players;
         this.forLeadBoard.appendChild(this.table.render());
