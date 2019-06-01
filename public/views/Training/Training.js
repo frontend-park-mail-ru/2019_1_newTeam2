@@ -28,14 +28,16 @@ export class Training extends Page {
         this.listeners = new Set([
             ['dicts-loaded', this._ondictsloaded],
             ['game-cards-loaded', this._ongamecardsloaded],
+            ['dicts-loaded-err', this._ondictsloadederr],
         ]);
         super.subscribeAll();
     }
 
+    _ondictsloadederr() {
+        super.openInfo();
+    }
+
     _ondictsloaded(dicts) {
-        if (!dicts) {
-            super.openInfo();
-        }
         this.forContent.innerText = '';
         dicts.forEach((dict) => {
             const merde = new Variant({

@@ -17,6 +17,7 @@ export class DictionaryModel {
                         bus.emit('dicts-loaded', res);
                     })
                     .catch( (err) => {
+                        bus.emit('dicts-loaded-err');
                         // TODO(gleensande): обработка ошибки
                         console.log(err);
                     });
