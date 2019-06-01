@@ -19,7 +19,7 @@ export class AboutPreview {
                 window.open('https://github.com/' + nickGithub);
             },
             type: 'dictionary',
-            src: '/static/about/' + srcImage + '.jpeg',
+            src: srcImage,
         }).render();
         outer.appendChild(image);
 
