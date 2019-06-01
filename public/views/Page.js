@@ -35,7 +35,7 @@ export class Page extends View {
         }
 
         this.info = new Hint(hint).render();
-        document.getElementsByClassName('main')[0].insertBefore(this.info, this.outer);
+        this.outer.insertBefore(this.info, this.forHeader);
     }
 
     renderBaseHeader(nameOfPage = '') {
@@ -52,6 +52,7 @@ export class Page extends View {
             id: 'home',
             handler: () => {
                 router.go('menu');
+                this.closeInfo();
             }
         }).render());
 
@@ -59,7 +60,7 @@ export class Page extends View {
             src: '/static/icons/info.png',
             id: 'info',
             handler: () => {
-                this.showInfo();
+                this.openOrCloseInfo();
             }
         }).render());
 
@@ -74,10 +75,26 @@ export class Page extends View {
         pagination.render(this.forPagination);
     }
 
-    showInfo () {
+    openOrCloseInfo() {
         const hint = document.getElementById('hint');
-        hint.classList.contains('hidden-element') ?
-            hint.classList.remove('hidden-element') :
+        if (hint.classList.contains('hidden-element')) {
+            hint.classList.remove('hidden-element');
+        } else {
             hint.classList.add('hidden-element');
+        }
+    }
+
+    openInfo() {
+        const hint = document.getElementById('hint');
+        if (hint.classList.contains('hidden-element')) {
+            hint.classList.remove('hidden-element');
+        }
+    }
+
+    closeInfo() {
+        const hint = document.getElementById('hint');
+        if (!hint.classList.contains('hidden-element')) {
+            hint.classList.add('hidden-element');
+        }
     }
 }

@@ -27,7 +27,7 @@ export class Hint {
             content: this._content,
             classname: this._classname,
             id: this._id,
-            size: 'headline_size_h1',
+            size: 'headline_size_h1', 
         });
         return hintBoard;
     }

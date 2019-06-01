@@ -13,6 +13,13 @@ import bus from 'Services/bus.js';
 
 export class Profile extends Page {
     render() {
+        const hint = {
+            headline: 'Профиль',
+            content: 'Здесь вы можете просмотреть или изменить свой профиль!',
+            id: 'hint',
+            classname: 'hidden-element',
+        };
+        super.renderHint(hint);
         super.renderBase();
         super.renderBaseHeader('Мой профиль');
 
