@@ -12,8 +12,8 @@ export class Training extends Page {
         super.renderBase();
         super.renderBaseHeader('Тренировка');
         const hintString = `Здесь вы можете тренировать любые свои словари!
-    Добавить их можно в Меню -> Мои словари -> +.
-    Словари должны быть непустыми!`;
+        Добавить их можно в Меню -> Мои словари -> +.
+        Словари должны быть непустыми!`;
         const hint = {
             headline: 'Тренировка',
             content:  hintString,
@@ -33,6 +33,9 @@ export class Training extends Page {
     }
 
     _ondictsloaded(dicts) {
+        if (!dicts) {
+            super.openInfo();
+        }
         this.forContent.innerText = '';
         dicts.forEach((dict) => {
             const merde = new Variant({
@@ -47,6 +50,7 @@ export class Training extends Page {
     }
 
     _ongamecardsloaded(cards) {
+        this.forPagination.classList.add('hidden-element');
         let result = [];
 
         const genNextPage = () => {

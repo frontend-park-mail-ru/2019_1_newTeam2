@@ -51,11 +51,10 @@ export class Multiplayer extends Page {
         this.forContent.classList.add('playground');
         this.forVariants.classList.add('playground');
 
-
         this.failText = document.createElement('div');
         this.failText.classList.add('game-fail-text');
         this.failText.classList.add('hidden-element');
-        this.failText.innerText = 'неправильно';
+        this.failText.innerText = 'Неверно. Подождите...';
 
         this.forContent.appendChild(this.forTask);
         this.forTask.appendChild(this.forWord);
