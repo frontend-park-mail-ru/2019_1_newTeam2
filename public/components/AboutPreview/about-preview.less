@@ -1,0 +1,57 @@
+@import '../../styles/colorScheme.less';
+@import '../../styles/breakWord.less';
+
+.about-preview {
+    border: 1px solid @borderColor;
+    border-radius: 4px;
+    background-color: @backgroundColor;
+    -webkit-box-shadow: 0px 2px 3px 1px @shadowColor;
+    -moz-box-shadow: 0px 2px 3px 1px @shadowColor;
+    box-shadow: 0px 2px 3px 1px @shadowColor;
+    margin: 5px;
+
+    @media screen and (min-width: 300px) {
+        width: 200px;
+        height: 400px;
+    }
+
+    @media screen and (min-width: 700px) {
+        width: 400px;
+        height: 200px;
+    }
+}
+
+.about-preview__headline {
+    float: left;
+    font-weight: 600;
+    font-size: 18px;
+    padding-top: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    .breakWord();
+
+    @media screen and (min-width: 300px) {
+        width: 100px;
+        margin-left: 10px;
+    }
+
+    @media screen and (min-width: 700px) {
+        width: 190px;
+    }
+}
+
+.about-preview__description {
+    font-weight: 400;
+    float: left;
+    text-overflow: ellipsis;
+    .breakWord();
+
+    @media screen and (min-width: 300px) {
+        width: 100px;
+        margin-left: 10px;
+    }
+
+    @media screen and (min-width: 700px) {
+        width: 190px;
+    }
+}

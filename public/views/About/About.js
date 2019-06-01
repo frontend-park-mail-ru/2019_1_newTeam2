@@ -1,8 +1,7 @@
 'use strict';
 
 import {Page} from 'Views/Page.js';
-import {Link} from 'Components/Link/Link.js';
-//import {Headline} from 'Components/Headline/Headline.js';
+import {AboutPreview} from 'Components/AboutPreview/AboutPreview.js';
 
 
 export class About extends Page {
@@ -10,28 +9,37 @@ export class About extends Page {
         super.renderBase();
         super.renderBaseHeader('О проекте');
 
-        const links = {
-            'Наш проект на github': 'https://github.com/frontend-park-mail-ru/2019_1_newTeam2',
-            'Зайцев Дмитрий (наш ментор)' : 'https://github.com/HaseProgram',
-            'Чуриков Сергей (backend)': 'https://github.com/sergeychur',
-            'Смехунов Алексей (frontend)': 'https://github.com/Sighr',
-            'Атасунц Владимир (backend)': 'https://github.com/Tsaanstu',
-            'Никифорова Ирина (frontend)': 'https://github.com/gleensande',
+        /* имя, описание */
+        const persons = { 
+            'Наш проект на github': '',
+            'Зайцев Дмитрий' : 'Ментор проекта',
+            'Чуриков Сергей': 'backend',
+            'Смехунов Алексей': 'frontend',
+            'Атасунц Владимир': 'backend',
+            'Никифорова Ирина':  'frontend',
         };
 
-        let renderedLinks = [];
+        /*имя аватарки, ник на гитхабе */
+        const avatars = ['project', 'HaseProgram', 'sergeychur', 'Sighr', 'Tsaanstu', 'gleensande']
+        const niks = [
+            'frontend-park-mail-ru/2019_1_newTeam2',
+            'HaseProgram',
+            'sergeychur',
+            'Sighr',
+            'Tsaanstu',
+            'gleensande',
+        ];
 
-        Object.entries(links).forEach( (name, i) => {
-            renderedLinks[i] = new Link ({
-                size: 'h1', 
-                name: name[0],
-                handler: () => {
-                    window.open(name[1]);
-                }
-            }).render();
+        let aboutPreviews = [];
+
+        Object.entries(persons).forEach( (name, i) => {
+            aboutPreviews[i] = new AboutPreview ({
+                name: name[1],
+                description: name[0]
+            }).render(avatars[i], niks[i]);
         });
 
-        renderedLinks.forEach( link => {
+        aboutPreviews.forEach( link => {
             this.forContent.appendChild(link);
             this.forContent.appendChild(document.createElement('br'));
         });
