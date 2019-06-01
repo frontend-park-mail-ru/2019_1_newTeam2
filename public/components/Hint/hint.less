@@ -1,0 +1,37 @@
+@import '../../styles/colorScheme.less';
+
+.mist {
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.hint {
+    position: absolute;
+    background: @backgroundLightNegativeColor;
+    width: 300px;
+    padding: 20px;
+    min-height: 180px;
+    left: 0; right: 0;
+    margin: 80px auto 0;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 4px 4px 0px @shadowColor;
+    -moz-box-shadow: 0px 4px 4px 0px @shadowColor;
+    box-shadow: 0px 4px 4px 0px @shadowColor;
+    z-index: 1;
+}
+
+.hint_headline {
+    width: 235px;
+    float: left;
+}
+
+.hint_close-icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 0;
+    left: 0;
+}

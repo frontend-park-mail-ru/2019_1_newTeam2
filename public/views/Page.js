@@ -2,6 +2,7 @@ import {View} from 'Views/View.js';
 
 import {Icon} from 'Components/Icon/Icon.js';
 import {Headline} from 'Components/Headline/Headline.js';
+import {Hint} from 'Components/Hint/Hint.js';
 import {Pagination} from 'Components/Pagination/Pagination.js';
 
 import router from 'Services/router.js';
@@ -21,20 +22,37 @@ export class Page extends View {
         this.outer.appendChild(this.forPagination);
     }
 
-    renderBaseHeader(nameOfPage = '') {
-        this.forHeader.appendChild(new Icon({
-            src: '/static/icons/home.png',
-            id: 'home',
-            handler: () => {
-                router.go('menu');
-            }
-        }).render());
+    renderHint(hint) {
+        this.info = new Hint(hint).render();
+        this.outer.insertBefore(this.info, this.forHeader);
 
+        document.getElementById('hint').classList.remove('hidden-element');
+    }
+
+    renderBaseHeader(nameOfPage = '') {
         this.forHeader.appendChild(new Icon({
             src: '/static/icons/back.png',
             id: 'back',
             handler: () => {
                 router.back();
+            }
+        }).render());
+
+        this.forHeader.appendChild(new Icon({
+            src: '/static/icons/home.png',
+            id: 'home',
+            handler: () => {
+                router.go('menu');
+                this.closeInfo();
+            }
+        }).render());
+
+        this.forHeader.appendChild(new Icon({
+            src: '/static/icons/info.png',
+            id: 'info',
+            classname: 'hidden-element',
+            handler: () => {
+                this.openOrCloseInfo();
             }
         }).render());
 
@@ -47,5 +65,28 @@ export class Page extends View {
     renderBasePagination() {
         const pagination = new Pagination();
         pagination.render(this.forPagination);
+    }
+
+    openOrCloseInfo() {
+        const hint = document.getElementById('hint');
+        if (hint.classList.contains('hidden-element')) {
+            hint.classList.remove('hidden-element');
+        } else {
+            hint.classList.add('hidden-element');
+        }
+    }
+
+    openInfo() {
+        const hint = document.getElementById('hint');
+        if (hint.classList.contains('hidden-element')) {
+            hint.classList.remove('hidden-element');
+        }
+    }
+
+    closeInfo() {
+        const hint = document.getElementById('hint');
+        if (!hint.classList.contains('hidden-element')) {
+            hint.classList.add('hidden-element');
+        }
     }
 }

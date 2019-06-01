@@ -10,6 +10,7 @@ import {DictionaryController} from 'Controllers/DictionaryController.js';
 import {CardController} from 'Controllers/CardController.js';
 import {ChatController} from 'Controllers/ChatController.js';
 import {MultiplayerController} from 'Controllers/MultiplayerController.js';
+import {AboutController} from 'Controllers/AboutController.js';
 
 import 'Styles/main.less';
 
@@ -36,6 +37,7 @@ const controllers = new Set([
     ['^training$', TrainingController],
     ['^chat$', ChatController],
     ['^game$', MultiplayerController],
+    ['^about$', AboutController],
 ]);
 
 

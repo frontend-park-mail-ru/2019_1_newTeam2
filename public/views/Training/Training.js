@@ -11,6 +11,13 @@ export class Training extends Page {
     render() {
         super.renderBase();
         super.renderBaseHeader('Тренировка');
+        const hint = {
+            headline: 'Тренировка',
+            content: 'Здесь вы можете тренировать любые свои словари!',
+            id: 'hint',
+            classname: 'hidden-element',
+        };
+        super.renderHint(hint);
         super.renderBasePagination();
 
         this.forContent.classList.add('training-outer');

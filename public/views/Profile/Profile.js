@@ -15,6 +15,13 @@ export class Profile extends Page {
     render() {
         super.renderBase();
         super.renderBaseHeader('Мой профиль');
+        const hint = {
+            headline: 'Профиль',
+            content: 'Здесь вы можете просмотреть или изменить свой профиль!',
+            id: 'hint',
+            classname: 'hidden-element',
+        };
+        super.renderHint(hint);
 
         let forButton = document.createElement('div');
         this.outer.appendChild(forButton);

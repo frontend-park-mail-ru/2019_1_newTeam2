@@ -16,20 +16,21 @@ export class Multiplayer extends Page {
         super.renderBase();
 
         this.forHeader.appendChild(new Icon({
-            src: '/static/icons/home.png',
-            id: 'home',
-            handler: () => {
-                this.ws.destroy();
-                router.go('menu');
-            }
-        }).render());
-
-        this.forHeader.appendChild(new Icon({
             src: '/static/icons/back.png',
             id: 'back',
             handler: () => {
                 this.ws.destroy();
                 router.back();
+            }
+        }).render());
+
+
+        this.forHeader.appendChild(new Icon({
+            src: '/static/icons/home.png',
+            id: 'home',
+            handler: () => {
+                this.ws.destroy();
+                router.go('menu');
             }
         }).render());
 

@@ -18,6 +18,7 @@ export class Image {
         this._typeset = {
             'profile': true,
             'dictionary': true,
+            'error': true,
         };
         this._src = src;
         this._type = type;
