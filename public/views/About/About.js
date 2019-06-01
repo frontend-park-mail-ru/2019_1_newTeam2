@@ -16,6 +16,7 @@ export class About extends Page {
             'Чуриков Сергей (backend)': 'https://github.com/sergeychur',
             'Смехунов Алексей (frontend)': 'https://github.com/Sighr',
             'Атасунц Владимир (backend)': 'https://github.com/Tsaanstu',
+            'Никифорова Ирина (frontend)': 'https://github.com/gleensande',
         };
 
         let renderedLinks = [];

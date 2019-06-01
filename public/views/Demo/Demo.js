@@ -7,15 +7,13 @@ import bus from 'Services/bus.js';
 import {Variant} from 'Components/Variant/Variant.js';
 import {Button} from 'Components/Button/Button.js';
 
-export class Training extends Page {
+export class Demo extends Page {
     render() {
         super.renderBase();
         super.renderBaseHeader('Тренировка');
-        const hintString = `Здесь вы можете тренировать любые свои словари!
-    Добавить их можно в Меню -> Мои словари -> +.
-    Словари должны быть непустыми!`;
+        const hintString = 'Здесь вы можете потренировать свой английский без смс и регистрации!';
         const hint = {
-            headline: 'Тренировка',
+            headline: 'Пробная тренировка',
             content:  hintString,
             id: 'hint',
             classname: 'hidden-element',
@@ -26,28 +24,13 @@ export class Training extends Page {
         this.forContent.classList.add('training-outer');
 
         this.listeners = new Set([
-            ['dicts-loaded', this._ondictsloaded],
             ['game-cards-loaded', this._ongamecardsloaded],
         ]);
         super.subscribeAll();
     }
 
-    _ondictsloaded(dicts) {
-        this.forContent.innerText = '';
-        dicts.forEach((dict) => {
-            const merde = new Variant({
-                size: 'small',
-                inner: dict.name,
-            }).render();
-            merde.addEventListener('click', () => {
-                bus.emit('dict-selected', dict.id);
-            });
-            this.forContent.appendChild(merde);
-        });
-    }
-
     _ongamecardsloaded(cards) {
-        let result = [];
+        /* let result = [];
 
         const genNextPage = () => {
             let page = pageGenerator.next();
@@ -111,6 +94,6 @@ export class Training extends Page {
                 yield inner;
             }
         }();
-        genNextPage();
+        genNextPage();*/
     }
 }

@@ -11,6 +11,7 @@ import {CardController} from 'Controllers/CardController.js';
 import {ChatController} from 'Controllers/ChatController.js';
 import {MultiplayerController} from 'Controllers/MultiplayerController.js';
 import {AboutController} from 'Controllers/AboutController.js';
+import {DemoController} from 'Controllers/DemoController.js';
 
 import 'Styles/main.less';
 
@@ -38,6 +39,7 @@ const controllers = new Set([
     ['^chat$', ChatController],
     ['^game$', MultiplayerController],
     ['^about$', AboutController],
+    ['^demo$', DemoController],
 ]);
 
 

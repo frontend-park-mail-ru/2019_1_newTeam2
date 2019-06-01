@@ -17,9 +17,10 @@ const loginedButtonNames = {
 };
 
 const unloginedButtonNames = {
+    'demo': 'Тестовая тренировка',
     'login': 'Войти',
-    'leaderboard/1': 'Таблица лидеров',
     'signup': 'Зарегистрироваться',
+    'leaderboard/1': 'Таблица лидеров',
     'about': 'О проекте',
 };
 
