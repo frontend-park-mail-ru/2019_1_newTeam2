@@ -72,6 +72,7 @@ export class Chat extends Page {
             ['name-got', this._onnamegot],
             ['history-loaded', this._onhistoryloaded],
         ]);
+        bus.emit('chat-view-ready');
         super.subscribeAll();
     }
 

@@ -7,23 +7,27 @@ import {ChatHistory} from 'Models/ChatHistory.js';
 
 export class ChatController extends Controller {
     index() {
-        this.model = new ChatHistory();
-        this.ws = new chatWebSocket();
-        this.view = new Chat();
-        this.page = 1;
-        auth.isAuthorised();
-        
+		auth.isAuthorised();
+		this.model = new ChatHistory();
+		this.view = new Chat();
+		this.page = 1;
         this.listeners = new Set ([
             ['logged-in', this._onloggedin],
             ['get-history', this._ongethistory],
             ['logged-out', this._onloggedout],
             ['ws-message-received', this._onmessagereceived],
             ['message-form-submitted', this._onmessageformsubmitted],
-            ['no-more-history', this._onnomorehistory],
+			['no-more-history', this._onnomorehistory],
+			['chat-view-ready', this._onchatviewready],
+
         ]);
 
         super.subscribeAll();
     }
+
+	_onchatviewready() {
+		this.ws = new chatWebSocket();
+	}
 
     _onnomorehistory() {
         this.stopGetHist = true;
