@@ -26,7 +26,11 @@ export class Page extends View {
         this.info = new Hint(hint).render();
         this.outer.insertBefore(this.info, this.forHeader);
 
-        document.getElementById('hint').classList.remove('hidden-element');
+        document.getElementById('hint-icon').classList.remove('hidden-element');
+
+        document.getElementById('hint_close').addEventListener('click', () => {
+            this.closeInfo();
+        });
     }
 
     renderBaseHeader(nameOfPage = '') {
@@ -49,7 +53,7 @@ export class Page extends View {
 
         this.forHeader.appendChild(new Icon({
             src: '/static/icons/info.png',
-            id: 'info',
+            id: 'hint-icon',
             classname: 'hidden-element',
             handler: () => {
                 this.openOrCloseInfo();

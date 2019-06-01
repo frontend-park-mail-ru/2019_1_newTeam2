@@ -10,13 +10,28 @@ export class About extends Page {
         super.renderBase();
         super.renderBaseHeader('О проекте');
 
-        const repository = new Link({
-            size: '', 
-            name: 'Наш проект на github',
-            handler: () => {
-                window.open('https://github.com/frontend-park-mail-ru/2019_1_newTeam2');
-            }
-        }).render();
-        this.forContent.appendChild(repository);
+        const links = {
+            'Наш проект на github': 'https://github.com/frontend-park-mail-ru/2019_1_newTeam2',
+            'Зайцев Дмитрий (наш ментор)' : 'https://github.com/HaseProgram',
+            'Чуриков Сергей (backend)': 'https://github.com/sergeychur',
+            'Смехунов Алексей (fronend)': 'https://github.com/Sighr',
+            'Атасунц Владимир (backend)': 'https://github.com/Tsaanstu',
+        };
+
+        let renderedLinks = [];
+
+        Object.entries(links).forEach( (name, i) => {
+            renderedLinks[i] = new Link ({
+                size: 'h1', 
+                name: name[0],
+                handler: () => {
+                    window.open(name[1]);
+                }
+            }).render();
+        });
+
+        renderedLinks.forEach( link => {
+            this.forContent.appendChild(link);
+        });
     }
 }
