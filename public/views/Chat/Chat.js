@@ -21,6 +21,7 @@ export class Chat extends Page {
             src: '/static/icons/back.png',
             id: 'back',
             handler: () => {
+                this.ws.destroy();
                 router.back();
             }
         }).render());

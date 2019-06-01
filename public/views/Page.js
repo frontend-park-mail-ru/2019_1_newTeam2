@@ -2,6 +2,7 @@ import {View} from 'Views/View.js';
 
 import {Icon} from 'Components/Icon/Icon.js';
 import {Headline} from 'Components/Headline/Headline.js';
+import {Hint} from 'Components/Hint/Hint.js';
 import {Pagination} from 'Components/Pagination/Pagination.js';
 
 import router from 'Services/router.js';
@@ -19,6 +20,14 @@ export class Page extends View {
         this.outer.appendChild(this.forHeader);
         this.outer.appendChild(this.forContent);
         this.outer.appendChild(this.forPagination);
+
+        this.info = new Hint({
+            headline: 'Подсказка!',
+            content: 'Здесь будет находиться подсказка',
+            id: 'hint',
+        }).render();
+        this.info.classList.add('hidden-element');
+        document.appendChild(this.info);
     }
 
     renderBaseHeader(nameOfPage = '') {
@@ -38,6 +47,14 @@ export class Page extends View {
             }
         }).render());
 
+        this.forHeader.appendChild(new Icon({
+            src: '/static/icons/info.png',
+            id: 'info',
+            handler: () => {
+                this.showInfo();
+            }
+        }).render());
+
         this.forHeader.appendChild(new Headline({
             textContent: nameOfPage,
         }).render());
@@ -47,5 +64,12 @@ export class Page extends View {
     renderBasePagination() {
         const pagination = new Pagination();
         pagination.render(this.forPagination);
+    }
+
+    showInfo () {
+        const hint = document.getElementById('hint');
+        hint.classList.contains('hidden-element') ?
+            hint.classList.remove('hidden-element') :
+            hint.classList.add('hidden-element');
     }
 }
