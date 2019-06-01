@@ -96,7 +96,7 @@ export class Multiplayer extends Page {
             if (a.score > b.score) {
                 return -1;
             } else if (a.score === b.score) {
-                if (a.username > b.username) {
+                if (a.username < b.username) {
                     return -1;
                 } else {
                     return 1;
