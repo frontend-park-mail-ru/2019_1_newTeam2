@@ -12,13 +12,15 @@ const loginedButtonNames = {
     'dictionaries/me': 'Мои словари',
     'profile/me': 'Профиль',
     'leaderboard/1': 'Таблица лидеров',
-    'login': 'Выйти'
+    'login': 'Выйти',
+    'about': 'О проекте',
 };
 
 const unloginedButtonNames = {
     'login': 'Войти',
     'leaderboard/1': 'Таблица лидеров',
-    'signup': 'Зарегистрироваться'
+    'signup': 'Зарегистрироваться',
+    'about': 'О проекте',
 };
 
 
