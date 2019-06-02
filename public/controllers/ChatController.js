@@ -4,7 +4,7 @@ import auth from 'Models/AuthModel.js';
 import bus from 'Services/bus.js';
 import {chatWebSocket} from 'Services/chatWebSocket.js';
 import {ChatHistory} from 'Models/ChatHistory.js';
-import {UserModel} from "Models/UserModel.js";
+import {UserModel} from 'Models/UserModel.js';
 
 export class ChatController extends Controller {
     index() {
@@ -12,14 +12,14 @@ export class ChatController extends Controller {
         this.view = new Chat();
         auth.isAuthorised();
         this.chatModel = new ChatHistory();
-		this.page = 1;
+        this.page = 1;
         this.listeners = new Set ([
             ['logged-in', this._onloggedin],
             ['get-history', this._ongethistory],
             ['logged-out', this._onloggedout],
             ['ws-message-received', this._onmessagereceived],
             ['message-form-submitted', this._onmessageformsubmitted],
-			['no-more-history', this._onnomorehistory],
+            ['no-more-history', this._onnomorehistory],
             ['self-loaded', this._onuserloaded],
             ['ws-opened', this._onwsopened],
         ]);
@@ -64,7 +64,7 @@ export class ChatController extends Controller {
 
     _notify(data) {
         if (!('Notification' in window)) {
-            console.error('notifications not supported');
+            //console.error('notifications not supported');
             return;
         }
 

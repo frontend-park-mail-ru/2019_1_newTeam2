@@ -99,8 +99,13 @@ export class Dictionary extends Page {
 
         this.listeners = new Set([
             ['dicts-loaded', this._ondictsloaded],
+            ['dicts-loaded-err', this._ondictsloadederr],
         ]);
         super.subscribeAll();
+    }
+
+    _ondictsloadederr() {
+        super.openInfo();
     }
 
     _ondictsloaded(dicts) {

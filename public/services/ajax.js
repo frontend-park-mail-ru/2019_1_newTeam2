@@ -50,7 +50,7 @@ class AjaxModule {
         method = 'GET',
         path = '/',
         body = {},
-		base = baseUrl
+        base = baseUrl
     } = {}) {
         let init = {
             method: method,
@@ -67,7 +67,7 @@ class AjaxModule {
         return fetch(base + path, init)
             .then((response) => {
                 if(response.status === 408) {
-                    console.log(response);
+                    //console.log(response);
                     bus.emit('no-internet');
                 }
                 return response;
@@ -87,7 +87,7 @@ class AjaxModule {
      */
     doGet({
         path = '/',
-		base = baseUrl,
+        base = baseUrl,
     } = {}) {
         return this._ajax({path: path, base: base});
     }

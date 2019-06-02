@@ -33,8 +33,8 @@ export class About extends Page {
 
         ];
         const niks = [
-            'frontend-park-mail-ru/2019_1_newTeam2',
             'go-park-mail-ru/2019_1_newTeam2',
+            'frontend-park-mail-ru/2019_1_newTeam2',
             'HaseProgram',
             'sergeychur',
             'Sighr',

@@ -18,12 +18,12 @@ export class CardModel {
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
-                        console.log(err);
+                        //console.log(err);
                     });
             })
             .catch((err) => {
                 // TODO(gleensande): обработка ошибки
-                console.log(err);
+                //console.log(err);
             });
     }
 
@@ -38,12 +38,12 @@ export class CardModel {
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
-                        console.log(err);
+                        //console.log(err);
                     });
             })
             .catch((err) => {
                 // TODO(gleensande): обработка ошибки
-                console.log(err);
+                //console.log(err);
                 bus.emit('load-card-error');
             });
     }
@@ -72,7 +72,7 @@ export class CardModel {
             (error) => {
                 bus.emit('update-card-error', error);
                 // TODO(gleensande): обработка ошибки
-                console.log('ошибка во время обновления карты: ' + error);
+                //console.log('ошибка во время обновления карты: ' + error);
             }
         );
     }

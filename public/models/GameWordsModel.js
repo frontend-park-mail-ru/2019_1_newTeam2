@@ -1,6 +1,6 @@
 import bus from 'Services/bus.js';
 import ajax from 'Services/ajax.js';
-import {gameUrl} from "Services/multiplayerWebSocket.js";
+import {gameUrl} from 'Services/multiplayerWebSocket.js';
 
 
 export class GameWordsModel {
@@ -46,7 +46,7 @@ export class GameWordsModel {
     getDemo() {
         ajax.doGet({
             path: 'demo/',
-            base: "https://" + gameUrl, //TODO(Deploy): https
+            base: 'https://' + gameUrl, //TODO(Deploy): https
         })
             .then((res) => {
                 res.json()
