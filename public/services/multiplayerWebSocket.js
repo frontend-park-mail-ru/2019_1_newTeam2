@@ -1,5 +1,6 @@
 import bus from 'Services/bus.js';
 
+
 export const gameUrl = 'new-words.ru/multiplayer/';
 
 

@@ -3,8 +3,8 @@
 import bus from './bus.js';
 const bodyIncludesMethods = ['POST', 'PATCH', 'PUT', 'DELETE'];
 
-export const baseUrl = 'https://new-words.ru/api/';
 
+export const baseUrl = 'https://new-words.ru/api/';
 
 /**
 * Checks the status of http answer
