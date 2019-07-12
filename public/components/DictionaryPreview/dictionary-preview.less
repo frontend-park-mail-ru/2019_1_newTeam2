@@ -12,28 +12,12 @@
 
     @media screen and (min-width: 300px) {
         width: 200px;
-        height: 100px;
+        height: 400px;
     }
 
     @media screen and (min-width: 700px) {
         width: 400px;
         height: 200px;
-    }
-}
-
-.dictionary-preview__image {
-    width: 198px;
-    height: 198px;
-    float: left;
-
-    @media screen and (min-width: 700px) {
-        -webkit-clip-path: polygon(0 0, 100% 0%, 100% 80%, 0 100%);
-                clip-path: polygon(0 0, 100% 0%, 100% 80%, 0 100%);
-    }
-
-    @media screen and (min-width: 300px) {
-        -webkit-clip-path: polygon(0 0, 80% 0%, 100% 100%, 0 100%);
-                clip-path: polygon(0 0, 80% 0%, 100% 100%, 0 100%);
     }
 }
 
@@ -47,19 +31,35 @@
 
 .dictionary-preview__headline {
     float: left;
-    width: 200px;
     font-weight: 600;
     font-size: 18px;
     padding-top: 60px;
     overflow: hidden;
     text-overflow: ellipsis;
     .breakWord();
+
+    @media screen and (min-width: 300px) {
+        width: 190px;
+        margin-left: 10px;
+    }
+
+    @media screen and (min-width: 700px) {
+        width: 190px;
+    }
 }
 
 .dictionary-preview__description {
     font-weight: 400;
     float: left;
-    width: 200px;
     text-overflow: ellipsis;
     .breakWord();
+
+    @media screen and (min-width: 300px) {
+        width: 190px;
+        margin-left: 10px;
+    }
+
+    @media screen and (min-width: 700px) {
+        width: 190px;
+    }
 }

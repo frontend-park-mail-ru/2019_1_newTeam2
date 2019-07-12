@@ -1,7 +1,7 @@
 'use strict';
 
-import {Input} from 'Components/Input/Input.js';
-import {Button} from 'Components/Button/Button.js';
+import {Textarea} from 'Components/Textarea/Textarea.js';
+import {Icon} from 'Components/Icon/Icon.js';
 
 import bus from 'Services/bus.js';
 
@@ -15,16 +15,14 @@ export class ChatForm {
         outer.classList.add('chat-form');
         outer.id = 'message-form';
 
-        const input = new Input({
+        const input = new Textarea({
             id: 'message',
-            type: 'text',
             placeholder: 'Ваше сообщение',
         }).render();
         outer.appendChild(input);
 
-        const send = new Button({
-            type: 'secondary', 
-            name: 'Отправить',
+        const send = new Icon({
+            src: '/static/icons/send.png',
             handler: (() => {
                 const text = document.getElementById('message').value;
                 if (!text) {

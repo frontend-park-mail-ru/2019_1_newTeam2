@@ -7,7 +7,7 @@ export class CardModel {
         this.url = 'card';
     }
 
-    getCardsByDictId({ rows = 5, page = 1, id = 0 } = { rows: 5, page: 1, id: 0 }) {
+    getCardsByDictId({ rows = 15, page = 1, id = 0 } = { rows: 5, page: 1, id: 0 }) {
         ajax.doGet({
             path: this.url + `s?dict=${id}&rows=${rows}&page=${page}`
         })
@@ -18,12 +18,12 @@ export class CardModel {
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
-                        console.log(err);
+                        //console.log(err);
                     });
             })
             .catch((err) => {
                 // TODO(gleensande): обработка ошибки
-                console.log(err);
+                //console.log(err);
             });
     }
 
@@ -38,12 +38,12 @@ export class CardModel {
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
-                        console.log(err);
+                        //console.log(err);
                     });
             })
             .catch((err) => {
                 // TODO(gleensande): обработка ошибки
-                console.log(err);
+                //console.log(err);
                 bus.emit('load-card-error');
             });
     }
@@ -54,7 +54,7 @@ export class CardModel {
             body: body
         })
             .then(() => {
-                bus.emit('card-created');
+                bus.emit('card-created', body);
             })
             .catch((error) => {
                 bus.emit('create-card-error', error);
@@ -72,7 +72,7 @@ export class CardModel {
             (error) => {
                 bus.emit('update-card-error', error);
                 // TODO(gleensande): обработка ошибки
-                console.log('ошибка во время обновления карты: ' + error);
+                //console.log('ошибка во время обновления карты: ' + error);
             }
         );
     }

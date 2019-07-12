@@ -1,14 +1,15 @@
 import bus from 'Services/bus.js';
 
-// const chatUrl = 'newteam2back.herokuapp.com/'; // TODO(Deploy): change url for deploy
-const chatUrl = 'new-words.ru/world_chat/';
+export const chatUrl = 'new-words.ru/world_chat/';
 
 let ws;
 
 export class chatWebSocket {
     constructor() {
         if(!ws) {
-            ws = new WebSocket(`ws://${chatUrl}chat/`);
+
+            ws = new WebSocket(`wss://${chatUrl}chat/enter/`); // TODO(Deploy): wss
+          
             ws.addEventListener('open', () => {
                 bus.emit('ws-opened');
             });
@@ -18,9 +19,17 @@ export class chatWebSocket {
                 bus.emit('ws-message-received', msg);
             });
         }
+        else {
+            bus.emit('ws-opened');
+        }
     }
 
     send(data) {
         ws.send(JSON.stringify(data));
+    }
+
+    destroy() {
+        ws.close();
+        ws = false;
     }
 }

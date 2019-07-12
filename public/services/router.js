@@ -1,5 +1,6 @@
 'use strict';
 import validation from './validation.js';
+import {Error404Controller} from 'Controllers/Error404Controller.js';
 
 class RouterModule {
     constructor() {
@@ -14,6 +15,8 @@ class RouterModule {
         window.addEventListener('popstate', () => {
             this.render();
         });
+
+        this.error404Controller = new Error404Controller();
     }
 
     register(path, controller) {
@@ -24,8 +27,9 @@ class RouterModule {
     go(path) {
         let i = validation.findPathInArray(path, this.paths);
         if (i === -1) {
-            // TODO(gleensande): обработка ошибки
-            console.log('path is not registered' + path);
+            this.currentController = this.error404Controller;
+            let options = {'path': path};
+            this.currentController.index(options);
             return;
         }
 
@@ -45,8 +49,10 @@ class RouterModule {
             currentPath = currentPath.substring(1, currentPath.length);
             let i = validation.findPathInArray(currentPath, this.paths);
             if (i === -1) {
-                // TODO(gleensande): обработка ошибки
-                console.log('path is not registered' + currentPath);
+                this.currentController = this.error404Controller;
+                let options = {'path': currentPath};
+                this.currentController.index(options);
+                
                 return;
             }
             currentState = {
@@ -65,6 +71,10 @@ class RouterModule {
 
         let options = {'path': currentState['path']};
         this.currentController.index(options);
+    }
+
+    back() {
+        window.history.back();
     }
 
 }

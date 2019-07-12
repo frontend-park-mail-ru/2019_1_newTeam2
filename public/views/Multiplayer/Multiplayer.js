@@ -1,30 +1,63 @@
 'use strict';
 
-import {View} from 'Views/View.js';
-import {Icon} from 'Components/Icon/Icon.js';
-import router from 'Services/router.js';
-import {GriseMerde} from 'Components/GriseMerde/GriseMerde.js';
+import {Page} from 'Views/Page.js';
+import {Variant} from 'Components/Variant/Variant.js';
 import {multiplayerWebSocket} from 'Services/multiplayerWebSocket.js';
 import {Table} from 'Components/Table/Table.js';
+import {Icon} from 'Components/Icon/Icon.js';
+import {Headline} from 'Components/Headline/Headline.js';
+
+import router from 'Services/router.js';
 
 const application = document.getElementById('application');
 
-export class Multiplayer extends View {
+export class Multiplayer extends Page {
     render() {
-        application.innerText = '';
+        super.renderBase();
 
-        application.appendChild(new Icon({
-            src: '/static/home-icon.png',
+        this.forHeader.appendChild(new Icon({
+            src: '/static/icons/back.png',
+            id: 'back',
+            handler: () => {
+                this.ws.destroy();
+                router.back();
+            }
+        }).render());
+
+        this.forHeader.appendChild(new Icon({
+            src: '/static/icons/home.png',
+            id: 'home',
             handler: () => {
                 this.ws.destroy();
                 router.go('menu');
             }
         }).render());
 
-        this.ws = new multiplayerWebSocket();
+        this.forHeader.appendChild(new Icon({
+            src: '/static/icons/info.png',
+            id: 'hint-icon',
+            classname: 'hidden-element',
+            handler: () => {
+                this.openOrCloseInfo();
+            }
+        }).render());
 
-        this.outer = document.createElement('div');
-        application.appendChild(this.outer);
+
+        this.forHeader.appendChild(new Headline({
+            textContent: 'Мультиплеер',
+        }).render());
+
+        const hintString = `Посоревнуйтесь в знаниях со своими друзьями!\n
+        Угадывайте слова на скорость\n`;
+        const hint = {
+            headline: 'Мультиплеер',
+            content:  hintString,
+            id: 'hint',
+            classname: 'hidden-element',
+        };
+        super.renderHint(hint);
+
+        this.ws = new multiplayerWebSocket();
 
         this.forTask = document.createElement('div');
         this.forWord = document.createElement('div');
@@ -34,21 +67,20 @@ export class Multiplayer extends View {
         this.table = new Table();
         this.table.fields = ['Ник', 'Очки'];
 
-        this.outer.classList.add('game');
-        this.forVariants.classList.add('game');
-
+        this.forContent.classList.add('playground');
+        this.forVariants.classList.add('playground');
 
         this.failText = document.createElement('div');
         this.failText.classList.add('game-fail-text');
         this.failText.classList.add('hidden-element');
-        this.failText.innerText = 'неправильно';
+        this.failText.innerText = 'Неверно. Подождите...';
 
-        this.outer.appendChild(this.forTask);
+        this.forContent.appendChild(this.forTask);
         this.forTask.appendChild(this.forWord);
         this.forTask.appendChild(document.createElement('br'));
         this.forTask.appendChild(document.createElement('br'));
         this.forTask.appendChild(this.forVariants);
-        this.outer.appendChild(this.forLeadBoard);
+        this.forContent.appendChild(this.forLeadBoard);
         application.appendChild(this.failText);
 
         this.listeners = new Set([
@@ -60,6 +92,19 @@ export class Multiplayer extends View {
 
     _ongameleaderboardupdate(data) {
         this.forLeadBoard.innerText = '';
+        data.payload.players.sort((a, b) => {
+            if (a.score > b.score) {
+                return -1;
+            } else if (a.score === b.score) {
+                if (a.username < b.username) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            } else {
+                return 1;
+            }
+        });
         this.table.data = data.payload.players;
         this.forLeadBoard.appendChild(this.table.render());
     }
@@ -68,14 +113,14 @@ export class Multiplayer extends View {
         this.forWord.innerText = '';
         this.forVariants.innerText = '';
 
-        this.forWord.appendChild(new GriseMerde(
+        this.forWord.appendChild(new Variant(
             {
                 size: 'big',
                 inner: data.payload.question
             }).render()
         );
         data.payload.words.forEach((word) => {
-            const merde = new GriseMerde(
+            const merde = new Variant(
                 {
                     size: 'small',
                     inner: word
@@ -87,11 +132,11 @@ export class Multiplayer extends View {
                     payload: word
                 });
                 if(word !== answer) {
-                    this.outer.classList.add('hidden-element');
+                    this.forContent.classList.add('hidden-element');
                     this.failText.classList.remove('hidden-element');
                     setTimeout(() => {
                         this.failText.classList.add('hidden-element');
-                        this.outer.classList.remove('hidden-element');
+                        this.forContent.classList.remove('hidden-element');
                     }, 3000);
                 }
             });

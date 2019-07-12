@@ -4,29 +4,41 @@ import {Page} from 'Views/Page.js';
 import {Headline} from 'Components/Headline/Headline.js';
 import router from 'Services/router.js';
 import bus from 'Services/bus.js';
-import {Link} from 'Components/Link/Link.js';
-import {GriseMerde} from 'Components/GriseMerde/GriseMerde.js';
+import {Variant} from 'Components/Variant/Variant.js';
 import {Button} from 'Components/Button/Button.js';
-import {Pagination} from 'Components/Pagination/Pagination.js';
 
 export class Training extends Page {
     render() {
         super.renderBase();
         super.renderBaseHeader('Тренировка');
-
-        this.forContent.classList.add('training-outer');
+        const hintString = `Здесь вы можете тренировать любые свои словари!\n
+        Добавить их можно в Меню -> Мои словари -> +.\n
+        Словари не должны быть пустыми!`;
+        const hint = {
+            headline: 'Тренировка',
+            content:  hintString,
+            id: 'hint',
+            classname: 'hidden-element',
+        };
+        super.renderHint(hint);
+        super.renderBasePagination();
 
         this.listeners = new Set([
             ['dicts-loaded', this._ondictsloaded],
             ['game-cards-loaded', this._ongamecardsloaded],
+            ['dicts-loaded-err', this._ondictsloadederr],
         ]);
         super.subscribeAll();
+    }
+
+    _ondictsloadederr() {
+        super.openInfo();
     }
 
     _ondictsloaded(dicts) {
         this.forContent.innerText = '';
         dicts.forEach((dict) => {
-            const merde = new GriseMerde({
+            const merde = new Variant({
                 size: 'small',
                 inner: dict.name,
             }).render();
@@ -35,11 +47,10 @@ export class Training extends Page {
             });
             this.forContent.appendChild(merde);
         });
-        const pagination = new Pagination();
-        pagination.render(this.forContent);
     }
 
     _ongamecardsloaded(cards) {
+        this.forPagination.classList.add('hidden-element');
         let result = [];
 
         const genNextPage = () => {
@@ -78,7 +89,7 @@ export class Training extends Page {
                 const card = cards[index];
                 const inner = document.createElement('div');
 
-                const word = new GriseMerde({
+                const word = new Variant({
                     size: 'big',
                     inner: card.word
                 }).render();
@@ -93,9 +104,9 @@ export class Training extends Page {
                         genNextPage();
                     };
 
-                    const choice = new GriseMerde({
+                    const choice = new Variant({
                         size: 'small',
-                        inner: variant + ' ', /* TODO(gleensande): fix this */
+                        inner: variant + ' ',
                     }).render();
                     choice.addEventListener('click', onchoose);
                     inner.appendChild(choice);

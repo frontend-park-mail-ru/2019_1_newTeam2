@@ -3,6 +3,9 @@ import {CardModel} from 'Models/CardModel.js';
 import {DictionaryModel} from 'Models/DictionaryModel.js';
 import {Card} from 'Views/Card/Card.js';
 
+import validation from 'Services/validation.js';
+import bus from 'Services/bus.js';
+
 
 export class CardController extends Controller{
     index(options = {path: ''}) {
@@ -15,7 +18,7 @@ export class CardController extends Controller{
         this.model.getCardsByDictId({id: this.id});
 
         this.page = 1;
-        this.rows = 5;
+        this.rows = 15;
 
         this.listeners = new Set ([
             ['prev-page', this._onprevpage],
@@ -27,8 +30,36 @@ export class CardController extends Controller{
         super.subscribeAll();
     }
 
-    _onnewcardformsubmitted(body) {
-        this.model.createCard(body, this.id); 
+    _onnewcardformsubmitted(card) {
+        // TODO(gleensande): move to Card view
+        let word = document.getElementById('word');
+        let translation = document.getElementById('translation');
+        
+        if (word.classList.contains('input_error')) {
+            word.classList.remove('input_error');
+        }
+
+        if (translation.classList.contains('input_error')) {
+            translation.classList.remove('input_error');
+        }
+
+        let passed = true;
+        if(!validation.checkWord(card.word.name, 'Rus')) {
+            bus.emit('wrong-word', card.word.name);
+            passed = false;
+        }
+
+        if(!validation.checkWord(card.translation.name, 'Eng')) {
+            bus.emit('wrong-translation', card.translation.name);
+            passed = false;
+        }
+
+        if(passed) {
+            word.value = '';
+            translation.value = '';
+
+            this.model.createCard(card, this.id);
+        }
     }
 
     _oncardremoved(cardId) {

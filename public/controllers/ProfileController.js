@@ -19,11 +19,12 @@ export class ProfileController extends Controller {
         super.subscribeAll();
     }
 
-    _onuseruploadavatar() {
-        this.avatar.uploadAvatar;
+    _onuseruploadavatar(data) {
+        this.avatar.uploadAvatar(data);
     }
 
     _onedituser(data) {
         this.user.updateUser(data.id, data);
+        this.user.getSelf();
     }
 }

@@ -5,9 +5,24 @@
     text-align: center;
     display: table;
     border: 2px solid @borderColor;
+    margin-top: 10px;
+
+    @media screen and (min-width: 300px) {
+        width: 280px;
+    }
+
+    @media screen and (min-width: 700px) {
+        width: 570px;
+    }
+}
+
+.line {
+    border: 2px solid @borderColor;
+    padding:  10px;
 }
 
 .cell {
     border: 2px solid @borderColor;
     padding:  10px;
+    width: 50%;
 }

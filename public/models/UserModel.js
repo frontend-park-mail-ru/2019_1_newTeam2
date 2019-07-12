@@ -28,12 +28,12 @@ export class UserModel {
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
-                        console.log(err);
+                        // console.log(err);
                     });
             })
             .catch((err) => {
                 // TODO(gleensande): обработка ошибки
-                console.log(err);
+                // console.log(err);
             });
     }
 
@@ -48,12 +48,12 @@ export class UserModel {
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
-                        console.log(err);
+                        // console.log(err);
                     });
             })
             .catch((err) => {
                 // TODO(gleensande): обработка ошибки
-                console.log(err);
+                // console.log(err);
             });
     }
 
@@ -68,12 +68,12 @@ export class UserModel {
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
-                        console.log(err);
+                        // console.log(err);
                     });
             })
             .catch((err) => {
                 // TODO(gleensande): обработка ошибки
-                console.log(err);
+                // console.log(err);
             });
     }
 
@@ -89,7 +89,7 @@ export class UserModel {
             .catch((error) => {
                 bus.emit('update-user-error', error);
                 // TODO(gleensande): обработка ошибки
-                console.log('some shit happened: ' + error);
+                // console.log('some shit happened: ' + error);
             });
     }
 

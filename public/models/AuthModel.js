@@ -36,7 +36,7 @@ class AuthModel {
             })
             .catch((err) => {
                 // TODO(gleensande): обработка ошибки
-                console.log(err);
+                //console.log(err);
                 bus.emit('no-login');
             });
     }

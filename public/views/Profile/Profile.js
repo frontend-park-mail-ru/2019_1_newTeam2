@@ -1,5 +1,7 @@
 'use strict';
 
+import router from 'Services/router.js';
+
 const profileTemplate = require('Templates/Profile.pug');
 const profileeditTemplate = require('Templates/ProfileEdit.pug');
 
@@ -13,6 +15,13 @@ export class Profile extends Page {
     render() {
         super.renderBase();
         super.renderBaseHeader('Мой профиль');
+        const hint = {
+            headline: 'Профиль',
+            content: 'Здесь вы можете просмотреть или изменить свой профиль',
+            id: 'hint',
+            classname: 'hidden-element',
+        };
+        super.renderHint(hint);
 
         let forButton = document.createElement('div');
         this.outer.appendChild(forButton);
@@ -24,6 +33,25 @@ export class Profile extends Page {
             edit.firstChild.classList.add('hidden-element');
             save.firstChild.classList.remove('hidden-element');
             this.forContent.innerHTML = profileeditTemplate(this._user);
+
+            const changeFunc = (event) => {
+                const files = event.target.files;
+                if(files && files.length) {
+                    bus.emit('user-upload-avatar', files[0]);
+                }
+
+                if (FileReader) {
+                    const fr = new FileReader();
+                    fr.onload = () => {
+                        document.getElementById('avatar').src = fr.result;
+                    };
+                    fr.readAsDataURL(files[0]);
+                }
+                else {
+                    router.go('profile/me');
+                }
+            };
+            document.getElementById('file').onchange = changeFunc;
         });
 
         let save = new Button({type: 'secondary', name: 'Сохранить'}).render();
@@ -42,11 +70,6 @@ export class Profile extends Page {
                 }
             );
             bus.emit('edit-user', this._user);
-            const fileUpload = document.getElementsByName('file')[0];
-            if(fileUpload.value) {
-                bus.emit('user-upload-avatar', fileUpload.files[0]);
-            }
-            this.forContent.innerHTML = profileTemplate(this._user);
         });
         save.firstChild.classList.add('hidden-element');
 
@@ -61,8 +84,6 @@ export class Profile extends Page {
         this._user = data;
         if (!this._user.path) {
             this._user.path = '/static/avatar-default.png';
-        } else {
-            this._user.path = this._user.baseUrl + this._user.path;
         }
         this.forContent.innerHTML = profileTemplate(this._user);
     }

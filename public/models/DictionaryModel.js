@@ -17,13 +17,13 @@ export class DictionaryModel {
                         bus.emit('dicts-loaded', res);
                     })
                     .catch( (err) => {
-                        // TODO(gleensande): обработка ошибки
-                        console.log(err);
+                        bus.emit('dicts-loaded-err');
+                        // console.log(err);
                     });
             })
             .catch( (err) => {
                 // TODO(gleensande): обработка ошибки
-                console.log(err);
+                // console.log(err);
             });
     }
 
@@ -38,12 +38,12 @@ export class DictionaryModel {
                     })
                     .catch((err) => {
                         // TODO(gleensande): обработка ошибки
-                        console.log(err);
+                        // console.log(err);
                     });
             })
             .catch((err) => {
                 // TODO(gleensande): обработка ошибки
-                console.log(err);
+                // console.log(err);
                 bus.emit('load-dict-error');
             });
     }
@@ -80,7 +80,7 @@ export class DictionaryModel {
             .catch ((error) => {
                 bus.emit('update-dict-error', error);
                 // TODO(gleensande): обработка ошибки
-                console.log('error while update dict' + error);
+                // console.log('error while update dict' + error);
             });
     }
 

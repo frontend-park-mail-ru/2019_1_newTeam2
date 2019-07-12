@@ -1,5 +1,6 @@
 import bus from 'Services/bus.js';
 import ajax from 'Services/ajax.js';
+import {gameUrl} from 'Services/multiplayerWebSocket.js';
 
 
 export class GameWordsModel {
@@ -39,6 +40,24 @@ export class GameWordsModel {
             })
             .catch((error) => {
                 bus.emit('load-game-card-error', error);
+            });
+    }
+
+    getDemo() {
+        ajax.doGet({
+            path: 'demo/',
+            base: 'https://' + gameUrl, //TODO(Deploy): https
+        })
+            .then((res) => {
+                res.json()
+                    .then(
+                        (res) => {
+                            bus.emit('demo-cards-loaded', res);
+                        }
+                    );
+            })
+            .catch((error) => {
+                bus.emit('load-demo-cards-error', error);
             });
     }
 }

@@ -13,9 +13,9 @@ export class ChatMessage {
     } = {}) {
         this.author = validAuthors.includes(author) ? author : 'me';
         this.authorName = authorName;
-        if (author == 'me') {
-            this.authorName = '@me';
-        }
+        // if (author == 'me') {
+        //     this.authorName = '@me';
+        // }
         this.authorId = authorId;
         this.text = text;
         this.avatarUrl = avatarUrl ? (baseUrl + avatarUrl) : '/static/avatar-default.png';

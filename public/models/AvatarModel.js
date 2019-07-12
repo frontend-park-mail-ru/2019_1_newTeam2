@@ -11,7 +11,7 @@ export class AvatarModel {
             })
             .catch(() => {
                 // TODO(gleensande): обработка ошибки
-                console.log('ошибка при загрузке аватара');
+                //console.log('ошибка при загрузке аватара');
             });
     }
 }

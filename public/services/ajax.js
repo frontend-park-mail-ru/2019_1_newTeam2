@@ -4,9 +4,7 @@ import bus from './bus.js';
 const bodyIncludesMethods = ['POST', 'PATCH', 'PUT', 'DELETE'];
 
 
-// export const baseUrl = 'https://newteam2back.herokuapp.com/';
-export const baseUrl = 'http://new-words.ru/api/';
-
+export const baseUrl = 'https://new-words.ru/api/';
 
 /**
 * Checks the status of http answer
@@ -52,6 +50,7 @@ class AjaxModule {
         method = 'GET',
         path = '/',
         body = {},
+        base = baseUrl
     } = {}) {
         let init = {
             method: method,
@@ -65,10 +64,10 @@ class AjaxModule {
         if (bodyIncludesMethods.includes(method)) {
             init.body = JSON.stringify(body);
         }
-        return fetch(baseUrl + path, init)
+        return fetch(base + path, init)
             .then((response) => {
                 if(response.status === 408) {
-                    console.log(response);
+                    //console.log(response);
                     bus.emit('no-internet');
                 }
                 return response;
@@ -88,8 +87,9 @@ class AjaxModule {
      */
     doGet({
         path = '/',
+        base = baseUrl,
     } = {}) {
-        return this._ajax({path: path});
+        return this._ajax({path: path, base: base});
     }
 
     /**

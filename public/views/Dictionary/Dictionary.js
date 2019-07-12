@@ -12,6 +12,15 @@ export class Dictionary extends Page {
     render() {
         super.renderBase();
         super.renderBaseHeader('Мои словари');
+        const hintString = `Этот раздел поможет кастомизировать приложение под ваши нужды.\n
+        Добавляйте словари, нажав +\n`;
+        const hint = {
+            headline: 'Мои словари',
+            content:  hintString,
+            id: 'hint',
+            classname: 'hidden-element',
+        };
+        super.renderHint(hint);
         super.renderBasePagination();
         
         const name = new Input({
@@ -58,7 +67,7 @@ export class Dictionary extends Page {
         this.forHeader.appendChild(submit);
 
         let deny = new Icon({
-            src: '/static/cross.png',
+            src: '/static/icons/close.png',
             id: 'deny',
             classname: 'hidden-element',
             handler: () => {
@@ -75,8 +84,9 @@ export class Dictionary extends Page {
         this.forHeader.appendChild(deny);
 
         let plus = new Icon({
-            src: '/static/plus.png',
+            src: '/static/icons/plus.png',
             id: 'plus',
+            classname: 'plus-icon',
             handler: () => {
                 document.getElementById('plus').classList.add('hidden-element');
                 document.getElementById('deny').classList.remove('hidden-element');
@@ -89,8 +99,13 @@ export class Dictionary extends Page {
 
         this.listeners = new Set([
             ['dicts-loaded', this._ondictsloaded],
+            ['dicts-loaded-err', this._ondictsloadederr],
         ]);
         super.subscribeAll();
+    }
+
+    _ondictsloadederr() {
+        super.openInfo();
     }
 
     _ondictsloaded(dicts) {

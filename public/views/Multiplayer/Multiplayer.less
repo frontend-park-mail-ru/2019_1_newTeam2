@@ -1,10 +1,17 @@
-.game {
-    display: flex;
-    justify-content: space-between;
-}
-
 .game-fail-text {
     color: red;
     font-size: large;
     position: absolute;
+}
+
+.playground {
+    //display: flex;
+    //justify-content: space-between;
+    @media screen and (min-width: 300px) {
+        width: 300px;
+    }
+
+    @media screen and (min-width: 700px) {
+        width: 600px;
+    }
 }

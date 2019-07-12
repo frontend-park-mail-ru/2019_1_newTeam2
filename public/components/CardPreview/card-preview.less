@@ -1,4 +1,5 @@
 @import '../../styles/colorScheme.less';
+@import '../../styles/breakWord.less';
 
 .card-preview__cross-icon {
     float: right;
@@ -6,6 +7,7 @@
     margin: 5px;
     width: 10px;
     height: 10px;
+    transform: translateY(-1px);
 }
 
 .card-preview {
@@ -33,6 +35,7 @@
     display: inline-block;
     -webkit-clip-path: polygon(0 0, 90% 0%, 100% 100%, 0 100%);
     clip-path: polygon(0 0, 90% 0%, 100% 100%, 0 100%);
+    .breakWord();
 
     @media screen and (min-width: 700px) {
         width: 210px;
@@ -50,6 +53,7 @@
     text-align: center;
     vertical-align: middle;
     display: inline-block;
+    .breakWord();
 
     @media screen and (min-width: 700px) {
         width: 188px;
