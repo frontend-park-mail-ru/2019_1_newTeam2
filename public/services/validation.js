@@ -1,5 +1,12 @@
 'use strict';
 
+/**
+ * Module ValidationModule
+ * 
+ * @class 
+ * @classdesc a module for data validation
+ * 
+ */
 class ValidationModule {
     constructor() {
         this.loginRegExpr = /^[a-zA-Z0-9-_]+$/;
