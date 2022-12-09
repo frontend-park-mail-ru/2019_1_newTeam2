@@ -20,7 +20,7 @@
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
     "eslint": "^5.16.0",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "less": "^3.9.0",
     "morgan": "^1.9.1",
     "pug-cli": "^1.0.0-alpha6",
